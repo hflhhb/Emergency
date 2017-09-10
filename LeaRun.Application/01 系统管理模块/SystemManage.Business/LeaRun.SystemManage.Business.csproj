@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{23F0EA7E-B48D-4AE0-A84D-AD1A330F0EFB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LeaRun.SystemManage.Business</RootNamespace>
+    <AssemblyName>LeaRun.SystemManage.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DocumentationFile>bin\Debug\LeaRun.SystemManage.Business.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="appUserInfoModel.cs" />
+    <Compile Include="AuthorizeManage\Busines\AuthorizeBLL.cs" />
+    <Compile Include="AuthorizeManage\Busines\FilterIPBLL.cs" />
+    <Compile Include="AuthorizeManage\Busines\FilterTimeBLL.cs" />
+    <Compile Include="AuthorizeManage\Busines\ModuleBLL.cs" />
+    <Compile Include="AuthorizeManage\Busines\ModuleButtonBLL.cs" />
+    <Compile Include="AuthorizeManage\Busines\ModuleColumnBLL.cs" />
+    <Compile Include="AuthorizeManage\Busines\ModuleFormBLL.cs" />
+    <Compile Include="AuthorizeManage\Busines\ModuleFormInstanceBLL.cs" />
+    <Compile Include="AuthorizeManage\Busines\PermissionBLL.cs" />
+    <Compile Include="AuthorizeManage\Service\AuthorizeService.cs" />
+    <Compile Include="AuthorizeManage\Service\AuthorizeService.T.cs" />
+    <Compile Include="AuthorizeManage\Service\FilterIPService.cs" />
+    <Compile Include="AuthorizeManage\Service\FilterTimeService.cs" />
+    <Compile Include="AuthorizeManage\Service\ModuleButtonService.cs" />
+    <Compile Include="AuthorizeManage\Service\ModuleColumnService.cs" />
+    <Compile Include="AuthorizeManage\Service\ModuleFormInstanceService.cs" />
+    <Compile Include="AuthorizeManage\Service\ModuleFormService.cs" />
+    <Compile Include="AuthorizeManage\Service\ModuleService.cs" />
+    <Compile Include="AuthorizeManage\Service\PermissionService.cs" />
+    <Compile Include="SystemManage\Service\SubSystemService.cs" />
+    <Compile Include="UserManage\Busines\AccountBLL.cs" />
+    <Compile Include="SystemManage\Busines\AreaBLL.cs" />
+    <Compile Include="SystemManage\Service\AreaService.cs" />
+    <Compile Include="Cache\DataItemCache.cs" />
+    <Compile Include="Cache\DepartmentCache.cs" />
+    <Compile Include="Cache\JobCache.cs" />
+    <Compile Include="Cache\OrganizeCache.cs" />
+    <Compile Include="Cache\PostCache.cs" />
+    <Compile Include="Cache\RoleCache.cs" />
+    <Compile Include="Cache\UserCache.cs" />
+    <Compile Include="Cache\UserGroupCache.cs" />
+    <Compile Include="SystemManage\Busines\CodeRuleBLL.cs" />
+    <Compile Include="UserManage\Busines\DepartmentBLL.cs" />
+    <Compile Include="UserManage\Busines\JobBLL.cs" />
+    <Compile Include="UserManage\Busines\OrganizeBLL.cs" />
+    <Compile Include="UserManage\Busines\PostBLL.cs" />
+    <Compile Include="UserManage\Busines\RoleBLL.cs" />
+    <Compile Include="UserManage\Busines\UserBLL.cs" />
+    <Compile Include="UserManage\Busines\UserGroupBLL.cs" />
+    <Compile Include="UserManage\Service\AccountService.cs" />
+    <Compile Include="UserManage\Service\DepartmentService.cs" />
+    <Compile Include="UserManage\Service\JobService.cs" />
+    <Compile Include="UserManage\Service\OrganizeService.cs" />
+    <Compile Include="UserManage\Service\PostService.cs" />
+    <Compile Include="UserManage\Service\RoleService.cs" />
+    <Compile Include="UserManage\Service\UserGroupService.cs" />
+    <Compile Include="UserManage\Service\UserService.cs" />
+    <Compile Include="SystemManage\Busines\DatabaseLinkBLL.cs" />
+    <Compile Include="SystemManage\Busines\DataItemBLL.cs" />
+    <Compile Include="SystemManage\Busines\DataItemDetailBLL.cs" />
+    <Compile Include="SystemManage\Busines\LogBLL.cs" />
+    <Compile Include="SystemManage\Service\CodeRuleService.cs" />
+    <Compile Include="SystemManage\Service\DatabaseLinkService.cs" />
+    <Compile Include="SystemManage\Service\DataItemDetailService.cs" />
+    <Compile Include="SystemManage\Service\DataItemService.cs" />
+    <Compile Include="SystemManage\Service\LogService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\LeaRun.Util\LeaRun.Cache\LeaRun.Cache.csproj">
+      <Project>{a68cdd21-2e12-4b11-95db-d0a0fced48b1}</Project>
+      <Name>LeaRun.Cache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\LeaRun.Data\LeaRun.Data\LeaRun.Data.csproj">
+      <Project>{7c84f157-09b6-42d8-85f2-04af1f31a046}</Project>
+      <Name>LeaRun.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\LeaRun.Util\LeaRun.Util\LeaRun.Util.csproj">
+      <Project>{07aa2566-d0e5-47af-a17d-3b1c6aee598d}</Project>
+      <Name>LeaRun.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\LeaRun.WebBase\LeaRun.WebBase\LeaRun.WebBase.csproj">
+      <Project>{9b10db87-130c-41d3-8687-1fac877db74a}</Project>
+      <Name>LeaRun.WebBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SystemManage.Domain\LeaRun.SystemManage.Domain.csproj">
+      <Project>{239ff513-5847-4dfc-9ec2-56ac52c412e0}</Project>
+      <Name>LeaRun.SystemManage.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

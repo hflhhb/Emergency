@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3E633869-399F-4E8F-897D-EDC47206B9A7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LeaRun.Application.WebBase</RootNamespace>
+    <AssemblyName>LeaRun.Application.WebBase</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attribute\AjaxOnlyAttribute.cs" />
+    <Compile Include="Attribute\HandlerAuthorizeAttribute.cs" />
+    <Compile Include="Attribute\HandlerErrorAttribute.cs" />
+    <Compile Include="Attribute\HandlerLoginAttribute.cs" />
+    <Compile Include="MvcControllerBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ThemeViewLocationExpander.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\LeaRun.Application\01 系统管理模块\SystemManage.Business\LeaRun.SystemManage.Business.csproj">
+      <Project>{23f0ea7e-b48d-4ae0-a84d-ad1a330f0efb}</Project>
+      <Name>LeaRun.SystemManage.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LeaRun.Application\01 系统管理模块\SystemManage.Domain\LeaRun.SystemManage.Domain.csproj">
+      <Project>{239ff513-5847-4dfc-9ec2-56ac52c412e0}</Project>
+      <Name>LeaRun.SystemManage.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LeaRun.WebBase\LeaRun.WebBase.csproj">
+      <Project>{9b10db87-130c-41d3-8687-1fac877db74a}</Project>
+      <Name>LeaRun.WebBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LeaRun.Data\LeaRun.Data\LeaRun.Data.csproj">
+      <Project>{7c84f157-09b6-42d8-85f2-04af1f31a046}</Project>
+      <Name>LeaRun.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LeaRun.Util\LeaRun.Util.Ioc\LeaRun.Util.Ioc.csproj">
+      <Project>{2a2611d5-0a19-4ead-a57f-0d361dc92639}</Project>
+      <Name>LeaRun.Util.Ioc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LeaRun.Util\LeaRun.Util\LeaRun.Util.csproj">
+      <Project>{07aa2566-d0e5-47af-a17d-3b1c6aee598d}</Project>
+      <Name>LeaRun.Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

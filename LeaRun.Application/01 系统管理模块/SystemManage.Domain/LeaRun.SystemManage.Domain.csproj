@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{239FF513-5847-4DFC-9EC2-56AC52C412E0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LeaRun.SystemManage.Domain</RootNamespace>
+    <AssemblyName>LeaRun.SystemManage.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AuthorizeManage\Entity\AuthorizeDataEntity.cs" />
+    <Compile Include="AuthorizeManage\Entity\AuthorizeEntity.cs" />
+    <Compile Include="AuthorizeManage\Entity\FilterIPEntity.cs" />
+    <Compile Include="AuthorizeManage\Entity\FilterTimeEntity.cs" />
+    <Compile Include="AuthorizeManage\Entity\ModuleButtonEntity.cs" />
+    <Compile Include="AuthorizeManage\Entity\ModuleColumnEntity.cs" />
+    <Compile Include="AuthorizeManage\Entity\ModuleEntity.cs" />
+    <Compile Include="AuthorizeManage\Entity\ModuleFormEntity.cs" />
+    <Compile Include="AuthorizeManage\Entity\ModuleFormInstanceEntity.cs" />
+    <Compile Include="AuthorizeManage\Entity\ViewModel\AuthorizeUrlModel.cs" />
+    <Compile Include="AuthorizeManage\IService\IAuthorizeService.cs" />
+    <Compile Include="AuthorizeManage\IService\IAuthorizeService.T.cs" />
+    <Compile Include="AuthorizeManage\IService\IFilterIPService.cs" />
+    <Compile Include="AuthorizeManage\IService\IFilterTimeService.cs" />
+    <Compile Include="AuthorizeManage\IService\IModuleButtonService.cs" />
+    <Compile Include="AuthorizeManage\IService\IModuleColumnService.cs" />
+    <Compile Include="AuthorizeManage\IService\IModuleFormInstanceService.cs" />
+    <Compile Include="AuthorizeManage\IService\IModuleFormService.cs" />
+    <Compile Include="AuthorizeManage\IService\IModuleService.cs" />
+    <Compile Include="AuthorizeManage\IService\IPermissionService.cs" />
+    <Compile Include="Models\BJUIResponse.cs" />
+    <Compile Include="SystemManage\Entity\DatabaseEntity.cs" />
+    <Compile Include="SystemManage\Entity\DatabaseTableEntity.cs" />
+    <Compile Include="SystemManage\IService\ISubSystemService.cs" />
+    <Compile Include="Models\AppConstant.cs" />
+    <Compile Include="Models\APP_Application.cs" />
+    <Compile Include="Models\APP_DBConnection.cs" />
+    <Compile Include="Models\APP_SSOConfig.cs" />
+    <Compile Include="Models\APP_SSOPwd.cs" />
+    <Compile Include="SystemManage\Entity\DatabaseBackupEntity.cs" />
+    <Compile Include="SystemManage\Entity\DatabaseFieldEntity.cs" />
+    <Compile Include="SystemManage\Entity\AreaEntity.cs" />
+    <Compile Include="SystemManage\Entity\CodeRuleEntity.cs" />
+    <Compile Include="SystemManage\Entity\CodeRuleFormatEntity.cs" />
+    <Compile Include="SystemManage\Entity\CodeRuleSeedEntity.cs" />
+    <Compile Include="SystemManage\Entity\DatabaseLinkEntity.cs" />
+    <Compile Include="SystemManage\Entity\DataItemDetailEntity.cs" />
+    <Compile Include="SystemManage\Entity\DataItemEntity.cs" />
+    <Compile Include="SystemManage\Entity\LogEntity.cs" />
+    <Compile Include="SystemManage\Entity\ViewModel\DataItemModel.cs" />
+    <Compile Include="SystemManage\IService\IAreaService.cs" />
+    <Compile Include="SystemManage\IService\ICodeRuleService.cs" />
+    <Compile Include="SystemManage\IService\IDatabaseLinkService.cs" />
+    <Compile Include="SystemManage\IService\IDataItemDetailService.cs" />
+    <Compile Include="SystemManage\IService\IDataItemService.cs" />
+    <Compile Include="SystemManage\IService\ILogService.cs" />
+    <Compile Include="SystemManage\IService\IDataBaseBackupService.cs" />
+    <Compile Include="SystemManage\IService\IDataBaseTableService.cs" />
+    <Compile Include="SystemManage\Mapping\ApplicationMap.cs" />
+    <Compile Include="UserManage\Entity\AccountEntity.cs" />
+    <Compile Include="UserManage\Entity\DepartmentEntity.cs" />
+    <Compile Include="UserManage\Entity\OrganizeEntity.cs" />
+    <Compile Include="UserManage\Entity\RoleEntity.cs" />
+    <Compile Include="UserManage\Entity\UserEntity.cs" />
+    <Compile Include="UserManage\Entity\UserRelationEntity.cs" />
+    <Compile Include="UserManage\IService\IAccountService.cs" />
+    <Compile Include="UserManage\IService\IDepartmentService.cs" />
+    <Compile Include="UserManage\IService\IJobService.cs" />
+    <Compile Include="UserManage\IService\IOrganizeService.cs" />
+    <Compile Include="UserManage\IService\IPostService.cs" />
+    <Compile Include="UserManage\IService\IRoleService.cs" />
+    <Compile Include="UserManage\IService\IUserGroupService.cs" />
+    <Compile Include="UserManage\IService\IUserService.cs" />
+    <Compile Include="UserManage\Mapping\AccountMap.cs" />
+    <Compile Include="AuthorizeManage\Mapping\AuthorizeDataMap.cs" />
+    <Compile Include="AuthorizeManage\Mapping\AuthorizeMap.cs" />
+    <Compile Include="AuthorizeManage\Mapping\FilterIPMap.cs" />
+    <Compile Include="AuthorizeManage\Mapping\FilterTimeMap.cs" />
+    <Compile Include="AuthorizeManage\Mapping\ModuleButtonMap.cs" />
+    <Compile Include="AuthorizeManage\Mapping\ModuleColumnMap.cs" />
+    <Compile Include="AuthorizeManage\Mapping\ModuleFormInstanceMap.cs" />
+    <Compile Include="AuthorizeManage\Mapping\ModuleFormMap.cs" />
+    <Compile Include="AuthorizeManage\Mapping\ModuleMap.cs" />
+    <Compile Include="UserManage\Mapping\DepartmentMap.cs" />
+    <Compile Include="UserManage\Mapping\OrganizeMap.cs" />
+    <Compile Include="UserManage\Mapping\RoleMap.cs" />
+    <Compile Include="UserManage\Mapping\UserMap.cs" />
+    <Compile Include="UserManage\Mapping\UserRelationMap.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemManage\Mapping\AreaMap.cs" />
+    <Compile Include="SystemManage\Mapping\CodeRuleMap.cs" />
+    <Compile Include="SystemManage\Mapping\CodeRuleSeedMap.cs" />
+    <Compile Include="SystemManage\Mapping\DataBaseLinkMap.cs" />
+    <Compile Include="SystemManage\Mapping\DataItemDetailMap.cs" />
+    <Compile Include="SystemManage\Mapping\DataItemMap.cs" />
+    <Compile Include="SystemManage\Mapping\LogMap.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\LeaRun.Data\LeaRun.Data\LeaRun.Data.csproj">
+      <Project>{7c84f157-09b6-42d8-85f2-04af1f31a046}</Project>
+      <Name>LeaRun.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\LeaRun.Util\LeaRun.Util\LeaRun.Util.csproj">
+      <Project>{07aa2566-d0e5-47af-a17d-3b1c6aee598d}</Project>
+      <Name>LeaRun.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\LeaRun.WebBase\LeaRun.WebBase\LeaRun.WebBase.csproj">
+      <Project>{9b10db87-130c-41d3-8687-1fac877db74a}</Project>
+      <Name>LeaRun.WebBase</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" /> -->
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+<!--     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" /> -->
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

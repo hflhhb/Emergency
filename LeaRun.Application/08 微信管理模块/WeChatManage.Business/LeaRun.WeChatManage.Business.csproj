@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9E776E64-3075-49B3-A6CE-B92F0B999C5C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LeaRun.WeChatManage.Business</RootNamespace>
+    <AssemblyName>LeaRun.WeChatManage.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DocumentationFile>bin\Debug\LeaRun.WeChatManage.Business.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\LeaRun.Util\LeaRun.Util\bin\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LeaRun.Util.WeChat\Comm\Cryptography.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Comm\HttpHelper.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Comm\Program.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Comm\Sample.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Comm\WXBizMsgCrypt.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Attribute\IAttribute.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Attribute\IsNotNullAttribute.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Attribute\LengthAttribute.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\HttpGetFileRequest.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\HttpGetRequest.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\HttpPostFileRequest.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\HttpPostRequest.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\IHttpSend.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\ISend.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\OperationRequestBase.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\OperationResultsBase.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\DepartmentCreate.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\DepartmentDelete.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\DepartmentList.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\DepartmentListResult.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\DepartmentResult.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\DepartmentUpdate.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\MediaGet.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\MediaGetResult.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\MediaUpload.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\MediaUploadResult.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\MenuCreate.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\MenuDelete.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\MenuGet.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\MenuGetResult.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\MenuItem.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\Oauth2Authorize.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\SendMessage\MessageSend.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\SendMessage\MessageSendResult.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\SendMessage\SendFile.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\SendMessage\SendImage.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\SendMessage\SendMpnews.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\SendMessage\SendNews.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\SendMessage\SendText.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\SendMessage\SendVideo.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\SendMessage\SendVoice.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\TagAddtagusers.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\TagAddtagusersResult.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\TagCreate.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\TagCreateResult.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\TagDelete.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\TagDeltagusers.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\TagDeltagusersResult.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\TagGet.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\TagUpdate.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\UserAuthsucc.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\UserCreate.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\UserDelete.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\UserGet.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\UserGetResult.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\UserGetuserinfo.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\UserGetuserinfoResult.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\UserInvite.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\UserSimplelist.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\UserSimplelistResult.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Request\UserUpdate.cs" />
+    <Compile Include="LeaRun.Util.WeChat\Model\Token.cs" />
+    <Compile Include="WeChatManage\Busines\WeChatAppBLL.cs" />
+    <Compile Include="WeChatManage\Busines\WeChatOrganizeBLL.cs" />
+    <Compile Include="WeChatManage\Busines\WeChatUserBLL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WeChatManage\Service\WeChatAppService.cs" />
+    <Compile Include="WeChatManage\Service\WeChatOrganizeService.cs" />
+    <Compile Include="WeChatManage\Service\WeChatUserService.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\LeaRun.Util\LeaRun.Cache\LeaRun.Cache.csproj">
+      <Project>{a68cdd21-2e12-4b11-95db-d0a0fced48b1}</Project>
+      <Name>LeaRun.Cache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\LeaRun.Data\LeaRun.Data\LeaRun.Data.csproj">
+      <Project>{7c84f157-09b6-42d8-85f2-04af1f31a046}</Project>
+      <Name>LeaRun.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\LeaRun.Util\LeaRun.Util\LeaRun.Util.csproj">
+      <Project>{07aa2566-d0e5-47af-a17d-3b1c6aee598d}</Project>
+      <Name>LeaRun.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\01 系统管理模块\SystemManage.Business\LeaRun.SystemManage.Business.csproj">
+      <Project>{23f0ea7e-b48d-4ae0-a84d-ad1a330f0efb}</Project>
+      <Name>LeaRun.SystemManage.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\01 系统管理模块\SystemManage.Domain\LeaRun.SystemManage.Domain.csproj">
+      <Project>{239ff513-5847-4dfc-9ec2-56ac52c412e0}</Project>
+      <Name>LeaRun.SystemManage.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\03 工作流引擎模块\WorkflowEngine.Business\LeaRun.WorkflowEngine.Business.csproj">
+      <Project>{b3363ffd-0d1f-4706-bff5-e87c455ea1f5}</Project>
+      <Name>LeaRun.WorkflowEngine.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WeChatManage.Domain\LeaRun.WeChatManage.Domain.csproj">
+      <Project>{1ade96b2-6bfe-4513-8dc1-ad940d7a4e3c}</Project>
+      <Name>LeaRun.WeChatManage.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

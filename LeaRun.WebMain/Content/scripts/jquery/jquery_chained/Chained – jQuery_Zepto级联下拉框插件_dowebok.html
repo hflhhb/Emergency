@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)http://www.dowebok.com/151.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/ex" async=""></script><script charset="utf-8" async="" src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/tanxssp.js"></script><script type="text/javascript" charset="gbk" id="tanx-s-mm_11497649_9662174_32200973" async="" src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/ex(1)"></script>
+
+<title>Chained – jQuery/Zepto级联下拉框插件_dowebok</title>
+<meta name="keywords" content="Chained,级联下拉框,jQuery插件,Zepto插件">
+<meta name="description" content="Chained是一款简单易用的级联下拉框插件，提供了jQuery和Zepto两个版本。Chained支持无限级、支持json数据。">
+<link rel="stylesheet" href="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/style.css">
+<!--[if lt IE 9]>
+<script src="http://cdn.staticfile.org/html5shiv/3.7/html5shiv.js"></script>
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/embed.default.css"></head>
+
+<body><div id="BAIDU_DUP_fp_wrapper" style="position: absolute; left: -1px; bottom: -1px; z-index: 0; width: 0px; height: 0px; overflow: hidden; visibility: hidden; display: none;"><iframe id="BAIDU_DUP_fp_iframe" src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/o.html" style="width: 0px; height: 0px; visibility: hidden; display: none;"></iframe></div><iframe src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/acbeacon2.html" style="width: 0px; height: 0px; display: none;"></iframe>
+<header class="hd">
+	<h1><a href="http://www.dowebok.com/" title="dowebok">dowebok</a></h1>
+	<ul class="nav">
+		<li><a class="cur" href="http://www.dowebok.com/" title="首页">首页</a></li>
+		<li><a href="http://www.dowebok.com/code" title="代码">代码</a></li>
+		<li><a href="http://www.dowebok.com/material" title="素材">素材</a></li>
+		<li><a href="http://www.dowebok.com/template" title="模板">模板</a></li>
+		<li><a href="http://www.dowebok.com/contact" title="联系">联系</a></li>
+	</ul>
+	<div class="search">
+		<form method="get" action="http://www.dowebok.com/">
+			<input class="key" type="text" name="s" placeholder="输入关键词"> <input class="go" type="submit" value="搜索">
+		</form>
+	</div>
+</header>
+<div class="main">
+	<div id="primary" class="primary">
+		<div class="article">
+												<header>
+				<h1>Chained – jQuery/Zepto级联下拉框插件</h1>
+				<p class="info">
+					<span>分类：<a href="http://www.dowebok.com/code" rel="category tag">代码</a></span> 
+					<span>日期：<time datetime="2015-11-15" pubdate="">2015-11-15</time></span>
+					<span>点击(7,563)</span>
+					<span>评论(<a href="http://www.dowebok.com/151.html#comments" class="ds-thread-count" data-thread-key="151">4</a>)</span>
+				</p>
+			</header>
+			<p><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/151.jpg" alt="Chained - jQuery/Zepto级联下拉框插件"></p>
+<h2>简介</h2>
+<p>Chained 是一款简单易用的级联下拉框插件，提供了 jQuery 和 Zepto 两个版本。Chained 支持无限级、支持 json 数据。</p>
+<h2>基本使用</h2>
+<p>1、引入文件</p>
+<pre>&lt;script src="js/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script src="js/jquery.chained.js"&gt;&lt;/script&gt;</pre>
+<p>如果你使用 zepto，除了引入 zepto 之外，还需要引入 zepto-selector，如</p>
+<pre>&lt;script src="js/zepto.js"&gt;&lt;/script&gt;
+&lt;script src="js/zepto-selector.js"&gt;&lt;/script&gt;
+&lt;script src="js/jquery.chained.js"&gt;&lt;/script&gt;</pre>
+<p>2、HTML</p>
+<pre>&lt;select id="mark" name="mark"&gt;
+&nbsp;&nbsp; &nbsp;&lt;option value=""&gt;品牌&lt;/option&gt;
+&nbsp;&nbsp; &nbsp;&lt;option value="audi"&gt;奥迪&lt;/option&gt;
+&nbsp;&nbsp; &nbsp;&lt;option value="bmw"&gt;宝马&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;select id="series" name="series"&gt;
+&nbsp;&nbsp; &nbsp;&lt;option value=""&gt;系列&lt;/option&gt;
+&nbsp;&nbsp; &nbsp;&lt;option value="a3" class="audi"&gt;A3&lt;/option&gt;
+&nbsp;&nbsp; &nbsp;&lt;option value="a4" class="audi"&gt;A4&lt;/option&gt;
+&nbsp;&nbsp; &nbsp;&lt;option value="a5" class="audi"&gt;A5&lt;/option&gt;
+
+&nbsp;&nbsp; &nbsp;&lt;option value="series-3" class="bmw"&gt;3系&lt;/option&gt;
+&nbsp;&nbsp; &nbsp;&lt;option value="series-5" class="bmw"&gt;5系&lt;/option&gt;
+&nbsp;&nbsp; &nbsp;&lt;option value="series-6" class="bmw"&gt;6系&lt;/option&gt;
+&lt;/select&gt;</pre>
+<p>注意 value 和 class 的对应关系。</p>
+<p>3、JavaScript</p>
+<pre>$(function() {
+&nbsp;&nbsp; &nbsp;$("#series").chained("#mark");
+});</pre>
+<h2>更多级</h2>
+<p>Chained 支持无限级，只需要后面添加即可，我们再在上面的 HTML 代码后面添加一个 select：</p>
+<pre>&lt;select id="model" name="model"&gt;
+&nbsp;&nbsp; &nbsp;&lt;option value=""&gt;类型&lt;/option&gt;
+&nbsp;&nbsp; &nbsp;&lt;option value="coupe" class="series-3 series-6 a5"&gt;双门跑车&lt;/option&gt;
+&nbsp;&nbsp; &nbsp;&lt;option value="cabrio" class="series-3 series-6 a3 a5"&gt;敞篷车&lt;/option&gt;
+&nbsp;&nbsp; &nbsp;&lt;option value="sedan" class="series-3 series-5 a3 a4"&gt;四门轿车&lt;/option&gt;
+&nbsp;&nbsp; &nbsp;&lt;option value="sportback" class="a3 a5"&gt;跑车&lt;/option&gt;
+&lt;/select&gt;</pre>
+<p>对应的 JavaScript：</p>
+<pre>$(function() {
+&nbsp;&nbsp; &nbsp;$('#series').chained('#mark');
+&nbsp;&nbsp; &nbsp;$('#model').chained('#series');
+});</pre>
+<h2>关联多个下拉框</h2>
+<p>Chained 还可以关联多个父级下拉框，你需要在 class 中指定，以 “\” 分割，当多个父级的值满足条件后才会显示，如：</p>
+<pre>&lt;select id="engine" name="engine"&gt;
+&nbsp;&nbsp; &nbsp;&lt;option value=""&gt;排量&lt;/option&gt;
+&nbsp;&nbsp; &nbsp;&lt;option value="25-petrol" class="series-3 a3 a4"&gt;2.5 汽油&lt;/option&gt;
+&nbsp;&nbsp; &nbsp;&lt;option value="30-petrol" class="series-3 series-5 series-6 a3 a4 a5"&gt;3.0 汽油&lt;/option&gt;
+&nbsp;&nbsp; &nbsp;&lt;option value="30-diesel" class="series-3\sedan series-5\sedan a5"&gt;3.0 柴油&lt;/option&gt;
+&lt;/select&gt;</pre>
+<p>对应的 JavaScript：</p>
+<pre>$(function() {
+&nbsp;&nbsp; &nbsp;$('#series').chained('#mark');
+&nbsp;&nbsp; &nbsp;$('#model').chained('#series');
+&nbsp;&nbsp; &nbsp;$('#engine').chained('#series, #model');
+});</pre>
+<p>上面的代码表示 3.0 汽油版只有 3 系四门轿车、5 系四门轿车和 A5 才有。</p>
+<h2>Remote 版本</h2>
+<p>级联下拉框的数据一般不会直接写到页面，可能需要另外获取，如从 json 文件中获取等，这时候需要用到另一个版本，所以引入的文件就变成：</p>
+<pre>&lt;script src="js/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script src="js/jquery.chained.remote.js"&gt;&lt;/script&gt;</pre>
+<p>我们把 HTML 的数据删除，改成从 json 文件中获取：</p>
+<pre>&lt;select id="mark" name="mark"&gt;
+&nbsp;&nbsp; &nbsp;&lt;option value=""&gt;品牌&lt;/option&gt;
+&nbsp;&nbsp; &nbsp;&lt;option value="audi"&gt;奥迪&lt;/option&gt;
+&nbsp;&nbsp; &nbsp;&lt;option value="bmw"&gt;宝马&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;select id="series" name="series"&gt;
+&nbsp;&nbsp; &nbsp;&lt;option value=""&gt;系列&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;select id="model" name="model"&gt;
+&nbsp;&nbsp; &nbsp;&lt;option value=""&gt;类型&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;select id="engine" name="engine"&gt;
+&nbsp;&nbsp; &nbsp;&lt;option value=""&gt;排量&lt;/option&gt;
+&lt;/select&gt;</pre>
+<p>对应的 JavaScript：</p>
+<pre>$(function() {
+&nbsp;&nbsp; &nbsp;$('#series').remoteChained({
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;parents: '#mark',
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;url: '/api/series.json'
+&nbsp;&nbsp; &nbsp;});
+
+&nbsp;&nbsp; &nbsp;$('#model').remoteChained({
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;parents: '#series',
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;url: '/api/model.json'
+&nbsp;&nbsp; &nbsp;});
+
+&nbsp;&nbsp; &nbsp;$('#engine').remoteChained({
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;parents: '#series, #model',
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;url: '/api/engine.json'
+&nbsp;&nbsp; &nbsp;});
+});</pre>
+<p>Json 可以的格式如下，第一个是 value，第二个是文本：</p>
+<pre>{
+&nbsp;&nbsp; &nbsp;"" : "--",
+&nbsp;&nbsp; &nbsp;"series-1" : "1 series",
+&nbsp;&nbsp; &nbsp;"series-3" : "3 series",
+&nbsp;&nbsp; &nbsp;"series-5" : "5 series",
+&nbsp;&nbsp; &nbsp;"series-6" : "6 series",
+&nbsp;&nbsp; &nbsp;"series-7" : "7 series"
+}</pre>
+<h2>引导选择</h2>
+<p>页面初始化的时候，你可以指定一个默认的值，如：</p>
+<pre>&lt;select id="mark" name="mark"&gt;
+&nbsp;&nbsp; &nbsp;&lt;option value=""&gt;--&lt;/option&gt;
+&nbsp;&nbsp; &nbsp;&lt;option value="bmw" selected&gt;BMW&lt;/option&gt;
+&nbsp;&nbsp; &nbsp;&lt;option value="audi"&gt;Audi&lt;/option&gt;n
+&lt;/select&gt;
+
+&lt;select id="series" name="series"&gt;
+&nbsp;&nbsp; &nbsp;&lt;option value="--"&gt;--&lt;/option&gt;
+&lt;/select&gt;</pre>
+<p>对应的 JavaScript：</p>
+<pre>$(function() {
+&nbsp;&nbsp; &nbsp;$('#series').remoteChained({
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;parents: '#mark',
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;url: '/api/series.json',
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;bootstrap : {
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;'': '--',
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;'series-3': '3系',
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;'series-5': '5系',
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;'series-6': '6系',
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;'selected': 'series-3'
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}
+&nbsp;&nbsp; &nbsp;});
+});</pre>
+<p>当页面加载的时候，会默认选择“3系”。</p>
+<h2>显示 loading</h2>
+<p>当数据较多时，加载可能需要花费一些时间，为了更好的体验，可以在加载数据时显示 loading：</p>
+<pre>$(function() {
+&nbsp;&nbsp; &nbsp;$('#engine').remoteChained({
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;parents: '#engine, #model',
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;url: '/api/series.json',
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;loading: 'Loading...'
+&nbsp;&nbsp; &nbsp;});
+});</pre>
+			<p class="tag"></p>
+									<script type="text/javascript" async="" src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/tcam"></script><script type="text/javascript" async="" src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/tcam(1)"></script><script>
+			var cpro_id = "u2160207";
+			</script>
+			<script src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/c.js"></script><div id="BAIDU_SSP__wrapper_u2160207_0"><iframe id="iframeu2160207_0" src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/tcam.html" width="728" height="24" align="center,center" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="border:0; vertical-align:bottom;margin:0;" allowtransparency="true"></iframe></div>
+		</div>
+		
+				<section class="xg">
+			<h2 class="tt1"><span>相关文章</span></h2>
+			<ul class="list2">
+										<li>
+					<a href="http://www.dowebok.com/216.html" title="overhang.js – jQuery顶部通知提示插件"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/216s.png" alt="overhang.js – jQuery顶部通知提示插件"></a>
+					<h4><a href="http://www.dowebok.com/216.html" title="overhang.js – jQuery顶部通知提示插件">overhang.js – jQuery顶部通知提示插件</a></h4>
+				</li>
+							<li>
+					<a href="http://www.dowebok.com/214.html" title="Zoomify – jQuery缩放效果lightbox插件"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/214s.jpg" alt="Zoomify – jQuery缩放效果lightbox插件"></a>
+					<h4><a href="http://www.dowebok.com/214.html" title="Zoomify – jQuery缩放效果lightbox插件">Zoomify – jQuery缩放效果lightbox插件</a></h4>
+				</li>
+							<li>
+					<a href="http://www.dowebok.com/211.html" title="Filterizr – jQuery筛选过滤插件"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/211s.jpg" alt="Filterizr – jQuery筛选过滤插件"></a>
+					<h4><a href="http://www.dowebok.com/211.html" title="Filterizr – jQuery筛选过滤插件">Filterizr – jQuery筛选过滤插件</a></h4>
+				</li>
+							<li>
+					<a href="http://www.dowebok.com/209.html" title="JK Responsive – jQuery响应式lightbox插件"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/209s.jpg" alt="JK Responsive – jQuery响应式lightbox插件"></a>
+					<h4><a href="http://www.dowebok.com/209.html" title="JK Responsive – jQuery响应式lightbox插件">JK Responsive – jQuery响应式lightbox插件</a></h4>
+				</li>
+							<li>
+					<a href="http://www.dowebok.com/204.html" title="okayNav – jQuery响应式菜单/导航插件"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/204s.jpg" alt="okayNav – jQuery响应式菜单/导航插件"></a>
+					<h4><a href="http://www.dowebok.com/204.html" title="okayNav – jQuery响应式菜单/导航插件">okayNav – jQuery响应式菜单/导航插件</a></h4>
+				</li>
+							<li>
+					<a href="http://www.dowebok.com/194.html" title="jQuery.slidizle – jQuery幻灯片插件"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/194s.jpg" alt="jQuery.slidizle – jQuery幻灯片插件"></a>
+					<h4><a href="http://www.dowebok.com/194.html" title="jQuery.slidizle – jQuery幻灯片插件">jQuery.slidizle – jQuery幻灯片插件</a></h4>
+				</li>
+							
+			</ul>
+		</section>
+		
+		<section class="xg" id="comments">
+			<h2 class="tt1"><span>发表评论</span></h2>
+			<div class="ds-thread" data-thread-key="151" data-title="Chained – jQuery/Zepto级联下拉框插件" data-url="http://www.dowebok.com/151.html" id="ds-thread"><div id="ds-reset"><a name="respond"></a><div class="ds-login-buttons"><p>社交帐号登录:</p><div class="ds-social-links"><ul class="ds-service-list"><li><a href="http://idwo.duoshuo.com/login/weixin/" rel="nofollow" class="ds-service-link ds-weixin">微信</a></li><li><a href="http://idwo.duoshuo.com/login/weibo/" rel="nofollow" class="ds-service-link ds-weibo">微博</a></li><li><a href="http://idwo.duoshuo.com/login/qq/" rel="nofollow" class="ds-service-link ds-qq">QQ</a></li><li><a href="http://idwo.duoshuo.com/login/renren/" rel="nofollow" class="ds-service-link ds-renren">人人</a></li><li><a class="ds-more-services" href="javascript:void(0)">更多»</a></li></ul><ul class="ds-service-list ds-additional-services"><li><a href="http://idwo.duoshuo.com/login/douban/" rel="nofollow" class="ds-service-link ds-douban">豆瓣</a></li><li><a href="http://idwo.duoshuo.com/login/kaixin/" rel="nofollow" class="ds-service-link ds-kaixin">开心</a></li><li><a href="http://idwo.duoshuo.com/login/baidu/" rel="nofollow" class="ds-service-link ds-baidu">百度</a></li><li><a href="http://idwo.duoshuo.com/login/google/" rel="nofollow" class="ds-service-link ds-google">谷歌</a></li></ul></div></div><div class="ds-replybox"><a class="ds-avatar" href="javascript:void(0);" onclick="return false"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/noavatar_default.png" alt=""></a><form method="post"><input type="hidden" name="thread_id" value="6314250834762793729">
+<input type="hidden" name="parent_id" value="">
+<input type="hidden" name="nonce" value="57ff3e36462f3"><div class="ds-textarea-wrapper ds-rounded-top"><textarea name="message" title="Ctrl+Enter快捷提交" placeholder="说点什么吧…"></textarea><pre class="ds-hidden-text"></pre></div><div class="ds-post-toolbar"><div class="ds-post-options ds-gradient-bg"><span class="ds-sync"></span></div><button class="ds-post-button" type="submit">发布</button><div class="ds-toolbar-buttons"><a class="ds-toolbar-button ds-add-emote" title="插入表情"></a></div></div></form></div><div class="ds-comments-info"><div class="ds-sort"><a class="ds-order-desc ds-current">最新</a><a class="ds-order-asc">最早</a><a class="ds-order-hot">最热</a></div><ul class="ds-comments-tabs"><li class="ds-tab"><a class="ds-comments-tab-duoshuo ds-current" href="javascript:void(0);"><span class="ds-highlight">4</span>评论</a></li>  </ul></div><ul class="ds-comments"><li class="ds-post" data-post-id="6314251142054281986"><div class="ds-post-self" data-post-id="6314251142054281986" data-thread-id="6314250834762793729" data-root-id="0" data-source="duoshuo"><div class="ds-avatar"><a rel="nofollow author" target="_blank" href="http://weibo.com/1994536364" title="唯昨"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/noavatar_default.png" alt="唯昨"></a></div><div class="ds-comment-body"><div class="ds-comment-header"><a class="ds-user-name ds-highlight" data-qqt-account="" href="http://weibo.com/1994536364" rel="nofollow" target="_blank">唯昨</a></div><p>感谢博主。例子和github地址在这里：<br> http://www.appelsiini.net/projects/chained  <br> https://github.com/tuupola/jquery_chained</p><div class="ds-comment-footer ds-comment-actions"><span class="ds-time" datetime="2016-03-07T10:56:22+08:00" title="2016年3月7日 上午10:56:22">3月7日</span><a class="ds-post-reply" href="javascript:void(0);"><span class="ds-icon ds-icon-reply"></span>回复</a><a class="ds-post-likes" href="javascript:void(0);"><span class="ds-icon ds-icon-like"></span>顶</a><a class="ds-post-repost" href="javascript:void(0);"><span class="ds-icon ds-icon-share"></span>转发</a><a class="ds-post-report" href="javascript:void(0);"><span class="ds-icon ds-icon-report"></span>举报</a></div></div></div></li><li class="ds-post" data-post-id="6314251073196393218"><div class="ds-post-self" data-post-id="6314251073196393218" data-thread-id="6314250834762793729" data-root-id="0" data-source="duoshuo"><div class="ds-avatar"><a rel="nofollow author" target="_blank" href="http://www.shayangnala.com/ds/183.html" title="寂寞相思雨"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/noavatar_default.png" alt="寂寞相思雨"></a></div><div class="ds-comment-body"><div class="ds-comment-header"><a class="ds-user-name ds-highlight" data-qqt-account="" href="http://www.shayangnala.com/ds/183.html" rel="nofollow" target="_blank">寂寞相思雨</a></div><p>好东西</p><div class="ds-comment-footer ds-comment-actions"><span class="ds-time" datetime="2015-09-14T15:36:09+08:00" title="2015年9月14日 下午3:36:09">2015年9月14日</span><a class="ds-post-reply" href="javascript:void(0);"><span class="ds-icon ds-icon-reply"></span>回复</a><a class="ds-post-likes" href="javascript:void(0);"><span class="ds-icon ds-icon-like"></span>顶</a><a class="ds-post-repost" href="javascript:void(0);"><span class="ds-icon ds-icon-share"></span>转发</a><a class="ds-post-report" href="javascript:void(0);"><span class="ds-icon ds-icon-report"></span>举报</a></div></div></div></li><li class="ds-post" data-post-id="6314251014698435329"><div class="ds-post-self" data-post-id="6314251014698435329" data-thread-id="6314250834762793729" data-root-id="0" data-source="duoshuo"><div class="ds-avatar"><a rel="nofollow author" target="_blank" href="http://t.qq.com/erroringldh" title="翠花"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/noavatar_default.png" alt="翠花"></a></div><div class="ds-comment-body"><div class="ds-comment-header"><a class="ds-user-name ds-highlight" data-qqt-account="" href="http://t.qq.com/erroringldh" rel="nofollow" target="_blank">翠花</a></div><p>是啊，为什么没有演示和下载！</p><div class="ds-comment-footer ds-comment-actions"><span class="ds-time" datetime="2015-05-14T10:12:20+08:00" title="2015年5月14日 上午10:12:20">2015年5月14日</span><a class="ds-post-reply" href="javascript:void(0);"><span class="ds-icon ds-icon-reply"></span>回复</a><a class="ds-post-likes" href="javascript:void(0);"><span class="ds-icon ds-icon-like"></span>顶</a><a class="ds-post-repost" href="javascript:void(0);"><span class="ds-icon ds-icon-share"></span>转发</a><a class="ds-post-report" href="javascript:void(0);"><span class="ds-icon ds-icon-report"></span>举报</a></div></div></div></li><li class="ds-post" data-post-id="6314251011057779458"><div class="ds-post-self" data-post-id="6314251011057779458" data-thread-id="6314250834762793729" data-root-id="0" data-source="duoshuo"><div class="ds-avatar"><a rel="nofollow author" target="_blank" href="http://t.qq.com/guokai785094371" title="郭凯"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/noavatar_default.png" alt="郭凯"></a></div><div class="ds-comment-body"><div class="ds-comment-header"><a class="ds-user-name ds-highlight" data-qqt-account="" href="http://t.qq.com/guokai785094371" rel="nofollow" target="_blank">郭凯</a></div><p>为什么没先演示和下载地址</p><div class="ds-comment-footer ds-comment-actions"><span class="ds-time" datetime="2015-05-04T11:23:54+08:00" title="2015年5月4日 上午11:23:54">2015年5月4日</span><a class="ds-post-reply" href="javascript:void(0);"><span class="ds-icon ds-icon-reply"></span>回复</a><a class="ds-post-likes" href="javascript:void(0);"><span class="ds-icon ds-icon-like"></span>顶</a><a class="ds-post-repost" href="javascript:void(0);"><span class="ds-icon ds-icon-share"></span>转发</a><a class="ds-post-report" href="javascript:void(0);"><span class="ds-icon ds-icon-report"></span>举报</a></div></div></div></li></ul><div class="ds-paginator" style="display: none;"><div class="ds-border"></div><a data-page="1" href="javascript:void(0);" class="ds-current">1</a></div><p class="ds-powered-by"><a href="http://duoshuo.com/" target="_blank" rel="nofollow">dowebok正在使用多说</a></p></div></div>
+		</section>
+	</div>
+
+	<div class="secondary">
+		<aside>
+			<h3><span>热门文章</span></h3>
+			<ul class="list3">
+						<li><a href="http://www.dowebok.com/77.html" title="jQuery全屏滚动插件fullPage.js"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/77s.png" alt="jQuery全屏滚动插件fullPage.js"></a><a href="http://www.dowebok.com/77.html">jQuery全屏滚动插件fullPage.js</a></li>
+						<li><a href="http://www.dowebok.com/78.html" title="用fullPage.js制作百度百科史记2013效果"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/78s.jpg" alt="用fullPage.js制作百度百科史记2013效果"></a><a href="http://www.dowebok.com/78.html">用fullPage.js制作百度百科史记2013效果</a></li>
+						<li><a href="http://www.dowebok.com/143.html" title="全屏/整屏滚动组件fullPage"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/143s.png" alt="全屏/整屏滚动组件fullPage"></a><a href="http://www.dowebok.com/143.html">全屏/整屏滚动组件fullPage</a></li>
+						<li><a href="http://www.dowebok.com/131.html" title="WOW.js – 让页面滚动更有趣"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/131s.png" alt="WOW.js – 让页面滚动更有趣"></a><a href="http://www.dowebok.com/131.html">WOW.js – 让页面滚动更有趣</a></li>
+						<li><a href="http://www.dowebok.com/97.html" title="fullPage.js制作网易邮箱6.0介绍页面"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/97s.jpg" alt="fullPage.js制作网易邮箱6.0介绍页面"></a><a href="http://www.dowebok.com/97.html">fullPage.js制作网易邮箱6.0介绍页面</a></li>
+						</ul>
+		</aside>
+
+		<aside>
+			<h3><span>随机推荐</span></h3>
+			<ul class="list3">
+										<li>
+					<a href="http://www.dowebok.com/42.html" title="jQuery时间轴/时光轴插件jqtimeline"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/42s.jpg" alt="jQuery时间轴/时光轴插件jqtimeline"></a>
+					<a href="http://www.dowebok.com/42.html">jQuery时间轴/时光轴插件jqtimeline</a>
+				</li>
+							<li>
+					<a href="http://www.dowebok.com/46.html" title="jQuery缩略图插件jQuery-Fakecrop"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/46s.jpg" alt="jQuery缩略图插件jQuery-Fakecrop"></a>
+					<a href="http://www.dowebok.com/46.html">jQuery缩略图插件jQuery-Fakecrop</a>
+				</li>
+							<li>
+					<a href="http://www.dowebok.com/63.html" title="jQuery侧边导航插件SidebarJS"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/63s.png" alt="jQuery侧边导航插件SidebarJS"></a>
+					<a href="http://www.dowebok.com/63.html">jQuery侧边导航插件SidebarJS</a>
+				</li>
+							<li>
+					<a href="http://www.dowebok.com/196.html" title="用CSS和jQuery制作简单的下拉框"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/196s.png" alt="用CSS和jQuery制作简单的下拉框"></a>
+					<a href="http://www.dowebok.com/196.html">用CSS和jQuery制作简单的下拉框</a>
+				</li>
+							<li>
+					<a href="http://www.dowebok.com/43.html" title="jQuery随机及响应式画廊插件least.js"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/43s.jpg" alt="jQuery随机及响应式画廊插件least.js"></a>
+					<a href="http://www.dowebok.com/43.html">jQuery随机及响应式画廊插件least.js</a>
+				</li>
+							
+			</ul>
+		</aside>
+
+		<aside>
+			<h3 class="tt1"><span>最新评论</span></h3>
+			<ul class="ds-recent-comments" data-show-title="0" id="ds-recent-comments"><li class="ds-comment ds-show-avatars" data-post-id="6341142949505532673"><div class="ds-avatar"><a rel="nofollow author" target="_blank" href="http://weibo.com/3192841161" onclick="this.href=&#39;http://idwo.duoshuo.com/user-url/?user_id=6341142818475475714&#39;;" title="楠N奋斗ing"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/be4ee3c9jw8ew3asv7wyhj20no0vkn1s.jpg" alt="楠N奋斗ing" style="width:32px;height:32px"></a></div><div class="ds-meta"><a rel="nofollow author" target="_blank" href="http://weibo.com/3192841161">楠N奋斗ing</a><span class="ds-time" datetime="2016-10-14T10:33:14+08:00" title="2016年10月14日 上午10:33:14">10月14日</span></div><a class="ds-excerpt" title="Ion.Calendar - jQuery日期/日历选择器插件 中的评论" href="http://www.dowebok.com/164.html#comments">下载不了额[疑问]</a></li><li class="ds-comment ds-show-avatars" data-post-id="6340390305677705985"><div class="ds-avatar"><a rel="nofollow author" target="_blank" href="http://t.qq.com/LOVEdiandiandidi521" onclick="this.href=&#39;http://idwo.duoshuo.com/user-url/?user_id=6340389584127394561&#39;;" title="诺小伟"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/50" alt="诺小伟" style="width:32px;height:32px"></a></div><div class="ds-meta"><a rel="nofollow author" target="_blank" href="http://t.qq.com/LOVEdiandiandidi521">诺小伟</a><span class="ds-time" datetime="2016-10-12T09:52:35+08:00" title="2016年10月12日 上午9:52:35">10月12日</span></div><a class="ds-excerpt" title="Scrollify - jQuery全屏滚动插件 中的评论" href="http://www.dowebok.com/107.html#comments">为什么锚链接的那个插件在手机上 就无法点击任何链接按钮了，有大神知道问题的原因吗  望指导，谢谢！  邮箱：845352809@qq.com</a></li><li class="ds-comment ds-show-avatars" data-post-id="6339764824955683585"><div class="ds-avatar"><a rel="nofollow author" target="_blank" href="http://t.qq.com/woaihehonghu" onclick="this.href=&#39;http://idwo.duoshuo.com/user-url/?user_id=6338909502426841857&#39;;" title="盛哥"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/50(1)" alt="盛哥" style="width:32px;height:32px"></a></div><div class="ds-meta"><a rel="nofollow author" target="_blank" href="http://t.qq.com/woaihehonghu">盛哥</a><span class="ds-time" datetime="2016-10-10T17:25:24+08:00" title="2016年10月10日 下午5:25:24">10月10日</span></div><a class="ds-excerpt" title="DD Full Screen Slider - jQuery全屏滚动插件 中的评论" href="http://www.dowebok.com/181.html#comments">自己修改源码解决了，但是阉割了滚轮滚动的功能</a></li><li class="ds-comment ds-show-avatars" data-post-id="6339415173190648578"><div class="ds-avatar"><a rel="nofollow author" target="_blank" href="http://weibo.com/dahuotu" onclick="this.href=&#39;http://idwo.duoshuo.com/user-url/?user_id=4730725&#39;;" title="大火兔工作室"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/9d76f8b7jw1e8qgp5bmzyj2050050aa8.jpg" alt="大火兔工作室" style="width:32px;height:32px"></a></div><div class="ds-meta"><a rel="nofollow author" target="_blank" href="http://weibo.com/dahuotu">大火兔工作室</a><span class="ds-time" datetime="2016-10-09T18:48:35+08:00" title="2016年10月9日 下午6:48:35">10月9日</span></div><a class="ds-excerpt" title="Viewer.js - 强大的JS/jQuery图片查看器 中的评论" href="http://www.dowebok.com/192.html#comments">我自己修复了！</a></li><li class="ds-comment ds-show-avatars" data-post-id="6339415142698058498"><div class="ds-avatar"><a rel="nofollow author" target="_blank" href="http://weibo.com/dahuotu" onclick="this.href=&#39;http://idwo.duoshuo.com/user-url/?user_id=4730725&#39;;" title="大火兔工作室"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/9d76f8b7jw1e8qgp5bmzyj2050050aa8.jpg" alt="大火兔工作室" style="width:32px;height:32px"></a></div><div class="ds-meta"><a rel="nofollow author" target="_blank" href="http://weibo.com/dahuotu">大火兔工作室</a><span class="ds-time" datetime="2016-10-09T18:48:28+08:00" title="2016年10月9日 下午6:48:28">10月9日</span></div><a class="ds-excerpt" title="Viewer.js - 强大的JS/jQuery图片查看器 中的评论" href="http://www.dowebok.com/192.html#comments">我自己修复了！</a></li></ul>
+		</aside>
+
+		<aside class="ad300x250">
+			<script>
+			var cpro_id = "u2131715";
+			</script>
+			<script src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/c.js"></script><div id="BAIDU_SSP__wrapper_u2131715_0"><iframe id="iframeu2131715_0" src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/tcam(2).html" width="300" height="250" align="center,center" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" style="border:0; vertical-align:bottom;margin:0;" allowtransparency="true"></iframe></div>
+		</aside>
+
+		<aside class="ad300x250">
+			<script type="text/javascript">
+			        document.write('<a style="display:none!important" id="tanx-a-mm_11497649_9662174_32200973"></a>');
+			        tanx_s = document.createElement("script");
+			        tanx_s.type = "text/javascript";
+			        tanx_s.charset = "gbk";
+			        tanx_s.id = "tanx-s-mm_11497649_9662174_32200973";
+			        tanx_s.async = true;
+			        tanx_s.src = "http://p.tanx.com/ex?i=mm_11497649_9662174_32200973";
+			        tanx_h = document.getElementsByTagName("head")[0];
+			        if(tanx_h)tanx_h.insertBefore(tanx_s,tanx_h.firstChild);
+			</script><ins style="display:inline-block;padding:0;margin:0;width:300px;height:250px;*zoom:1;*display:inline; position:relative;" id="tanxssp-outer-conmm_11497649_9662174_32200973"><div id="tanxssp_con_mm_11497649_9662174_32200973" style="overflow:hidden;display:inline-block;position:relative;width:300px;height:250px;*display:inline;*zoom:1;font:12px/1.5 tahoma,&#39;Hiragino Sans GB&#39;,&#39;microsoft yahei&#39;,sans-serif;"><iframe id="tanxssp-tuwen-iframemm_11497649_9662174_32200973" src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/creation-164857uaSd33GHMrk-437386.html" style="width:300px;height:250px" border="0" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="true"></iframe><a id="iconmm_11497649_9662174_32200973" title="我也要申请橱窗推广" target="_blank" href="http://pro.taobao.com/index.htm?spm=a2320.7388781.1998051528.5.JOvNkN" style="overflow:hidden;width:15px;height:13px;right:20px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;">   <span id="icon_smallmm_11497649_9662174_32200973" style="border-right:2px solid #eee;float:none;width:13px;display:block;height:13px;box-sizing:content-box"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/TB1DmcoJXXXXXavXpXXXXXXXXXX-26-26.png" border="0" style="width:13px;height:13px;margin:auto;display:block;"></span>   <span id="icon_bigmm_11497649_9662174_32200973" style="float:none;width:60px;height:13px;display: none;"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/TB1Lt7aJXXXXXcjXVXXXXXXXXXX-117-26.png" style="width:60px;height:13px;margin:auto;display:block;" border="0/"></span></a><a id="sxmm_11497649_9662174_32200973" href="javascript:;" style="width:20px;height:13px;right:0px;bottom:0px;display:block;position:absolute;cursor:pointer;z-index:250;">   <span id="sx1mm_11497649_9662174_32200973" style="float:none;width:20px;display:block;height:13px;"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/TB1tWvVJFXXXXc_aXXXXXXXXXXX-40-26.png" style="width:20px;height:13px;margin:auto;display:block;" border="0/"></span><div id="sxtipmm_11497649_9662174_32200973" style="display:none;position:absolute;left:-38px;bottom:13px;"><img src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/TB1upAiJXXXXXa5aXXXXXXXXXXX-116-30.png" style="width:58px;height:15px;margin:auto;display:block;" border="0"></div></a></div></ins><a style="display:none!important" id="tanx-a-mm_11497649_9662174_32200973"></a>
+		</aside>
+	</div>
+</div>
+
+<script>
+var duoshuoQuery = {short_name:'idwo'};
+</script>
+<script src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/embed.js"></script>
+
+<footer class="ft">
+	<p>© CopyRight 2016 dowebok.com</p>
+</footer>
+
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan style='display:none' id='cnzz_stat_icon_1253231826'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s5.cnzz.com/stat.php%3Fid%3D1253231826' type='text/javascript'%3E%3C/script%3E"));</script><span style="display:none" id="cnzz_stat_icon_1253231826"><a href="http://www.cnzz.com/stat/website.php?web_id=1253231826" target="_blank" title="站长统计">站长统计</a></span><script src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/stat.php" type="text/javascript"></script><script src="./Chained – jQuery_Zepto级联下拉框插件_dowebok_files/core.php" charset="utf-8" type="text/javascript"></script>
+
+</body></html>

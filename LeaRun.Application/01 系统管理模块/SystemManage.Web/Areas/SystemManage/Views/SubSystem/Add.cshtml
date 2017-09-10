@@ -1,0 +1,90 @@
+﻿@using LeaRun.Util
+@using LeaRun.SystemManage.Entity
+@{
+    Layout = null;
+}
+<form id="frmAdd" action="/SubSystem/Add" class="pageForm" data-toggle="validate" data-reload-navtab="true">
+    <div class="table-responsive">
+        <table class=" table table-bordered table-hover table-striped">
+            <tbody>
+                <tr>
+                    <td>
+                        <label for="app_Code" class="control-label x90">子系统代码<span style="color:red">*</span>：</label>
+                    </td>
+                    <td>
+                        <input type="text" id="app_Code" name="app_Code" class="form-control" data-rule="required" />
+                    </td>
+                    <td>
+                        <label for="app_Name" class="control-label x85">子系统名称<span style="color:red">*</span>：</label>
+                    </td>
+                    <td>
+                        <input type="text" id="app_Name" name="app_Name" class="form-control" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="app_Type" class="control-label x90">
+                            类型<span style="color:red">*</span>
+                        </label>
+                    </td> 
+                    <td>
+                        <select id="app_Type" name="app_Type" class="form-control">
+                            <option value="Application" selected="selected">应用系统</option>
+                            <option value="SubSystem">子系统</option>
+                        </select>
+                    </td>
+                    <td>
+                        <label for="app_App" class="control-label x90">
+                            应用系统代码<span style="color:red">*</span>
+                        </label>
+                    </td>
+                    <td>
+                        <input type="text" id="app_App" name="app_App" class="form-control" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="app_Icon" class="control-label x90">
+                            子系统图标
+                        </label>
+                    </td>
+                    <td>
+                        <input type="text" id="app_Icon" name="app_Icon" class="form-control" />
+                    </td>
+                    <td>
+                        <label for="app_Url" class="control-label x90">
+                            子系统主页URL
+                        </label>
+                    </td>
+                    <td>
+                        <input type="text" id="app_Url" name="app_Url" class="form-control" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="app_IP" class="control-label x90">
+                            子系统IP和端口
+                        </label>
+                    </td>
+                    <td>
+                        <input type="text" id="app_IP" name="app_IP" class="form-control" />
+                    </td>
+                    <td>
+                        <label for="app_Rank" class="control-label x90">优先级<span style="color:red">*</span></label>
+                    </td>
+                    <td>
+                        <input type="text" id="app_Rank" name="app_Rank" class="form-control" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <button type="button" class="btn-default" onclick="subSystem_add('frmAdd');">保存</button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn-close" onclick="javascript: layer.closeAll('page');">关闭</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</form>

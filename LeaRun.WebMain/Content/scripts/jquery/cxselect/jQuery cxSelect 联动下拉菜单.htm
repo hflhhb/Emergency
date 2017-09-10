@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<!-- saved from url=(0039)http://code.ciaoca.com/jquery/cxSelect/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>jQuery cxSelect 联动下拉菜单 - 前端开发仓库</title>
+<meta name="keywords" content="jquery插件,javascript 联动下拉框,jquery 联动下拉框,select 二级联动,select 三级联动,select 多级联动,select 省市联动">
+<meta name="description" content="一款基于jQuery的多级下拉菜单联动插件，快速实现省市联动，还可自定义数据，减轻重复工作。">
+<link rel="stylesheet" href="http://code.ciaoca.com/static/css/base.css">
+<link rel="stylesheet" href="http://code.ciaoca.com/static/css/code.css">
+<script src="./jQuery cxSelect 联动下拉菜单_files/jquery-1.9.1.min.js"></script>
+<script src="./jQuery cxSelect 联动下拉菜单_files/plugins.js"></script><style id="code_ciaoca_donate_tyle">#code_ciaoca_donate{overflow:hidden;position:fixed;bottom:30px;right:0;zoom:1;width:190px;height:290px;border:1px solid #444;border-right:none;border-radius:5px 0 0 5px;color:#ddd;-webkit-transition:right 0.3s,height 0.5s 0.3s;-moz-transition:right 0.3s,height 0.5s 0.3s;transition:right 0.3s,height 0.5s 0.3s;filter:progid:DXImageTransform.Microsoft.gradient(enabled="true",startColorstr="#CC000000",endColorstr="#CC000000");background-color:rgba(0,0,0,0.8);}#code_ciaoca_donate .full{float:left;width:160px;margin:0;padding:10px 15px;font:12px/20px Arial;}#code_ciaoca_donate .full h5{margin:0;padding:0;font:bold 14px/20px Arial;}#code_ciaoca_donate .full .close{position:absolute;top:12px;right:5px;width:16px;height:16px;color:#e33;font:bold 14px/16px Tahoma;cursor:pointer;}#code_ciaoca_donate .full .qr{height:160px;margin-top:5px;border-radius:5px 5px 0 0;background-color:#f1f1f1;background-repeat:no-repeat;background-position:center;}#code_ciaoca_donate .full .pays{overflow:hidden;border-radius:0 0 5px 5px;background:#111;line-height:24px;text-align:center;}#code_ciaoca_donate .full .pays a{float:left;width:50%;color:#888;text-decoration:none;}#code_ciaoca_donate .full .pays a:hover{color:#eee;}#code_ciaoca_donate .full .note{margin-top:5px;color:#aaa;}#code_ciaoca_donate .alipay .qr{background-image:url(http://code.ciaoca.com/static/img/donate_qrcode_alipay.png);}#code_ciaoca_donate .alipay .pays a[rev="alipay"],#code_ciaoca_donate .wechat .pays a[rev="wechat"]{background:#f1f1f1;color:#555;}#code_ciaoca_donate .alipay .name:before{content:"支付宝钱包";}#code_ciaoca_donate .wechat .qr{background-image:url(http://code.ciaoca.com/static/img/donate_qrcode_wechat.png);}#code_ciaoca_donate .wechat .name:before{content:"微信";}#code_ciaoca_donate .mini{display:none;float:left;width:20px;height:80px;padding:10px 5px;font:12px/18px Tahoma;text-align:center;cursor:pointer;}#code_ciaoca_donate.minimize{width:220px;right:-190px;height:110px;background-color:rgba(0,0,0,0.6);}#code_ciaoca_donate.minimize:hover{background-color:rgba(0,0,0,0.8);}#code_ciaoca_donate.minimize .mini{display:block;}@media screen and (max-width:640px){#code_ciaoca_donate,#code_ciaoca_donate.minimize{position:relative;bottom:auto;right:auto;width:auto;height:auto;margin:20px;border-radius:5px;background-color:rgba(0,0,0,0.8);}#code_ciaoca_donate .mini,#code_ciaoca_donate.minimize .mini,#code_ciaoca_donate .full .close{display:none;}#code_ciaoca_donate .full{float:none;width:auto;}}</style></head>
+<body>
+<div id="header" class="header">
+  <p class="breadcrumb"><a class="blacklink" href="http://code.ciaoca.com/">前端开发仓库</a> » <span>jQuery</span> » <strong>jQuery cxSelect 联动下拉菜单</strong></p>
+</div><div class="wrap">
+    <h1>jQuery cxSelect 联动下拉菜单</h1>  <div class="intro">
+    <p>cxSelect 是基于 jQuery 的多级联动菜单插件，适用于省市、商品分类等联动菜单。</p>
+    <p>列表数据通过 AJAX 获取，也可以自定义，数据内容使用 JSON 格式。</p>
+    <p>同时兼容 Zepto，方便在移动端使用。</p>
+    <p>国内省市县数据来源：<a href="https://github.com/basecss/cityData" target="_blank">basecss/cityData</a> Date: 2014.03.31</p>
+    <p>全球主要城市数据来源：整理国内常用网站和软件 Date: 2014.07.29</p>
+  </div>
+
+  <div class="intro">
+    <dt>版本：</dt><dd>jQuery v1.7+</dd><dd>Zepto v1.0+</dd><dd>jQuery cxSelect v1.4.1</dd><ul class="release"><li><a class="demo" target="_blank" href="http://code.ciaoca.com/jquery/cxSelect/demo/">查看 Demo</a></li><li><a class="download" href="http://code.ciaoca.com/jquery/cxSelect/version/jQuery.cxSelect-1.4.1.zip">下载 jQuery cxSelect v1.4.1</a></li><li><a class="download" target="_blank" href="http://code.ciaoca.com/jquery/cxSelect/version/jQuery.cxSelect-1.3.11.zip">下载 jQuery cxSelect v1.3.11</a></li><li><a class="issues" target="_blank" href="https://github.com/ciaoca/cxSelect/issues">提交问题 / Bug / 建议</a></li></ul><div id="github_star" data-user="ciaoca" data-repo="cxSelect"><iframe src="./jQuery cxSelect 联动下拉菜单_files/github-btn.htm" allowtransparency="true" frameborder="0" scrolling="0" height="30px"></iframe></div>  </div>
+
+  <div id="doc_menu" class="doc_menu fixed" style="height: 194px;"><div class="title">文档目录</div><ol class="list"><li class="">示例</li><li class="">使用方法</li><li class="n">参数说明</li><li>data 属性参数</li><li>API 接口</li><li>相关信息</li></ol></div>
+
+  <h2>示例</h2>
+  <div class="example">
+    <div id="my_city" class="form">
+      <dl class="row">
+        <dt>省份</dt>
+        <dd>
+          <select class="province select" name="province"><option value="">请选择</option><option value="北京市">北京市</option><option value="天津市">天津市</option><option value="河北省">河北省</option><option value="山西省">山西省</option><option value="内蒙古自治区">内蒙古自治区</option><option value="辽宁省">辽宁省</option><option value="吉林省">吉林省</option><option value="黑龙江省">黑龙江省</option><option value="上海市">上海市</option><option value="江苏省">江苏省</option><option value="浙江省">浙江省</option><option value="安徽省">安徽省</option><option value="福建省">福建省</option><option value="江西省">江西省</option><option value="山东省">山东省</option><option value="河南省">河南省</option><option value="湖北省">湖北省</option><option value="湖南省">湖南省</option><option value="广东省">广东省</option><option value="广西壮族自治区">广西壮族自治区</option><option value="海南省">海南省</option><option value="重庆市">重庆市</option><option value="四川省">四川省</option><option value="贵州省">贵州省</option><option value="云南省">云南省</option><option value="西藏自治区">西藏自治区</option><option value="陕西省">陕西省</option><option value="甘肃省">甘肃省</option><option value="青海省">青海省</option><option value="宁夏回族自治区">宁夏回族自治区</option><option value="新疆维吾尔自治区">新疆维吾尔自治区</option><option value="台湾省">台湾省</option><option value="香港特别行政区">香港特别行政区</option><option value="澳门特别行政区">澳门特别行政区</option></select>
+        </dd>
+      </dl>
+      <dl class="row">
+        <dt>城市</dt>
+        <dd>
+          <select class="city select" name="city"><option value="">请选择</option><option value="杭州市">杭州市</option><option value="宁波市">宁波市</option><option value="温州市">温州市</option><option value="嘉兴市">嘉兴市</option><option value="湖州市">湖州市</option><option value="绍兴市">绍兴市</option><option value="金华市">金华市</option><option value="衢州市">衢州市</option><option value="舟山市">舟山市</option><option value="台州市">台州市</option><option value="丽水市">丽水市</option></select>
+        </dd>
+      </dl>
+      <dl class="row">
+        <dt>地区</dt>
+        <dd>
+          <select class="area select" name="area"><option value="">请选择</option><option value="上城区">上城区</option><option value="下城区">下城区</option><option value="江干区">江干区</option><option value="拱墅区">拱墅区</option><option value="西湖区">西湖区</option><option value="滨江区">滨江区</option><option value="萧山区">萧山区</option><option value="余杭区">余杭区</option><option value="桐庐县">桐庐县</option><option value="淳安县">淳安县</option><option value="建德市">建德市</option><option value="富阳市">富阳市</option><option value="临安市">临安市</option></select>
+        </dd>
+      </dl>
+    </div>
+  </div>
+
+  <h2>使用方法</h2>
+  <div class="example">
+<h3>载入 JavaScript 文件</h3>
+<pre><code class="html hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"jquery.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"jquery.cxselect.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+
+<h3>DOM 结构</h3>
+<pre><code class="html hljs xml"><span class="hljs-comment">&lt;!--
+select 必须放在元素 id="element_id" 的内部，不限层级
+select 的 class 任意取值，也可以附加多个 class，如 class="province otherclass"，在调用时只需要输入其中一个即可，但是不能重复
+--&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"element_id"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"province"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"city"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"area"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
+
+<h3>设置默认值</h3>
+<pre><code class="html hljs xml"><span class="hljs-comment">&lt;!-- 方法一：使用 option 的 value 和 selected 属性 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"province"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"浙江省"</span> <span class="hljs-attr">selected</span>&gt;</span>浙江省<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- 方法二：使用 select 的 data-value 属性 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"province"</span> <span class="hljs-attr">data-value</span>=<span class="hljs-string">"浙江省"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span>
+</code></pre>
+
+<h3>调用 cxSelect</h3>
+<pre><code class="js hljs javascript">$(<span class="hljs-string">'#element_id'</span>).cxSelect({
+  url: <span class="hljs-string">'cityData.min.json'</span>,               <span class="hljs-comment">// 如果服务器不支持 .json 类型文件，请将文件改为 .js 文件</span>
+  selects: [<span class="hljs-string">'province'</span>, <span class="hljs-string">'city'</span>, <span class="hljs-string">'area'</span>],  <span class="hljs-comment">// 数组，请注意顺序</span>
+  emptyStyle: <span class="hljs-string">'none'</span>
+});
+</code></pre>
+
+<h3>设置参数全局默认值</h3>
+<pre><code class="js hljs javascript"><span class="hljs-comment">// 需在引入 &lt;script src="jquery.cxselect.js"&gt;&lt;/script&gt; 之后，调用之前设置</span>
+$.cxSelect.defaults.url = <span class="hljs-string">'cityData.min.json'</span>;
+$.cxSelect.defaults.emptyStyle = <span class="hljs-string">'none'</span>;
+</code></pre>
+</div>
+
+  <h2>参数说明</h2>
+  <div class="example">
+    <table class="manual_table">
+      <thead>
+        <tr>
+          <th width="100">名称</th>
+          <th width="100">默认值</th>
+          <th>说明</th>
+        </tr>
+      </thead>
+      <tbody><tr>
+        <td>selects</td>
+        <td>[]</td>
+        <td>下拉选框组。输入 select 的 className</td>
+      </tr>
+      <tr>
+        <td>url</td>
+        <td>null</td>
+        <td>
+          <p>整合列表数据接口地址（URL）</p>
+          <p>每个选框的内容使用各自的接口地址，详见 <a href="http://code.ciaoca.com/jquery/cxSelect/demo/oneself">[DEMO]</a></p>
+        </td>
+      </tr>
+      <tr>
+        <td>data</td>
+        <td>null</td>
+        <td>自定义数据，类型为数组，数据使用 JSON 格式。<a href="http://code.ciaoca.com/jquery/cxSelect/demo/custom">[DEMO]</a></td>
+      </tr>
+      <tr>
+        <td>emptyStyle</td>
+        <td>null</td>
+        <td>子集无数据时 select 的状态。可设置为："none"(display:none), "hidden"(visibility:hidden)</td>
+      </tr>
+      <tr>
+        <td>required</td>
+        <td>false</td>
+        <td>是否为必选。设为 false 时，会在列表头部添加 <code>&lt;option value="firstValue"&gt;firstTitle&lt;/option&gt;</code> 选项。</td>
+      </tr>
+      <tr>
+        <td>firstTitle</td>
+        <td>'请选择'</td>
+        <td>选框第一个项目的标题（仅在 required 为 false 时有效）</td>
+      </tr>
+      <tr>
+        <td>firstValue</td>
+        <td>''</td>
+        <td>选框第一个项目的值（仅在 required 为 false 时有效）</td>
+      </tr>
+      <tr>
+        <td>jsonSpace</td>
+        <td>''</td>
+        <td>数据命名空间</td>
+      </tr>
+      <tr>
+        <td>jsonName</td>
+        <td>'n'</td>
+        <td>数据标题字段名称（用于 option 的标题）</td>
+      </tr>
+      <tr>
+        <td>jsonValue</td>
+        <td>''</td>
+        <td>数据值字段名称（用于 option 的 value，没有值字段时使用标题作为 value）</td>
+      </tr>
+      <tr>
+        <td>jsonSub</td>
+        <td>'s'</td>
+        <td>子集数据字段名称</td>
+      </tr>
+    </tbody></table>
+  </div>
+
+  <h2>data 属性参数</h2>
+  <div class="example">
+    <h3>在父元素上的 <code>data-</code> 属性</h3>
+    <pre><code class="html hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"element_id"</span> <span class="hljs-attr">data-url</span>=<span class="hljs-string">"cityData.min.json"</span> <span class="hljs-attr">data-selects</span>=<span class="hljs-string">"province,city,area"</span> <span class="hljs-attr">data-required</span>=<span class="hljs-string">"true"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
+    <table class="manual_table">
+      <thead>
+        <tr>
+          <th width="160">名称</th>
+          <th>说明</th>
+        </tr>
+      </thead>
+      <tbody><tr>
+        <td>data-selects</td>
+        <td>下拉选框组。输入 select 的 className，使用英文逗号分隔的字符串</td>
+      </tr>
+      <tr>
+        <td>data-url</td>
+        <td>列表数据接口地址（此处只能设置 URL，自定义需要在参数中设置）</td>
+      </tr>
+      <tr>
+        <td>data-empty-style</td>
+        <td>子集无数据时 select 的状态</td>
+      </tr>
+      <tr>
+        <td>data-required</td>
+        <td>是否为必选</td>
+      </tr>
+      <tr>
+        <td>data-first-title</td>
+        <td>选框第一个项目的标题</td>
+      </tr>
+      <tr>
+        <td>data-first-value</td>
+        <td>选框第一个项目的值</td>
+      </tr>
+      <tr>
+        <td>data-json-space</td>
+        <td>数据命名空间</td>
+      </tr>
+      <tr>
+        <td>data-json-name</td>
+        <td>数据标题字段名称</td>
+      </tr>
+      <tr>
+        <td>data-json-value</td>
+        <td>数据值字段名称</td>
+      </tr>
+      <tr>
+        <td>data-json-sub</td>
+        <td>子集数据字段名称</td>
+      </tr>
+    </tbody></table>
+
+    <h3>在 <code>&lt;select&gt;</code> 元素上的 <code>data-</code> 属性</h3>
+    <pre><code class="html hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"province"</span> <span class="hljs-attr">data-value</span>=<span class="hljs-string">"浙江省"</span> <span class="hljs-attr">data-required</span>=<span class="hljs-string">"false"</span> <span class="hljs-attr">data-first-title</span>=<span class="hljs-string">"选择省"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span></code></pre>
+    <table class="manual_table">
+      <thead>
+        <tr>
+          <th width="160">名称</th>
+          <th>说明</th>
+        </tr>
+      </thead>
+      <tbody><tr>
+        <td>data-value</td>
+        <td>默认选中值</td>
+      </tr>
+      <tr>
+        <td>data-url</td>
+        <td>列表数据接口地址</td>
+      </tr>
+      <tr>
+        <td>data-required</td>
+        <td>是否为必选</td>
+      </tr>
+      <tr>
+        <td>data-query-name</td>
+        <td>传递上一个选框值的参数名称（默认使用上一个选框的 name 属性值）</td>
+      </tr>
+      <tr>
+        <td>data-first-title</td>
+        <td>选框第一个项目的标题</td>
+      </tr>
+      <tr>
+        <td>data-first-value</td>
+        <td>选框第一个项目的值</td>
+      </tr>
+      <tr>
+        <td>data-json-space</td>
+        <td>数据命名空间</td>
+      </tr>
+      <tr>
+        <td>data-json-name</td>
+        <td>数据标题字段名称</td>
+      </tr>
+      <tr>
+        <td>data-json-value</td>
+        <td>数据值字段名称</td>
+      </tr>
+    </tbody></table>
+  </div>
+
+  <h2>API 接口</h2>
+  <div class="example">
+<pre><code class="js hljs javascript"><span class="hljs-keyword">var</span> cxSelectApi;
+<span class="hljs-comment">// 方法一：</span>
+cxSelectApi = $.cxSelect($(<span class="hljs-string">'#element_id'</span>), {
+  selects: [<span class="hljs-string">'province'</span>, <span class="hljs-string">'city'</span>, <span class="hljs-string">'area'</span>]
+});
+
+<span class="hljs-comment">// 方法二：</span>
+$(<span class="hljs-string">'#element_id'</span>).cxSelect({
+  selects: [<span class="hljs-string">'province'</span>, <span class="hljs-string">'city'</span>, <span class="hljs-string">'area'</span>]
+}, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">api</span>) </span>{
+  cxSelectApi = api;
+});</code></pre>
+    <table class="manual_table">
+      <thead>
+        <tr>
+          <th width="160">名称</th>
+          <th>说明</th>
+        </tr>
+      </thead>
+      <tbody><tr>
+        <td>attach()</td>
+        <td>绑定<br>调用时会自动进行绑定，用于使用detach解除绑定后，进行重新绑定。</td>
+      </tr>
+      <tr>
+        <td>detach()</td>
+        <td>解除绑定<br>解除绑定后，不再具有联动效果。</td>
+      </tr>
+      <tr>
+        <td>clear(index)</td>
+        <td>清空选项<br>清空第 index 个 select 自身及之后的 select 的选项。<p></p>
+          <p>index: select 的序号，从 0 开始。</p>
+        </td>
+      </tr>
+      <tr>
+        <td>setOptions(settings)</td>
+        <td>重新设置参数
+          <p>settings: 与调用时参数一致。</p>
+        </td>
+      </tr>
+    </tbody></table>
+  </div>
+
+  <h2>相关信息</h2>
+<div class="about">
+  <dl><dt>作者网站：</dt><dd><a target="_blank" href="http://ciaoca.com/">http://ciaoca.com</a></dd></dl><dl><dt>相关文档：</dt><dd><a target="_blank" href="https://github.com/ciaoca/cxSelect">Github</a></dd><dd><a target="_blank" href="./jQuery cxSelect 联动下拉菜单_files/jQuery cxSelect 联动下拉菜单.htm">中文文档</a></dd></dl><dl><dt>授权协议：</dt><dd><a target="_blank" href="http://zh.wikipedia.org/zh-cn/MIT%E8%AE%B8%E5%8F%AF%E8%AF%81">MIT</a></dd></dl></div></div>
+
+<div class="ft_copyright">© 2009 - 2017 Ciaoca</div>
+
+<script src="./jQuery cxSelect 联动下拉菜单_files/highlight.pack.js"></script>
+<script src="./jQuery cxSelect 联动下拉菜单_files/code.js"></script>
+<script src="./jQuery cxSelect 联动下拉菜单_files/jquery.cxselect.js"></script>
+<script>
+$('#my_city').cxSelect({
+  url: 'js/cityData.min.json',
+  selects: ['province', 'city', 'area']
+});
+</script>
+
+<script src="./jQuery cxSelect 联动下拉菜单_files/donate.js"></script><div id="code_ciaoca_donate"><div class="mini">«<br>赞赏支持</div><div class="full alipay"><h5>赞赏支持</h5><p>早安，据说早上效率特别高</p><div class="qr"></div><div class="pays"><a id="code_ciaoca_donate_alipay" href="javascript://" rev="alipay">支付宝</a><a id="code_ciaoca_donate_wechat" href="javascript://" rev="wechat">微信</a></div><p class="note">打开<span class="name"></span>，使用扫一扫<br>扫描上面的二维码进行支付</p><i class="close">x</i></div></div>
+<div style="display:none;">
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cdiv id='cnzz_stat_icon_5076009' style='display:none;'%3E%3C/div%3E%3Cscript src='" + cnzz_protocol + "s25.cnzz.com/stat.php%3Fid%3D5076009' type='text/javascript'%3E%3C/script%3E"));</script><div id="cnzz_stat_icon_5076009" style="display:none;"><a href="http://www.cnzz.com/stat/website.php?web_id=5076009" target="_blank" title="站长统计">站长统计</a></div><script src="./jQuery cxSelect 联动下拉菜单_files/stat.php" type="text/javascript"></script><script src="./jQuery cxSelect 联动下拉菜单_files/core.php" charset="utf-8" type="text/javascript"></script>
+</div>
+</body></html>

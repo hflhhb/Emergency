@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>jQuery基于特定值来隐藏显示元素的插件|DEMO_jQuery之家-自由分享jQuery、html5、css3的插件库</title>
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="css/default.css">
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+	<!--[if IE]>
+		<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div class="htmleaf-container">
+		<header class="htmleaf-header">
+			<h1>jQuery基于特定值来隐藏显示元素的插件 <span>A jQuery Plugin designed to easily show elements based on values of other elements</span></h1>
+			<div class="htmleaf-links">
+				<a class="htmleaf-icon icon-home" href="http://www.htmleaf.com/" title="jQuery之家" target="_blank"><span> jQuery之家</span></a>
+				<a class="htmleaf-icon icon-arrow-right3" href="http://www.htmleaf.com/jQuery/Layout-Interface/201503111502.html" title="返回下载页" target="_blank"><span> 返回下载页</span></a>
+			</div>
+		</header>
+		<!--<div class="htmleaf-content bgcolor-8">
+			
+		</div>-->
+
+		<!---->
+		<div class="container">
+		<div>
+		<p>
+			<h2>Example 1 - Simple Single Rule</h2>
+			<div style="background-color:#ADDBB9; padding:10px 10px 1px 10px">
+				<p>这个例子使用 <code>test1:0,2</code> 规则来隐藏显示元素。</p>
+				<p>这个规则指示字段 <code>text1</code> 需要值为 <code>0</code> 或者 <code>2</code>, 使用下面的下拉列表来测试一下结果：</p>
+			</div>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;label</span> <span style="color: #7D9029">for=</span><span style="color: #BA2121">&quot;test1&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>Test1<span style="color: #008000; font-weight: bold">&lt;/label&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;select</span> <span style="color: #7D9029">id=</span><span style="color: #BA2121">&quot;test1&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+  <span style="color: #008000; font-weight: bold">&lt;option</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">&quot;-1&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>-1<span style="color: #008000; font-weight: bold">&lt;/option&gt;</span>
+  <span style="color: #008000; font-weight: bold">&lt;option</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">&quot;0&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>0<span style="color: #008000; font-weight: bold">&lt;/option&gt;</span>
+  <span style="color: #008000; font-weight: bold">&lt;option</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">&quot;1&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>1<span style="color: #008000; font-weight: bold">&lt;/option&gt;</span>
+  <span style="color: #008000; font-weight: bold">&lt;option</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">&quot;2&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>2<span style="color: #008000; font-weight: bold">&lt;/option&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/select&gt;</span>
+
+<span style="color: #008000; font-weight: bold">&lt;div</span> <span style="color: #7D9029">visibly=</span><span style="color: #BA2121">&quot;test1:0,2&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+  SELECTION MATCHED THE ABOVE RULE!
+<span style="color: #008000; font-weight: bold">&lt;/div&gt;</span>
+</pre></div>
+
+
+
+</p>
+				
+<p>
+<form class="form-horizontal" role="form">
+<div class="row">
+	<div class="form-group col-md-offset-2">
+		<label for="test1" class="col-lg-2 control-label">Test1</label>
+		<div class="col-lg-6">
+			<select class="form-control" id="test1">
+				<option value="-1">-1</option>
+				<option value="0">0</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+			</select>
+		</div>
+	</div>
+</div>
+</form>
+<div class="row" id="demo1" visibly="test1:0,2" >
+	<div class="col-md-offset-2">
+		<p class="text-success"><span class="glyphicon glyphicon-ok"></span><strong>SELECTION MATCHED THE ABOVE RULE!</strong></p>
+	</div>
+</div>
+		</p>
+		
+		<p>
+			<h2>Example 2 - Multiple Rules</h2>
+				<div style="background-color:#ADDBB9; padding:10px 10px 1px 10px">
+					<p>这个例子使用 <code>test2:-1,2;test3:1%test2:1;test3:2</code> 规则来隐藏显示元素。</p>
+					<p>这个例子有两个规则： <code>test2:-1,2;test3:1</code> 和 <code>test2:1;test3:2</code>。 如果符合这两个规则，label标签和input输入框将被显示。</p>
+					<p>When valid selection is made a text field will show, anything entered in here will be removed when invalid option is selected. This happens because visibly was setup with clearOnHide set to true.</p>
+							<p>The following options are set for this example</p>
+		<p>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">options <span style="color: #666666">=</span> {
+  clearOnHide<span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">true</span>
+}
+</pre></div>
+
+		</p>
+
+				</div>
+
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;select</span> <span style="color: #7D9029">id=</span><span style="color: #BA2121">&quot;test2&quot;</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;form-control&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+  <span style="color: #008000; font-weight: bold">&lt;option</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">&quot;-1&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>-1<span style="color: #008000; font-weight: bold">&lt;/option&gt;</span>
+  <span style="color: #008000; font-weight: bold">&lt;option</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">&quot;0&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>0<span style="color: #008000; font-weight: bold">&lt;/option&gt;</span>
+  <span style="color: #008000; font-weight: bold">&lt;option</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">&quot;1&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>1<span style="color: #008000; font-weight: bold">&lt;/option&gt;</span>
+  <span style="color: #008000; font-weight: bold">&lt;option</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">&quot;2&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>2<span style="color: #008000; font-weight: bold">&lt;/option&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/select&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;select</span> <span style="color: #7D9029">id=</span><span style="color: #BA2121">&quot;test3&quot;</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;form-control&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+  <span style="color: #008000; font-weight: bold">&lt;option</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">&quot;-1&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>-1<span style="color: #008000; font-weight: bold">&lt;/option&gt;</span>
+  <span style="color: #008000; font-weight: bold">&lt;option</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">&quot;0&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>0<span style="color: #008000; font-weight: bold">&lt;/option&gt;</span>
+  <span style="color: #008000; font-weight: bold">&lt;option</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">&quot;1&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>1<span style="color: #008000; font-weight: bold">&lt;/option&gt;</span>
+  <span style="color: #008000; font-weight: bold">&lt;option</span> <span style="color: #7D9029">value=</span><span style="color: #BA2121">&quot;2&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>2<span style="color: #008000; font-weight: bold">&lt;/option&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;/select&gt;</span>
+
+<span style="color: #008000; font-weight: bold">&lt;div</span> <span style="color: #7D9029">visibly=</span><span style="color: #BA2121">&quot;test2:-1,2;test3:1%test2:1;test3:2&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>
+  <span style="color: #008000; font-weight: bold">&lt;label</span> <span style="color: #7D9029">for=</span><span style="color: #BA2121">&quot;dummytext&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>Useless text<span style="color: #008000; font-weight: bold">&lt;/label&gt;</span>
+  <span style="color: #008000; font-weight: bold">&lt;input</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text&quot;</span> <span style="color: #7D9029">placeholder=</span><span style="color: #BA2121">&quot;whatever you put in here will disappear when field is hidden&quot;</span><span style="color: #008000; font-weight: bold">/&gt;</span>	
+  SELECTION MATCHED THE ABOVE RULE!
+<span style="color: #008000; font-weight: bold">&lt;/div&gt;</span>
+</pre></div>
+
+
+
+
+</p>
+<p>
+<form class="form-horizontal" role="form">
+	<div class="row ">
+		<div class="form-group  col-md-offset-2">
+			<label for="test2" class="col-lg-2 control-label">Test2</label>
+			<div class="col-lg-6">
+				<select id="test2" class="form-control">
+					<option value="-1">-1</option>
+					<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+				</select>
+			</div>
+		</div>
+	</div>
+	<div class="row ">
+		<div class="form-group  col-md-offset-2">
+			<label for="test3" class="col-lg-2 control-label">Test3</label>
+			<div class="col-lg-6">
+				<select id="test3" class="form-control">
+					<option value="-1">-1</option>
+					<option value="0">0</option>
+					<option value="1">1</option>
+		
+					<option value="2">2</option>
+				</select>
+			</div>
+		</div>				
+	</div>
+</form>
+<form class="form-horizontal" role="form" id="demo2" visibly="test2:-1,2;test3:1%test2:1;test3:2">
+	<div class="row ">
+		<div class="form-group col-md-offset-2">
+			<label for="dummytext" class="col-lg-2 control-label">Useless text</label>
+			<div class="col-lg-6">
+				<input type="text" id="dummytext" class="form-control" placeholder="whatever you put in here will disappear when field is hidden"/>
+			</div>
+		</div>				
+	</div>
+	<div class="row" >
+		<div class="col-md-offset-2">
+			
+			<p class="text-success"><span class="glyphicon glyphicon-ok"></span><strong>SELECTION MATCHED THE ABOVE RULE!</strong></p>
+		</div>
+	</div>
+</form>
+</p>
+
+<p>
+	<h2>Example 3 - Regular Expression (has value)</h2>
+	<div style="background-color:#ADDBB9; padding:10px 10px 1px 10px">
+		<p>这个例子使用正则表达式 <code>ex3t1:^(?=\s*\S).*$</code> 来作为隐藏显示元素的规则。</p>
+		
+		<p>这个正则表达式十分简单，只要输入框中有值就可以显示。</p>
+
+		<p>The following options are set for this example</p>
+		<p>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">options <span style="color: #666666">=</span> {
+  regularExpression<span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">true</span>
+}
+</pre></div>
+
+		</p>
+	</div>	
+	<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;label</span> <span style="color: #7D9029">for=</span><span style="color: #BA2121">&quot;ex3t1&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>Text<span style="color: #008000; font-weight: bold">&lt;/label&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;input</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text&quot;</span> <span style="color: #7D9029">id=</span><span style="color: #BA2121">&quot;ex3t1&quot;</span> <span style="color: #008000; font-weight: bold">/&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;div</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;row&quot;</span> <span style="color: #7D9029">id=</span><span style="color: #BA2121">&quot;demo3&quot;</span> <span style="color: #7D9029">visibly=</span><span style="color: #BA2121">&quot;ex3t1:^(?=\s*\S).*$&quot;</span> <span style="color: #008000; font-weight: bold">&gt;</span>
+  SELECTION MATCHED THE ABOVE RULE!
+<span style="color: #008000; font-weight: bold">&lt;/div&gt;</span>
+</pre></div>
+	<p>
+		<form class="form-horizontal" role="form">
+			<div class="row ">
+				<div class="form-group col-md-offset-2">
+					<label for="ex3t1" class="col-lg-2 control-label">Text</label>
+					<div class="col-lg-6">
+						<input type="text" id="ex3t1" class="form-control" />
+					</div>
+				</div>				
+			</div>
+			
+		</form>
+		<div class="row" id="demo3" visibly="ex3t1:^(?=\s*\S).*$" >
+			<div class="col-md-offset-2">
+				
+				<p class="text-success"><span class="glyphicon glyphicon-ok"></span><strong>SELECTION MATCHED THE ABOVE RULE!</strong></p>
+			</div>
+		</div>
+	</p>
+
+
+</p>
+
+<p>
+	<h2>Example 4 - Regular Expression (Number between 1 and 99)</h2>
+	<div style="background-color:#ADDBB9; padding:10px 10px 1px 10px">
+		<p>这个例子使用稍微复杂的正则表达式 <code>ex4t1:^(([0-9][1-9])|([1-9][0-9])|[1-9])$</code> 来作为隐藏显示元素的规则。</p>
+		
+		<p>输入的值必须在1-99之间元素才会被显示。</p>
+
+		<p>The following options are set for this Example</p>
+		<p>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">options <span style="color: #666666">=</span> {
+  regularExpression<span style="color: #666666">:</span> <span style="color: #008000; font-weight: bold">true</span>
+}
+</pre></div>
+
+
+		</p>
+	</div>	
+	<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">&lt;label</span> <span style="color: #7D9029">for=</span><span style="color: #BA2121">&quot;ex4t1&quot;</span><span style="color: #008000; font-weight: bold">&gt;</span>Text<span style="color: #008000; font-weight: bold">&lt;/label&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;input</span> <span style="color: #7D9029">type=</span><span style="color: #BA2121">&quot;text&quot;</span> <span style="color: #7D9029">id=</span><span style="color: #BA2121">&quot;ex4t1&quot;</span> <span style="color: #008000; font-weight: bold">/&gt;</span>
+<span style="color: #008000; font-weight: bold">&lt;div</span> <span style="color: #7D9029">class=</span><span style="color: #BA2121">&quot;row&quot;</span> <span style="color: #7D9029">id=</span><span style="color: #BA2121">&quot;demo4&quot;</span> <span style="color: #7D9029">visibly=</span><span style="color: #BA2121">&quot;ex4t1:^(([0-9][1-9])|([1-9][0-9])|[1-9])$&quot;</span> <span style="color: #008000; font-weight: bold">&gt;</span>
+  SELECTION MATCHED THE ABOVE RULE!
+<span style="color: #008000; font-weight: bold">&lt;/div&gt;</span>
+</pre></div>
+	<p>
+		<form class="form-horizontal" role="form">
+			<div class="row ">
+				<div class="form-group col-md-offset-2">
+					<label for="ex4t1" class="col-lg-2 control-label">Text</label>
+					<div class="col-lg-6">
+						<input type="text" id="ex4t1" class="form-control" />
+					</div>
+				</div>				
+			</div>
+			
+		</form>
+		<div class="row" id="demo4" visibly="ex4t1:^(([0-9][1-9])|([1-9][0-9])|[1-9])$" >
+			<div class="col-md-offset-2">
+				
+				<p class="text-success"><span class="glyphicon glyphicon-ok"></span><strong>SELECTION MATCHED THE ABOVE RULE!</strong></p>
+			</div>
+		</div>
+	</p>
+</p>
+</div>
+</div>
+		<!---->
+		<div class="related">
+		    <h3>如果你喜欢这个插件，那么你可能也喜欢:</h3>
+		    <a href="http://www.htmleaf.com/ziliaoku/qianduanjiaocheng/201502271431.html">
+			  <img src="related/1.jpg" width="300" alt="使用CSS隐藏HTML元素的4种常用方法"/>
+			  <h3>使用CSS隐藏HTML元素的4种常用方法</h3>
+			</a>
+			<a href="http://www.htmleaf.com/jQuery/Menu-Navigation/201502281432.html">
+			  <img src="related/2.jpg" width="300" alt="基于Bootstrup的jQuery隐藏滑动侧边栏特效插件"/>
+			  <h3>基于Bootstrup的jQuery隐藏滑动侧边栏特效插件</h3>
+			</a>
+		</div>
+	</div>
+	
+	<script src="http://libs.useso.com/js/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	  <script src="js/jquery-visibly.min.js"></script>
+  <script type="text/javascript">
+
+$(document).ready(function() {
+	options = {
+		clearOnHide: true
+	}
+	$('#demo1').Visibly();
+	$('#demo2').Visibly(options);
+	options = {
+		regularExpression: true
+	}
+	$('#demo3, #demo4').Visibly(options);
+
+
+})
+
+  </script>
+</body>
+</html>
