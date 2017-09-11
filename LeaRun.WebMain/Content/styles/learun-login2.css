@@ -8,7 +8,7 @@ button:focus {outline: -webkit-focus-ring-color auto 0px;}
 button[disabled],button[disabled] button{color:#ccc;opacity:1;cursor:default}
 .lr-login-top {height:40px;margin-bottom:16px;}
 .lr-login-top .lr-login-title {margin:auto;width:1024px;height:100%}
-.lr-login-logo {background: url('../images/login/logo.png') no-repeat;height:40px;}
+.lr-login-logo {/*background: url('../images/login/logo.png') no-repeat;*/height:40px;}
 .lr-login-center {height:524px;}
 .lr-login-center table {border-spacing: 0;border-collapse: collapse;margin:0px;padding:0px;}
 .lr-login-center table td{margin: 0px;padding: 0px;}
