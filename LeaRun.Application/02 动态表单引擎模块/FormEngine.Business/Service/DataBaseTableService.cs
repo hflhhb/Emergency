@@ -22,7 +22,7 @@ namespace LeaRun.SystemManage.Service
     public class DataBaseTableService : Dao<DataBaseLinkEntity>, IDataBaseTableService
     {
         private IDataBaseLinkService dataBaseLinkService =null;
-        private string Platform_DBName = "LeaRunFramework_Base_2016";
+        private string Platform_DBName = Config.GetValue("Platform_DBName");
 
 
         /// <summary>

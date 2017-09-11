@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BBF6EEC4-511B-4910-B975-14F86122B4AE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LeaRun.Emergency.Domain</RootNamespace>
+    <AssemblyName>LeaRun.Emergency.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ResourceManage\Entity\Hospital.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\LeaRun.Data\LeaRun.Data\LeaRun.Data.csproj">
+      <Project>{7c84f157-09b6-42d8-85f2-04af1f31a046}</Project>
+      <Name>LeaRun.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\LeaRun.Util\LeaRun.Util\LeaRun.Util.csproj">
+      <Project>{07aa2566-d0e5-47af-a17d-3b1c6aee598d}</Project>
+      <Name>LeaRun.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\LeaRun.WebBase\LeaRun.WebBase\LeaRun.WebBase.csproj">
+      <Project>{9b10db87-130c-41d3-8687-1fac877db74a}</Project>
+      <Name>LeaRun.WebBase</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Appraise\Entity\" />
+    <Folder Include="Appraise\IService\" />
+    <Folder Include="Appraise\Mapping\" />
+    <Folder Include="BasicManage\Entity\" />
+    <Folder Include="BasicManage\IService\" />
+    <Folder Include="BasicManage\Mapping\" />
+    <Folder Include="EmergencyDuty\Entity\" />
+    <Folder Include="EmergencyDuty\IService\" />
+    <Folder Include="EmergencyDuty\Mapping\" />
+    <Folder Include="GIS\Entity\" />
+    <Folder Include="GIS\IService\" />
+    <Folder Include="GIS\Mapping\" />
+    <Folder Include="ResourceManage\IService\" />
+    <Folder Include="ResourceManage\Mapping\" />
+    <Folder Include="SecurityInvestigation\Entity\" />
+    <Folder Include="SecurityInvestigation\IService\" />
+    <Folder Include="SecurityInvestigation\Mapping\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

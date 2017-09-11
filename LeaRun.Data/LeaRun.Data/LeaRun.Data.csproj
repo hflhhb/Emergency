@@ -64,8 +64,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\MySql.Data.Entity.6.9.9\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
     </Reference>
-    <Reference Include="Oracle.DataAccess, Version=4.112.3.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
-      <HintPath>..\..\packages\odp.net.x86.112.3.20\lib\net40\Oracle.DataAccess.dll</HintPath>
+    <Reference Include="Oracle.DataAccess, Version=4.112.3.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=AMD64">
+      <HintPath>..\..\packages\odp.net.x64.112.3.20\lib\net40\Oracle.DataAccess.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />

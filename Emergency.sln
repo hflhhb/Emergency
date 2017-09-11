@@ -93,6 +93,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeaRun.WeChatManage.Domain"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeaRun.WeChatManage.Web", "LeaRun.Application\08 微信管理模块\WeChatManage.Web\LeaRun.WeChatManage.Web.csproj", "{82E7A109-817B-4F91-849F-484DBB6888B2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeaRun.Emergency.Domain", "LeaRun.Application\50 应急平台模块\LeaRun.Emergency.Domain\LeaRun.Emergency.Domain.csproj", "{BBF6EEC4-511B-4910-B975-14F86122B4AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeaRun.Emergency.Business", "LeaRun.Application\50 应急平台模块\LeaRun.Emergency.Business\LeaRun.Emergency.Business.csproj", "{95AF440B-E511-458F-8D99-36DE2A8C083C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "50 Emergency", "50 Emergency", "{6495C71B-A335-4D3C-8B11-F9AA860A1B32}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -231,6 +237,14 @@ Global
 		{82E7A109-817B-4F91-849F-484DBB6888B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82E7A109-817B-4F91-849F-484DBB6888B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82E7A109-817B-4F91-849F-484DBB6888B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBF6EEC4-511B-4910-B975-14F86122B4AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBF6EEC4-511B-4910-B975-14F86122B4AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBF6EEC4-511B-4910-B975-14F86122B4AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBF6EEC4-511B-4910-B975-14F86122B4AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95AF440B-E511-458F-8D99-36DE2A8C083C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95AF440B-E511-458F-8D99-36DE2A8C083C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95AF440B-E511-458F-8D99-36DE2A8C083C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95AF440B-E511-458F-8D99-36DE2A8C083C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -276,6 +290,9 @@ Global
 		{9E776E64-3075-49B3-A6CE-B92F0B999C5C} = {3BE6F9E0-6CE3-4544-8D06-89A856E13C1F}
 		{1ADE96B2-6BFE-4513-8DC1-AD940D7A4E3C} = {3BE6F9E0-6CE3-4544-8D06-89A856E13C1F}
 		{82E7A109-817B-4F91-849F-484DBB6888B2} = {3BE6F9E0-6CE3-4544-8D06-89A856E13C1F}
+		{BBF6EEC4-511B-4910-B975-14F86122B4AE} = {6495C71B-A335-4D3C-8B11-F9AA860A1B32}
+		{95AF440B-E511-458F-8D99-36DE2A8C083C} = {6495C71B-A335-4D3C-8B11-F9AA860A1B32}
+		{6495C71B-A335-4D3C-8B11-F9AA860A1B32} = {49A4CC01-304D-4B58-B42C-ED64C56B1D9A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C254EA21-FAA6-4111-89F3-1A6FA0272EC0}
