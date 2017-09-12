@@ -1,17 +1,14 @@
 ﻿using System.Web.Mvc;
 
-namespace LeaRun.SecurityInvestigation.Areas
+namespace LeaRun.BasicData.Areas
 {
-    /// <summary>
-    /// 安全排查
-    /// </summary>
-    public class SecurityInvestigationAreaRegistration : AreaRegistration 
+    public class BasicDataAreaRegistration : AreaRegistration 
     {
         public override string AreaName 
         {
             get 
             {
-                return "SecurityInvestigation";
+                return "BasicData";
             }
         }
 

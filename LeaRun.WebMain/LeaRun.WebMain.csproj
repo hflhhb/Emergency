@@ -155,14 +155,15 @@
     <Compile Include="App_Start\WebActivator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Appraise\AppraiseAreaRegistration.cs" />
-    <Compile Include="Areas\BasicManage\BasicManageAreaRegistration.cs" />
+    <Compile Include="Areas\BasicData\BasicDataAreaRegistration.cs" />
     <Compile Include="Areas\EmergencyDuty\EmergencyDutyAreaRegistration.cs" />
     <Compile Include="Areas\GIS\Controllers\EmergencyController.cs" />
     <Compile Include="Areas\GIS\GISAreaRegistration.cs" />
-    <Compile Include="Areas\PlanManage\PlanManageAreaRegistration.cs" />
+    <Compile Include="Areas\EmergencyPlan\EmergencyPlanAreaRegistration.cs" />
     <Compile Include="Areas\PortalManage\PortalManageAreaRegistration.cs" />
+    <Compile Include="Areas\ResourceManage\Controllers\CameraController.cs" />
     <Compile Include="Areas\ResourceManage\ResourceManageAreaRegistration.cs" />
-    <Compile Include="Areas\SecurityInvestigation\SecurityInvestigationAreaRegistration.cs" />
+    <Compile Include="Areas\SecurityCheck\SecurityCheckAreaRegistration.cs" />
     <Compile Include="Content\scripts\plugins\ueditor\net\App_Code\Config.cs" />
     <Compile Include="Content\scripts\plugins\ueditor\net\App_Code\ConfigHandler.cs" />
     <Compile Include="Content\scripts\plugins\ueditor\net\App_Code\CrawlerHandler.cs" />
@@ -1441,13 +1442,15 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Areas\EmergencyDuty\Views\web.config" />
-    <Content Include="Areas\SecurityInvestigation\Views\web.config" />
+    <Content Include="Areas\SecurityCheck\Views\web.config" />
     <Content Include="Areas\GIS\Views\web.config" />
     <Content Include="Areas\Appraise\Views\web.config" />
     <Content Include="Areas\ResourceManage\Views\web.config" />
-    <Content Include="Areas\PlanManage\Views\web.config" />
+    <Content Include="Areas\EmergencyPlan\Views\web.config" />
     <Content Include="Areas\PortalManage\Views\web.config" />
-    <Content Include="Areas\BasicManage\Views\web.config" />
+    <Content Include="Areas\BasicData\Views\web.config" />
+    <Content Include="Areas\ResourceManage\Views\Camera\Form.cshtml" />
+    <Content Include="Areas\ResourceManage\Views\Camera\Index.cshtml" />
     <None Include="Configs\Data\Database.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -1839,27 +1842,26 @@
     <Folder Include="Areas\Appraise\Controllers\" />
     <Folder Include="Areas\Appraise\Models\" />
     <Folder Include="Areas\Appraise\Views\Shared\" />
-    <Folder Include="Areas\BasicManage\Controllers\" />
-    <Folder Include="Areas\BasicManage\Models\" />
-    <Folder Include="Areas\BasicManage\Views\Shared\" />
+    <Folder Include="Areas\BasicData\Controllers\" />
+    <Folder Include="Areas\BasicData\Models\" />
+    <Folder Include="Areas\BasicData\Views\Shared\" />
     <Folder Include="Areas\EmergencyDuty\Controllers\" />
     <Folder Include="Areas\EmergencyDuty\Models\" />
     <Folder Include="Areas\EmergencyDuty\Views\Shared\" />
+    <Folder Include="Areas\EmergencyPlan\Controllers\" />
+    <Folder Include="Areas\EmergencyPlan\Models\" />
+    <Folder Include="Areas\EmergencyPlan\Views\Shared\" />
     <Folder Include="Areas\GIS\Models\" />
     <Folder Include="Areas\GIS\Views\Emergency\" />
     <Folder Include="Areas\GIS\Views\Shared\" />
-    <Folder Include="Areas\PlanManage\Controllers\" />
-    <Folder Include="Areas\PlanManage\Models\" />
-    <Folder Include="Areas\PlanManage\Views\Shared\" />
     <Folder Include="Areas\PortalManage\Controllers\" />
     <Folder Include="Areas\PortalManage\Models\" />
     <Folder Include="Areas\PortalManage\Views\Shared\" />
-    <Folder Include="Areas\ResourceManage\Controllers\" />
     <Folder Include="Areas\ResourceManage\Models\" />
     <Folder Include="Areas\ResourceManage\Views\Shared\" />
-    <Folder Include="Areas\SecurityInvestigation\Controllers\" />
-    <Folder Include="Areas\SecurityInvestigation\Models\" />
-    <Folder Include="Areas\SecurityInvestigation\Views\Shared\" />
+    <Folder Include="Areas\SecurityCheck\Controllers\" />
+    <Folder Include="Areas\SecurityCheck\Models\" />
+    <Folder Include="Areas\SecurityCheck\Views\Shared\" />
     <Folder Include="Content\scripts\jquery\layer-v3.0.3\" />
     <Folder Include="Content\scripts\jquery\validate\" />
     <Folder Include="Content\scripts\plugins\ueditor\net\新建文件夹\" />
@@ -3364,6 +3366,10 @@
       <Project>{239ff513-5847-4dfc-9ec2-56ac52c412e0}</Project>
       <Name>LeaRun.SystemManage.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LeaRun.Application\01 系统管理模块\SystemManage.Web\LeaRun.SystemManage.Web.csproj">
+      <Project>{d2e7a109-f17b-4f91-b49f-434dbb6ee8b2}</Project>
+      <Name>LeaRun.SystemManage.Web</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LeaRun.Application\02 动态表单引擎模块\FormEngine.Business\LeaRun.FormEngine.Business.csproj">
       <Project>{b24c0524-80c0-4f0b-b6db-9c811347ec74}</Project>
       <Name>LeaRun.FormEngine.Business</Name>
@@ -3372,9 +3378,33 @@
       <Project>{2c7bac77-c1ec-43c1-9097-4770d02033dc}</Project>
       <Name>LeaRun.FormEngine.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LeaRun.Application\02 动态表单引擎模块\FormEngine.Web\LeaRun.FormEngine.Web.csproj">
+      <Project>{d2e7a109-317b-4f91-a49f-123dbb6ee8b2}</Project>
+      <Name>LeaRun.FormEngine.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LeaRun.Application\03 工作流引擎模块\WorkflowEngine.Web\LeaRun.WorkflowEngine.Web.csproj">
+      <Project>{32e7a159-917b-7f91-b49f-456dbb6ee8b2}</Project>
+      <Name>LeaRun.WorkflowEngine.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LeaRun.Application\04 文档发布管理模块\PublicInfoManage.Web\LeaRun.PublicInfoManage.Web.csproj">
+      <Project>{52e7a109-e17b-4f91-349f-a34dbb6ee8b2}</Project>
+      <Name>LeaRun.PublicInfoManage.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LeaRun.Application\05 报表管理模块\ReportManage.Web\LeaRun.ReportManage.Web.csproj">
+      <Project>{92e7a109-f17b-2f91-149f-534d5b6ee8b2}</Project>
+      <Name>LeaRun.ReportManage.Web</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LeaRun.Application\06 客户关系管理模块\CustomerManage.Web\LeaRun.CustomerManage.Web.csproj">
       <Project>{32c376fe-1538-402d-81c8-cffd98216186}</Project>
       <Name>LeaRun.CustomerManage.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LeaRun.Application\07 消息管理模块\MessageManage.Web\LeaRun.MessageManage.Web.csproj">
+      <Project>{c2e7a109-c17b-4f91-449f-ed4dbb6ee8b2}</Project>
+      <Name>LeaRun.MessageManage.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LeaRun.Application\08 微信管理模块\WeChatManage.Web\LeaRun.WeChatManage.Web.csproj">
+      <Project>{82e7a109-817b-4f91-849f-484dbb6888b2}</Project>
+      <Name>LeaRun.WeChatManage.Web</Name>
     </ProjectReference>
     <ProjectReference Include="..\LeaRun.Application\50 应急平台模块\LeaRun.Emergency.Business\LeaRun.Emergency.Business.csproj">
       <Project>{95af440b-e511-458f-8d99-36de2a8c083c}</Project>

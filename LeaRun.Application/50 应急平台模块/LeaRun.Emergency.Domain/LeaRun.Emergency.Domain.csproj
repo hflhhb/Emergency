@@ -47,8 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ResourceManage\Entity\Hospital.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceManage\Entity\CameraEntity.cs" />
+    <Compile Include="ResourceManage\IService\ICameraService.cs" />
+    <Compile Include="ResourceManage\Mapping\CameraMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\LeaRun.Data\LeaRun.Data\LeaRun.Data.csproj">
@@ -72,20 +74,18 @@
     <Folder Include="Appraise\Entity\" />
     <Folder Include="Appraise\IService\" />
     <Folder Include="Appraise\Mapping\" />
-    <Folder Include="BasicManage\Entity\" />
-    <Folder Include="BasicManage\IService\" />
-    <Folder Include="BasicManage\Mapping\" />
+    <Folder Include="BasicData\Entity\" />
+    <Folder Include="BasicData\IService\" />
+    <Folder Include="BasicData\Mapping\" />
     <Folder Include="EmergencyDuty\Entity\" />
     <Folder Include="EmergencyDuty\IService\" />
     <Folder Include="EmergencyDuty\Mapping\" />
     <Folder Include="GIS\Entity\" />
     <Folder Include="GIS\IService\" />
     <Folder Include="GIS\Mapping\" />
-    <Folder Include="ResourceManage\IService\" />
-    <Folder Include="ResourceManage\Mapping\" />
-    <Folder Include="SecurityInvestigation\Entity\" />
-    <Folder Include="SecurityInvestigation\IService\" />
-    <Folder Include="SecurityInvestigation\Mapping\" />
+    <Folder Include="SecurityCheck\Entity\" />
+    <Folder Include="SecurityCheck\IService\" />
+    <Folder Include="SecurityCheck\Mapping\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

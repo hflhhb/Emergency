@@ -63,6 +63,18 @@ namespace LeaRun.Data
         }
 
         /// <summary>
+        /// 业务应用数据库
+        /// </summary>
+        /// <returns></returns>
+        public static DbContextBase Applicate()
+        {
+            DbHelper.DbType = (DatabaseType)Enum.Parse(typeof(DatabaseType), UnityIocHelper.GetmapToByName("DBcontainer", "IDbContext"));
+            return (DbContextBase)UnityIocHelper.DBInstance.GetService<IDbContext>(new ParameterOverride(
+             "connString", "ApplicateDb"), new ParameterOverride(
+              "DbType", ""));
+        }
+
+        /// <summary>
         /// CRM 客户关系数据库
         /// </summary>
         /// <returns></returns>

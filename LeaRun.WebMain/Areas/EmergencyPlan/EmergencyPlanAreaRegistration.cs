@@ -1,14 +1,14 @@
 ﻿using System.Web.Mvc;
 
-namespace LeaRun.PlanManage.Areas
+namespace LeaRun.EmergencyPlan.Areas
 {
-    public class PlanManageAreaRegistration : AreaRegistration 
+    public class EmergencyPlanAreaRegistration : AreaRegistration 
     {
         public override string AreaName 
         {
             get 
             {
-                return "PlanManage";
+                return "EmergencyPlan";
             }
         }
 

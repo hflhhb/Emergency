@@ -1,12 +1,8 @@
-﻿using LeaRun.CustomerManage.Entity;
-using LeaRun.CustomerManage.Entity.ViewModel;
+﻿using LeaRun.CustomerManage.Entity.ViewModel;
 using LeaRun.CustomerManage.IService;
-using LeaRun.Data;
 using LeaRun.Data;
 using LeaRun.Util;
 using LeaRun.Util.Extension;
-using LeaRun.Util.Web;
-using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Text;

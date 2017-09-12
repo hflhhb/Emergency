@@ -1,14 +1,17 @@
 ﻿using System.Web.Mvc;
 
-namespace LeaRun.BasicManage.Areas
+namespace LeaRun.SecurityCheck.Areas
 {
-    public class BasicManageAreaRegistration : AreaRegistration 
+    /// <summary>
+    /// 安全排查
+    /// </summary>
+    public class SecurityCheckAreaRegistration : AreaRegistration 
     {
         public override string AreaName 
         {
             get 
             {
-                return "BasicManage";
+                return "SecurityCheck";
             }
         }
 

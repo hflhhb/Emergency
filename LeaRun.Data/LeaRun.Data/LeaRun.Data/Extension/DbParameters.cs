@@ -1,5 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
-using Oracle.DataAccess.Client;
+//using Oracle.DataAccess.Client;
+using Oracle.ManagedDataAccess.Client;
+using Oracle.ManagedDataAccess.EntityFramework;
 using System;
 using System.Data;
 using System.Data.Common;

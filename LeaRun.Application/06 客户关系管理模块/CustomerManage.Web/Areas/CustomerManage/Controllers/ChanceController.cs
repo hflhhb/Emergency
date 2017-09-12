@@ -1,12 +1,10 @@
-using LeaRun.CustomerManage.Entity;
 using LeaRun.CustomerManage.Business;
+using LeaRun.CustomerManage.Entity;
+using LeaRun.SystemManage.Business;
 using LeaRun.Util;
 using LeaRun.Util.Web;
+using LeaRun.WebBase;
 using System.Web.Mvc;
-using LeaRun.SystemManage.Business;
-using LeaRun.WebBase;
-using LeaRun.UserManage.Entity;
-using LeaRun.WebBase;
 
 namespace LeaRun.CustomerManage.Controllers
 {

@@ -666,10 +666,8 @@ namespace LeaRun.Util
             String strBooleanList = "";
             String strSelected = "selected";
             //如果是空字符串或NULL值，则不选择。
-            if (boolValue == null || boolValue == "")
-            {
-                strSelected = "";
-            }
+            if (boolValue == null) strSelected = "";
+            if (boolValue.ToString().IsEmpty()) strSelected = "";
 
             if (StringUtil.getBool(boolValue))
             {

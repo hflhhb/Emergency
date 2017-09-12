@@ -50,8 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceManage\Business\CameraBLL.cs" />
+    <Compile Include="ResourceManage\Service\CameraService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -82,16 +83,14 @@
   <ItemGroup>
     <Folder Include="Appraise\Business\" />
     <Folder Include="Appraise\Service\" />
-    <Folder Include="BasicManage\Business\" />
-    <Folder Include="BasicManage\Service\" />
+    <Folder Include="BasicData\Business\" />
+    <Folder Include="BasicData\Service\" />
     <Folder Include="EmergencyDuty\Business\" />
     <Folder Include="EmergencyDuty\Service\" />
     <Folder Include="GIS\Business\" />
     <Folder Include="GIS\Service\" />
-    <Folder Include="ResourceManage\Business\" />
-    <Folder Include="ResourceManage\Service\" />
-    <Folder Include="SecurityInvestigation\Business\" />
-    <Folder Include="SecurityInvestigation\Service\" />
+    <Folder Include="SecurityCheck\Business\" />
+    <Folder Include="SecurityCheck\Service\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
