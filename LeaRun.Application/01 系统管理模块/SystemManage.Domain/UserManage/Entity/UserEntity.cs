@@ -193,6 +193,12 @@ namespace LeaRun.UserManage.Entity
         /// 有效标志
         /// </summary>		
         public int? EnabledMark { get; set; }
+
+        /// <summary>
+        /// 是否系统用户
+        /// </summary>		
+        public int? IsSystem { get; set; }
+
         /// <summary>
         /// 备注
         /// </summary>		
@@ -235,6 +241,7 @@ namespace LeaRun.UserManage.Entity
             //this.CreateUserName = OperatorProvider.Provider.Current().UserName;
             this.DeleteMark = 0;
             this.EnabledMark = 1;
+            this.IsSystem = 0;
         }
         /// <summary>
         /// 编辑调用

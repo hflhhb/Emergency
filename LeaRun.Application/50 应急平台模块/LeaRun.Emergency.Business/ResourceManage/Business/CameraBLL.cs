@@ -29,6 +29,18 @@ namespace LeaRun.ResourceManage.Business
         {
             return service.GetList(queryJson);
         }
+
+        /// <summary>
+        /// 列表
+        /// </summary>
+        /// <param name="pagination">分页</param>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public IEnumerable<CameraEntity> GetPageList(Pagination pagination, string queryJson)
+        {
+            return service.GetPageList(pagination, queryJson);
+        }
+
         /// <summary>
         /// 获取实体
         /// </summary>

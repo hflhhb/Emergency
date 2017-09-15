@@ -165,7 +165,7 @@ namespace LeaRun.GeneratorManage.Controllers
         {
             string filepath = Server.MapPath("~/Areas/SystemManage/Views/CodeGenerator/template/" + templateId + ".txt");
             FileStream fs = new System.IO.FileStream(filepath, FileMode.Open, System.IO.FileAccess.Read, FileShare.ReadWrite);
-            StreamReader sr = new StreamReader(fs, Encoding.GetEncoding("gb2312"));
+            StreamReader sr = new StreamReader(fs, Encoding.GetEncoding("utf-8"));
             return Content(sr.ReadToEnd().ToString());
         }
         #endregion

@@ -1,4 +1,5 @@
 using LeaRun.ResourceManage.Entity;
+using LeaRun.Util.Web;
 using System.Collections.Generic;
 
 namespace LeaRun.ResourceManage.IService
@@ -19,6 +20,15 @@ namespace LeaRun.ResourceManage.IService
         /// <param name="queryJson">查询参数</param>
         /// <returns>返回列表</returns>
         IEnumerable<CameraEntity> GetList(string queryJson);
+
+        /// <summary>
+        /// 列表
+        /// </summary>
+        /// <param name="pagination">分页</param>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        IEnumerable<CameraEntity> GetPageList(Pagination pagination, string queryJson);
+
         /// <summary>
         /// 获取实体
         /// </summary>

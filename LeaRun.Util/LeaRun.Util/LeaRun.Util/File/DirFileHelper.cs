@@ -252,7 +252,7 @@ namespace LeaRun.Util
             dir = dir.Replace("/", "\\");
             if (dir.IndexOf("\\") > -1)
                 CreateDir(dir.Substring(0, dir.LastIndexOf("\\")));
-            System.IO.StreamWriter sw = new System.IO.StreamWriter(System.Web.HttpContext.Current.Request.PhysicalApplicationPath + "\\" + dir, false, System.Text.Encoding.GetEncoding("GB2312"));
+            System.IO.StreamWriter sw = new System.IO.StreamWriter(System.Web.HttpContext.Current.Request.PhysicalApplicationPath + "\\" + dir, false, System.Text.Encoding.GetEncoding("utf-8"));
             sw.Write(pagestr);
             sw.Close();
         }
@@ -269,7 +269,7 @@ namespace LeaRun.Util
             {
                 di.Create();
             }
-            StreamWriter sw = new StreamWriter(path, false, System.Text.Encoding.GetEncoding("GB2312"));
+            StreamWriter sw = new StreamWriter(path, false, System.Text.Encoding.GetEncoding("utf-8"));
             sw.Write(content);
             sw.Close();
         }

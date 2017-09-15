@@ -176,7 +176,7 @@ namespace LeaRun.Application.Web.Controllers
                     }
                     else
                     {
-                        operators.IsSystem = false;
+                        operators.IsSystem = (userEntity.IsSystem == 1);
                     }
                     OperatorProvider.Provider.AddCurrent(operators);
                     //登录限制

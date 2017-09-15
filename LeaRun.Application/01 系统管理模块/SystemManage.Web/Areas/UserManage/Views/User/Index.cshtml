@@ -60,6 +60,16 @@
                 },
                 { label: '主管', name: 'Manager', index: 'Manager', width: 100, align: 'left' },
                 {
+                    label: '系统用户', name: "IsSystem", index: "IsSystem", width: 65, align: "center",
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue == 1) {
+                            return '是';
+                        } else {
+                            return '';
+                        }
+                    }
+                },
+                {
                     label: "状态", name: "EnabledMark", index: "EnabledMark", width: 50, align: "center",
                     formatter: function (cellvalue, options, rowObject) {
                         if (cellvalue == 1) {

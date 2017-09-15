@@ -43,12 +43,12 @@ namespace LeaRun.ResourceManage.Entity
         /// Latitude
         /// </summary>
         /// <returns></returns>
-        public decimal? Latitude { get; set; }
+        public decimal Latitude { get; set; }
         /// <summary>
         /// Longitude
         /// </summary>
         /// <returns></returns>
-        public decimal? Longitude { get; set; }
+        public decimal Longitude { get; set; }
         /// <summary>
         /// Url
         /// </summary>
@@ -78,7 +78,9 @@ namespace LeaRun.ResourceManage.Entity
         public override void Create()
         {
             this.Id = Guid.NewGuid().ToString();
-                                            }
+            this.Longitude = 0M;
+            this.Latitude = 0M;
+        }
         /// <summary>
         /// ±à¼­µ÷ÓÃ
         /// </summary>
@@ -86,7 +88,7 @@ namespace LeaRun.ResourceManage.Entity
         public override void Modify(string keyValue)
         {
             this.Id = keyValue;
-                                            }
+        }
         #endregion
     }
 }

@@ -34,7 +34,7 @@ namespace LeaRun.WebBase
         /// <summary>
         /// 秘钥
         /// </summary>
-        private string LoginUserKey = "Learun_LoginUserKey_2016_V6.1";
+        private string LoginUserKey = "Emergency_LoginUserKey";
         /// <summary>
         /// 登陆提供者模式:Session、Cookie 
         /// </summary>

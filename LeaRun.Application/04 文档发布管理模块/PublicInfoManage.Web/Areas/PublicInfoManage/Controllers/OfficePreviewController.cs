@@ -181,7 +181,7 @@ namespace LeaRun.PublicInfoManage.Controllers
             StreamReader sr = new StreamReader(strFilePath, Encoding.GetEncoding(0));
             string html = sr.ReadToEnd();
             sr.Close();
-            html = System.Text.RegularExpressions.Regex.Replace(html, @"<meta[^>]*>", "<meta http-equiv=Content-Type content='text/html; charset=gb2312'>", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+            html = System.Text.RegularExpressions.Regex.Replace(html, @"<meta[^>]*>", "<meta http-equiv=Content-Type content='text/html; charset=utf-8'>", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
             StreamWriter sw = new StreamWriter(strFilePath, false, Encoding.UTF8);
 
             sw.Write(html);

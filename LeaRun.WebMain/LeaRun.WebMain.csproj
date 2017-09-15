@@ -157,11 +157,14 @@
     <Compile Include="Areas\Appraise\AppraiseAreaRegistration.cs" />
     <Compile Include="Areas\BasicData\BasicDataAreaRegistration.cs" />
     <Compile Include="Areas\EmergencyDuty\EmergencyDutyAreaRegistration.cs" />
-    <Compile Include="Areas\GIS\Controllers\EmergencyController.cs" />
+    <Compile Include="Areas\GIS\Controllers\ResourceMapsController.cs" />
     <Compile Include="Areas\GIS\GISAreaRegistration.cs" />
     <Compile Include="Areas\EmergencyPlan\EmergencyPlanAreaRegistration.cs" />
     <Compile Include="Areas\PortalManage\PortalManageAreaRegistration.cs" />
-    <Compile Include="Areas\ResourceManage\Controllers\CameraController.cs" />
+    <Compile Include="Areas\ResourceManage\Controllers\CamerasController.cs" />
+    <Compile Include="Areas\ResourceManage\Controllers\GasStationsController.cs" />
+    <Compile Include="Areas\ResourceManage\Controllers\HospitalsController.cs" />
+    <Compile Include="Areas\ResourceManage\Controllers\SchoolsController.cs" />
     <Compile Include="Areas\ResourceManage\ResourceManageAreaRegistration.cs" />
     <Compile Include="Areas\SecurityCheck\SecurityCheckAreaRegistration.cs" />
     <Compile Include="Content\scripts\plugins\ueditor\net\App_Code\Config.cs" />
@@ -1443,14 +1446,25 @@
     </Content>
     <Content Include="Areas\EmergencyDuty\Views\web.config" />
     <Content Include="Areas\SecurityCheck\Views\web.config" />
-    <Content Include="Areas\GIS\Views\web.config" />
+    <Content Include="Areas\GIS\Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\Appraise\Views\web.config" />
-    <Content Include="Areas\ResourceManage\Views\web.config" />
+    <Content Include="Areas\ResourceManage\Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\EmergencyPlan\Views\web.config" />
     <Content Include="Areas\PortalManage\Views\web.config" />
     <Content Include="Areas\BasicData\Views\web.config" />
-    <Content Include="Areas\ResourceManage\Views\Camera\Form.cshtml" />
-    <Content Include="Areas\ResourceManage\Views\Camera\Index.cshtml" />
+    <Content Include="Areas\ResourceManage\Views\Cameras\Form.cshtml" />
+    <Content Include="Areas\ResourceManage\Views\Cameras\Index.cshtml" />
+    <Content Include="Areas\ResourceManage\Views\GasStations\Form.cshtml" />
+    <Content Include="Areas\ResourceManage\Views\GasStations\Index.cshtml" />
+    <Content Include="Areas\ResourceManage\Views\Hospitals\Form.cshtml" />
+    <Content Include="Areas\ResourceManage\Views\Hospitals\Index.cshtml" />
+    <Content Include="Areas\ResourceManage\Views\Schools\Form.cshtml" />
+    <Content Include="Areas\ResourceManage\Views\Schools\Index.cshtml" />
+    <Content Include="Areas\GIS\Views\ResourceMaps\Index.cshtml" />
     <None Include="Configs\Data\Database.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -1829,6 +1843,7 @@
     <Content Include="Content\scripts\jquery\jquery_chained\test\json.php" />
     <Content Include="Content\scripts\jquery\jquery_chained\test\vendor\jasmine-1.3.1\MIT.LICENSE" />
     <Content Include="Web.config" />
+    <Content Include="Views\Shared\_MapIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1852,7 +1867,6 @@
     <Folder Include="Areas\EmergencyPlan\Models\" />
     <Folder Include="Areas\EmergencyPlan\Views\Shared\" />
     <Folder Include="Areas\GIS\Models\" />
-    <Folder Include="Areas\GIS\Views\Emergency\" />
     <Folder Include="Areas\GIS\Views\Shared\" />
     <Folder Include="Areas\PortalManage\Controllers\" />
     <Folder Include="Areas\PortalManage\Models\" />

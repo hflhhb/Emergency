@@ -1,0 +1,141 @@
+@{;
+    ViewBag.Title = "表单页面";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<script>
+    var keyValue = request('keyValue');
+    $(function () {
+        initControl();
+    });
+    //初始化控件
+    function initControl() {
+        //区域
+        $("#ProvinceId").ComboBox({
+            height: "130px",
+        }).ComboBoxSetValue('310100');
+        $("#CityId").ComboBox({
+            height: "130px",
+        }).ComboBoxSetValue('310115');
+        $("#Area").ComboBox({
+            url: "../../SystemManage/Area/GetListJson",
+            param: {
+                value: '310115'
+            },
+            id: "AreaName",
+            text: "AreaName",
+            description: "选择市",
+            height: "150px",
+            allowSearch:true
+        });
+
+        //获取表单
+        if (!!keyValue) {
+            $.SetForm({
+                url: "../../ResourceManage/Cameras/GetFormJson",
+                param: { keyValue: keyValue },
+                success: function (data) {
+                    $("#form1").SetWebControls(data);
+                    $("#Area").ComboBoxSetValue(data.Version);
+                }
+            })
+        }
+    }
+    //保存表单;
+    function AcceptClick() {
+        if (!$('#form1').Validform()) {
+            return false;
+        }
+        var postData = $("#form1").GetWebControls(keyValue);
+        $.SaveForm({
+            url: "../../ResourceManage/Cameras/SaveForm?keyValue=" + keyValue,
+            param: postData,
+            loading: "正在保存数据...",
+            success: function () {
+                $.currentIframe().$("#gridTable").trigger("reloadGrid");
+            }
+        })
+    }
+
+    function btn_Locate() {
+        dialogOpen({
+            id: 'LocateForm',
+            title: '地址定位',
+            url: '/GIS/LocateForm?keyValue=',
+            width: '800px',
+            height: '630px',
+            callBack: function (iframeId) {
+                top.frames[iframeId].AcceptClick();
+            }
+        })
+    }
+</script>
+<div style="margin-top: 20px; margin-right: 30px;">
+    <table class="form" style="table-layout:auto;">
+        <tr>
+            <td class="formTitle">编号 <font face="宋体">*</font></td>
+            <td class="formValue" colspan='3'>
+                <input id="Code" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">名称 <font face="宋体">*</font></td>
+            <td class="formValue" colspan='3'>
+                <input id="Name" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">区域 <font face="宋体">*</font></td>
+            <td class="formValue" colspan='3'>
+                <div style="float: left;">
+                    <div id="ProvinceId" type="select" class="ui-select" style="float: left; width: 84px; margin-right: 1px;">
+                        <ul>
+                            <li data-value="310100">上海市</li>
+                        </ul>
+                    </div>
+                    <div id="CityId" type="select" class="ui-select" style="float: left; width: 84px; margin-right: 1px;">
+                        <ul>
+                            <li data-value="310115">浦东新区</li>
+                        </ul>
+                    </div>
+                    <div id="Area" type="select" class="ui-select" style="float: left; width: 200px; margin-right: 0px;" isvalid="yes" checkexpession="NotNull">
+
+                    </div>
+                </div>
+                @*<div id="Area" type="select" class="ui-select" isvalid="yes" checkexpession="NotNull"></div>*@
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">地址 <font face="宋体">*</font></td>
+            <td class="formValue" colspan='3'>
+                <input id="Address" type="text" class="form-control" style="float:left; width:311px;" isvalid="yes" checkexpession="NotNull" />
+                <div class="control-button" title="点击定位经纬度" onclick="btn_Locate()">
+                    地址定位
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">经度</td>
+            <td class="formValue">
+                <input id="Longitude" type="text" class="pull-left form-control" isvalid="yes" checkexpession="DoubleOrNull" />
+            </td>
+            <td class="formTitle" style="width:90px;">纬度</td>
+            <td class="formValue">
+                <input id="Latitude" type="text" class="form-control" style="width:150px;" isvalid="yes" checkexpession="DoubleOrNull" />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">链接地址</td>
+            <td class="formValue" colspan='3'>
+                <input id="Url" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">备注</td>
+            <td class="formValue" colspan='3'>
+                <textarea id="Remark" class="form-control" style="height:60px;" ></textarea>
+            </td>
+        </tr>
+       
+    </table>
+
+</div>

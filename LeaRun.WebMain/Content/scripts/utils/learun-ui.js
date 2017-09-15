@@ -487,7 +487,7 @@ $.fn.Contextmenu = function () {
                 showTimer = setTimeout(function () {
                     for (i = 0; i < oThis.parentNode.children.length; i++) {
                         oThis.parentNode.children[i].getElementsByTagName("ul")[0] &&
-						(oThis.parentNode.children[i].getElementsByTagName("ul")[0].style.display = "none");
+                        (oThis.parentNode.children[i].getElementsByTagName("ul")[0].style.display = "none");
                     }
                     oUl[0].style.display = "block";
                     oUl[0].style.top = oThis.offsetTop + "px";
@@ -514,7 +514,7 @@ $.fn.Contextmenu = function () {
             hideTimer = setTimeout(function () {
                 for (i = 0; i < oThis.parentNode.children.length; i++) {
                     oThis.parentNode.children[i].getElementsByTagName("ul")[0] &&
-					(oThis.parentNode.children[i].getElementsByTagName("ul")[0].style.display = "none");
+                    (oThis.parentNode.children[i].getElementsByTagName("ul")[0].style.display = "none");
                 }
             }, 300);
         };

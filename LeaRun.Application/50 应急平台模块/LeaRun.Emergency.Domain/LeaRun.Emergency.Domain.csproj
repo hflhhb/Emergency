@@ -47,10 +47,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GIS\IService\IResourceMapService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceManage\Entity\CameraEntity.cs" />
+    <Compile Include="ResourceManage\Entity\GasStationEntity.cs" />
+    <Compile Include="ResourceManage\Entity\HospitalEntity.cs" />
+    <Compile Include="ResourceManage\Entity\SchoolEntity.cs" />
     <Compile Include="ResourceManage\IService\ICameraService.cs" />
+    <Compile Include="ResourceManage\IService\IGasStationService.cs" />
+    <Compile Include="ResourceManage\IService\IHospitalService.cs" />
+    <Compile Include="ResourceManage\IService\ISchoolService.cs" />
     <Compile Include="ResourceManage\Mapping\CameraMap.cs" />
+    <Compile Include="ResourceManage\Mapping\GasStationMap.cs" />
+    <Compile Include="ResourceManage\Mapping\HospitalMap.cs" />
+    <Compile Include="ResourceManage\Mapping\SchoolMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\LeaRun.Data\LeaRun.Data\LeaRun.Data.csproj">
@@ -81,7 +91,6 @@
     <Folder Include="EmergencyDuty\IService\" />
     <Folder Include="EmergencyDuty\Mapping\" />
     <Folder Include="GIS\Entity\" />
-    <Folder Include="GIS\IService\" />
     <Folder Include="GIS\Mapping\" />
     <Folder Include="SecurityCheck\Entity\" />
     <Folder Include="SecurityCheck\IService\" />

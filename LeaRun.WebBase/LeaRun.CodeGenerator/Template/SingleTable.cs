@@ -36,7 +36,7 @@ namespace LeaRun.CodeGenerator.Template
             sb.Append("{\r\n");
             sb.Append("    /// <summary>\r\n");
             sb.Append("    /// 版 本\r\n");
-            sb.Append("    /// Copyright (c) 2017-2020 肖海根\r\n");
+            sb.Append("    /// Copyright (c) 2017-2020 HFL\r\n");
             sb.Append("    /// 创 建：" + baseConfigModel.CreateUser + "\r\n");
             sb.Append("    /// 日 期：" + baseConfigModel.CreateDate + "\r\n");
             sb.Append("    /// 描 述：" + baseConfigModel.Description + "\r\n");
@@ -69,7 +69,7 @@ namespace LeaRun.CodeGenerator.Template
             sb.Append("            this." + baseConfigModel.DataBaseTablePK + " = Guid.NewGuid().ToString();\r\n");
             sb.Append("            " + IsCreateDate(dt) + "");
             sb.Append("            " + IsCreateUserId(dt) + "");
-            sb.Append("            " + IsCreateUserName(dt) + "");
+            sb.Append("            " + IsCreateUserName(dt) + "\r\n");
             sb.Append("        }\r\n");
             sb.Append("        /// <summary>\r\n");
             sb.Append("        /// 编辑调用\r\n");
@@ -80,7 +80,7 @@ namespace LeaRun.CodeGenerator.Template
             sb.Append("            this." + baseConfigModel.DataBaseTablePK + " = keyValue;\r\n");
             sb.Append("            " + IsModifyDate(dt) + "");
             sb.Append("            " + IsModifyUserId(dt) + "");
-            sb.Append("            " + IsModifyUserName(dt) + "");
+            sb.Append("            " + IsModifyUserName(dt) + "\r\n");
             sb.Append("        }\r\n");
             sb.Append("        #endregion\r\n");
             sb.Append("    }\r\n");
@@ -159,7 +159,7 @@ namespace LeaRun.CodeGenerator.Template
             sb.Append("{\r\n");
             sb.Append("    /// <summary>\r\n");
             sb.Append("    /// 版 本\r\n");
-            sb.Append("    /// Copyright (c) 2017-2020 肖海根\r\n");
+            sb.Append("    /// Copyright (c) 2017-2020 HFL\r\n");
             sb.Append("    /// 创 建：" + baseConfigModel.CreateUser + "\r\n");
             sb.Append("    /// 日 期：" + baseConfigModel.CreateDate + "\r\n");
             sb.Append("    /// 描 述：" + baseConfigModel.Description + "\r\n");
@@ -204,13 +204,21 @@ namespace LeaRun.CodeGenerator.Template
             sb.Append("{\r\n");
             sb.Append("    /// <summary>\r\n");
             sb.Append("    /// 版 本 1.5\r\n");
-            sb.Append("    /// Copyright (c) 2017-2020 肖海根\r\n");
+            sb.Append("    /// Copyright (c) 2017-2020 HFL\r\n");
             sb.Append("    /// 创 建：" + baseConfigModel.CreateUser + "\r\n");
             sb.Append("    /// 日 期：" + baseConfigModel.CreateDate + "\r\n");
             sb.Append("    /// 描 述：" + baseConfigModel.Description + "\r\n");
             sb.Append("    /// </summary>\r\n");
-            sb.Append("    public class " + baseConfigModel.ServiceClassName + " : RepositoryFactory<" + baseConfigModel.EntityClassName + ">, " + baseConfigModel.IServiceClassName + "\r\n");
+            sb.Append("    public class " + baseConfigModel.ServiceClassName + " : Dao<" + baseConfigModel.EntityClassName + ">, " + baseConfigModel.IServiceClassName + "\r\n");
             sb.Append("    {\r\n");
+
+            sb.Append("        /// <summary>\r\n");
+            sb.Append("        /// 带连接字符串参数的构造函数\r\n");
+            sb.Append("        /// </summary>\r\n");
+            sb.Append("        /// <param name=\"dbcontext\"></param>\r\n");
+            sb.Append("        public " + baseConfigModel.ServiceClassName + "(DbContextBase dbcontext) : base(dbcontext)\r\n");
+            sb.Append("        {\r\n");
+            sb.Append("        }\r\n");
 
             sb.Append("        #region 获取数据\r\n");
             if (baseConfigModel.gridModel.IsPage == true)
@@ -291,6 +299,7 @@ namespace LeaRun.CodeGenerator.Template
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("using LeaRun." + baseConfigModel.OutputAreas + ".Entity;\r\n");
+            sb.Append("using LeaRun.Util.Web;\r\n");
             sb.Append("using System.Collections.Generic;\r\n\r\n");
 
             sb.Append("namespace LeaRun." + baseConfigModel.OutputAreas + ".IService\r\n");
@@ -467,13 +476,14 @@ namespace LeaRun.CodeGenerator.Template
             sb.Append("using LeaRun." + baseConfigModel.OutputAreas + ".Business;\r\n");
             sb.Append("using LeaRun.Util;\r\n");
             sb.Append("using LeaRun.Util.Web;\r\n");
+            sb.Append("using LeaRun.WebBase;\r\n");
             sb.Append("using System.Web.Mvc;\r\n\r\n");
 
-            sb.Append("namespace LeaRun.Application.Web.Areas." + baseConfigModel.OutputAreas + ".Controllers\r\n");
+            sb.Append("namespace LeaRun." + baseConfigModel.OutputAreas + ".Controllers\r\n");
             sb.Append("{\r\n");
             sb.Append("    /// <summary>\r\n");
             sb.Append("    /// 版 本 1.5\r\n");
-            sb.Append("    /// Copyright (c) 2017-2020 肖海根\r\n");
+            sb.Append("    /// Copyright (c) 2017-2020 HFL\r\n");
             sb.Append("    /// 创 建：" + baseConfigModel.CreateUser + "\r\n");
             sb.Append("    /// 日 期：" + baseConfigModel.CreateDate + "\r\n");
             sb.Append("    /// 描 述：" + baseConfigModel.Description + "\r\n");
@@ -744,7 +754,7 @@ namespace LeaRun.CodeGenerator.Template
             sb.Append("    </div>\r\n");
             sb.Append("    <div class=\"toolbar\">\r\n");
             sb.Append("        <div class=\"btn-group\">\r\n");
-            sb.Append("            <a id=\"lr-replace\" class=\"btn btn-default\" onclick=\"Reload()\"><i class=\"fa fa-refresh\"></i>★刷新</a>\r\n");
+            sb.Append("            <a id=\"lr-replace\" class=\"btn btn-default\" onclick=\"reload()\"><i class=\"fa fa-refresh\"></i>★刷新</a>\r\n");
             sb.Append("            <a id=\"lr-add\" class=\"btn btn-default\" onclick=\"btn_add()\"><i class=\"fa fa-plus\"></i>★新增</a>\r\n");
             sb.Append("            <a id=\"lr-edit\" class=\"btn btn-default\" onclick=\"btn_edit()\"><i class=\"fa fa-pencil-square-o\"></i>★编辑</a>\r\n");
             sb.Append("            <a id=\"lr-delete\" class=\"btn btn-default\" onclick=\"btn_delete()\"><i class=\"fa fa-trash-o\"></i>★删除</a>\r\n");

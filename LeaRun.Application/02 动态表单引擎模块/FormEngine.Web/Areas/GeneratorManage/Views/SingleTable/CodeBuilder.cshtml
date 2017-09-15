@@ -29,13 +29,18 @@
         //区域改变时，输入路径都要改变
         $("#OutputAreas").change(function (e) {
             var value = $(this).attr('data-value');
-            var outDir = '@ViewBag.OutputDirectory' + "\\" + value;
-            $('#OutputEntity').val(outDir+ '\\Entity');
-            $('#OutputMap').val(outDir+ '\\Mapping');
-            $('#OutputService').val(outDir+ '\\Service');
-            $('#OutputIService').val(outDir+ '\\IService');
-            $('#OutputBusines').val(outDir+ '\\Business');
-            $('#OutputController').val(outDir+ '\\Web');
+            var baseUrl = '@ViewBag.OutputDirectory';
+            var domainDir = "LeaRun.Application\\50 应急平台模块\\LeaRun.Emergency.Domain\\";
+            var bizDir = "LeaRun.Application\\50 应急平台模块\\LeaRun.Emergency.Business\\";
+            var outDominDir = baseUrl + "\\" + domainDir + value;
+            var outBizDir = baseUrl + "\\" + bizDir + value;
+
+            $('#OutputEntity').val(outDominDir+ '\\Entity');
+            $('#OutputMap').val(outDominDir+ '\\Mapping');
+            $('#OutputService').val(outBizDir+ '\\Service');
+            $('#OutputIService').val(outDominDir+ '\\IService');
+            $('#OutputBusines').val(outBizDir+ '\\Business');
+            $('#OutputController').val(baseUrl + '\\LeaRun.WebMain');
         });
 
         //功能上级
@@ -603,37 +608,37 @@
                         <tr>
                             <th class="formTitle">实体层输出目录</th>
                             <td class="formValue">
-                                <input id="OutputEntity" readonly type="text" class="form-control" value=""/>
+                                <input id="OutputEntity" type="text" class="form-control" value=""/>
                             </td>
                         </tr>
                         <tr>
                             <th class="formTitle">映射层输出目录</th>
                             <td class="formValue">
-                                <input id="OutputMap" readonly type="text" class="form-control" value="" />
+                                <input id="OutputMap" type="text" class="form-control" value="" />
                             </td>
                         </tr>
                         <tr>
                             <th class="formTitle">服务层输出目录</th>
                             <td class="formValue">
-                                <input id="OutputService" readonly type="text" class="form-control" value=""/>
+                                <input id="OutputService" type="text" class="form-control" value=""/>
                             </td>
                         </tr>
                         <tr>
                             <th class="formTitle">接口层输出目录</th>
                             <td class="formValue">
-                                <input id="OutputIService" readonly type="text" class="form-control" value=""/>
+                                <input id="OutputIService" type="text" class="form-control" value=""/>
                             </td>
                         </tr>
                         <tr>
                             <th class="formTitle">业务层输出目录</th>
                             <td class="formValue">
-                                <input id="OutputBusines" readonly type="text" class="form-control" value=""/>
+                                <input id="OutputBusines" type="text" class="form-control" value=""/>
                             </td>
                         </tr>
                         <tr>
                             <th class="formTitle">应用层输出目录</th>
                             <td class="formValue">
-                                <input id="OutputController" readonly type="text" class="form-control"  value="" />
+                                <input id="OutputController" type="text" class="form-control"  value="" />
                             </td>
                         </tr>
                     </table>

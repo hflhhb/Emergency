@@ -50,9 +50,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GIS\Business\ResourceMapBLL.cs" />
+    <Compile Include="GIS\Service\ResourceMapService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceManage\Business\CameraBLL.cs" />
+    <Compile Include="ResourceManage\Business\GasStationBLL.cs" />
+    <Compile Include="ResourceManage\Business\HospitalBLL.cs" />
+    <Compile Include="ResourceManage\Business\SchoolBLL.cs" />
     <Compile Include="ResourceManage\Service\CameraService.cs" />
+    <Compile Include="ResourceManage\Service\GasStationService.cs" />
+    <Compile Include="ResourceManage\Service\HospitalService.cs" />
+    <Compile Include="ResourceManage\Service\SchoolService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -87,8 +95,6 @@
     <Folder Include="BasicData\Service\" />
     <Folder Include="EmergencyDuty\Business\" />
     <Folder Include="EmergencyDuty\Service\" />
-    <Folder Include="GIS\Business\" />
-    <Folder Include="GIS\Service\" />
     <Folder Include="SecurityCheck\Business\" />
     <Folder Include="SecurityCheck\Service\" />
   </ItemGroup>

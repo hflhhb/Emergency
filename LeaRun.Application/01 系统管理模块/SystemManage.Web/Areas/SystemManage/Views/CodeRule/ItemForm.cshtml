@@ -10,7 +10,8 @@
         }).bind("change", function () {
             var value = $(this).attr('data-value');
             var $formValue = $("#FormatStr").parents('.formValue');
-            $("#StepValue").attr("readonly", "readonly").attr('[isvalid=no]');            $("#InitValue").attr("readonly", "readonly").attr('[isvalid=no]');
+            $("#StepValue").attr("readonly", "readonly").attr('[isvalid=no]');
+            $("#InitValue").attr("readonly", "readonly").attr('[isvalid=no]');
             switch (value) {
                 case "0":
                     $formValue.html('<input id="FormatStr" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />');
@@ -24,37 +25,45 @@
                         + '<li data-value="yyyymm">yyyymm</li>'
                         + '<li data-value="yymmdd">yymmdd</li>'
                         + '<li data-value="yyyymmdd">yyyymmdd</li>'
-                        + '</ul></div>');                    $("#FormatStr").ComboBox({
+                        + '</ul></div>');
+                    $("#FormatStr").ComboBox({
                         height: "130px",
-                    }).ComboBoxSetValue('mmdd');                    break;
+                    }).ComboBoxSetValue('mmdd');
+                    break;
                 case "2":
                     $formValue.html('<div id="FormatStr" type="select" class="ui-select" isvalid="yes" checkexpession="NotNull"><ul>'
                        + '<li data-value="000">000</li>'
                        + '<li data-value="0000">0000</li>'
                        + '<li data-value="00000">00000</li>'
                        + '<li data-value="000000">000000</li>'
-                       + '</ul></div>');                    $("#FormatStr").ComboBox({
+                       + '</ul></div>');
+                    $("#FormatStr").ComboBox({
                     }).ComboBoxSetValue('000');
-                    $("#StepValue").removeAttr("readonly").attr('isvalid','yes');                    $("#InitValue").removeAttr("readonly").attr('isvalid', 'yes');
+                    $("#StepValue").removeAttr("readonly").attr('isvalid','yes');
+                    $("#InitValue").removeAttr("readonly").attr('isvalid', 'yes');
                     break;
                 case "3":
                     $formValue.html('<div id="FormatStr" type="select" class="ui-select" isvalid="yes" checkexpession="NotNull"><ul>'
                        + '<li data-value="code">公司编号</li>'
                        + '<li data-value="name">公司名称</li>'
-                       + '</ul></div>');                    $("#FormatStr").ComboBox({
-                    }).ComboBoxSetValue('code');                    break;
+                       + '</ul></div>');
+                    $("#FormatStr").ComboBox({
+                    }).ComboBoxSetValue('code');
+                    break;
                 case "4":
                     $formValue.html('<div id="FormatStr" type="select" class="ui-select" isvalid="yes" checkexpession="NotNull"><ul>'
                        + '<li data-value="code">部门编号</li>'
                        + '<li data-value="name">部门名称</li>'
-                       + '</ul></div>');                    $("#FormatStr").ComboBox({
+                       + '</ul></div>');
+                    $("#FormatStr").ComboBox({
                     }).ComboBoxSetValue('code');
                     break;
                 case "5":
                     $formValue.html('<div id="FormatStr" type="select" class="ui-select" isvalid="yes" checkexpession="NotNull"><ul>'
                        + '<li data-value="code">用户编号</li>'
                        + '<li data-value="name">用户名称</li>'
-                       + '</ul></div>');                    $("#FormatStr").ComboBox({
+                       + '</ul></div>');
+                    $("#FormatStr").ComboBox({
                     }).ComboBoxSetValue('code');
                     break;
                 default:
@@ -67,7 +76,8 @@
             var rowdata = top.Form.$("#gridTable").jqGridRow()[0];
             $("#form1").SetWebControls(rowdata);
             if (rowdata.ItemType == 2) {
-                $("#StepValue").removeAttr("readonly").attr('isvalid', 'yes');                $("#InitValue").removeAttr("readonly").attr('isvalid', 'yes');
+                $("#StepValue").removeAttr("readonly").attr('isvalid', 'yes');
+                $("#InitValue").removeAttr("readonly").attr('isvalid', 'yes');
             }
         }
     })

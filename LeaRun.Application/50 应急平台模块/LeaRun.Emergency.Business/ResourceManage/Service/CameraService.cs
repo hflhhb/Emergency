@@ -4,6 +4,8 @@ using LeaRun.Data;
 using LeaRun.Util.Web;
 using System.Collections.Generic;
 using System.Linq;
+using LeaRun.Util.Extension;
+using LeaRun.Util;
 
 namespace LeaRun.ResourceManage.Service
 {
@@ -34,6 +36,40 @@ namespace LeaRun.ResourceManage.Service
         {
             return base.Queryable().OrderByDescending(t => t.CreateTime).ToList();
         }
+
+        /// <summary>
+        /// 列表
+        /// </summary>
+        /// <param name="pagination">分页</param>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public IEnumerable<CameraEntity> GetPageList(Pagination pagination, string queryJson)
+        {
+            var expression = LinqExtensions.True<CameraEntity>();
+            var queryParam = queryJson.ToJObject();
+            //查询条件
+            if (!queryParam["condition"].IsEmpty() && !queryParam["keyword"].IsEmpty())
+            {
+                string condition = queryParam["condition"].ToString();
+                string keyword = queryParam["keyword"].ToString();
+                switch (condition)
+                {
+                    case "Code":            //编号
+                        expression = expression.And(t => t.Code.Contains(keyword));
+                        break;
+                    case "Area":            //区域
+                        expression = expression.And(t => t.Area.Contains(keyword));
+                        break;
+                    case "Address":        //地址
+                        expression = expression.And(t => t.Address.Contains(keyword));
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return base.FindList(expression, pagination);
+        }
+
         /// <summary>
         /// 获取实体
         /// </summary>
