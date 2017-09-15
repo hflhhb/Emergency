@@ -19,7 +19,7 @@ namespace LeaRun.GIS.Business
         {
             return new
             {
-                GasStations = gasStationBLL.GetList("");
+                GasStations = gasStationBLL.GetList("")
             };
         }
 
