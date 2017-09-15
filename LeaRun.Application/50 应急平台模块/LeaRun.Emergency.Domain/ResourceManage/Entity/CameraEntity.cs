@@ -80,6 +80,7 @@ namespace LeaRun.ResourceManage.Entity
             this.Id = Guid.NewGuid().ToString();
             this.Longitude = 0M;
             this.Latitude = 0M;
+            CreateTime = DateTime.Now;
         }
         /// <summary>
         /// ±à¼­µ÷ÓÃ

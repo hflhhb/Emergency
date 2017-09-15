@@ -157,6 +157,7 @@
     <Compile Include="Areas\Appraise\AppraiseAreaRegistration.cs" />
     <Compile Include="Areas\BasicData\BasicDataAreaRegistration.cs" />
     <Compile Include="Areas\EmergencyDuty\EmergencyDutyAreaRegistration.cs" />
+    <Compile Include="Areas\GIS\Controllers\GeoLocationsController.cs" />
     <Compile Include="Areas\GIS\Controllers\ResourceMapsController.cs" />
     <Compile Include="Areas\GIS\GISAreaRegistration.cs" />
     <Compile Include="Areas\EmergencyPlan\EmergencyPlanAreaRegistration.cs" />
@@ -1465,6 +1466,7 @@
     <Content Include="Areas\ResourceManage\Views\Schools\Form.cshtml" />
     <Content Include="Areas\ResourceManage\Views\Schools\Index.cshtml" />
     <Content Include="Areas\GIS\Views\ResourceMaps\Index.cshtml" />
+    <Content Include="Areas\GIS\Views\GeoLocations\Index.cshtml" />
     <None Include="Configs\Data\Database.xsd">
       <SubType>Designer</SubType>
     </None>

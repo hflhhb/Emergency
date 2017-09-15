@@ -60,11 +60,15 @@
         dialogOpen({
             id: 'LocateForm',
             title: 'µÿ÷∑∂®Œª',
-            url: '/GIS/LocateForm?keyValue=',
-            width: '800px',
+            url: '/GIS/GeoLocations',
+            width: '900px',
             height: '630px',
             callBack: function (iframeId) {
-                top.frames[iframeId].AcceptClick();
+                top.frames[iframeId].AcceptClick(function (respData) {
+                    $("#Address").val(respData.address);
+                    $("#Longitude").val(respData.lng);
+                    $("#Latitude").val(respData.lat);
+                });
             }
         })
     }
