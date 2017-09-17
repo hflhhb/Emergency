@@ -5,6 +5,7 @@ using LeaRun.Util.Web;
 using System.Collections.Generic;
 using System;
 using LeaRun.Data;
+using LeaRun.ResourceManage.Model;
 
 namespace LeaRun.ResourceManage.Business
 {
@@ -39,6 +40,16 @@ namespace LeaRun.ResourceManage.Business
         public IEnumerable<CameraEntity> GetPageList(Pagination pagination, string queryJson)
         {
             return service.GetPageList(pagination, queryJson);
+        }
+
+        /// <summary>
+        /// 获取列表
+        /// </summary>
+        /// <param name="query">查询参数</param>
+        /// <returns>返回列表</returns>
+        public IEnumerable<CameraEntity> GetList(ResourceMapQuery query)
+        {
+            return service.GetList(query);
         }
 
         /// <summary>

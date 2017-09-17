@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using LeaRun.Util.Extension;
 using LeaRun.Util;
+using LeaRun.ResourceManage.Model;
 
 namespace LeaRun.ResourceManage.Service
 {
@@ -35,6 +36,42 @@ namespace LeaRun.ResourceManage.Service
         public IEnumerable<CameraEntity> GetList(string queryJson)
         {
             return base.Queryable().OrderByDescending(t => t.CreateTime).ToList();
+        }
+
+        /// <summary>
+        /// 获取列表
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns>返回列表</returns>
+        public IEnumerable<CameraEntity> GetList(ResourceMapQuery query)
+        {
+            var expression = LinqExtensions.True<CameraEntity>();
+            if(query.Bounds != null)
+            {
+                var bounds = query.Bounds;
+                if(bounds.SouthWest != null)
+                {
+                    expression = expression.And(t => t.Longitude >= bounds.SouthWest.Longitude);
+                    expression = expression.And(t => t.Latitude >= bounds.SouthWest.Latitude);
+                }
+
+                if (bounds.NorthEast != null)
+                {
+                    expression = expression.And(t => t.Longitude <= bounds.NorthEast.Longitude);
+                    expression = expression.And(t => t.Latitude <= bounds.NorthEast.Latitude);
+                }
+            }
+            if (query.AreaName.IsNotEmpty())
+            {
+                expression = expression.And(t => t.Area == query.AreaName);
+            }
+
+            if (query.Address.IsNotEmpty())
+            {
+                expression = expression.And(t => t.Address.Contains(query.Address));
+            }
+
+            return base.Queryable(expression).ToList();
         }
 
         /// <summary>

@@ -1,5 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using LeaRun.Util
+@{
+    //
+    var ak = Config.GetValue("BaiduMapAK");
+}
 
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -25,7 +30,6 @@
     <script src="~/Content/scripts/plugins/tree/tree.js"></script>
     <!--树形组件end-->
     <!--布局组件start-->
-
     <!--布局组件end-->
     <!--表单验证组件start-->
     <script src="~/Content/scripts/plugins/validator/validator.js"></script>
@@ -41,16 +45,20 @@
 
     <script src="~/Content/scripts/plugins/layout/jquery.layout.js"></script>
     <script src="~/Content/scripts/plugins/datepicker/WdatePicker.js"></script>
-
-    @*@System.Web.Optimization.Styles.Render("~/Content/scripts/plugins/jqgrid/css", 
-    "~/Content/scripts/plugins/tree/css", 
-    "~/Content/scripts/plugins/datetime/css", 
-    "~/Content/styles/learun-ui.css")
-    @System.Web.Optimization.Scripts.Render("~/Content/scripts/plugins/jqgrid/js", 
-    "~/Content/scripts/plugins/tree/js",
-    "~/Content/scripts/plugins/validator/js",
-            "~/Content/scripts/plugins/datepicker/js", 
-    "~/Content/scripts/utils/js")*@
+    <script src="~/Content/scripts/plugins/lodash/lodash.js"></script>
+    
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=@ak"></script>
+    <script type="text/javascript" src="~/Content/scripts/app/map.base.js"></script>
+    @*@System.Web.Optimization.Styles.Render("~/Content/scripts/plugins/jqgrid/css",
+        "~/Content/scripts/plugins/tree/css",
+        "~/Content/scripts/plugins/datetime/css",
+        "~/Content/styles/learun-ui.css")
+        @System.Web.Optimization.Scripts.Render("~/Content/scripts/plugins/jqgrid/js",
+        "~/Content/scripts/plugins/tree/js",
+        "~/Content/scripts/plugins/validator/js",
+            "~/Content/scripts/plugins/lodash/js",
+                "~/Content/scripts/plugins/datepicker/js",
+        "~/Content/scripts/utils/js")*@
 
     @RenderSection("Scripts", false)
     @RenderSection("Styles", false)

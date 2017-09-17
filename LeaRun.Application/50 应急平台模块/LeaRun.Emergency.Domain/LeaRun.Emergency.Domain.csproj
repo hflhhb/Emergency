@@ -61,6 +61,7 @@
     <Compile Include="ResourceManage\Mapping\GasStationMap.cs" />
     <Compile Include="ResourceManage\Mapping\HospitalMap.cs" />
     <Compile Include="ResourceManage\Mapping\SchoolMap.cs" />
+    <Compile Include="ResourceManage\Model\ResourceMapQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\LeaRun.Data\LeaRun.Data\LeaRun.Data.csproj">

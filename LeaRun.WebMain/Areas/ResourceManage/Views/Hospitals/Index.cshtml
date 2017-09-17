@@ -28,23 +28,23 @@
             url: "../../ResourceManage/Hospitals/GetPageListJson",
             datatype: "json",
             colModel: [
-                { label: 'Id', name: 'Id', index: 'Id', width: 100, align: 'left',sortable: true  },
-                { label: 'Name', name: 'Name', index: 'Name', width: 100, align: 'left',sortable: true  },
-                { label: 'LinkPerson', name: 'LinkPerson', index: 'LinkPerson', width: 100, align: 'left',sortable: true  },
-                { label: 'LinkPhone', name: 'LinkPhone', index: 'LinkPhone', width: 100, align: 'left',sortable: true  },
-                { label: 'HospitalType', name: 'HospitalType', index: 'HospitalType', width: 100, align: 'left',sortable: true  },
-                { label: 'Address', name: 'Address', index: 'Address', width: 100, align: 'left',sortable: true  },
-                { label: 'Longitude', name: 'Longitude', index: 'Longitude', width: 100, align: 'left',sortable: true  },
-                { label: 'Latitude', name: 'Latitude', index: 'Latitude', width: 100, align: 'left',sortable: true  },
-                { label: 'CreateTime', name: 'CreateTime', index: 'CreateTime', width: 100, align: 'left',sortable: true  },
-                { label: 'CreateUser', name: 'CreateUser', index: 'CreateUser', width: 100, align: 'left',sortable: true  },
-                { label: 'Remark', name: 'Remark', index: 'Remark', width: 100, align: 'left',sortable: true  },
+                { label: '主键', name: 'Id', hidden: true },
+                { label: '名称', name: 'Name', index: 'Name', width: 100, align: 'left',sortable: true  },
+                { label: '联系人', name: 'LinkPerson', index: 'LinkPerson', width: 100, align: 'left',sortable: true  },
+                { label: '联系电话', name: 'LinkPhone', index: 'LinkPhone', width: 100, align: 'left' },
+                { label: '医院类型', name: 'HospitalType', index: 'HospitalType', width: 100, align: 'left',sortable: true  },
+                { label: '地址', name: 'Address', index: 'Address', width: 100, align: 'left'  },
+                { label: '经度', name: 'Longitude', index: 'Longitude', width: 100, align: 'left',sortable: true  },
+                { label: '纬度', name: 'Latitude', index: 'Latitude', width: 100, align: 'left',sortable: true  },
+                { label: '创建时间', name: 'CreateTime', index: 'CreateTime', width: 100, align: 'left' },
+                { label: '创建人', name: 'CreateUser', index: 'CreateUser', width: 100, align: 'left' },
+                { label: '备注', name: 'Remark', index: 'Remark', width: 100, align: 'left' },
             ],
             viewrecords: true,
             rowNum: 30,
             rowList: [30, 50, 100],
             pager: "#gridPager",
-            sortname: '',
+            sortname: 'CreateTime',
             sortorder: 'desc',
             rownumbers: true,
             shrinkToFit: false,
@@ -61,10 +61,10 @@
     function btn_add() {
         dialogOpen({
             id: 'Form',
-            title: '添加Hospital',
+            title: '添加医院',
             url: '/ResourceManage/Hospitals/Form',
-            width: 'px',
-            height: 'px',
+            width: '500px',
+            height: '380px',
             callBack: function (iframeId) {
                 top.frames[iframeId].AcceptClick();
             }
@@ -76,10 +76,10 @@
         if (checkedRow(keyValue)) {
             dialogOpen({
                 id: 'Form',
-                title: '编辑Hospital',
+                title: '编辑医院',
                 url: '/ResourceManage/Hospitals/Form?keyValue=' + keyValue,
-                width: 'px',
-                height: 'px',
+                width: '500px',
+                height: '380px',
                 callBack: function (iframeId) {
                     top.frames[iframeId].AcceptClick();
                 }
@@ -98,7 +98,7 @@
                 }
             })
         } else {
-            dialogMsg('请选择需要删除的Hospital！', 0);
+            dialogMsg('请选择需要删除的医院！', 0);
         }
     }
 </script>

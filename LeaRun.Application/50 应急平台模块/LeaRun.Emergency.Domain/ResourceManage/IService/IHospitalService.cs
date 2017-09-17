@@ -1,4 +1,5 @@
 ﻿using LeaRun.ResourceManage.Entity;
+using LeaRun.ResourceManage.Model;
 using LeaRun.Util.Web;
 using System.Collections.Generic;
 
@@ -27,6 +28,13 @@ namespace LeaRun.ResourceManage.IService
         /// <param name="queryJson">查询参数</param>
         /// <returns>返回列表</returns>
         IEnumerable<HospitalEntity> GetList(string queryJson);
+
+        /// <summary>
+        /// 获取列表
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        IEnumerable<HospitalEntity> GetList(ResourceMapQuery query);
         /// <summary>
         /// 获取实体
         /// </summary>

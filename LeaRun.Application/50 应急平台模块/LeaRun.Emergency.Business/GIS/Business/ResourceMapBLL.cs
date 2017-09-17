@@ -1,4 +1,6 @@
 ﻿using LeaRun.ResourceManage.Business;
+using LeaRun.ResourceManage.Entity;
+using LeaRun.ResourceManage.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +17,14 @@ namespace LeaRun.GIS.Business
         private CameraBLL cameraBLL = new CameraBLL();
         private HospitalBLL hospitalBLL = new HospitalBLL();
 
-        public object GetResources(string queryString)
+        public object GetResources(ResourceMapQuery query)
         {
             return new
             {
-                GasStations = gasStationBLL.GetList("")
+                GasStations = new GasStationEntity[] { },
+                Cameras = cameraBLL.GetList(query),
+                Hospitals = hospitalBLL.GetList(query),
+                Schools  = new SchoolEntity[] { }
             };
         }
 

@@ -19,12 +19,21 @@ namespace LeaRun.Util.Extension
         }
 
         /// <summary>
-        /// 是否为空
+        /// 是否为空或空白
         /// </summary>
         /// <param name="value">值</param>
         public static bool IsEmpty(this string value)
         {
             return string.IsNullOrWhiteSpace(value);
+        }
+
+        /// <summary>
+        /// 是否不为空或空白
+        /// </summary>
+        /// <param name="value">值</param>
+        public static bool IsNotEmpty(this string value)
+        {
+            return !string.IsNullOrWhiteSpace(value);
         }
 
         /// <summary>

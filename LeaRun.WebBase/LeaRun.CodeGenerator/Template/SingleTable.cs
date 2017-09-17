@@ -386,7 +386,7 @@ namespace LeaRun.CodeGenerator.Template
             sb.Append("    /// </summary>\r\n");
             sb.Append("    public class " + baseConfigModel.BusinesClassName + "\r\n");
             sb.Append("    {\r\n");
-            sb.Append("        private " + baseConfigModel.IServiceClassName + " service = new " + baseConfigModel.ServiceClassName + "(DbFactory.Base());\r\n\r\n");
+            sb.Append("        private " + baseConfigModel.IServiceClassName + " service = new " + baseConfigModel.ServiceClassName + "(DbFactory.Applicate());\r\n\r\n");
 
             sb.Append("        #region 获取数据\r\n");
             if (baseConfigModel.gridModel.IsPage == true)

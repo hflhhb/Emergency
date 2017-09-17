@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "应急地图展示";
+    ViewBag.Title = "地图区域设计";
     Layout = "~/Views/Shared/_MapIndex.cshtml";
 }
 @section Scripts{
@@ -19,23 +19,32 @@
         .map-content {
             padding-right: 10px;
         }
+
+        .boundary-pts{
+            padding-left:10px;
+        }
+
+        .boundary-pts ul li{
+            padding:5px;
+        }
+        .boundary-pt-title {
+            font-weight: bold;
+            font-size: 18px;
+            width: 80px;
+            display: inline-block;
+            text-align: left;
+            color:blue;
+        }
+
+        .boundary-pt{
+            width:100px;
+            display:inline-block;
+        }
     </style>
 }
 
 <div class="ui-layout" id="layout" style="height: 100%; width: 100%;">
-    <div class="ui-layout-west">
-        <div class="west-Panel">
-            <div class="profile-nav">
-                <ul style="padding-top: 20px;">
-                    <li class="active" data-value="1">加油站</li>
-                    <li data-value="2">学校</li>
-                    <li data-value="3">摄像头</li>
-                    <li class="divide"></li>
-                    <li data-value="4">医院</li>
-                </ul>
-            </div>
-        </div>
-    </div>
+
     <div class="ui-layout-center">
         <div class="center-Panel">
             <div class="titlePanel">
@@ -63,6 +72,32 @@
             <div id="allmap"></div>
         </div>
     </div>
+
+    <div class="ui-layout-east">
+        <div class="east-Panel">
+            <div class="boundary-pts">
+                <div style="padding-top:15px;">
+                    <button class="btn btn-info" id="btnJoinPoint" >区域连接</button>
+                    <button class="btn btn-danger" id="btnClearPoint">清空</button>
+                </div>
+                <ul style="padding-top: 20px;">
+
+                    @*<li data-value="2">
+                        <span class="boundary-pt-title">边界点1</span>
+                        <span>经度 <input type="text" class="form-control boundary-pt" /></span>
+                        <span>纬度 <input type="text" class="form-control boundary-pt" /></span>
+                        <button class="btn btn-sm btn-danger">删除</button>
+                    </li>
+                    <li data-value="2">
+                        <span class="boundary-pt-title">边界点12</span>
+                        <span>经度 <input type="text" class="form-control boundary-pt" /></span>
+                        <span>纬度 <input type="text" class="form-control boundary-pt" /></span>
+                        <button class="btn btn-sm btn-danger">删除</button>
+                    </li>*@
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 <script type="text/javascript">
     //初始化页面
@@ -70,17 +105,17 @@
         //layout布局
         $('#layout').layout({
             applyDefaultStyles: true,
-            west__size: 300,
+            east__size: 450,
             onresize: function () {
                 $(window).resize()
             }
         });
-        $('.profile-nav').height($(window).height() - 20);
+        $('.boundary-pts').height($(window).height() - 20);
         $('.map-content').height($(window).height() - 80);
         //resize重设(表格、树形)宽高
         $(window).resize(function (e) {
             window.setTimeout(function () {
-                $('.profile-nav').height($(window).height() - 20);
+                $('.boundary-pts').height($(window).height() - 20);
                 $('.map-content').height($(window).height() - 80);
             }, 200);
             e.stopPropagation();
@@ -94,7 +129,6 @@
     var map = kouMap.map;
     //
     kouMap.iniAutoComplete("txtSuggest");
-
     //
     //查询事件
     $("#btn_Search").click(function () {
@@ -120,14 +154,12 @@
     }
 
     $(function () {
-        getBoundary();
-        lazyLoadResource();
     });
 
     //区域
     function getBoundary() {
         var bdary = new BMap.Boundary();
-        bdary.get("上海市浦东新区", function (rs) {       //获取行政区域
+        bdary.get("上海市浦东新区航头", function (rs) {       //获取行政区域
             map.clearOverlays();        //清除地图覆盖物
             var count = rs.boundaries.length; //行政区域的点有多少个
             if (count === 0) {
@@ -197,5 +229,104 @@
 
         map.addOverlay(pointCollection);  // 添加Overlay
     }
+    //
+    var pIndex = 0;
+    var pPrefix = "boundaryPt";
+    var boundary = {
+        points: [],
+        markers: [],
+        ply: null,
+    };
+    function clearBoundary() {
+        //
+        $(".boundary-pts ul").empty();
+        boundary.points = [];
+        //
+        _.each(boundary.markers, function (m) {
+            map.removeOverlay(m);
+        });
+        boundary.markers = [];
+        //
+        map.removeOverlay(boundary.ply);
+        boundary.ply = null;
+        //
+        pIndex = 0;
+    }
+
+    function getPointKey(point) {
+        return point.lng + "," + point.lat;
+    }
+    $(".boundary-pts").on("click", ".btn-pt-del", function () {
+        var key = $(this).data("key");
+        $(this).parent().remove();
+        var findedIdx = -1;
+        _.remove(boundary.points, function (p, i) {
+            if (getPointKey(p) == key) {
+                findedIdx = i;
+                return true;
+            }
+        });
+        if (findedIdx >= 0) {
+            var delingMarks = _.pullAt(boundary.markers, findedIdx);
+            _.each(delingMarks, function (m) {
+                map.removeOverlay(m);
+            });
+        }
+
+        paintBoundaryLine();
+        
+    });
+    map.addEventListener("click", function (e) {
+        pIndex++;
+        var curPt = new BMap.Point(e.point.lng, e.point.lat);
+        boundary.points.push(curPt);
+        addMarker(curPt, pIndex);
+        $(".boundary-pts ul").append(createPointHtml(curPt));
+        paintBoundaryLine();
+    });
+
+    function createPointHtml(point) {
+        var key = getPointKey(point);
+        var html = "<li>";
+        html += '<span class="boundary-pt-title">边界点' + (pIndex) + '</span>';
+        html += '<span>经度 <input type="text" class="form-control boundary-pt" value="' + point.lng +'"/></span> ';
+        html += '<span>纬度 <input type="text" class="form-control boundary-pt" value="' + point.lat + '" /></span> ';
+        html += '<button class="btn btn-xs btn-danger btn-pt-del" data-key="' + key + '"><i class="fa fa-trash-o"></i> 删除</button>';
+        html += "</li>";
+
+        return html;
+    }
+    function addMarker(point, index) {
+        var marker = new BMap.Marker(point);
+        map.addOverlay(marker);
+        var label = new BMap.Label("边界点" + index, { offset: new BMap.Size(20, -10) });
+        marker.setLabel(label);
+        boundary.markers.push(marker);
+    }
+
+    function paintBoundary() {
+        map.removeOverlay(boundary.ply);
+        var pts = boundary.points;
+        var ply = new BMap.Polygon(pts, { strokeWeight: 2, strokeColor: "#ff0000" }); //建立多边形覆盖物
+        map.addOverlay(ply);  //添加覆盖物
+        boundary.ply = ply;
+    }
+
+    function paintBoundaryLine() {
+        map.removeOverlay(boundary.ply);
+        var pts = boundary.points;
+        var ply = new BMap.Polyline(pts, { strokeWeight: 2, strokeColor: "#ff0000" }); //建立多边形覆盖物
+        map.addOverlay(ply);  //添加覆盖物
+        boundary.ply = ply;
+    }
+
+    $("#btnJoinPoint").click(function () {
+        paintBoundary();
+    });
+
+    $("#btnClearPoint").click(function () {
+        //
+        clearBoundary();
+    });
 
 </script>

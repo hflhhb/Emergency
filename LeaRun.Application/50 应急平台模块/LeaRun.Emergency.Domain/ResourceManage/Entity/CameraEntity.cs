@@ -78,8 +78,6 @@ namespace LeaRun.ResourceManage.Entity
         public override void Create()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.Longitude = 0M;
-            this.Latitude = 0M;
             CreateTime = DateTime.Now;
         }
         /// <summary>

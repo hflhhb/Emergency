@@ -17,7 +17,7 @@ namespace LeaRun.ResourceManage.Business
     /// </summary>
     public class SchoolBLL
     {
-        private ISchoolService service = new SchoolService(DbFactory.Base());
+        private ISchoolService service = new SchoolService(DbFactory.Applicate());
 
         #region 获取数据
         /// <summary>

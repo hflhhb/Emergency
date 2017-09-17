@@ -17,7 +17,7 @@ namespace LeaRun.ResourceManage.Business
     /// </summary>
     public class GasStationBLL
     {
-        private IGasStationService service = new GasStationService(DbFactory.Base());
+        private IGasStationService service = new GasStationService(DbFactory.Applicate());
 
         #region 获取数据
         /// <summary>

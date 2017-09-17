@@ -5,6 +5,7 @@ using LeaRun.Data;
 using LeaRun.Util.Web;
 using System.Collections.Generic;
 using System;
+using LeaRun.ResourceManage.Model;
 
 namespace LeaRun.ResourceManage.Business
 {
@@ -17,7 +18,7 @@ namespace LeaRun.ResourceManage.Business
     /// </summary>
     public class HospitalBLL
     {
-        private IHospitalService service = new HospitalService(DbFactory.Base());
+        private IHospitalService service = new HospitalService(DbFactory.Applicate());
 
         #region 获取数据
         /// <summary>
@@ -39,6 +40,17 @@ namespace LeaRun.ResourceManage.Business
         {
             return service.GetList(queryJson);
         }
+
+        /// <summary>
+        /// 获取列表
+        /// </summary>
+        /// <param name="query">查询参数</param>
+        /// <returns>返回列表</returns>
+        public IEnumerable<HospitalEntity> GetList(ResourceMapQuery query)
+        {
+            return service.GetList(query);
+        }
+
         /// <summary>
         /// 获取实体
         /// </summary>

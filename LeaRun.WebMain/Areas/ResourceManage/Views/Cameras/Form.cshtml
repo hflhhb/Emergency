@@ -56,11 +56,20 @@
         })
     }
 
+    function getLocation() {
+        return {
+            address: $("#Address").val(),
+            lng: $("#Longitude").val(),
+            lat: $("#Latitude").val()
+        };
+    }
+
     function btn_Locate() {
+        var curLocation = getLocation();
         dialogOpen({
             id: 'LocateForm',
             title: 'µÿ÷∑∂®Œª',
-            url: '/GIS/GeoLocations',
+            url: '/GIS/GeoLocations?address=' + escape(curLocation.address) + "&lng=" + curLocation.lng + "&lat=" + curLocation.lat,
             width: '900px',
             height: '630px',
             callBack: function (iframeId) {
