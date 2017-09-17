@@ -25,20 +25,22 @@
         $gridTable.jqGrid({
             autowidth: true,
             height: $(window).height() - 136.5,
-            url: "../../ResourceManage/Hospitals/GetPageListJson",
+            url: "../../GIS/MapBoundaries/GetPageListJson",
             datatype: "json",
             colModel: [
-                { label: '主键', name: 'Id', hidden: true },
+                { label: '主键', name: 'Id', hidden:true },
+                { label: '编码', name: 'Code', index: 'Code', width: 100, align: 'left',sortable: true  },
+                { label: '组区域', name: 'Group', index: 'Group', width: 100, align: 'left',sortable: true  },
+                { label: '区域', name: 'Area', index: 'Area', width: 100, align: 'left',sortable: true  },
                 { label: '名称', name: 'Name', index: 'Name', width: 200, align: 'left',sortable: true  },
-                { label: '联系人', name: 'LinkPerson', index: 'LinkPerson', width: 100, align: 'left',sortable: true  },
-                { label: '联系电话', name: 'LinkPhone', index: 'LinkPhone', width: 100, align: 'left' },
-                { label: '医院类型', name: 'HospitalType', index: 'HospitalType', width: 100, align: 'left',sortable: true  },
-                { label: '地址', name: 'Address', index: 'Address', width: 200, align: 'left'  },
-                { label: '经度', name: 'Longitude', index: 'Longitude', width: 100, align: 'left',sortable: true  },
-                { label: '纬度', name: 'Latitude', index: 'Latitude', width: 100, align: 'left',sortable: true  },
-                { label: '创建时间', name: 'CreateTime', index: 'CreateTime', width: 100, align: 'left' },
-                { label: '创建人', name: 'CreateUser', index: 'CreateUser', width: 100, align: 'left' },
-                { label: '备注', name: 'Remark', index: 'Remark', width: 100, align: 'left' },
+                { label: '地址', name: 'Address', index: 'Address', width: 200, align: 'left',sortable: true  },
+                { label: '中心点经度', name: 'Longitude', index: 'Longitude', width: 100, align: 'left',sortable: true  },
+                { label: '中心点纬度', name: 'Latitude', index: 'Latitude', width: 100, align: 'left',sortable: true  },
+                { label: '边界点', name: 'Boundary', index: 'Boundary', width: 100, align: 'left',sortable: true  },
+                { label: '内容', name: 'Content', index: 'Content', width: 200, align: 'left',sortable: true  },
+                { label: '备注', name: 'Remark', index: 'Remark', width: 100, align: 'left',sortable: true  },
+                { label: '创建时间', name: 'CreateTime', index: 'CreateTime', width: 100, align: 'left',sortable: true  },
+                { label: '创建用户', name: 'CreateUser', index: 'CreateUser', width: 100, align: 'left',sortable: true  },
             ],
             viewrecords: true,
             rowNum: 30,
@@ -61,10 +63,10 @@
     function btn_add() {
         dialogOpen({
             id: 'Form',
-            title: '添加医院',
-            url: '/ResourceManage/Hospitals/Form',
+            title: '添加地图区域',
+            url: '/GIS/MapBoundaries/Form',
             width: '500px',
-            height: '380px',
+            height: '550px',
             callBack: function (iframeId) {
                 top.frames[iframeId].AcceptClick();
             }
@@ -76,10 +78,10 @@
         if (checkedRow(keyValue)) {
             dialogOpen({
                 id: 'Form',
-                title: '编辑医院',
-                url: '/ResourceManage/Hospitals/Form?keyValue=' + keyValue,
+                title: '编辑地图区域',
+                url: '/GIS/MapBoundaries/Form?keyValue=' + keyValue,
                 width: '500px',
-                height: '380px',
+                height: '550px',
                 callBack: function (iframeId) {
                     top.frames[iframeId].AcceptClick();
                 }
@@ -91,14 +93,30 @@
         var keyValue = $('#gridTable').jqGridRowValue( 'Id');
         if (keyValue) {
             $.RemoveForm({
-                url: '../../ResourceManage/Hospitals/RemoveForm',
+                url: '../../GIS/MapBoundaries/RemoveForm',
                 param: { keyValue: keyValue },
                 success: function (data) {
                     $('#gridTable').trigger('reloadGrid');
                 }
             })
         } else {
-            dialogMsg('请选择需要删除的医院！', 0);
+            dialogMsg('请选择需要删除的地图区域！', 0);
+        }
+    }
+    //区域设计
+    function btn_design() {
+        var keyValue = $('#gridTable').jqGridRowValue('Id');
+        if (checkedRow(keyValue)) {
+            dialogOpen({
+                id: 'Design',
+                title: '编辑地图区域',
+                url: '/GIS/MapBoundaries/Design?keyValue=' + keyValue,
+                width: '1100px',
+                height: '950px',
+                callBack: function (iframeId) {
+                    top.frames[iframeId].AcceptClick();
+                }
+            })
         }
     }
 </script>
@@ -121,6 +139,9 @@
             <a id="lr-add" class="btn btn-default" onclick="btn_add()"><i class="fa fa-plus"></i>&nbsp;新增</a>
             <a id="lr-edit" class="btn btn-default" onclick="btn_edit()"><i class="fa fa-pencil-square-o"></i>&nbsp;编辑</a>
             <a id="lr-delete" class="btn btn-default" onclick="btn_delete()"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+        </div>
+        <div class="btn-group">
+            <a id="lr-member" class="btn btn-default" onclick="btn_design()"><i class="fa fa fa-group"></i>&nbsp;区域设计</a>
         </div>
     </div>
 </div>

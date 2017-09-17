@@ -47,7 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GIS\Entity\MapBoundaryEntity.cs" />
+    <Compile Include="GIS\IService\IMapBoundaryService.cs" />
     <Compile Include="GIS\IService\IResourceMapService.cs" />
+    <Compile Include="GIS\Mapping\MapBoundaryMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceManage\Entity\CameraEntity.cs" />
     <Compile Include="ResourceManage\Entity\GasStationEntity.cs" />
@@ -91,8 +94,6 @@
     <Folder Include="EmergencyDuty\Entity\" />
     <Folder Include="EmergencyDuty\IService\" />
     <Folder Include="EmergencyDuty\Mapping\" />
-    <Folder Include="GIS\Entity\" />
-    <Folder Include="GIS\Mapping\" />
     <Folder Include="SecurityCheck\Entity\" />
     <Folder Include="SecurityCheck\IService\" />
     <Folder Include="SecurityCheck\Mapping\" />

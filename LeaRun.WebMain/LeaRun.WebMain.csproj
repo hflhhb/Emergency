@@ -1472,6 +1472,8 @@
     <Content Include="Areas\GIS\Views\ResourceMaps\Index.cshtml" />
     <Content Include="Areas\GIS\Views\GeoLocations\Index.cshtml" />
     <Content Include="Areas\GIS\Views\MapBoundaries\Design.cshtml" />
+    <Content Include="Areas\GIS\Views\MapBoundaries\Form.cshtml" />
+    <Content Include="Areas\GIS\Views\MapBoundaries\Index.cshtml" />
     <None Include="Configs\Data\Database.xsd">
       <SubType>Designer</SubType>
     </None>

@@ -66,5 +66,9 @@
     <Build Include="dbo\Tables\RC_GasStation.sql" />
     <Build Include="dbo\Tables\RC_Equipment.sql" />
     <Build Include="dbo\Tables\RC_Camera.sql" />
+    <Build Include="dbo\Tables\GIS_MapBoundary.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Emergency2Local.scmp" />
   </ItemGroup>
 </Project>

@@ -50,7 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GIS\Business\MapBoundaryBLL.cs" />
     <Compile Include="GIS\Business\ResourceMapBLL.cs" />
+    <Compile Include="GIS\Service\MapBoundaryService.cs" />
     <Compile Include="GIS\Service\ResourceMapService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceManage\Business\CameraBLL.cs" />

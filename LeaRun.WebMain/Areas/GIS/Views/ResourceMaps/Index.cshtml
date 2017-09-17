@@ -136,7 +136,18 @@
             }
             var pointArray = [];
             for (var i = 0; i < count; i++) {
-                var ply = new BMap.Polygon(rs.boundaries[i], { strokeWeight: 2, strokeColor: "#ff0000" }); //建立多边形覆盖物
+                var ply = new BMap.Polygon(rs.boundaries[i], {
+                    //strokeWeight: 2, strokeColor: "#ff0000"
+                    strokeColor: "#0955CF",
+                    strokeWeight: 2,
+                    strokeOpacity: 0.7,
+                    dashStyle: "Solid",
+                    filled: true,
+                    fillColor: "#84A8E2",
+                    fillOpacity: 0.3,
+                    autoClose: true,
+                    infowin: false
+                }); //建立多边形覆盖物
                 map.addOverlay(ply);  //添加覆盖物
                 pointArray = pointArray.concat(ply.getPath());
             }
@@ -169,33 +180,59 @@
         });
     }
 
+    var resPaintConfig = {
+        Cameras: {
+            size: BMAP_POINT_SIZE_SMALL,
+            shape: BMAP_POINT_SHAPE_WATERDROP,
+            color: '#d340c3'
+        },
+        Hospitals: {
+            size: BMAP_POINT_SIZE_BIG,
+            shape: BMAP_POINT_SHAPE_RHOMBUS,
+            color: '#4c58a4'
+        },
+        GasStations: {
+            size: BMAP_POINT_SIZE_SMALL,
+            shape: BMAP_POINT_SHAPE_STAR,
+            color: '#d3ed27'
+        },
+        Schools: {
+            size: BMAP_POINT_SIZE_SMALL,
+            shape: BMAP_POINT_SHAPE_CIRCLE,
+            color: '#16e1cc'
+        }
+    };
+    var ptCollections = {};
     //
     function locateResource(data) {
         //
-        var cameras = data.Cameras;
-        if (cameras != null && _.any(cameras)) {
-            addPointCollection(cameras);
-        }
+        var ptCollections = _.forEach(data, function (val, key) {
+            if (val != null && _.any(val)) {
+                ptCollections[key] = addPointCollection(val, resPaintConfig[key]);
+            }
+        });
+
     }
 
-    function addPointCollection(aryRes) {
+    function addPointCollection(aryRes, opt) {
         // map.clearOverlays();
         var points = [];  // 添加海量点数据
         for (var i = 0; i < aryRes.length; i++) {
             var res = aryRes[i];
             points.push(new BMap.Point(res.Longitude, res.Latitude));
         }
-        var options = {
-            size: BMAP_POINT_SIZE_SMALL,
-            shape: BMAP_POINT_SHAPE_WATERDROP,
-            color: '#d340c3'
-        }
-        var pointCollection = new BMap.PointCollection(points, options);  // 初始化PointCollection
+        //var options = {
+        //    size: BMAP_POINT_SIZE_SMALL,
+        //    shape: BMAP_POINT_SHAPE_WATERDROP,
+        //    color: '#d340c3'
+        //}
+        var pointCollection = new BMap.PointCollection(points, opt);  // 初始化PointCollection
         pointCollection.addEventListener('click', function (e) {
             alert('单击点的坐标为：' + e.point.lng + ',' + e.point.lat);  // 监听点击事件
         });
 
         map.addOverlay(pointCollection);  // 添加Overlay
+        return pointCollection;
     }
 
 </script>
