@@ -120,9 +120,59 @@
     }
 
     $(function () {
-        getBoundary();
+        //getBoundary();
+        loadBoundary();
         lazyLoadResource();
     });
+
+    function getMapBounds() {
+        var bounds = map.getBounds();
+        var postBounds = {
+            lngsw: bounds.Le,
+            latsw: bounds.Ke,
+            lngne: bounds.Ge,
+            latne: bounds.Fe
+        };
+
+        return postBounds;
+    }
+    function loadBoundary() {
+        var postBounds = getMapBounds();
+        $.ajax({
+            url: "/GIS/MapBoundaries/GetListJson",
+            data: { queryJson: JSON.stringify(postBounds) },
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                paintBoundary(data);
+            },
+        });
+        
+    }
+
+    function paintBoundary(data) {
+        var pointArray = [];
+        _.each(data, function (b) {
+            var boundarypts = b.Boundary;
+            var ply = new BMap.Polygon(boundarypts, {
+                //strokeWeight: 2, strokeColor: "#ff0000"
+                strokeColor: "#0955CF",
+                strokeWeight: 2,
+                strokeOpacity: 0.7,
+                dashStyle: "Solid",
+                filled: true,
+                fillColor: "#84A8E2",
+                fillOpacity: 0.3,
+                autoClose: true,
+                infowin: false
+            }); //建立多边形覆盖物
+            map.addOverlay(ply);  //添加覆盖物
+            pointArray = pointArray.concat(ply.getPath());
+        });
+
+        map.setViewport(pointArray);    //调整视野
+        
+    }
 
     //区域
     function getBoundary() {
@@ -161,14 +211,7 @@
     });
     //
     function loadResources() {
-        var bounds = map.getBounds();
-        console.log(bounds);
-        var postBounds = {
-            lngsw: bounds.Le,
-            latsw: bounds.Ke,
-            lngne: bounds.Ge,
-            latne: bounds.Fe
-        };
+        var postBounds = getMapBounds();
         $.ajax({
             url: "/GIS/ResourceMaps/GetResources",
             data: { queryJson: JSON.stringify(postBounds) },
@@ -178,6 +221,8 @@
                 locateResource(data);
             },
         });
+
+        
     }
 
     var resPaintConfig = {
@@ -206,7 +251,7 @@
     //
     function locateResource(data) {
         //
-        var ptCollections = _.forEach(data, function (val, key) {
+        _.forEach(data, function (val, key) {
             if (val != null && _.any(val)) {
                 ptCollections[key] = addPointCollection(val, resPaintConfig[key]);
             }

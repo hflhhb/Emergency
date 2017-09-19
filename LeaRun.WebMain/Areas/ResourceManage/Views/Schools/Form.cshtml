@@ -35,53 +35,80 @@
             }
         })
     }
+
+    function getLocation() {
+        return {
+            address: $("#Address").val(),
+            lng: $("#Longitude").val(),
+            lat: $("#Latitude").val()
+        };
+    }
+
+    function btn_Locate() {
+        var curLocation = getLocation();
+        dialogOpen({
+            id: 'LocateForm',
+            title: '地址定位',
+            url: '/GIS/GeoLocations?address=' + escape(curLocation.address) + "&lng=" + curLocation.lng + "&lat=" + curLocation.lat,
+            width: '900px',
+            height: '630px',
+            callBack: function (iframeId) {
+                top.frames[iframeId].AcceptClick(function (respData) {
+                    $("#Address").val(respData.address);
+                    $("#Longitude").val(respData.lng);
+                    $("#Latitude").val(respData.lat);
+                });
+            }
+        })
+    }
 </script>
 <div style="margin-top: 20px; margin-right: 30px;">
     <table class="form">
         <tr>
-            <td class="formTitle">Id</td>
+            <td class="formTitle">名称 <font face="宋体">*</font></td>
             <td class="formValue">
-                <input id="Id" type="text" class="form-control"  />
+                <input id="Name" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
             </td>
-            <td class="formTitle">Name</td>
+            <td class="formTitle">学校类型</td>
             <td class="formValue">
-                <input id="Name" type="text" class="form-control"  />
-            </td>
-        </tr>
-        <tr>
-            <td class="formTitle">LinkPerson</td>
-            <td class="formValue">
-                <input id="LinkPerson" type="text" class="form-control"  />
-            </td>
-            <td class="formTitle">LinkPhone</td>
-            <td class="formValue">
-                <input id="LinkPhone" type="text" class="form-control"  />
+                <input id="SchoolType" type="text" class="form-control" />
             </td>
         </tr>
         <tr>
-            <td class="formTitle">SchoolType</td>
+            <td class="formTitle">联系人</td>
             <td class="formValue">
-                <input id="SchoolType" type="text" class="form-control"  />
+                <input id="LinkPerson" type="text" class="form-control" />
             </td>
-            <td class="formTitle">Address</td>
+            <td class="formTitle">联系电话</td>
             <td class="formValue">
-                <input id="Address" type="text" class="form-control"  />
-            </td>
-        </tr>
-        <tr>
-            <td class="formTitle">Latitude</td>
-            <td class="formValue">
-                <input id="Latitude" type="text" class="form-control"  />
-            </td>
-            <td class="formTitle">Longitude</td>
-            <td class="formValue">
-                <input id="Longitude" type="text" class="form-control"  />
+                <input id="LinkPhone" type="text" class="form-control" />
             </td>
         </tr>
         <tr>
-            <td class="formTitle">Remark</td>
+            <td class="formTitle">地址 <font face="宋体">*</font></td>
+            <td class="formValue" colspan='3'>
+                <input id="Address" type="text" class="form-control" style="float:left; width:311px;" isvalid="yes" checkexpession="NotNull" />
+                <div class="control-button" title="点击定位经纬度" onclick="btn_Locate()">
+                    地址定位
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">经度</td>
             <td class="formValue">
-                <input id="Remark" type="text" class="form-control"  />
-            
+                <input id="Longitude" type="text" class="pull-left form-control" isvalid="yes" checkexpession="DoubleOrNull" />
+            </td>
+            <td class="formTitle" style="width:90px;">纬度</td>
+            <td class="formValue">
+                <input id="Latitude" type="text" class="form-control" style="width:136px;" isvalid="yes" checkexpession="DoubleOrNull" />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">备注</td>
+            <td class="formValue" colspan='3'>
+                <textarea id="Remark" class="form-control" style="height:60px;"></textarea>
+            </td>
+        </tr>
+
     </table>
 </div>

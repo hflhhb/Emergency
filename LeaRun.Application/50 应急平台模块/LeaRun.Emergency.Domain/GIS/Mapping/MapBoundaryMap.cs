@@ -22,6 +22,8 @@ namespace LeaRun.GIS.Mapping
             #endregion
 
             #region 配置关系
+            this.Property(o => o.Longitude).IsRequired().HasPrecision(19, 16);
+            this.Property(o => o.Latitude).IsRequired().HasPrecision(19, 16);
             #endregion
         }
     }

@@ -28,25 +28,25 @@
             url: "../../ResourceManage/GasStations/GetPageListJson",
             datatype: "json",
             colModel: [
-                { label: 'Id', name: 'Id', index: 'Id', width: 100, align: 'left',sortable: true  },
-                { label: 'Name', name: 'Name', index: 'Name', width: 100, align: 'left',sortable: true  },
-                { label: 'Address', name: 'Address', index: 'Address', width: 100, align: 'left',sortable: true  },
-                { label: 'LinkPhone', name: 'LinkPhone', index: 'LinkPhone', width: 100, align: 'left',sortable: true  },
-                { label: 'LegalPerson', name: 'LegalPerson', index: 'LegalPerson', width: 100, align: 'left',sortable: true  },
-                { label: 'LinkPerson', name: 'LinkPerson', index: 'LinkPerson', width: 100, align: 'left',sortable: true  },
-                { label: 'StartTime', name: 'StartTime', index: 'StartTime', width: 100, align: 'left',sortable: true  },
-                { label: 'Longitude', name: 'Longitude', index: 'Longitude', width: 100, align: 'left',sortable: true  },
-                { label: 'Latitude', name: 'Latitude', index: 'Latitude', width: 100, align: 'left',sortable: true  },
-                { label: 'Remark', name: 'Remark', index: 'Remark', width: 100, align: 'left',sortable: true  },
-                { label: 'State', name: 'State', index: 'State', width: 100, align: 'left',sortable: true  },
-                { label: 'CreateTime', name: 'CreateTime', index: 'CreateTime', width: 100, align: 'left',sortable: true  },
-                { label: 'CreateUser', name: 'CreateUser', index: 'CreateUser', width: 100, align: 'left',sortable: true  },
+                { label: '主键', name: 'Id', hidden: true },
+                { label: '名称', name: 'Name', index: 'Name', width: 100, align: 'left',sortable: true  },
+                { label: '地址', name: 'Address', index: 'Address', width: 100, align: 'left',sortable: true  },
+                { label: '联系电话', name: 'LinkPhone', index: 'LinkPhone', width: 100, align: 'left',sortable: true  },
+                { label: '法人', name: 'LegalPerson', index: 'LegalPerson', width: 100, align: 'left',sortable: true  },
+                { label: '联系人', name: 'LinkPerson', index: 'LinkPerson', width: 100, align: 'left',sortable: true  },
+                { label: '开始时间', name: 'StartTime', index: 'StartTime', width: 100, align: 'left',sortable: true  },
+                { label: '经度', name: 'Longitude', index: 'Longitude', width: 100, align: 'left',sortable: true  },
+                { label: '纬度', name: 'Latitude', index: 'Latitude', width: 100, align: 'left',sortable: true  },
+                { label: '备注', name: 'Remark', index: 'Remark', width: 100, align: 'left',sortable: true  },
+                { label: '状态', name: 'State', index: 'State', width: 100, align: 'left',sortable: true  },
+                { label: '创建时间', name: 'CreateTime', index: 'CreateTime', width: 100, align: 'left',sortable: true  },
+                { label: '创建用户', name: 'CreateUser', index: 'CreateUser', width: 100, align: 'left',sortable: true  },
             ],
             viewrecords: true,
             rowNum: 30,
             rowList: [30, 50, 100],
             pager: "#gridPager",
-            sortname: '',
+            sortname: 'CreateTime',
             sortorder: 'desc',
             rownumbers: true,
             shrinkToFit: false,
@@ -63,7 +63,7 @@
     function btn_add() {
         dialogOpen({
             id: 'Form',
-            title: '添加GasStation',
+            title: '添加加油站',
             url: '/ResourceManage/GasStations/Form',
             width: '500px',
             height: '400px',
@@ -78,7 +78,7 @@
         if (checkedRow(keyValue)) {
             dialogOpen({
                 id: 'Form',
-                title: '编辑GasStation',
+                title: '编辑加油站',
                 url: '/ResourceManage/GasStations/Form?keyValue=' + keyValue,
                 width: '500px',
                 height: '400px',
@@ -100,7 +100,7 @@
                 }
             })
         } else {
-            dialogMsg('请选择需要删除的GasStation！', 0);
+            dialogMsg('请选择需要删除的加油站！', 0);
         }
     }
 </script>

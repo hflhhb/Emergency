@@ -47,8 +47,7 @@
             position:relative;
         } 
         .panel-header {
-            padding-top: 15px;
-            padding-left: 5px;
+            padding:15px 5px 0px;
         } 
         .panel-footer {
             position: fixed;
@@ -91,10 +90,14 @@
         <div class="east-Panel">
             <div class="content-panel">
                 <div class="panel-header">
-                    <div style="">
+                    <div class="pull-left">
                         <button class="btn btn-info" id="btnJoinPoint">区域连接</button>
                         <button class="btn btn-danger" id="btnClearPoint">清空</button>
                     </div>
+                    <div class="pull-right">
+                        <button class="btn btn-primary lr-push-right" id="btnSave">保存</button>
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
                 <div class="boundary-pts">
 
@@ -114,14 +117,16 @@
                     </li>*@
                     </ul>
                 </div>
-                <div class="panel-footer">
+                @*<div class="panel-footer">
 
-                </div>
+                </div>*@
             </div>
         </div>
     </div>
 </div>
 <script type="text/javascript">
+    var keyValue = request('keyValue');
+    checkKeyvalue();
     //初始化页面
     function InitialPage() {
         //layout布局
@@ -145,6 +150,13 @@
     }
     InitialPage();
 
+    function checkKeyvalue() {
+        if (!keyValue) {
+            dialogTop("区域模型[keyvalue]不存在.", 'error');
+            return false;
+        }
+        return true;
+    }
 </script>
 <script type="text/javascript">
     var kouMap = new Kou.Map();
@@ -165,103 +177,53 @@
 
     //确定
     function AcceptClick(onAccept) {
-        var postData = {
-            address: $("#txtSuggest").val(),
-            lng: $("#lng").val(),
-            lat: $("#lat").val()
-        };
-        //
-        onAccept(postData);
         dialogClose();
     }
 
+    //
+    var lazyLoadDbBoundary = _.debounce(loadDbBoundary, 0);
     $(function () {
+        lazyLoadDbBoundary();
     });
-
-    //区域
-    function getBoundary() {
-        var bdary = new BMap.Boundary();
-        bdary.get("上海市浦东新区", function (rs) {       //获取行政区域
-            map.clearOverlays();        //清除地图覆盖物
-            var count = rs.boundaries.length; //行政区域的点有多少个
-            if (count === 0) {
-                dialogTop("未能获取当前输入行政区域", 'error');
-                return;
-            }
-            var pointArray = [];
-            for (var i = 0; i < count; i++) {
-                var ply = new BMap.Polygon(rs.boundaries[i], {
-                    //strokeWeight: 2, strokeColor: "#ff0000"
-                    strokeColor: "#0955CF",
-                    strokeWeight: 2,
-                    strokeOpacity: 0.7,
-                    dashStyle: "Solid",
-                    filled: true,
-                    fillColor: "#84A8E2",
-                    fillOpacity: 0.3,
-                    autoClose: true,
-                    infowin: false
-                }); //建立多边形覆盖物
-                map.addOverlay(ply);  //添加覆盖物
-                pointArray = pointArray.concat(ply.getPath());
-            }
-            map.setViewport(pointArray);    //调整视野
-        });
-    }
-    //
-    var lazyLoadResource = _.debounce(loadResources, 800);
     map.addEventListener("tilesloaded", function (e) {
-        //lazyLoadResource();
+        //lazyLoadDbBoundary();
     });
     //
-    function loadResources() {
-        var bounds = map.getBounds();
-        console.log(bounds);
-        var postBounds = {
-            lngsw: bounds.Le,
-            latsw: bounds.Ke,
-            lngne: bounds.Ge,
-            latne: bounds.Fe
-        };
+    function loadDbBoundary() {
+        if (!checkKeyvalue()) return;
         $.ajax({
-            url: "/GIS/ResourceMaps/GetResources",
-            data: { queryJson: JSON.stringify(postBounds) },
+            url: "/GIS/MapBoundaries/GetFormJson?keyvalue="+keyValue,
+            data: {  },
             type: "get",
             dataType: "json",
             success: function (data) {
-                locateResource(data);
+                paintDbBoundary(data);
             },
         });
     }
 
     //
-    function locateResource(data) {
+    function paintDbBoundary(data) {
+        var dbBoundary = data.Boundary;
+        if (!dbBoundary) return;
         //
-        var cameras = data.Cameras;
-        if (cameras != null && _.any(cameras)) {
-            addPointCollection(cameras);
-        }
-    }
-
-    function addPointCollection(aryRes) {
-        // map.clearOverlays();
-        var points = [];  // 添加海量点数据
-        for (var i = 0; i < aryRes.length; i++) {
-            var res = aryRes[i];
-            points.push(new BMap.Point(res.Longitude, res.Latitude));
-        }
-        var options = {
-            size: BMAP_POINT_SIZE_SMALL,
-            shape: BMAP_POINT_SHAPE_WATERDROP,
-            color: '#d340c3'
-        }
-        var pointCollection = new BMap.PointCollection(points, options);  // 初始化PointCollection
-        pointCollection.addEventListener('click', function (e) {
-            alert('单击点的坐标为：' + e.point.lng + ',' + e.point.lat);  // 监听点击事件
+        var dbPoints = dbBoundary.split(";");
+        var html = "";
+        _.each(dbPoints, function (p) {
+            var pt = p.split(",");
+            pIndex++;
+            var curPt = new BMap.Point(pt[0], pt[1]);
+            boundary.points.push(curPt);
+            addMarker(curPt, pIndex);
+            html += createPointHtml(curPt);
         });
-
-        map.addOverlay(pointCollection);  // 添加Overlay
+        
+        $(".boundary-pts ul").append(html);
+        paintBoundary();
+        //
+        map.setViewport(boundary.points);
     }
+
     //
     var pIndex = 0;
     var pPrefix = "boundaryPt";
@@ -320,7 +282,7 @@
 
     function createPointHtml(point) {
         var key = getPointKey(point);
-        var html = "<li>";
+        var html = '<li class="boundary-pt-li" data-key="' + key + '">';
         html += '<span class="boundary-pt-title">点' + (pIndex) + '</span>';
         html += '<span><input type="text" class="form-control boundary-pt" value="' + point.lng +'"/></span> ';
         html += '<span><input type="text" class="form-control boundary-pt" value="' + point.lat + '" /></span> ';
@@ -364,6 +326,41 @@
     $("#btnClearPoint").click(function () {
         //
         clearBoundary();
+    });
+
+    $("#btnSave").click(function () {
+        //
+        if (!keyValue) {
+            dialogTop("区域模型[keyvalue]不存在.", 'error');
+            return;
+        }
+        var points = [];
+        $(".boundary-pt-li").each(function () {
+            points.push($(this).data("key"));
+        });
+        if (points.length <= 2) {
+            dialogTop("请输入两个以上的点.", 'error');
+            return;
+        }
+        paintBoundary();
+        var ptStr = points.join(";");
+        var center = boundary.ply.getBounds().getCenter();
+        console.log(ptStr, center);
+        //
+        var postData = {
+            longitude: center.lng,
+            latitude: center.lat,
+            boundary: ptStr
+        };
+        $.SaveForm({
+            url: "/GIS/MapBoundaries/SaveForm?keyValue=" + keyValue,
+            param: postData,
+            loading: "正在保存数据...",
+            success: function () {
+                $.currentIframe().$("#gridTable").trigger("reloadGrid");
+            }
+        });
+        
     });
 
 </script>

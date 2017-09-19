@@ -26,6 +26,8 @@
             return false;
         }
         var postData = $("#form1").GetWebControls(keyValue);
+        postData.Latitude = 0;
+        postData.Longitude = 0;
         $.SaveForm({
             url: "../../GIS/MapBoundaries/SaveForm?keyValue=" + keyValue,
             param: postData,
@@ -66,7 +68,7 @@
                 <input id="Address" type="text" class="form-control" />
             </td>
         </tr>
-        <tr>
+        @*<tr>
             <td class="formTitle">中心点经度</td>
             <td class="formValue">
                 <input id="Longitude" type="text" class="form-control" />
@@ -81,7 +83,7 @@
             <td class="formValue" colspan='3'>
                 <textarea id="Boundary" readonly class="form-control" style="height:40px;"></textarea>
             </td>
-        </tr>
+        </tr>*@
         <tr>
             <td class="formTitle">扩展内容</td>
             <td class="formValue" colspan='3'>
