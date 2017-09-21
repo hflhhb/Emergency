@@ -59,5 +59,10 @@ namespace LeaRun.Util.Extension
                 return true;
             }
         }
+
+        public static bool EqualsIgnoreCase(this string v1, string v2)
+        {
+            return string.Equals(v1, v2, StringComparison.OrdinalIgnoreCase);
+        }
     }
 }

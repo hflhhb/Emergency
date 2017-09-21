@@ -37,7 +37,13 @@
                 { label: '中心点经度', name: 'Longitude', index: 'Longitude', width: 100, align: 'left',sortable: true  },
                 { label: '中心点纬度', name: 'Latitude', index: 'Latitude', width: 100, align: 'left',sortable: true  },
                 { label: '边界点', name: 'Boundary', index: 'Boundary', width: 100, align: 'left',sortable: true  },
-                { label: '内容', name: 'Content', index: 'Content', width: 200, align: 'left',sortable: true  },
+                {
+                    label: '内容', name: 'Content', index: 'Content', width: 200, align: 'left', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (!cellvalue) return "";
+                        return _.escape(decodeURIComponent(cellvalue));
+                    }
+                },
                 { label: '备注', name: 'Remark', index: 'Remark', width: 100, align: 'left',sortable: true  },
                 { label: '创建时间', name: 'CreateTime', index: 'CreateTime', width: 100, align: 'left',sortable: true  },
                 { label: '创建用户', name: 'CreateUser', index: 'CreateUser', width: 100, align: 'left',sortable: true  },
@@ -66,7 +72,7 @@
             title: '添加地图区域',
             url: '/GIS/MapBoundaries/Form',
             width: '500px',
-            height: '550px',
+            height: '450px',
             callBack: function (iframeId) {
                 top.frames[iframeId].AcceptClick();
             }
@@ -81,7 +87,7 @@
                 title: '编辑地图区域',
                 url: '/GIS/MapBoundaries/Form?keyValue=' + keyValue,
                 width: '500px',
-                height: '550px',
+                height: '450px',
                 callBack: function (iframeId) {
                     top.frames[iframeId].AcceptClick();
                 }

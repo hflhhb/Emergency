@@ -250,6 +250,12 @@
     <Content Include="Content\images\filetype\xml.png" />
     <Content Include="Content\images\filetype\zip.png" />
     <Content Include="Content\images\file_arrow.png" />
+    <Content Include="Content\images\gis\a1.gif" />
+    <Content Include="Content\images\gis\a2.gif" />
+    <Content Include="Content\images\gis\a3.gif" />
+    <Content Include="Content\images\gis\a4.gif" />
+    <Content Include="Content\images\gis\a5.gif" />
+    <Content Include="Content\images\gis\a8.gif" />
     <Content Include="Content\images\head\avatar.png" />
     <Content Include="Content\images\head\avatar04.png" />
     <Content Include="Content\images\head\avatar2.png" />

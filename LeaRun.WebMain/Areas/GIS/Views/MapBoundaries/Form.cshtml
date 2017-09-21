@@ -15,6 +15,9 @@
                 url: "../../GIS/MapBoundaries/GetFormJson",
                 param: { keyValue: keyValue },
                 success: function (data) {
+                    if (!!data.Content) {
+                        data.Content = decodeURIComponent(data.Content);
+                    }
                     $("#form1").SetWebControls(data);
                 }
             })
@@ -26,8 +29,11 @@
             return false;
         }
         var postData = $("#form1").GetWebControls(keyValue);
-        postData.Latitude = 0;
-        postData.Longitude = 0;
+        postData.Content = encodeURIComponent(postData.Content);
+        if (!keyValue) { //新建时
+            postData.Latitude = 0;
+            postData.Longitude = 0;
+        }
         $.SaveForm({
             url: "../../GIS/MapBoundaries/SaveForm?keyValue=" + keyValue,
             param: postData,

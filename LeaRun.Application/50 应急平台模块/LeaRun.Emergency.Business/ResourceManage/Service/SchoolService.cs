@@ -4,6 +4,8 @@ using LeaRun.Data;
 using LeaRun.Util.Web;
 using System.Collections.Generic;
 using System.Linq;
+using LeaRun.ResourceManage.Model;
+using LeaRun.Util.Extension;
 
 namespace LeaRun.ResourceManage.Service
 {
@@ -42,6 +44,37 @@ namespace LeaRun.ResourceManage.Service
         public IEnumerable<SchoolEntity> GetList(string queryJson)
         {
             return base.Queryable().ToList();
+        }
+        /// <summary>
+        /// 获取列表
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns>返回列表</returns>
+        public IEnumerable<SchoolEntity> GetList(ResourceMapQuery query)
+        {
+            var expression = LinqExtensions.True<SchoolEntity>();
+            if (query.Bounds != null)
+            {
+                var bounds = query.Bounds;
+                if (bounds.SouthWest != null)
+                {
+                    expression = expression.And(t => t.Longitude >= bounds.SouthWest.Longitude);
+                    expression = expression.And(t => t.Latitude >= bounds.SouthWest.Latitude);
+                }
+
+                if (bounds.NorthEast != null)
+                {
+                    expression = expression.And(t => t.Longitude <= bounds.NorthEast.Longitude);
+                    expression = expression.And(t => t.Latitude <= bounds.NorthEast.Latitude);
+                }
+            }
+
+            if (query.Address.IsNotEmpty())
+            {
+                expression = expression.And(t => t.Address.Contains(query.Address));
+            }
+
+            return base.Queryable(expression).ToList();
         }
         /// <summary>
         /// 获取实体
