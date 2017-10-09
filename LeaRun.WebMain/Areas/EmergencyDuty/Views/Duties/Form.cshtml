@@ -1,0 +1,160 @@
+﻿@model LeaRun.EmergencyDuty.Entity.DutiesEntity
+@{;
+
+    ViewBag.Title = "表单页面";
+    Layout = "~/Views/Shared/_OrderForm.cshtml";
+    var isAdd = Model.Id.IsEmpty();
+    var iniMonth = (isAdd ? DateTime.Now.AddMonths(1) : Model.StartedOn.Value).ToString(Definition.MONTH_FORMAT_CN);
+}
+<script>
+    var keyValue = request('keyValue');
+    var dutyClass = request('dutyClass');
+    $(function () {
+        InitialPage();
+        InitControl();
+        @*loadDutyDetailView('@iniMonth');*@
+    });
+    //初始化页面
+    function InitialPage() {
+        $(".bills").height($(window).height() - 88);
+        //resize重设(表格、树形)宽高
+        $(window).resize(function (e) {
+            window.setTimeout(function () {
+                $('#gridTable').setGridWidth(($('.gridPanel').width()));
+                $(".bills").height($(window).height() - 88);
+            }, 200);
+            e.stopPropagation();
+        });
+    }
+
+    function InitControl() {
+
+    }
+
+    function onMonthChange(dp) {
+        var month = dp.cal.getNewDateStr();
+        if (dp.cal.oldValue == month) return;
+        loadDutyDetailView(month)
+    }
+
+    function loadDutyDetailView(month) {
+        $.ajax({
+            url: "/EmergencyDuty/Duties/DutyDetailView?keyValue=" + keyValue,
+            data: { dutyclass: dutyClass, month: month },
+            type: "get",
+            dataType: "html",
+            success: function (data) {
+                $("#dutyDetailsWrap").html(data);
+            },
+        });
+    }
+</script>
+<div class="ui-report">
+    <div class="titlePanel">
+        <div class="title-search">
+            <table class="form" style="width: 100%; margin-bottom: 10px;">
+                <tr>
+                    <th class="formTitle">值班月份 <font face="宋体">*</font></th>
+                    <td class="formValue" style="padding-left: 10px;">
+                        <input id="StartOn" readonly type="text" value="@iniMonth" class="form-control input-wdatepicker" 
+                               onclick="WdatePicker({onpicked:function(dp){onMonthChange(dp);}, isShowClear:false, dateFmt:'@Definition.MONTH_FORMAT_CN'})">
+                    </td>
+                    <td class="formTitle">联系人 <font face="宋体">*</font></td>
+                    <td class="formValue" style="padding-left: 10px;">
+                        <input id="Contracts" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
+                    </td>
+                    <td class="formTitle">联系电话 <font face="宋体">*</font></td>
+                    <td class="formValue" style="padding-left: 10px;">
+                        <input id="ContractsTelNo" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="gridPanel" id="gridPanel">
+        <div class="printArea">
+            <div class="grid-title">现金银行报表</div>
+            <div class="grid-subtitle">日期: 2016-03-10 至 2016-04-10</div>
+            <table id="gridTable"></table>
+            <div id="dutyDetailsWrap">
+                @Html.Action("DutyDetailView", new { dutyClass= Model.DutyClass, keyValue = Model.Id, month = iniMonth })
+            </div>
+            
+        </div>
+    </div>
+</div>
+@*<div class="bills">
+        <table class="form" style="width: 100%; margin-bottom: 10px;">
+            <tr>
+                <th class="formTitle" style="width: 60px;">客户名称<font face="宋体">*</font></th>
+                <td class="formValue">
+                    <div id="CustomerId" type="select" class="ui-select" isvalid="yes" checkexpession="NotNull"></div>
+                </td>
+                <th class="formTitle">销售人员<font face="宋体">*</font></th>
+                <td class="formValue">
+                    <div id="SellerId" type="selectTree" class="ui-select" isvalid="yes" checkexpession="NotNull"></div>
+                </td>
+                <th class="formTitle">单据日期<font face="宋体">*</font></th>
+                <td class="formValue">
+                    <input id="OrderDate" type="text" value="@LeaRun.Util.Time.GetToday()" class="form-control input-wdatepicker" onfocus="WdatePicker({maxDate:'%y-%M-%d'})" isvalid="yes" checkexpession="NotNull" />
+                </td>
+                <th class="formTitle">单据编号<font face="宋体">*</font></th>
+                <td class="formValue">
+                    <input id="OrderCode" type="text" readonly value="@ViewBag.OrderCode" class="form-control" isvalid="yes" checkexpession="NotNull" />
+                </td>
+            </tr>
+        </table>
+        <div class="gridPanel">
+            <table id="gridTable"></table>
+        </div>
+        <textarea id="Description" placeholder="暂无备注信息" class="form-control" style="width: 100%; height: 50px; margin-top: 10px;"></textarea>
+        <table class="form" style="width: 100%; margin-top: 5px;">
+            <tr>
+                <th class="formTitle" style="width: 60px;">优惠金额<font face="宋体">*</font></th>
+                <td class="formValue">
+                    <input id="DiscountSum" type="text" class="form-control" value="0.00" isvalid="yes" checkexpession="Double" />
+                </td>
+                <th class="formTitle">收款金额<font face="宋体">*</font></th>
+                <td class="formValue">
+                    <input id="Accounts" type="text" class="form-control" value="0.00" isvalid="yes" checkexpession="Double" />
+                </td>
+                <th class="formTitle">收款日期<font face="宋体">*</font></th>
+                <td class="formValue">
+                    <input id="PaymentDate" type="text" class="form-control input-wdatepicker" onfocus="WdatePicker()" isvalid="yes" checkexpession="NotNull" />
+                </td>
+                <th class="formTitle">收款方式<font face="宋体">*</font></th>
+                <td class="formValue">
+                    <div id="PaymentMode" type="select" class="ui-select" isvalid="yes" checkexpession="NotNull"></div>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle" style="width: 60px;">销售费用<font face="宋体">*</font></th>
+                <td class="formValue">
+                    <input id="SaleCost" type="text" class="form-control" value="0.00" isvalid="yes" checkexpession="Double" />
+                </td>
+                <th class="formTitle">制单人员<font face="宋体">*</font></th>
+                <td class="formValue">
+                    <input id="CreateUserName" type="text" class="form-control" readonly value="@LeaRun.WebBase.OperatorProvider.Provider.Current().UserName" />
+                </td>
+                <th class="formTitle">合同编号</th>
+                <td class="formValue">
+                    <input id="ContractCode" type="text" class="form-control" />
+                </td>
+                <th class="formTitle">合同附件</th>
+                <td class="formValue">
+                    <input id="ContractFile" type="text" class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">摘要信息</th>
+                <td class="formValue" colspan="7">
+                    <input id="AbstractInfo" type="text" class="form-control" />
+                </td>
+            </tr>
+        </table>
+    </div>*@
+<div id="bottomField">
+    <a id="savaAndAdd" class="btn btn-success" onclick="AcceptClick(1)">保存并新增</a>
+    <a id="save" class="btn btn-default" onclick="AcceptClick(2)">保存单据</a>
+    <a id="save" class="btn btn-default" onclick="reload();">刷新</a>
+</div>

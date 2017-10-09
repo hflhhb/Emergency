@@ -11,7 +11,7 @@ namespace LeaRun.GIS.Entity
     /// 日 期：2017-09-17 21:31
     /// 描 述：MapBoundary
     /// </summary>
-    public class MapBoundaryEntity : BaseEntity
+    public partial class MapBoundaryEntity : BaseEntity
     {
         #region 实体成员
         /// <summary>

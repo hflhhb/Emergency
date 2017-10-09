@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Reflection;
+using System.Linq;
+using System;
 
 namespace LeaRun.Util.Extension
 {
@@ -29,6 +31,42 @@ namespace LeaRun.Util.Extension
             if (Value == null) { return true; }
             if (Value.Count == 0) { return true; }
             return false; 
+        }
+
+        /// <summary>
+        /// 确定序列是否包含任何元素。
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="t"></param>
+        /// <returns>如果源序列包含任何元素，则为 true；否则为 false。</returns>
+        public static bool IsAny<T>(this IEnumerable<T> t, Func<T, bool> predicate = null)
+        {
+            if (t == null) return false;
+            if (predicate == null)
+            {
+                return t.Any();
+            }
+            else
+            {
+                return t.Any(predicate);
+            }
+        }
+
+        public static string StringJoin<T>(this IEnumerable<T> source, string separator = ",")
+        {
+            if (!source.IsAny())
+            {
+                return "";
+            }
+            return string.Join(separator, source);
+        }
+
+        /// <summary>
+        /// 得到List&lt;T&gt;,如果本身是List,不需要转化返回List，否则调用ToList()
+        /// </summary>
+        public static List<T> AsList<T>(this IEnumerable<T> source)
+        {
+            return (source == null || source is List<T>) ? (List<T>)source : source.ToList();
         }
 
 

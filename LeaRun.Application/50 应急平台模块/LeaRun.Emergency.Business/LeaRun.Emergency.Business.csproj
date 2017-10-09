@@ -50,6 +50,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmergencyDuty\Business\DutiesBLL.cs" />
+    <Compile Include="EmergencyDuty\Helper\Helper.cs" />
+    <Compile Include="EmergencyDuty\Service\DutyDetailsService.cs" />
+    <Compile Include="EmergencyDuty\Service\DutiesService.cs" />
     <Compile Include="GIS\Business\MapBoundaryBLL.cs" />
     <Compile Include="GIS\Business\ResourceMapBLL.cs" />
     <Compile Include="GIS\Service\MapBoundaryService.cs" />
@@ -73,6 +77,10 @@
       <Project>{7c84f157-09b6-42d8-85f2-04af1f31a046}</Project>
       <Name>LeaRun.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\LeaRun.Definitions\LeaRun.Definitions.csproj">
+      <Project>{c621f8ab-b9ee-4301-a890-58c7ef7b571b}</Project>
+      <Name>LeaRun.Definitions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\LeaRun.Util\LeaRun.Cache\LeaRun.Cache.csproj">
       <Project>{a68cdd21-2e12-4b11-95db-d0a0fced48b1}</Project>
       <Name>LeaRun.Cache</Name>
@@ -85,6 +93,14 @@
       <Project>{9b10db87-130c-41d3-8687-1fac877db74a}</Project>
       <Name>LeaRun.WebBase</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\01 系统管理模块\SystemManage.Business\LeaRun.SystemManage.Business.csproj">
+      <Project>{23F0EA7E-B48D-4AE0-A84D-AD1A330F0EFB}</Project>
+      <Name>LeaRun.SystemManage.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\01 系统管理模块\SystemManage.Domain\LeaRun.SystemManage.Domain.csproj">
+      <Project>{239FF513-5847-4DFC-9EC2-56AC52C412E0}</Project>
+      <Name>LeaRun.SystemManage.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LeaRun.Emergency.Domain\LeaRun.Emergency.Domain.csproj">
       <Project>{bbf6eec4-511b-4910-b975-14f86122b4ae}</Project>
       <Name>LeaRun.Emergency.Domain</Name>
@@ -95,8 +111,6 @@
     <Folder Include="Appraise\Service\" />
     <Folder Include="BasicData\Business\" />
     <Folder Include="BasicData\Service\" />
-    <Folder Include="EmergencyDuty\Business\" />
-    <Folder Include="EmergencyDuty\Service\" />
     <Folder Include="SecurityCheck\Business\" />
     <Folder Include="SecurityCheck\Service\" />
   </ItemGroup>

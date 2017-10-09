@@ -47,6 +47,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmergencyDuty\Entity\DutiesEntity.cs" />
+    <Compile Include="EmergencyDuty\Entity\DutyDetailsEntity.cs" />
+    <Compile Include="EmergencyDuty\Entity\DutyUsersEntity.cs" />
+    <Compile Include="EmergencyDuty\IService\IDutyDetailsService.cs" />
+    <Compile Include="EmergencyDuty\IService\IDutiesService.cs" />
+    <Compile Include="EmergencyDuty\Mapping\DutiesMap.cs" />
+    <Compile Include="EmergencyDuty\Mapping\DutyDetailsMap.cs" />
+    <Compile Include="EmergencyDuty\Mapping\DutyUsersMap.cs" />
+    <Compile Include="EmergencyDuty\Model\DutyDetailsViewModel.cs" />
+    <Compile Include="EmergencyDuty\Model\DutiesViewModel.cs" />
     <Compile Include="GIS\Entity\MapBoundaryEntity.cs" />
     <Compile Include="GIS\IService\IMapBoundaryService.cs" />
     <Compile Include="GIS\IService\IResourceMapService.cs" />
@@ -71,6 +81,10 @@
       <Project>{7c84f157-09b6-42d8-85f2-04af1f31a046}</Project>
       <Name>LeaRun.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\LeaRun.Definitions\LeaRun.Definitions.csproj">
+      <Project>{c621f8ab-b9ee-4301-a890-58c7ef7b571b}</Project>
+      <Name>LeaRun.Definitions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\LeaRun.Util\LeaRun.Util\LeaRun.Util.csproj">
       <Project>{07aa2566-d0e5-47af-a17d-3b1c6aee598d}</Project>
       <Name>LeaRun.Util</Name>
@@ -91,9 +105,6 @@
     <Folder Include="BasicData\Entity\" />
     <Folder Include="BasicData\IService\" />
     <Folder Include="BasicData\Mapping\" />
-    <Folder Include="EmergencyDuty\Entity\" />
-    <Folder Include="EmergencyDuty\IService\" />
-    <Folder Include="EmergencyDuty\Mapping\" />
     <Folder Include="SecurityCheck\Entity\" />
     <Folder Include="SecurityCheck\IService\" />
     <Folder Include="SecurityCheck\Mapping\" />

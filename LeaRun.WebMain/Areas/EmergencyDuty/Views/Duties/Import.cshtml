@@ -1,0 +1,146 @@
+﻿@{;
+
+    ViewBag.Title = "表单页面";
+    Layout = "~/Views/Shared/_OrderForm.cshtml";
+    var isAdd = Model.Id.IsEmpty();
+    var iniMonth = isAdd ? Model.StartedOn : DateTime.Now.AddMonths(1).ToString(Definition.MONTH_FORMAT_CN);
+
+
+#line default
+#line hidden
+
+#line 3 "D:\ProjectFiles\OutSourcing\Emergency\LeaRun.WebMain\Areas\EmergencyDuty\Views\Duties\Form.cshtml"
+    __o = iniMonth;
+
+
+#line default
+#line hidden
+
+#line 4 "D:\ProjectFiles\OutSourcing\Emergency\LeaRun.WebMain\Areas\EmergencyDuty\Views\Duties\Form.cshtml"
+    __o = iniMonth;
+
+
+#line default
+#line hidden
+
+#line 5 "D:\ProjectFiles\OutSourcing\Emergency\LeaRun.WebMain\Areas\EmergencyDuty\Views\Duties\Form.cshtml"
+    __o = Definition.MONTH_FORMAT_CN;
+
+
+#line default
+#line hidden
+
+#line 6 "D:\ProjectFiles\OutSourcing\Emergency\LeaRun.WebMain\Areas\EmergencyDuty\Views\Duties\Form.cshtml"
+    __o = Html.Action("DutyDetailView", new { dutyClass= Model.DutyClass, keyValue = Model.Id, month = iniMonth });
+}
+<script>
+    var keyValue = request('keyValue');
+    $(function () {
+        initControl();
+    });
+    //初始化控件
+    function initControl() {
+        //获取表单
+        if (!!keyValue) {
+            $.SetForm({
+                url: "../../EmergencyDuty/Duties/GetFormJson",
+                param: { keyValue: keyValue },
+                success: function (data) {
+                    $("#form1").SetWebControls(data);
+                }
+            })
+        }
+    }
+    //保存表单;
+    function AcceptClick() {
+        if (!$('#form1').Validform()) {
+            return false;
+        }
+        var postData = $("#form1").GetWebControls(keyValue);
+        $.SaveForm({
+            url: "../../EmergencyDuty/Duties/SaveForm?keyValue=" + keyValue,
+            param: postData,
+            loading: "正在保存数据...",
+            success: function () {
+                $.currentIframe().$("#gridTable").trigger("reloadGrid");
+            }
+        })
+    }
+</script>
+<div style="margin-top: 20px; margin-right: 30px;">
+    <table class="form">
+        <tr>
+            <td class="formTitle">标题</td>
+            <td class="formValue">
+                <input id="Title" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">值班表类型 10: 月值班表 20: 午值班表 30: 机动值班表 40: 驾驶员值班表 50: 节假日领导值班表</td>
+            <td class="formValue">
+                <input id="DutyClass" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">开始时间</td>
+            <td class="formValue">
+                <input id="StartedOn" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">结束时间</td>
+            <td class="formValue">
+                <input id="EndedOn" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">联系人</td>
+            <td class="formValue">
+                <input id="Contacts" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">联系人电话</td>
+            <td class="formValue">
+                <input id="ContactsTelNo" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">上传文件路径</td>
+            <td class="formValue">
+                <input id="FilePath" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">是否审核</td>
+            <td class="formValue">
+                <input id="IsCheck" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">备注</td>
+            <td class="formValue">
+                <input id="Remarks" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">审核日期</td>
+            <td class="formValue">
+                <input id="CheckedAt" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">是否采用</td>
+            <td class="formValue">
+                <input id="IsSend" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">采用日期</td>
+            <td class="formValue">
+                <input id="SentAt" type="text" class="form-control"  />
+            </td>
+        </tr>
+       
+    </table>
+</div>

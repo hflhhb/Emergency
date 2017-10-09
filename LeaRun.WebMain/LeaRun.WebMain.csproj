@@ -156,6 +156,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Appraise\AppraiseAreaRegistration.cs" />
     <Compile Include="Areas\BasicData\BasicDataAreaRegistration.cs" />
+    <Compile Include="Areas\EmergencyDuty\Controllers\DutiesController.cs" />
     <Compile Include="Areas\EmergencyDuty\EmergencyDutyAreaRegistration.cs" />
     <Compile Include="Areas\GIS\Controllers\MapBoundariesController.cs" />
     <Compile Include="Areas\GIS\Controllers\GeoLocationsController.cs" />
@@ -1480,6 +1481,10 @@
     <Content Include="Areas\GIS\Views\MapBoundaries\Design.cshtml" />
     <Content Include="Areas\GIS\Views\MapBoundaries\Form.cshtml" />
     <Content Include="Areas\GIS\Views\MapBoundaries\Index.cshtml" />
+    <Content Include="Areas\EmergencyDuty\Views\Duties\Form.cshtml" />
+    <Content Include="Areas\EmergencyDuty\Views\Duties\Import.cshtml" />
+    <Content Include="Areas\EmergencyDuty\Views\Duties\Index.cshtml" />
+    <Content Include="Areas\EmergencyDuty\Views\Duties\_Detail.cshtml" />
     <None Include="Configs\Data\Database.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -1875,7 +1880,6 @@
     <Folder Include="Areas\BasicData\Controllers\" />
     <Folder Include="Areas\BasicData\Models\" />
     <Folder Include="Areas\BasicData\Views\Shared\" />
-    <Folder Include="Areas\EmergencyDuty\Controllers\" />
     <Folder Include="Areas\EmergencyDuty\Models\" />
     <Folder Include="Areas\EmergencyDuty\Views\Shared\" />
     <Folder Include="Areas\EmergencyPlan\Controllers\" />
@@ -3442,6 +3446,10 @@
     <ProjectReference Include="..\LeaRun.Application\50 应急平台模块\LeaRun.Emergency.Domain\LeaRun.Emergency.Domain.csproj">
       <Project>{bbf6eec4-511b-4910-b975-14f86122b4ae}</Project>
       <Name>LeaRun.Emergency.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LeaRun.Definitions\LeaRun.Definitions.csproj">
+      <Project>{c621f8ab-b9ee-4301-a890-58c7ef7b571b}</Project>
+      <Name>LeaRun.Definitions</Name>
     </ProjectReference>
     <ProjectReference Include="..\LeaRun.Util\LeaRun.Cache\LeaRun.Cache.csproj">
       <Project>{a68cdd21-2e12-4b11-95db-d0a0fced48b1}</Project>
