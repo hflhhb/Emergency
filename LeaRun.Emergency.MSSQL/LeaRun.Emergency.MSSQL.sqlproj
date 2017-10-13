@@ -73,5 +73,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Emergency2Local.scmp" />
+    <None Include="Project2Emergency2.scmp" />
   </ItemGroup>
 </Project>
