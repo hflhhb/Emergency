@@ -8,6 +8,7 @@ using LeaRun.Util.Extension;
 using LeaRun.Util;
 using LeaRun.AuthorizeManage.Service;
 using LeaRun.AuthorizeManage.IService;
+using System;
 
 namespace LeaRun.EmergencyDuty.Service
 {
@@ -100,25 +101,60 @@ namespace LeaRun.EmergencyDuty.Service
         /// <param name="keyValue">主键</param>
         public void RemoveForm(string keyValue)
         {
-            base.Delete(keyValue);
+            db.BeginTrans();
+            try
+            {
+                db.Delete<DutiesEntity>(keyValue);
+                db.Delete<DutyDetailsEntity>(t => t.DutyId.Equals(keyValue));
+                db.Commit();
+            }
+            catch (Exception)
+            {
+                db.Rollback();
+                throw;
+            }
         }
+
         /// <summary>
         /// 保存表单（新增、修改）
         /// </summary>
         /// <param name="keyValue">主键值</param>
-        /// <param name="entity">实体对象</param>
+        /// <param name="dutyEntity">实体对象</param>
+        /// <param name="dutyDetailList">明细实体对象</param>
         /// <returns></returns>
-        public void SaveForm(string keyValue, DutiesEntity entity)
+        public void SaveForm(string keyValue, DutiesEntity dutyEntity, List<DutyDetailsEntity> dutyDetailList)
         {
-            if (!string.IsNullOrEmpty(keyValue))
+            db.BeginTrans();
+            try
             {
-                entity.Modify(keyValue);
-                base.Update(entity);
+                if (!string.IsNullOrEmpty(keyValue))
+                {
+                    //主表
+                    dutyEntity.Modify(keyValue);
+                    db.Update(dutyEntity);
+                    //明细
+                    db.Delete<DutyDetailsEntity>(t => t.DutyId.Equals(keyValue));
+                }
+                else
+                {
+                    //主表
+                    dutyEntity.Create();
+                    db.Insert(dutyEntity);
+                    
+                }
+                //明细
+                foreach (var dutyDetail in dutyDetailList)
+                {
+                    if (dutyDetail.Id.IsNullOrEmpty()) dutyDetail.Create();
+                    dutyDetail.DutyId = dutyEntity.Id;
+                    db.Insert(dutyDetail);
+                }
+                db.Commit();
             }
-            else
+            catch (Exception)
             {
-                entity.Create();
-                base.Insert(entity);
+                db.Rollback();
+                throw;
             }
         }
         #endregion

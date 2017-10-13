@@ -853,6 +853,12 @@ reload = function () {
     location.reload();
     return false;
 }
+closeCurrentTab = function () {
+    !!top.$.removeTab && top.$.removeTab('closeCurrent');//
+    var curTabCloseTrigger = top.$('.tabCloseCurrent');
+    if (!!curTabCloseTrigger) curTabCloseTrigger.click();
+    //!!top.$.learuntab && top.$.learuntab.closeTab();
+};
 newGuid = function () {
     var guid = "";
     for (var i = 1; i <= 32; i++) {

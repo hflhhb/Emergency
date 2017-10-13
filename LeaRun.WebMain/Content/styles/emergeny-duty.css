@@ -33,11 +33,11 @@
             font-size: 12px;
         }
 .duty-table table {
-    /*margin: 0px;
+    margin: 0px;
     margin-top: 1px;
     border-collapse: collapse;
     width: 100%;
-    border-left: 1px solid #ccc;*/
+    border-left: 1px solid #ccc;
 }
     .duty-table table thead tr td, .duty-table table thead tr th {
         border-top: 1px solid #ccc;

@@ -138,5 +138,28 @@ namespace LeaRun.Util.Extension
                 return string.Empty;
             return ToChineseDateTimeString(dateTime.Value);
         }
+
+
+        /// <summary>
+        /// 获取格式化字符串，不带时分秒，格式："yyyy年MM月dd日"
+        /// </summary>
+        /// <param name="dateTime">日期</param>
+        public static string ToChineseDateMonthString(this DateTime? dateTime)
+        {
+            if (dateTime == null)
+                return string.Empty;
+            return dateTime?.ToString("yyyy年MM月") ?? "";
+        }
+
+        /// <summary>
+        /// 获取格式化字符串，不带时分秒，格式："yyyy年MM月dd日"
+        /// </summary>
+        /// <param name="dateTime">日期</param>
+        public static string ToChineseDateMonthString(this DateTime dateTime)
+        {
+            if (dateTime == null)
+                return string.Empty;
+            return dateTime.ToString("yyyy年MM月");
+        }
     }
 }

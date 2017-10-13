@@ -81,12 +81,13 @@ namespace LeaRun.EmergencyDuty.Business
         /// </summary>
         /// <param name="keyValue">主键值</param>
         /// <param name="entity">实体对象</param>
+        /// <param name="dutyDetailList">明细实体对象</param>
         /// <returns></returns>
-        public void SaveForm(string keyValue, DutiesEntity entity)
+        public void SaveForm(string keyValue, DutiesEntity entity, List<DutyDetailsEntity> dutyDetailList)
         {
             try
             {
-                service.SaveForm(keyValue, entity);
+                service.SaveForm(keyValue, entity, dutyDetailList);
             }
             catch (Exception)
             {

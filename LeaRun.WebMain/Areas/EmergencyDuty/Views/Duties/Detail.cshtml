@@ -3,8 +3,7 @@
 
     ViewBag.Title = "详情页面";
     Layout = "~/Views/Shared/_OrderForm.cshtml";
-    var isAdd = Model.Id.IsEmpty();
-    var iniMonth = (isAdd ? DateTime.Now.AddMonths(1) : Model.StartedOn.Value).ToString(Definition.MONTH_FORMAT_CN);
+    var iniMonth = Model.StartedOn.Value;
 }
 @section Styles{
     <link href="~/Content/styles/emergeny-duty.css" rel="stylesheet" />
@@ -37,10 +36,14 @@
     <div class="gridPanel" id="gridPanel">
         <div class="printArea" id="dutyDetailsContainer">
             @Html.Action("DutyDetailReadView", new { dutyClass = Model.DutyClass, keyValue = Model.Id, month = iniMonth })
+            <div>
+                <div>@Model.Remarks</div>
+            </div>
         </div>
     </div>
 </div>
 
 <div id="bottomField">
+    <a id="back" class="btn btn-default" onclick="closeCurrentTab();">返回</a>
     <a id="save" class="btn btn-default" onclick="reload();">刷新</a>
 </div>

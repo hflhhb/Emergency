@@ -3,6 +3,7 @@ using LeaRun.Definitions.Enums;
 using LeaRun.EmergencyDuty.Business;
 using LeaRun.EmergencyDuty.Entity;
 using LeaRun.EmergencyDuty.Model;
+using LeaRun.UserManage.Cache;
 using LeaRun.Util;
 using LeaRun.Util.Extension;
 using LeaRun.Util.Web;
@@ -17,6 +18,7 @@ namespace LeaRun.EmergencyDuty.Controllers
 {
     public class DutiesController : MvcControllerBase
     {
+        private DepartmentCache departmentCache = new DepartmentCache();
         private DutiesBLL dutiesbll = new DutiesBLL();
 
         #region 视图功能
@@ -148,6 +150,24 @@ namespace LeaRun.EmergencyDuty.Controllers
             }
             return View(duty);
         }
+
+        /// <summary>
+        /// 浏览详情页面
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Detail(int? dutyClass, string keyValue)
+        {
+            var duty = dutiesbll.GetEntity(keyValue);
+            if (duty == null)
+            {
+                duty = new DutiesEntity()
+                {
+                    DutyClass = dutyClass
+                };
+            }
+            return View(duty);
+        }
         #endregion
 
         #region 获取数据
@@ -220,9 +240,12 @@ namespace LeaRun.EmergencyDuty.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AjaxOnly]
-        public ActionResult SaveForm(string keyValue, DutiesEntity entity)
+        public ActionResult SaveForm(string keyValue, DutiesEntity entity, string dutyDetailsJson)
         {
-            dutiesbll.SaveForm(keyValue, entity);
+            var department = departmentCache.GetEntity(OperatorProvider.Provider.Current().DepartmentId);
+            entity.Title = $"{department?.FullName}{entity.StartedOn.ToChineseDateMonthString()}{entity.DutyClass.ToNullableEnum<DutyClassEnum>()?.ToDescription()}";
+            var dutyDetailList = dutyDetailsJson.ToList<DutyDetailsEntity>();
+            dutiesbll.SaveForm(keyValue, entity, dutyDetailList);
             return Success("操作成功。");
         }
         #endregion
