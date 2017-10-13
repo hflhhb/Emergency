@@ -1,0 +1,65 @@
+﻿
+.duty-box{width:860px;margin-left:auto;margin-right:auto;border: 1px solid #ddd;box-shadow: rgb(189, 189, 189) 0px 0px 10px;background: #fff;padding: 50px;padding-top:20px;margin-top: 25px;padding-bottom:0px;}
+.duty-title {
+    font-size: 28px;
+    text-align: center;
+    line-height: 60px;
+    font-weight: bold;
+    color: #333;
+}
+.duty-subtitle {
+    text-align: center;
+}
+.duty-info {
+    /*margin-top: 20px;*/
+    margin-bottom: 20px;
+}
+    .duty-info table .formTitle {
+        text-align: left;
+        width: 50px;
+        font-size: 12px;
+    }
+    .duty-info table .formValue {
+        text-align: left;
+        font-size: 12px;
+    }
+        .duty-info table .formValue input {
+            box-shadow: none;
+            border-top: none;
+            border-right: none;
+            border-left: none;
+            height: 22px !important;
+            line-height: 22px !important;
+            font-size: 12px;
+        }
+.duty-table table {
+    /*margin: 0px;
+    margin-top: 1px;
+    border-collapse: collapse;
+    width: 100%;
+    border-left: 1px solid #ccc;*/
+}
+    .duty-table table thead tr td, .duty-table table thead tr th {
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        text-overflow: ellipsis;
+        word-break: keep-all;
+        overflow: hidden;
+        font-weight: bold;
+        padding-left: 5px;
+        padding-right: 5px;
+        font-size: 12px;
+    }
+    .duty-table table tbody tr td {
+        border-bottom: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+        height: 25px;
+        line-height: 25px;
+        word-break: break-all;
+        padding-left: 5px;
+        padding-right: 5px;
+        font-size: 12px;
+    }

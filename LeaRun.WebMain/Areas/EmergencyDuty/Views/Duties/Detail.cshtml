@@ -1,0 +1,46 @@
+﻿@model LeaRun.EmergencyDuty.Entity.DutiesEntity
+@{;
+
+    ViewBag.Title = "详情页面";
+    Layout = "~/Views/Shared/_OrderForm.cshtml";
+    var isAdd = Model.Id.IsEmpty();
+    var iniMonth = (isAdd ? DateTime.Now.AddMonths(1) : Model.StartedOn.Value).ToString(Definition.MONTH_FORMAT_CN);
+}
+@section Styles{
+    <link href="~/Content/styles/emergeny-duty.css" rel="stylesheet" />
+}
+<script>
+    var keyValue = request('keyValue');
+    var dutyClass = request('dutyClass');
+    $(function () {
+        InitialPage();
+        InitControl();
+    });
+    //初始化页面
+    function InitialPage() {
+        $(".bills").height($(window).height() - 88);
+        //resize重设(表格、树形)宽高
+        $(window).resize(function (e) {
+            window.setTimeout(function () {
+                $('#gridTable').setGridWidth(($('.gridPanel').width()));
+                $(".bills").height($(window).height() - 88);
+            }, 200);
+            e.stopPropagation();
+        });
+    }
+
+    function InitControl() {
+
+    }
+</script>
+<div class="ui-report">
+    <div class="gridPanel" id="gridPanel">
+        <div class="printArea" id="dutyDetailsContainer">
+            @Html.Action("DutyDetailReadView", new { dutyClass = Model.DutyClass, keyValue = Model.Id, month = iniMonth })
+        </div>
+    </div>
+</div>
+
+<div id="bottomField">
+    <a id="save" class="btn btn-default" onclick="reload();">刷新</a>
+</div>

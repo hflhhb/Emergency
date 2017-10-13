@@ -84,15 +84,34 @@ namespace LeaRun.EmergencyDuty.Controllers
         }
 
         [HttpGet]
-        public ActionResult DutyDetailView(int dutyClass, string keyValue, string month)
+        public ActionResult DutyDetailWriteView(int dutyClass, string keyValue, string month)
         {
-            var dutyId = keyValue;
             var model = new DutyDetailsViewModel()
             {
-                DutyId = dutyId,
+                DutyId = keyValue,
                 DutyMonth = month.ToDate(),
-                DutyClass = dutyClass.ToNullableEnum<DutyClassEnum>()
+                DutyClass = dutyClass.ToNullableEnum<DutyClassEnum>(),
+                Readonly = false
             };
+            return DutyDetailView(model);
+        }
+
+        [HttpGet]
+        public ActionResult DutyDetailReadView(int dutyClass, string keyValue, string month)
+        {
+            var model = new DutyDetailsViewModel()
+            {
+                DutyId = keyValue,
+                DutyMonth = month.ToDate(),
+                DutyClass = dutyClass.ToNullableEnum<DutyClassEnum>(),
+                Readonly = true
+            };
+            return DutyDetailView(model);
+        }
+
+        private ActionResult DutyDetailView(DutyDetailsViewModel model)
+        {
+            var dutyId = model.DutyId;
             //
             DutiesEntity duty = null;
             if (dutyId.IsNotEmpty())

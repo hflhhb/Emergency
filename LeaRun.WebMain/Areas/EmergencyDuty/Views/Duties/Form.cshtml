@@ -6,6 +6,9 @@
     var isAdd = Model.Id.IsEmpty();
     var iniMonth = (isAdd ? DateTime.Now.AddMonths(1) : Model.StartedOn.Value).ToString(Definition.MONTH_FORMAT_CN);
 }
+@section Styles{
+    <link href="~/Content/styles/emergeny-duty.css" rel="stylesheet" />
+}
 <script>
     var keyValue = request('keyValue');
     var dutyClass = request('dutyClass');
@@ -39,20 +42,65 @@
 
     function loadDutyDetailView(month) {
         $.ajax({
-            url: "/EmergencyDuty/Duties/DutyDetailView?keyValue=" + keyValue,
+            url: "/EmergencyDuty/Duties/DutyDetailWriteView?keyValue=" + keyValue,
             data: { dutyclass: dutyClass, month: month },
             type: "get",
             dataType: "html",
             success: function (data) {
-                $("#dutyDetailsWrap").html(data);
+                $("#dutyDetailsContainer").html(data);
             },
+        });
+    }
+
+    //保存表单
+    function AcceptClick(save_Mode) {
+        if (!$('#form1').Validform()) {
+            return false;
+        }
+        var dutyDetailsJson = [];
+        $("#dutyDetailsWrap").find('[role=row]').each(function (i) {
+            if (!!$(this).find('input[name="ProductId"]').val()) {
+                dutyDetailsJson.push({
+                    OrderEntryId: $(this).find('input[name="OrderEntryId"]').val(),
+                    ProductName: $(this).find('input[name="ProductName"]').val(),
+                    ProductCode: $(this).find('input[name="ProductCode"]').val(),
+                    ProductId: $(this).find('input[name="ProductId"]').val(),
+                    UnitId: $(this).find('input[name="UnitId"]').val(),
+                    Qty: $(this).find('input[name="Qty"]').val(),
+                    Price: $(this).find('input[name="Price"]').val(),
+                    Amount: $(this).find('input[name="Amount"]').val(),
+                    TaxRate: $(this).find('input[name="TaxRate"]').val(),
+                    Taxprice: $(this).find('input[name="Taxprice"]').val(),
+                    Tax: $(this).find('input[name="Tax"]').val(),
+                    TaxAmount: $(this).find('input[name="TaxAmount"]').val(),
+                    Description: $(this).find('input[name="Description"]').val(),
+                    SortCode: i
+                });
+            }
+        });
+        var postData = $("#form1").GetWebControls(keyValue);
+        //postData["StartOn"] = $("#StartOn").val();
+        //postData["Contracts"] = $("#Contracts").val();
+        //postData["ContractsTelNo"] = $("#ContractsTelNo").val();
+        postData["DutyDetails"] = JSON.stringify(dutyDetailsJson);
+        $.ConfirmAjax({
+            msg: "注：您确认要保存此操作吗？",
+            url: "../../EmergencyDuty/Duties/SaveForm?keyValue=" + keyValue,
+            param: postData,
+            success: function (data) {
+                if (save_Mode == 1) {
+                    reload();
+                } else {
+                    top.$.removeTab('closeCurrent');
+                }
+            }
         });
     }
 </script>
 <div class="ui-report">
     <div class="titlePanel">
         <div class="title-search">
-            <table class="form" style="width: 100%; margin-bottom: 10px;">
+            <table class="form" id="form1" style="width: 100%; margin-bottom: 10px;">
                 <tr>
                     <th class="formTitle">值班月份 <font face="宋体">*</font></th>
                     <td class="formValue" style="padding-left: 10px;">
@@ -72,87 +120,12 @@
         </div>
     </div>
     <div class="gridPanel" id="gridPanel">
-        <div class="printArea">
-            <div class="grid-title">现金银行报表</div>
-            <div class="grid-subtitle">日期: 2016-03-10 至 2016-04-10</div>
-            <table id="gridTable"></table>
-            <div id="dutyDetailsWrap">
-                @Html.Action("DutyDetailView", new { dutyClass= Model.DutyClass, keyValue = Model.Id, month = iniMonth })
-            </div>
-            
+        <div class="printArea" id="dutyDetailsContainer">
+            @Html.Action("DutyDetailWriteView", new { dutyClass = Model.DutyClass, keyValue = Model.Id, month = iniMonth })
         </div>
     </div>
 </div>
-@*<div class="bills">
-        <table class="form" style="width: 100%; margin-bottom: 10px;">
-            <tr>
-                <th class="formTitle" style="width: 60px;">客户名称<font face="宋体">*</font></th>
-                <td class="formValue">
-                    <div id="CustomerId" type="select" class="ui-select" isvalid="yes" checkexpession="NotNull"></div>
-                </td>
-                <th class="formTitle">销售人员<font face="宋体">*</font></th>
-                <td class="formValue">
-                    <div id="SellerId" type="selectTree" class="ui-select" isvalid="yes" checkexpession="NotNull"></div>
-                </td>
-                <th class="formTitle">单据日期<font face="宋体">*</font></th>
-                <td class="formValue">
-                    <input id="OrderDate" type="text" value="@LeaRun.Util.Time.GetToday()" class="form-control input-wdatepicker" onfocus="WdatePicker({maxDate:'%y-%M-%d'})" isvalid="yes" checkexpession="NotNull" />
-                </td>
-                <th class="formTitle">单据编号<font face="宋体">*</font></th>
-                <td class="formValue">
-                    <input id="OrderCode" type="text" readonly value="@ViewBag.OrderCode" class="form-control" isvalid="yes" checkexpession="NotNull" />
-                </td>
-            </tr>
-        </table>
-        <div class="gridPanel">
-            <table id="gridTable"></table>
-        </div>
-        <textarea id="Description" placeholder="暂无备注信息" class="form-control" style="width: 100%; height: 50px; margin-top: 10px;"></textarea>
-        <table class="form" style="width: 100%; margin-top: 5px;">
-            <tr>
-                <th class="formTitle" style="width: 60px;">优惠金额<font face="宋体">*</font></th>
-                <td class="formValue">
-                    <input id="DiscountSum" type="text" class="form-control" value="0.00" isvalid="yes" checkexpession="Double" />
-                </td>
-                <th class="formTitle">收款金额<font face="宋体">*</font></th>
-                <td class="formValue">
-                    <input id="Accounts" type="text" class="form-control" value="0.00" isvalid="yes" checkexpession="Double" />
-                </td>
-                <th class="formTitle">收款日期<font face="宋体">*</font></th>
-                <td class="formValue">
-                    <input id="PaymentDate" type="text" class="form-control input-wdatepicker" onfocus="WdatePicker()" isvalid="yes" checkexpession="NotNull" />
-                </td>
-                <th class="formTitle">收款方式<font face="宋体">*</font></th>
-                <td class="formValue">
-                    <div id="PaymentMode" type="select" class="ui-select" isvalid="yes" checkexpession="NotNull"></div>
-                </td>
-            </tr>
-            <tr>
-                <th class="formTitle" style="width: 60px;">销售费用<font face="宋体">*</font></th>
-                <td class="formValue">
-                    <input id="SaleCost" type="text" class="form-control" value="0.00" isvalid="yes" checkexpession="Double" />
-                </td>
-                <th class="formTitle">制单人员<font face="宋体">*</font></th>
-                <td class="formValue">
-                    <input id="CreateUserName" type="text" class="form-control" readonly value="@LeaRun.WebBase.OperatorProvider.Provider.Current().UserName" />
-                </td>
-                <th class="formTitle">合同编号</th>
-                <td class="formValue">
-                    <input id="ContractCode" type="text" class="form-control" />
-                </td>
-                <th class="formTitle">合同附件</th>
-                <td class="formValue">
-                    <input id="ContractFile" type="text" class="form-control" />
-                </td>
-            </tr>
-            <tr>
-                <th class="formTitle">摘要信息</th>
-                <td class="formValue" colspan="7">
-                    <input id="AbstractInfo" type="text" class="form-control" />
-                </td>
-            </tr>
-        </table>
-    </div>*@
+
 <div id="bottomField">
     <a id="savaAndAdd" class="btn btn-success" onclick="AcceptClick(1)">保存并新增</a>
     <a id="save" class="btn btn-default" onclick="AcceptClick(2)">保存单据</a>

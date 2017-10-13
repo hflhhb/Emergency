@@ -1380,6 +1380,7 @@
     <Content Include="Content\scripts\utils\learun-webAppData.js" />
     <Content Include="Content\styles\font-awesome.min.css" />
     <Content Include="Content\styles\learun-applayout.css" />
+    <Content Include="Content\styles\emergeny-duty.css" />
     <Content Include="Content\styles\learun-bill.css" />
     <Content Include="Content\styles\learun-ckbox-radio.css" />
     <Content Include="Content\styles\learun-flow.css" />
@@ -1485,6 +1486,7 @@
     <Content Include="Areas\EmergencyDuty\Views\Duties\Import.cshtml" />
     <Content Include="Areas\EmergencyDuty\Views\Duties\Index.cshtml" />
     <Content Include="Areas\EmergencyDuty\Views\Duties\_Detail.cshtml" />
+    <Content Include="Areas\EmergencyDuty\Views\Duties\Detail.cshtml" />
     <None Include="Configs\Data\Database.xsd">
       <SubType>Designer</SubType>
     </None>

@@ -18,6 +18,8 @@ namespace LeaRun.EmergencyDuty.Model
 
         public List<DutyDetailsEntity> Details { get; set; }
 
+        public bool Readonly { get; set; }
+
         public DutyDetailsViewModel()
         {
             

@@ -1,4 +1,5 @@
-﻿@model LeaRun.EmergencyDuty.Model.DutyDetailsViewModel
+﻿@using LeaRun.Util.Extension
+@model LeaRun.EmergencyDuty.Model.DutyDetailsViewModel
 
 @{ 
     var groupDetails = Model.Details.Where(o=>o.DutyDay.HasValue)
@@ -7,63 +8,62 @@
     var firstDayNextMonth = Model.DutyMonth.AddMonths(1);
     var dictDutyTypes = Helper.MapToDutyTypes(Model.DutyClass);
 }
-
-<table class="form" border="1" style="border:2px solid #999;">
-    <tr>
-        <th>日期</th>
-        @foreach (var dutytype in dictDutyTypes)
+<div class="grid-title">@(Model.DutyMonth.ToString(Definition.MONTH_FORMAT_CN) + " " + Model.DutyClass.ToDescription())</div>
+<div class="grid-subtitle">日期: @Model.DutyMonth.ToDateString() 至 @firstDayNextMonth.AddDays(-1).ToDateString()</div>
+<div id="dutyDetailsWrap" class="duty-info duty-table">
+    <table class="form" border="1" style="border:2px solid #999;">
+        <thead>
+            <tr>
+                <th>日期</th>
+                @foreach (var dutytype in dictDutyTypes)
+                {
+                    <th>@dutytype.Value</th>
+                }
+            </tr>
+        </thead>
+        @for (var day = Model.DutyMonth; day < firstDayNextMonth; day = day.AddDays(1))
         {
-            <th>@dutytype.Value</th>
+            var dayDesc = day.ToString(Definition.DATE_FORMAT_HYPHEN);
+            var isSetUsers = groupDetails.ContainsKey(dayDesc);
+            <tr>
+                <td align="center">@(dayDesc + " (" + LeaRun.Definitions.EnumHelper.WeekendConverter(day.DayOfWeek) + ")")</td>
+                @if (isSetUsers)
+                {
+                    var lstDetails = groupDetails[dayDesc];
+
+                    foreach (var dutytype in dictDutyTypes)
+                    {
+                        var setUser = lstDetails.FirstOrDefault(o => o.DutyType == (int)dutytype.Key);
+                        var userNames = setUser == null ? "" : setUser.DutyUsers;
+                        if (Model.Readonly)
+                        {
+                            <td>@userNames</td>
+                        }
+                        else
+                        {
+                            <td class="formValue"><input dutyrole="username" data-date="@dayDesc" data-dutytype="@dutytype.Key" type="text"  class="form-control" value="@userNames"/></td>
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (var dutytype in dictDutyTypes)
+                    {
+                        if (Model.Readonly)
+                        {
+                            <td></td>
+                        }
+                        else
+                        {
+                            <td class="formValue"><input dutyrole="username" data-date="@dayDesc" data-dutytype="@dutytype.Key" type="text" class="form-control" /></td>
+                        }
+                    }
+                }
+            </tr>
         }
-        @*@switch (Model.DutyClass)
-        {
-            case LeaRun.Definitions.Enums.DutyClassEnum.Month:
-                <td>值班领导</td>
-                <td>值班人员（白班）</td>
-                <td>值班人员（夜班）</td>
-                break;
-            case LeaRun.Definitions.Enums.DutyClassEnum.Noon:
-                <td>值班人员</td>
-                break;
-            case LeaRun.Definitions.Enums.DutyClassEnum.Flexible:
-                <td>机动值班人员</td>
-                break;
-            case LeaRun.Definitions.Enums.DutyClassEnum.Driver:
-                <td>值班人员（日班）</td>
-                <td>值班人员（日备）</td>
-                <td>值班人员（夜班）</td>
-                break;
-            case LeaRun.Definitions.Enums.DutyClassEnum.HolidayLeader:
-                <td>值班领导</td>
-                break;
-            default:
-                break;
-        }*@
-    </tr>
-    @for (var day = Model.DutyMonth; day < firstDayNextMonth; day = day.AddDays(1))
-    {
-        var dayDesc = day.ToString(Definition.DATE_FORMAT_HYPHEN);
-        var isSetUsers = groupDetails.ContainsKey(dayDesc);
-        <tr>
-            <td align="center">@(dayDesc + " (" + LeaRun.Definitions.EnumHelper.WeekendConverter(day.DayOfWeek) + ")")</td>
-            @if (isSetUsers)
-            {
-                var lstDetails = groupDetails[dayDesc];
 
-                foreach (var dutytype in dictDutyTypes)
-                {
-                    var setUser = lstDetails.FirstOrDefault(o => o.DutyType == (int)dutytype.Key);
-                    <td>@(setUser==null?"" : setUser.DutyUsers)</td>
-                }
-            }
-            else
-            {
-                foreach (var dutytype in dictDutyTypes)
-                {
-                    <td></td>
-                }
-            }
-        </tr>
-    }
-    
-</table>
+    </table>
+</div>
+<div>
+    <textarea class="form-control"></textarea>
+</div>
