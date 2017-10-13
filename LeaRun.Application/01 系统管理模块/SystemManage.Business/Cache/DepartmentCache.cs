@@ -52,6 +52,11 @@ namespace LeaRun.UserManage.Cache
             return data;
         }
 
+        /// <summary>
+        /// 部门实体
+        /// </summary>
+        /// <param name="departmentId">部门ID</param>
+        /// <returns></returns>
         public DepartmentEntity GetEntity(string departmentId)
         {
             var data = this.GetList();

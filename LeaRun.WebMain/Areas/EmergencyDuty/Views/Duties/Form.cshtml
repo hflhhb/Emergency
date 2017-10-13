@@ -54,66 +54,79 @@
 
     //保存表单
     function AcceptClick(save_Mode) {
-        if (!$('#form1').Validform()) {
-            return false;
-        }
+        //if (!$('#form1').Validform()) {
+        //    return false;
+        //}
         var dutyDetailsJson = [];
-        $("#dutyDetailsWrap").find('[role=row]').each(function (i) {
-            if (!!$(this).find('input[name="ProductId"]').val()) {
+        $("#dutyDetailsWrap").find('[dutyrole="username"]').each(function (i) {
+            var dutyday = $(this).data("dutyday");
+            var dutyusers = $.trim($(this).val());
+            if (!!dutyusers){ 
                 dutyDetailsJson.push({
-                    OrderEntryId: $(this).find('input[name="OrderEntryId"]').val(),
-                    ProductName: $(this).find('input[name="ProductName"]').val(),
-                    ProductCode: $(this).find('input[name="ProductCode"]').val(),
-                    ProductId: $(this).find('input[name="ProductId"]').val(),
-                    UnitId: $(this).find('input[name="UnitId"]').val(),
-                    Qty: $(this).find('input[name="Qty"]').val(),
-                    Price: $(this).find('input[name="Price"]').val(),
-                    Amount: $(this).find('input[name="Amount"]').val(),
-                    TaxRate: $(this).find('input[name="TaxRate"]').val(),
-                    Taxprice: $(this).find('input[name="Taxprice"]').val(),
-                    Tax: $(this).find('input[name="Tax"]').val(),
-                    TaxAmount: $(this).find('input[name="TaxAmount"]').val(),
-                    Description: $(this).find('input[name="Description"]').val(),
-                    SortCode: i
+                    Id: $(this).data("id"),
+                    DutyId: keyValue,
+                    DutyDay: dutyday,
+                    DutyUsers: $(this).val(),
+                    DutyType: $(this).data("dutytype"),
+                    Sort: i
                 });
             }
         });
-        var postData = $("#form1").GetWebControls(keyValue);
-        //postData["StartOn"] = $("#StartOn").val();
+        var postData = $("#formDuty").GetWebControls(keyValue);
+        postData["DutyClass"] = dutyClass;
         //postData["Contracts"] = $("#Contracts").val();
         //postData["ContractsTelNo"] = $("#ContractsTelNo").val();
-        postData["DutyDetails"] = JSON.stringify(dutyDetailsJson);
+        postData["Remarks"] = $("#Remarks").val();
+        postData["dutyDetailsJson"] = JSON.stringify(dutyDetailsJson);
+        console.info(postData);
+        if (dutyDetailsJson.length == 0) {
+            //
+            dialogConfirm("没有设置值班人员，是否确定保存?", function (r) {
+                if (r) {
+                    saveDuty(postData, save_Mode);
+                }
+            });
+        } else {
+            saveDuty(postData, save_Mode);
+        }
+        
+    }
+
+    function saveDuty(postData, save_Mode) {
         $.ConfirmAjax({
             msg: "注：您确认要保存此操作吗？",
             url: "../../EmergencyDuty/Duties/SaveForm?keyValue=" + keyValue,
             param: postData,
             success: function (data) {
-                if (save_Mode == 1) {
-                    reload();
-                } else {
-                    top.$.removeTab('closeCurrent');
-                }
+                dialogMsg("保存成功", 1);
+                closeCurrentTab();
+                //if (save_Mode == 1) {
+                //    reload();
+                //} else {
+                //    closeCurrentTab();
+                //}
             }
         });
     }
+
 </script>
 <div class="ui-report">
     <div class="titlePanel">
         <div class="title-search">
-            <table class="form" id="form1" style="width: 100%; margin-bottom: 10px;">
+            <table class="form" id="formDuty" style="width: 100%; margin-bottom: 10px;">
                 <tr>
                     <th class="formTitle">值班月份 <font face="宋体">*</font></th>
                     <td class="formValue" style="padding-left: 10px;">
-                        <input id="StartOn" readonly type="text" value="@iniMonth" class="form-control input-wdatepicker" 
+                        <input id="StartedOn" readonly type="text" value="@iniMonth" class="form-control input-wdatepicker" 
                                onclick="WdatePicker({onpicked:function(dp){onMonthChange(dp);}, isShowClear:false, dateFmt:'@Definition.MONTH_FORMAT_CN'})">
                     </td>
-                    <td class="formTitle">联系人 <font face="宋体">*</font></td>
+                    <td class="formTitle">联系人 @*<font face="宋体">*</font>*@</td>
                     <td class="formValue" style="padding-left: 10px;">
-                        <input id="Contracts" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
+                        <input id="Contacts" type="text" class="form-control" value="@Model.Contacts" isvalid="false" checkexpession="NotNull"/>
                     </td>
-                    <td class="formTitle">联系电话 <font face="宋体">*</font></td>
+                    <td class="formTitle">联系电话 @*<font face="宋体">*</font>*@</td>
                     <td class="formValue" style="padding-left: 10px;">
-                        <input id="ContractsTelNo" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
+                        <input id="ContactsTelNo" type="text" class="form-control" value="@Model.ContactsTelNo" isvalid="false" checkexpession="NotNull"/>
                     </td>
                 </tr>
             </table>
@@ -122,12 +135,16 @@
     <div class="gridPanel" id="gridPanel">
         <div class="printArea" id="dutyDetailsContainer">
             @Html.Action("DutyDetailWriteView", new { dutyClass = Model.DutyClass, keyValue = Model.Id, month = iniMonth })
+            <div>
+                <textarea class="form-control" id="Remarks">@Model.Remarks</textarea>
+            </div>
         </div>
     </div>
 </div>
 
 <div id="bottomField">
-    <a id="savaAndAdd" class="btn btn-success" onclick="AcceptClick(1)">保存并新增</a>
-    <a id="save" class="btn btn-default" onclick="AcceptClick(2)">保存单据</a>
+    <a id="sava" class="btn btn-success" onclick="AcceptClick(1)">保存单据</a>
+    @*<a id="save" class="btn btn-default" onclick="AcceptClick(2)">保存单据</a>*@
+    <a id="back" class="btn btn-default" onclick="closeCurrentTab();">返回</a>
     <a id="save" class="btn btn-default" onclick="reload();">刷新</a>
 </div>
