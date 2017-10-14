@@ -162,13 +162,6 @@ namespace LeaRun.Application.Web.Controllers
                     operators.ObjectId = new PermissionBLL().GetObjectStr(userEntity.UserId);
                     operators.LogTime = DateTime.Now;
                     operators.Token = DESEncrypt.Encrypt(Guid.NewGuid().ToString());
-                    //写入当前用户数据权限
-                    AuthorizeDataModel dataAuthorize = new AuthorizeDataModel();
-                    dataAuthorize.ReadAutorize = authorizeBLL.GetDataAuthor(operators);
-                    dataAuthorize.ReadAutorizeUserId = authorizeBLL.GetDataAuthorUserId(operators);
-                    dataAuthorize.WriteAutorize = authorizeBLL.GetDataAuthor(operators, true);
-                    dataAuthorize.WriteAutorizeUserId = authorizeBLL.GetDataAuthorUserId(operators, true);
-                    operators.DataAuthorize = dataAuthorize;
                     //判断是否系统管理员
                     if (userEntity.Account == "System")
                     {
@@ -178,6 +171,18 @@ namespace LeaRun.Application.Web.Controllers
                     {
                         operators.IsSystem = (userEntity.IsSystem == 1);
                     }
+
+                    //写入当前用户数据权限
+                    AuthorizeDataModel dataAuthorize = new AuthorizeDataModel();
+                    dataAuthorize.ReadAutorize = authorizeBLL.GetDataAuthor(operators);
+                    dataAuthorize.ReadAutorizeUserId = authorizeBLL.GetDataAuthorUserId(operators);
+                    dataAuthorize.WriteAutorize = authorizeBLL.GetDataAuthor(operators, true);
+                    dataAuthorize.WriteAutorizeUserId = authorizeBLL.GetDataAuthorUserId(operators, true);
+                    //Emergency
+                    dataAuthorize.ReadAutorizeDeptIds = authorizeBLL.GetDataAuthorDeptIds(operators);
+                    dataAuthorize.WriteAutorizeDeptIds = authorizeBLL.GetDataAuthorDeptIds(operators, true);
+                    operators.DataAuthorize = dataAuthorize;
+                    //
                     OperatorProvider.Provider.AddCurrent(operators);
                     //登录限制
                     //LoginLimit(username, operators.IPAddress, operators.IPAddressName);

@@ -28,6 +28,10 @@ namespace LeaRun.Util.Extension
         {
             return Expression.GreaterThan(left, right);
         }
+        public static Expression Equal(this Expression left, Expression right)
+        {
+            return Expression.Equal(left, right);
+        }
         public static Expression<T> ToLambda<T>(this Expression body, params  ParameterExpression[] parameters)
         {
             return Expression.Lambda<T>(body, parameters);

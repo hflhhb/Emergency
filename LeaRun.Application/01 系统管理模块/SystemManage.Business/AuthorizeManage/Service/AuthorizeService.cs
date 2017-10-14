@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
 using System.Text;
-
+using LeaRun.Util.Extension;
 
 namespace LeaRun.AuthorizeManage.Service
 {
@@ -263,6 +263,88 @@ namespace LeaRun.AuthorizeManage.Service
             whereSb.Append(")");
             return whereSb.ToString();
         }
+
+
+        #region Emergency使用, 以部门ID为基础的场合,没有用户ID数据的场合
+
+        /// <summary>
+        /// 获得权限范围部门ID
+        /// </summary>
+        /// <param name="operators">当前登陆用户信息</param>
+        /// <param name="isWrite">可写入</param>
+        /// <returns></returns>
+        public List<string> GetDataAuthorDeptIds(Operator operators, bool isWrite = false)
+        {
+            //如果是系统管理员直接给所有数据权限
+            if (operators.IsSystem)
+            {
+                return null;
+            }
+
+            string userId = operators.UserId;
+
+            string strAuthorData = "";
+            if (isWrite)
+            {
+                strAuthorData = @"   SELECT    *
+                                        FROM      Base_AuthorizeData
+                                        WHERE     IsRead=0 AND
+                                        ObjectId IN (
+                                                SELECT  ObjectId
+                                                FROM    Base_UserRelation
+                                                WHERE   UserId =@UserId)";
+            }
+            else
+            {
+                strAuthorData = @"   SELECT    *
+                                        FROM      Base_AuthorizeData
+                                        WHERE     
+                                        ObjectId IN (
+                                                SELECT  ObjectId
+                                                FROM    Base_UserRelation
+                                                WHERE   UserId =@UserId)";
+            }
+            DbParameter[] parameter =
+            {
+                DbParameters.CreateDbParameter("@UserId",userId),
+            };
+
+            var lstDeptIds = new List<string>();
+            var listAuthorizeData = db.FindList<AuthorizeDataEntity>(strAuthorData, parameter);
+            //
+            foreach (AuthorizeDataEntity item in listAuthorizeData)
+            {
+                switch (item.AuthorizeType)
+                {
+                    //0代表最大权限
+                    case 0://
+                        return null;
+                    //本人及下属, 在部门选择上不支持
+                    case -2://
+                        break;
+                    //所在部门
+                    case -3:
+                        lstDeptIds.Add(operators.DepartmentId);
+                        break;
+                    //所在公司 在部门选择上不支持
+                    case -4:
+                        break;
+                    //自由选择部门
+                    case -5:
+                        //把部门ID添加到权限集合中
+                        lstDeptIds.Add(item.ResourceId);
+                        break;
+                }
+            }
+            if (lstDeptIds.Count == 0)
+            {
+                //如果没有权限的场合，默认为0000,这样可以和最大权限的空区分开
+                lstDeptIds.Add("0000");
+            }
+
+            return lstDeptIds;
+        }
+        #endregion
 
     }
 }

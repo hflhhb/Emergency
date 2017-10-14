@@ -16,6 +16,8 @@ namespace LeaRun.EmergencyDuty.Model
 
         public DutyClassEnum? DutyClass { get; set; }
 
+        public DutiesEntity Duty { get; set; }
+
         public List<DutyDetailsEntity> Details { get; set; }
 
         public bool Readonly { get; set; }

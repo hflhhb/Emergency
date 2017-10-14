@@ -58,6 +58,11 @@ namespace LeaRun.EmergencyDuty.Business
             return detailSvc.GetList(new { DutyId = dutyId }.ToJson());
         }
 
+        public DutiesEntity GetDeptDuty(int dutyClass, string deptId, string month)
+        {
+            return service.GetDeptDuty(dutyClass, deptId, month);
+        }
+
         #endregion
 
         #region 提交数据

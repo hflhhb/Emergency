@@ -16,7 +16,7 @@ using System.Web.Mvc;
 
 namespace LeaRun.EmergencyDuty.Controllers
 {
-    public class DutiesController : MvcControllerBase
+    public class DeptDutiesController : MvcControllerBase
     {
         private DepartmentCache departmentCache = new DepartmentCache();
         private DutiesBLL dutiesbll = new DutiesBLL();
@@ -35,91 +35,47 @@ namespace LeaRun.EmergencyDuty.Controllers
         [HttpGet]
         public ActionResult MonthDuty()
         {
-            var model = new DutiesViewModel()
-            {
-                DutyClass = DutyClassEnum.Month
-            };
-            return View("Index", model);
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public ActionResult NoonDuty()
-        {
-            var model = new DutiesViewModel()
-            {
-                DutyClass = DutyClassEnum.Noon
-            };
-            return View("Index", model);
+            return View("Index", IniDutyDetailsViewModel(DutyClassEnum.Month));
         }
 
         [HttpGet]
         public ActionResult HolidayDuty()
         {
-            var model = new DutiesViewModel()
-            {
-                DutyClass = DutyClassEnum.Flexible
-            };
-            return View("Index", model);
+            return View("Index", IniDutyDetailsViewModel(DutyClassEnum.Flexible));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        public ActionResult DriverDuty()
+        public ActionResult TodayDuty()
         {
-            var model = new DutiesViewModel()
-            {
-                DutyClass = DutyClassEnum.Driver
-            };
-            return View("Index", model);
+            return View("Index", IniDutyDetailsViewModel(DutyClassEnum.Noon));
         }
 
-        [HttpGet]
-        public ActionResult HolidayLeaderDuty()
+        private DutyDetailsViewModel IniDutyDetailsViewModel(DutyClassEnum dutyClass)
         {
-            var model = new DutiesViewModel()
+            return new DutyDetailsViewModel()
             {
-                DutyClass = DutyClassEnum.HolidayLeader
+                DutyMonth = DateTime.Parse(DateTime.Today.ToChineseDateMonthString()),
+                DutyClass = dutyClass,
+                Readonly = true,
+                Details = new List<DutyDetailsEntity>()
             };
-            return View("Index", model);
         }
 
         [HttpGet]
-        public ActionResult DutyDetailWriteView(int dutyClass, string keyValue, string month)
+        public ActionResult DutyDetailView(int dutyClass, string deptId, string month)
         {
             var model = new DutyDetailsViewModel()
             {
-                DutyId = keyValue,
-                DutyMonth = month.ToDate(),
-                DutyClass = dutyClass.ToNullableEnum<DutyClassEnum>(),
-                Readonly = false
-            };
-            return DutyDetailView(model);
-        }
-
-        [HttpGet]
-        public ActionResult DutyDetailReadView(int dutyClass, string keyValue, string month)
-        {
-            var model = new DutyDetailsViewModel()
-            {
-                DutyId = keyValue,
                 DutyMonth = month.ToDate(),
                 DutyClass = dutyClass.ToNullableEnum<DutyClassEnum>(),
                 Readonly = true
             };
-            return DutyDetailView(model);
-        }
-
-        private ActionResult DutyDetailView(DutyDetailsViewModel model)
-        {
-            var dutyId = model.DutyId;
             //
-            DutiesEntity duty = null;
-            if (dutyId.IsNotEmpty())
-            {
-                duty = dutiesbll.GetEntity(dutyId);
-            }
+            DutiesEntity duty = dutiesbll.GetDeptDuty(dutyClass, deptId, month);
 
             if (duty == null)
             {
@@ -127,7 +83,7 @@ namespace LeaRun.EmergencyDuty.Controllers
             }
             else
             {
-                model.Details = dutiesbll.GetDutyDetails(dutyId).AsList();
+                model.Details = dutiesbll.GetDutyDetails(duty.Id).AsList();
             }
             model.Duty = duty;
 

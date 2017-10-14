@@ -30,6 +30,12 @@
                 btnlogin.click();
             }
         }
+        //
+        var __IsTopper = true;
+        if (window.top != window.self) {
+            top.window.location.href = "/Login/Index2";
+            __IsTopper = false;
+        }
         $(function () {
             initialPage();
             $(window).resize(function (e) {
@@ -69,7 +75,9 @@
                     default:
                         break;
                 }
-                top.$.cookie('learun_login_error', '', { path: "/", expires: -1 });
+                if (__IsTopper) {
+                    top.$.cookie('learun_login_error', '', { path: "/", expires: -1 });
+                }
             }
             //是否自动登录
             if (top.$.cookie('learn_autologin') == 1) {

@@ -35,5 +35,15 @@ namespace LeaRun.WebBase
         /// 可写数据权限
         /// </summary>
         public string WriteAutorizeUserId { get; set; }
+
+        /// <summary>
+        /// 可读部门ID
+        /// </summary>
+        public List<string> ReadAutorizeDeptIds { get; set; }
+
+        /// <summary>
+        /// 可写部门数据权限
+        /// </summary>
+        public List<string> WriteAutorizeDeptIds { get; set; }
     }
 }

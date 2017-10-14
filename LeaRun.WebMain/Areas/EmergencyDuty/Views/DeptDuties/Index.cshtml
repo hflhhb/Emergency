@@ -1,0 +1,124 @@
+﻿@using LeaRun.Util.Extension
+@model LeaRun.EmergencyDuty.Model.DutyDetailsViewModel
+
+@{
+    ViewBag.Title = "单位月值班表";
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+    var iniMonth = Model.DutyMonth.ToChineseDateMonthString();
+}
+@section Styles{
+    <link href="~/Content/styles/emergeny-duty.css" rel="stylesheet" />
+}
+<script>
+    $(function () {
+        InitialPage();
+        GetTree();
+        InitialControl();
+    });
+    //初始化页面
+    function InitialPage() {
+        //layout布局
+        $('#layout').layout({
+            applyDemoStyles: true,
+            onresize: function () {
+                $(window).resize()
+            }
+        });
+        //resize重设(表格、树形)宽高
+        $(window).resize(function (e) {
+            window.setTimeout(function () {
+                $('#gridTable').setGridWidth(($('.gridPanel').width()));
+                $("#gridTable").setGridHeight($(window).height() - 141.5);
+                $("#itemTree").setTreeHeight($(window).height() - 52);
+            }, 200);
+            e.stopPropagation();
+        });
+    }
+    //加载树
+    var _deptId = "";
+    function GetTree() {
+        var item = {
+            height: $(window).height() - 52,
+            url: "../../UserManage/Department/GetOrganizeTreeJson",
+            onnodeclick: function (item) {
+                _deptId = item.id;
+                $('#btn_Search').trigger("click");
+            }
+        };
+        //初始化
+        $("#itemTree").treeview(item);
+    }
+
+    function InitialControl() {
+        //查询事件
+        $("#btn_Search").click(function () {
+            loadDutyDetailView($("#StartedOn").val());
+        });
+
+        //查询回车
+        $('#txt_Keyword').bind('keypress', function (event) {
+            if (event.keyCode == "13") {
+                $('#btn_Search').trigger("click");
+            }
+        });
+    }
+
+    function onMonthChange(dp) {
+        var month = dp.cal.getNewDateStr();
+        if (dp.cal.oldValue == month) return;
+        loadDutyDetailView(month)
+    }
+
+    function loadDutyDetailView(month) {
+        $.ajax({
+            url: "/EmergencyDuty/DeptDuties/DutyDetailView",
+            data: { dutyclass: "@((int)Model.DutyClass)", month: month, deptId: _deptId },
+            type: "get",
+            dataType: "html",
+            success: function (data) {
+                $("#dutyDetailsContainer").html(data);
+            },
+        });
+    }
+   
+</script>
+<div class="ui-layout  ui-duty" id="layout" style="height: 100%; width: 100%;">
+    <div class="ui-layout-west">
+        <div class="west-Panel">
+            <div class="panel-Title">部门目录</div>
+            <div id="itemTree"></div>
+        </div>
+    </div>
+    <div class="ui-layout-center">
+        <div class="center-Panel">
+            <div class="panel-Title">值班用户</div>
+            <div class="titlePanel">
+                <div class="title-search">
+                    <table>
+                        <tr>
+                            <td>
+                                <input id="StartedOn" readonly type="text" value="@iniMonth" class="form-control input-wdatepicker"
+                                       onclick="WdatePicker({onpicked:function(dp){onMonthChange(dp);}, isShowClear:false, dateFmt:'@Definition.MONTH_FORMAT_CN'})">
+                            </td>
+
+                            <td style="padding-left: 5px;">
+                                <a id="btn_Search" class="btn btn-primary"><i class="fa fa-search"></i>&nbsp;查询</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="toolbar">
+                    <div class="btn-group">
+                        <a id="lr-replace" class="btn btn-default" onclick="reload();"><i class="fa fa-refresh"></i>&nbsp;刷新</a>
+                    </div>
+                    @*<script>$('.toolbar').authorizeButton()</script>*@
+                </div>
+            </div>
+            <div class="gridPanel">
+                <div class="printArea" id="dutyDetailsContainer">
+                    @Html.Partial("_Detail", Model)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

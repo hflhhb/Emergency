@@ -1,4 +1,33 @@
-﻿
+﻿.ui-duty{
+
+}
+    .ui-duty .titlePanel {
+        padding: 0;
+        margin: 0 0px 5px 0;
+        border: 1px solid #cfcfcf;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    .ui-duty .gridPanel {
+        background: #fff;
+        padding: 15px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        border: 1px solid #cfcfcf;
+    }
+
+    .ui-duty .grid-title {
+        font-size: 22px;
+        text-align: center;
+        width: 100%;
+        color: #444;
+    }
+
+    .ui-duty .grid-subtitle {
+        width: 100%;
+        text-align: left;
+        padding: 5px 0;
+    }
+
 .duty-box{width:860px;margin-left:auto;margin-right:auto;border: 1px solid #ddd;box-shadow: rgb(189, 189, 189) 0px 0px 10px;background: #fff;padding: 50px;padding-top:20px;margin-top: 25px;padding-bottom:0px;}
 .duty-title {
     font-size: 28px;

@@ -1,0 +1,20 @@
+﻿@model LeaRun.EmergencyDuty.Entity.DutiesEntity
+@{;
+
+    var iniMonth = Model.StartedOn.Value;
+}
+
+@section Styles{
+    <link href="~/Content/styles/emergeny-duty.css" rel="stylesheet" />
+}
+
+<div class="ui-report">
+    <div class="gridPanel" id="gridPanel">
+        <div class="printArea" id="dutyDetailsContainer">
+            @Html.Action("DutyDetailView", new { dutyClass = Model.DutyClass, deptId = Model.Id, month = iniMonth })
+            <div>
+                <div>@Model.Remarks</div>
+            </div>
+        </div>
+    </div>
+</div>

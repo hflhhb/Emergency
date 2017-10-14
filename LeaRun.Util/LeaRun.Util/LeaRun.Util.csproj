@@ -75,6 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LeaRun.Util.Extension\03_WhereIfExpression.cs" />
     <Compile Include="LeaRun.Util.Log\Log.cs" />
     <Compile Include="LeaRun.Util.Log\LogFactory.cs" />
     <Compile Include="LeaRun.Util.Log\LogFormat.cs" />

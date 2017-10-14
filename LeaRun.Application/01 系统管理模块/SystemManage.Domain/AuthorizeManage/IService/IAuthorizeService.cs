@@ -59,5 +59,16 @@ namespace LeaRun.AuthorizeManage.IService
         /// <param name="isWrite">可写入</param>
         /// <returns></returns>
         string GetDataAuthor(Operator operators, bool isWrite = false);
+
+        #region Emergency
+
+        /// <summary>
+        /// 获得权限范围部门ID
+        /// </summary>
+        /// <param name="operators">当前登陆用户信息</param>
+        /// <param name="isWrite">可写入</param>
+        /// <returns></returns>
+        List<string> GetDataAuthorDeptIds(Operator operators, bool isWrite = false);
+        #endregion
     }
 }

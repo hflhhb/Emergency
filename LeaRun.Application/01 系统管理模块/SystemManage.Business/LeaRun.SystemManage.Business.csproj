@@ -67,6 +67,7 @@
     <Compile Include="AuthorizeManage\Busines\ModuleFormInstanceBLL.cs" />
     <Compile Include="AuthorizeManage\Busines\PermissionBLL.cs" />
     <Compile Include="AuthorizeManage\Service\AuthorizeService.cs" />
+    <Compile Include="AuthorizeManage\Service\DeptAuthorizeService.T.cs" />
     <Compile Include="AuthorizeManage\Service\AuthorizeService.T.cs" />
     <Compile Include="AuthorizeManage\Service\FilterIPService.cs" />
     <Compile Include="AuthorizeManage\Service\FilterTimeService.cs" />

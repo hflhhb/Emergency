@@ -34,7 +34,16 @@ namespace LeaRun.EmergencyDuty.IService
         /// <param name="keyValue">主键值</param>
         /// <returns></returns>
         DutiesEntity GetEntity(string keyValue);
-        
+
+        /// <summary>
+        /// 所选部门的最新值班安排
+        /// </summary>
+        /// <param name="dutyClass"></param>
+        /// <param name="deptId"></param>
+        /// <param name="month"></param>
+        /// <returns></returns>
+        DutiesEntity GetDeptDuty(int dutyClass, string deptId, string month);
+
         #endregion
 
         #region 提交数据

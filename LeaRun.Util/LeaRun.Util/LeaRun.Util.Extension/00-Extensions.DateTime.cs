@@ -141,7 +141,7 @@ namespace LeaRun.Util.Extension
 
 
         /// <summary>
-        /// 获取格式化字符串，不带时分秒，格式："yyyy年MM月dd日"
+        /// 获取格式化字符串，不带时分秒，格式："yyyy年MM月"
         /// </summary>
         /// <param name="dateTime">日期</param>
         public static string ToChineseDateMonthString(this DateTime? dateTime)
@@ -152,7 +152,7 @@ namespace LeaRun.Util.Extension
         }
 
         /// <summary>
-        /// 获取格式化字符串，不带时分秒，格式："yyyy年MM月dd日"
+        /// 获取格式化字符串，不带时分秒，格式："yyyy年MM月"
         /// </summary>
         /// <param name="dateTime">日期</param>
         public static string ToChineseDateMonthString(this DateTime dateTime)

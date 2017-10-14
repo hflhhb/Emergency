@@ -156,6 +156,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Appraise\AppraiseAreaRegistration.cs" />
     <Compile Include="Areas\BasicData\BasicDataAreaRegistration.cs" />
+    <Compile Include="Areas\EmergencyDuty\Controllers\DeptDutiesController.cs" />
     <Compile Include="Areas\EmergencyDuty\Controllers\DutiesController.cs" />
     <Compile Include="Areas\EmergencyDuty\EmergencyDutyAreaRegistration.cs" />
     <Compile Include="Areas\GIS\Controllers\MapBoundariesController.cs" />
@@ -1487,6 +1488,9 @@
     <Content Include="Areas\EmergencyDuty\Views\Duties\Index.cshtml" />
     <Content Include="Areas\EmergencyDuty\Views\Duties\_Detail.cshtml" />
     <Content Include="Areas\EmergencyDuty\Views\Duties\Detail.cshtml" />
+    <Content Include="Areas\EmergencyDuty\Views\DeptDuties\Index.cshtml" />
+    <Content Include="Areas\EmergencyDuty\Views\DeptDuties\Detail.cshtml" />
+    <Content Include="Areas\EmergencyDuty\Views\DeptDuties\_Detail.cshtml" />
     <None Include="Configs\Data\Database.xsd">
       <SubType>Designer</SubType>
     </None>

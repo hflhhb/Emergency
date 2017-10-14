@@ -21,14 +21,14 @@ namespace LeaRun.EmergencyDuty.Service
     /// </summary>
     public class DutiesService : Dao<DutiesEntity>, IDutiesService
     {
-        private IAuthorizeService<DutiesEntity> iauthorizeservice = null;
+        private IAuthorizeService<DutiesEntity> _authorizeSvc = null;
         /// <summary>
         /// 带连接字符串参数的构造函数
         /// </summary>
         /// <param name="dbcontext"></param>
         public DutiesService(DbContextBase dbcontext) : base(dbcontext)
         {
-            iauthorizeservice = new AuthorizeService<DutiesEntity>(dbcontext);
+            _authorizeSvc = new DeptAuthorizeService<DutiesEntity>(dbcontext);
         }
 
         #region 获取数据
@@ -38,8 +38,37 @@ namespace LeaRun.EmergencyDuty.Service
         /// <param name="queryJson">查询参数</param>
         /// <returns>返回列表</returns>
         public IEnumerable<DutiesEntity> GetList(string queryJson)
-        {           
-            return base.Queryable().ToList();
+        {
+            var expression = LinqExtensions.True<DutiesEntity>();
+            var queryParam = queryJson.ToJObject();
+
+            if (!queryParam["DutyClass"].IsEmpty())
+            {
+                var dutyClass = queryParam["DutyClass"].ToIntOrNull();
+                expression = expression.And(t => t.DutyClass == dutyClass);
+            }
+
+            if (!queryParam["Contracts"].IsEmpty())
+            {
+                var contracts = queryParam["Contracts"].ToString();
+                expression = expression.And(t => t.Contacts.Contains(contracts));
+            }
+
+            if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
+            {
+                var startMonth = queryParam["StartTime"].ToString().ToDateOrNull();
+                var endMonth = queryParam["EndTime"].ToString().ToDateOrNull();
+                if (startMonth.HasValue)
+                {
+                    expression = expression.And(t => t.StartedOn >= startMonth);
+                }
+                if (endMonth.HasValue)
+                {
+                    expression = expression.And(t => t.StartedOn < endMonth);
+                }
+            }
+
+            return _authorizeSvc.Queryable(expression).ToList();
         }
 
         /// <summary>
@@ -79,7 +108,7 @@ namespace LeaRun.EmergencyDuty.Service
                 }
             }
 
-            return base.FindList(expression, pagination);
+            return _authorizeSvc.FindList(expression, pagination);
         }
 
         /// <summary>
@@ -90,6 +119,17 @@ namespace LeaRun.EmergencyDuty.Service
         public DutiesEntity GetEntity(string keyValue)
         {
             return base.FindEntity(keyValue);
+        }
+
+        public DutiesEntity GetDeptDuty(int dutyClass, string deptId, string month)
+        {
+            //所选部门的最新的值班安排
+            var startedOn = month.ToDateOrNull();
+            return _authorizeSvc.Queryable()
+                .Where(o => o.DutyClass == dutyClass && o.CreateDeptId == deptId)
+                .WhereIf(o => o.StartedOn == startedOn, startedOn.HasValue)
+                .OrderByDescending(o => o.CreatedAt)
+                .FirstOrDefault();
         }
 
         #endregion
