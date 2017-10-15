@@ -24,16 +24,17 @@
                 $(window).resize()
             }
         });
+        //$("#dutyDetailsContainer").height($(window).height() - 148);
+        $("#dutygrid").height($(window).height() - 148);
         //resize重设(表格、树形)宽高
         $(window).resize(function (e) {
             window.setTimeout(function () {
-                $('#gridTable').setGridWidth(($('.gridPanel').width()));
-                $("#gridTable").setGridHeight($(window).height() - 141.5);
+                $("#dutygrid").height($(window).height() - 148);
                 $("#itemTree").setTreeHeight($(window).height() - 52);
             }, 200);
             e.stopPropagation();
         });
-    }
+    } 
     //加载树
     var _deptId = "";
     function GetTree() {
@@ -114,7 +115,7 @@
                     @*<script>$('.toolbar').authorizeButton()</script>*@
                 </div>
             </div>
-            <div class="gridPanel">
+            <div class="gridPanel" id="dutygrid">
                 <div class="printArea" id="dutyDetailsContainer">
                     @Html.Partial("_Detail", Model)
                 </div>
