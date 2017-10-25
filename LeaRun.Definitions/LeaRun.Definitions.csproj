@@ -47,6 +47,7 @@
     <Compile Include="EnumHelper.cs" />
     <Compile Include="Enums\DutyTypeEnum.cs" />
     <Compile Include="Enums\DutyClassEnum.cs" />
+    <Compile Include="Enums\EventTypeEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
