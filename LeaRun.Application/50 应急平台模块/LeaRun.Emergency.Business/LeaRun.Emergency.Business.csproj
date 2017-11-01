@@ -51,9 +51,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmergencyDuty\Business\DutiesBLL.cs" />
+    <Compile Include="EmergencyDuty\Business\DutyNotesBLL.cs" />
+    <Compile Include="EmergencyDuty\Business\DutyUsersBLL.cs" />
+    <Compile Include="EmergencyDuty\Business\EmergencyReportsBLL.cs" />
     <Compile Include="EmergencyDuty\Helper\Helper.cs" />
     <Compile Include="EmergencyDuty\Service\DutyDetailsService.cs" />
     <Compile Include="EmergencyDuty\Service\DutiesService.cs" />
+    <Compile Include="EmergencyDuty\Service\DutyNotesService.cs" />
+    <Compile Include="EmergencyDuty\Service\DutyUsersService.cs" />
+    <Compile Include="EmergencyDuty\Service\EmergencyReportsService.cs" />
     <Compile Include="GIS\Business\MapBoundaryBLL.cs" />
     <Compile Include="GIS\Business\ResourceMapBLL.cs" />
     <Compile Include="GIS\Service\MapBoundaryService.cs" />

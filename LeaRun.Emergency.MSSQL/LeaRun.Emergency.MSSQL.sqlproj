@@ -70,6 +70,12 @@
     <Build Include="dbo\Tables\DutyUsers.sql" />
     <Build Include="dbo\Tables\DutyDetails.sql" />
     <Build Include="dbo\Tables\Duties.sql" />
+    <Build Include="dbo\Tables\EmergencyReports.sql" />
+    <Build Include="dbo\Tables\DutyNotes.sql" />
+    <Build Include="dbo\Tables\DutyNoteReports.sql" />
+    <Build Include="dbo\Tables\DutyNoteOrders.sql" />
+    <Build Include="dbo\Tables\DutyNoteDeals.sql" />
+    <Build Include="dbo\Tables\DutyNoteDays.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Emergency2Local.scmp" />

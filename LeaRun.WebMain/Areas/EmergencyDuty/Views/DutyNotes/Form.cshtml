@@ -1,0 +1,151 @@
+﻿@{;
+    ViewBag.Title = "表单页面";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<script>
+    var keyValue = request('keyValue');
+    $(function () {
+        initControl();
+    });
+    //初始化控件
+    function initControl() {
+        //获取表单
+        if (!!keyValue) {
+            $.SetForm({
+                url: "../../EmergencyDuty/DutyNotes/GetFormJson",
+                param: { keyValue: keyValue },
+                success: function (data) {
+                    $("#form1").SetWebControls(data);
+                }
+            })
+        }
+    }
+    //保存表单;
+    function AcceptClick() {
+        if (!$('#form1').Validform()) {
+            return false;
+        }
+        var postData = $("#form1").GetWebControls(keyValue);
+        $.SaveForm({
+            url: "../../EmergencyDuty/DutyNotes/SaveForm?keyValue=" + keyValue,
+            param: postData,
+            loading: "正在保存数据...",
+            success: function () {
+                $.currentIframe().$("#gridTable").trigger("reloadGrid");
+            }
+        })
+    }
+</script>
+<div style="margin-top: 20px; margin-right: 30px;">
+    <table class="form">
+        <tr>
+            <td class="formTitle">值班日Id</td>
+            <td class="formValue">
+                <input id="DayId" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">标题</td>
+            <td class="formValue">
+                <input id="Title" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">事发时间</td>
+            <td class="formValue">
+                <input id="LogedAt" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">报送单位</td>
+            <td class="formValue">
+                <input id="SendDept" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">接报人</td>
+            <td class="formValue">
+                <input id="ReportUser" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">接报形式</td>
+            <td class="formValue">
+                <input id="ReportWay" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">事件大类别</td>
+            <td class="formValue">
+                <input id="EvtClass" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">事件小类别</td>
+            <td class="formValue">
+                <input id="EvtSubClass" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">内容</td>
+            <td class="formValue">
+                <input id="Content" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">处理结果</td>
+            <td class="formValue">
+                <input id="Result" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">备注</td>
+            <td class="formValue">
+                <input id="Remarks" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">是否上报</td>
+            <td class="formValue">
+                <input id="IsSend" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">上报时间</td>
+            <td class="formValue">
+                <input id="SentAt" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">日志类型 0:其他 1:事件</td>
+            <td class="formValue">
+                <input id="NoteType" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">事件程度</td>
+            <td class="formValue">
+                <input id="EvtDegree" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">报送类型</td>
+            <td class="formValue">
+                <input id="RptType" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">初报时间</td>
+            <td class="formValue">
+                <input id="FirstReportedAt" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">事发区域</td>
+            <td class="formValue">
+                <input id="EvtArea" type="text" class="form-control"  />
+            </td>
+        </tr>
+       
+    </table>
+</div>

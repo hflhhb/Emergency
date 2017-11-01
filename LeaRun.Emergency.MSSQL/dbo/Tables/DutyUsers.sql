@@ -3,6 +3,7 @@
     [UserName]       NVARCHAR (50)  NULL,
     [DeptId]         NVARCHAR (50)  NULL,
     [DeptName]       NVARCHAR (50)  NULL,
+    [DutyProp]       NVARCHAR (100) NULL,
     [DutyName]       NVARCHAR (100) NULL,
     [JobName]        NVARCHAR (100) NULL,
     [TelNo]          NVARCHAR (50)  NULL,
@@ -15,6 +16,8 @@
     [CreateDeptId]   NVARCHAR (50)  NULL,
     CONSTRAINT [PK_DutyUsers] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
+
+
 
 
 GO
@@ -75,4 +78,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'ID', @level
 
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'值班人员表', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'DutyUsers';
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_Description', @value = N'值班属性', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE', @level1name = N'DutyUsers', @level2type = N'COLUMN', @level2name = N'DutyProp';
 

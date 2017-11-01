@@ -4,52 +4,64 @@ using System;
 
 namespace LeaRun.EmergencyDuty.Entity
 {
-    public partial class DutyUsersEntity : BaseEntity
+    public partial class DutyNoteReportsEntity : BaseEntity
     {
         /// <summary>
         ///ID
         /// </summary>
         public string Id { get; set; }
         /// <summary>
-        ///值班人员名称
+        ///日志ID
         /// </summary>
-        public string UserName { get; set; }
+        public string NoteId { get; set; }
         /// <summary>
-        ///所在部门
+        ///接报时间
         /// </summary>
-        public string DeptId { get; set; }
+        public DateTime? LogedAt { get; set; }
         /// <summary>
-        ///部门名称
+        ///报送单位
         /// </summary>
-        public string DeptName { get; set; }
+        public string SendDept { get; set; }
         /// <summary>
-        ///值班属性
+        ///接报人
         /// </summary>
-        public string DutyProp { get; set; }
+        public string ReportUser { get; set; }
         /// <summary>
-        ///职务名称
+        ///接报形式
         /// </summary>
-        public string DutyName { get; set; }
+        public string ReportWay { get; set; }
         /// <summary>
-        ///职责名称
+        ///内容
         /// </summary>
-        public string JobName { get; set; }
+        public string Content { get; set; }
         /// <summary>
-        ///电话
+        ///事件大类别
         /// </summary>
-        public string TelNo { get; set; }
+        public int? EvtClass { get; set; }
         /// <summary>
-        ///手机
+        ///事件小类别
         /// </summary>
-        public string Mobile { get; set; }
+        public int? EvtSubClass { get; set; }
         /// <summary>
-        ///是否领导
+        ///事发区域
         /// </summary>
-        public bool? IsLeader { get; set; }
+        public string EvtArea { get; set; }
         /// <summary>
-        ///排序
+        ///(事件上报）事件Id
         /// </summary>
-        public int? Sort { get; set; }
+        public string EvtId { get; set; }
+        /// <summary>
+        ///
+        /// </summary>
+        public string RptType { get; set; }
+        /// <summary>
+        ///续报
+        /// </summary>
+        public string NextReport { get; set; }
+        /// <summary>
+        ///
+        /// </summary>
+        public string ReportId { get; set; }
         /// <summary>
         ///创建人标识
         /// </summary>

@@ -158,6 +158,9 @@
     <Compile Include="Areas\BasicData\BasicDataAreaRegistration.cs" />
     <Compile Include="Areas\EmergencyDuty\Controllers\DeptDutiesController.cs" />
     <Compile Include="Areas\EmergencyDuty\Controllers\DutiesController.cs" />
+    <Compile Include="Areas\EmergencyDuty\Controllers\DutyNotesController.cs" />
+    <Compile Include="Areas\EmergencyDuty\Controllers\DutyUsersController.cs" />
+    <Compile Include="Areas\EmergencyDuty\Controllers\EmergencyReportsController.cs" />
     <Compile Include="Areas\EmergencyDuty\EmergencyDutyAreaRegistration.cs" />
     <Compile Include="Areas\GIS\Controllers\MapBoundariesController.cs" />
     <Compile Include="Areas\GIS\Controllers\GeoLocationsController.cs" />
@@ -1491,6 +1494,12 @@
     <Content Include="Areas\EmergencyDuty\Views\DeptDuties\Index.cshtml" />
     <Content Include="Areas\EmergencyDuty\Views\DeptDuties\Detail.cshtml" />
     <Content Include="Areas\EmergencyDuty\Views\DeptDuties\_Detail.cshtml" />
+    <Content Include="Areas\EmergencyDuty\Views\DutyUsers\Form.cshtml" />
+    <Content Include="Areas\EmergencyDuty\Views\DutyUsers\Index.cshtml" />
+    <Content Include="Areas\EmergencyDuty\Views\DutyNotes\Form.cshtml" />
+    <Content Include="Areas\EmergencyDuty\Views\DutyNotes\Index.cshtml" />
+    <Content Include="Areas\EmergencyDuty\Views\EmergencyReports\Form.cshtml" />
+    <Content Include="Areas\EmergencyDuty\Views\EmergencyReports\Index.cshtml" />
     <None Include="Configs\Data\Database.xsd">
       <SubType>Designer</SubType>
     </None>
