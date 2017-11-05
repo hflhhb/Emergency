@@ -45,6 +45,7 @@
     <Compile Include="EnumExtensions.cs" />
     <Compile Include="Definition.cs" />
     <Compile Include="EnumHelper.cs" />
+    <Compile Include="Enums\DataItemCodeEnum.cs" />
     <Compile Include="Enums\DutyNoteTypeEnum.cs" />
     <Compile Include="Enums\DutyTypeEnum.cs" />
     <Compile Include="Enums\DutyClassEnum.cs" />

@@ -46,19 +46,19 @@ namespace LeaRun.WorkflowEngine.Service
             {
                 var strSql = new StringBuilder();
                 strSql.Append(@"SELECT
-	                                w1.Id,
-	                                w1.ToUserId,
-	                                w1.ToUserName,
-	                                w1.BeginDate,
-	                                w1.EndDate,
-	                                w1.CreateUserId,
-	                                w1.CreateUserName,
-	                                w1.CreateDate,
-	                                w1.Description,
+                                    w1.Id,
+                                    w1.ToUserId,
+                                    w1.ToUserName,
+                                    w1.BeginDate,
+                                    w1.EndDate,
+                                    w1.CreateUserId,
+                                    w1.CreateUserName,
+                                    w1.CreateDate,
+                                    w1.Description,
                                     w1.EnabledMark,
-	                                COUNT(w2.Id) as shcemeNum
+                                    COUNT(w2.Id) as shcemeNum
                                 FROM
-	                                WF_DelegateRule w1
+                                    WF_DelegateRule w1
                                 LEFT JOIN WF_DelegateRuleSchemeInfo w2 ON w2.DelegateRuleId = w1.Id
                                 Where 1=1 
                                ");
@@ -77,16 +77,16 @@ namespace LeaRun.WorkflowEngine.Service
                     parameter.Add(DbParameters.CreateDbParameter("@keyword", '%' + keyord + '%'));
                 }
                 strSql.Append(@" GROUP BY
-	                                w1.Id,
-	                                w1.ToUserId,
-	                                w1.ToUserName,
-	                                w1.BeginDate,
-	                                w1.EndDate,
-	                                w1.CreateUserId,
-	                                w1.CreateUserName,
-	                                w1.CreateDate,
+                                    w1.Id,
+                                    w1.ToUserId,
+                                    w1.ToUserName,
+                                    w1.BeginDate,
+                                    w1.EndDate,
+                                    w1.CreateUserId,
+                                    w1.CreateUserName,
+                                    w1.CreateDate,
                                     w1.EnabledMark,
-	                                w1.Description ");
+                                    w1.Description ");
 
                 return base.db.FindTable(strSql.ToString(), parameter.ToArray(), pagination);
             }
@@ -106,39 +106,39 @@ namespace LeaRun.WorkflowEngine.Service
             {
                 var strSql = new StringBuilder();
                 strSql.Append(@"SELECT
-	                                w.Id,
-	                                w.SchemeCode,
-	                                w.SchemeName,
-	                                w.SchemeType,
-	                                w.SchemeVersion,
-	                                w.FrmType,
-	                                t2.ItemName AS SchemeTypeName,
-	                                w.SortCode,
-	                                w.DeleteMark,
-	                                w.EnabledMark,
-	                                w.Description,
-	                                w.CreateDate,
-	                                w.CreateUserId,
-	                                w.CreateUserName,
-	                                w.ModifyDate,
-	                                w.ModifyUserId,
-	                                w.ModifyUserName,
-	                                CASE
+                                    w.Id,
+                                    w.SchemeCode,
+                                    w.SchemeName,
+                                    w.SchemeType,
+                                    w.SchemeVersion,
+                                    w.FrmType,
+                                    t2.ItemName AS SchemeTypeName,
+                                    w.SortCode,
+                                    w.DeleteMark,
+                                    w.EnabledMark,
+                                    w.Description,
+                                    w.CreateDate,
+                                    w.CreateUserId,
+                                    w.CreateUserName,
+                                    w.ModifyDate,
+                                    w.ModifyUserId,
+                                    w.ModifyUserName,
+                                    CASE
                                 WHEN t3.Id IS NOT NULL THEN
-	                                '1'
+                                    '1'
                                 ELSE
-	                                '0'
+                                    '0'
                                 END AS ischecked
                                 FROM
-	                                WF_SchemeInfo w
+                                    WF_SchemeInfo w
                                 LEFT JOIN Base_DataItemDetail t2 ON t2.ItemDetailId = w.SchemeType
                                 LEFT JOIN WF_DelegateRuleSchemeInfo t3 ON t3.SchemeInfoId = w.Id and t3.DelegateRuleId = @ruleId
                                 WHERE
-	                                w.DeleteMark = 0
+                                    w.DeleteMark = 0
                                 AND w.EnabledMark = 1
                                 ORDER BY
-	                                w.SchemeType,
-	                                w.SchemeCode");
+                                    w.SchemeType,
+                                    w.SchemeCode");
                 var parameter = new List<DbParameter>();
                 parameter.Add(DbParameters.CreateDbParameter("@ruleId", string.IsNullOrEmpty(ruleId) ? " " : ruleId));
                 return base.db.FindTable(strSql.ToString(), parameter.ToArray());
@@ -178,21 +178,21 @@ namespace LeaRun.WorkflowEngine.Service
                 }
                 var strSql = new StringBuilder();
                 strSql.Append(string.Format(@"SELECT
-	                               	    w1.Id,
-	                                    w1.ToUserId,
-	                                    w1.ToUserName,
-	                                    w1.BeginDate,
-	                                    w1.EndDate,
-	                                    w1.CreateDate,
-	                                    w1.CreateUserId,
-	                                    w1.CreateUserName,
-	                                    w1.EnabledMark,
-	                                    w1.Description
+                                        w1.Id,
+                                        w1.ToUserId,
+                                        w1.ToUserName,
+                                        w1.BeginDate,
+                                        w1.EndDate,
+                                        w1.CreateDate,
+                                        w1.CreateUserId,
+                                        w1.CreateUserName,
+                                        w1.EnabledMark,
+                                        w1.Description
                                     FROM
-	                                    WF_DelegateRule w1
+                                        WF_DelegateRule w1
                                     LEFT JOIN WF_DelegateRuleSchemeInfo w2 ON w2.DelegateRuleId = w1.Id
                                     WHERE
-	                                    w1.EnabledMark = 1 AND w1.BeginDate <='{0}' AND w1.EndDate >='{0}' AND w1.CreateUserId in ('{1}')
+                                        w1.EnabledMark = 1 AND w1.BeginDate <='{0}' AND w1.EndDate >='{0}' AND w1.CreateUserId in ('{1}')
                                    AND w2.SchemeInfoId = @SchemeInfoId
                                 ", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), userIdlist));
                 var parameter = new List<DbParameter>();

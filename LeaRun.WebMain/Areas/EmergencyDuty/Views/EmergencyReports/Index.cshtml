@@ -13,7 +13,7 @@
         $(window).resize(function (e) {
             window.setTimeout(function () {
                 $('#gridTable').setGridWidth(($('.gridPanel').width()));
-                $('#gridTable').setGridHeight($(window).height() - 108.5);
+                $('#gridTable').setGridHeight($(window).height() - 136.5);
             }, 200);
             e.stopPropagation();
         });
@@ -24,7 +24,7 @@
         var $gridTable = $('#gridTable');
         $gridTable.jqGrid({
             autowidth: true,
-            height: $(window).height() - 108.5,
+            height: $(window).height() - 136.5,
             url: "../../EmergencyDuty/EmergencyReports/GetPageListJson",
             datatype: "json",
             colModel: [
