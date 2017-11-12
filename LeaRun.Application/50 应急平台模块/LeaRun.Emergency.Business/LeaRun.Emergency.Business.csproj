@@ -117,6 +117,7 @@
     <Folder Include="Appraise\Service\" />
     <Folder Include="BasicData\Business\" />
     <Folder Include="BasicData\Service\" />
+    <Folder Include="Cache\" />
     <Folder Include="SecurityCheck\Business\" />
     <Folder Include="SecurityCheck\Service\" />
   </ItemGroup>

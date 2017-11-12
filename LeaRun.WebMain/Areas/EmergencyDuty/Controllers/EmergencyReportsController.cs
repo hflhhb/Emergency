@@ -4,6 +4,7 @@ using LeaRun.Util;
 using LeaRun.Util.Web;
 using LeaRun.WebBase;
 using System.Web.Mvc;
+using LeaRun.UserManage.Cache;
 
 namespace LeaRun.EmergencyDuty.Controllers
 {
@@ -16,6 +17,8 @@ namespace LeaRun.EmergencyDuty.Controllers
     /// </summary>
     public class EmergencyReportsController : MvcControllerBase
     {
+        private DepartmentCache departmentCache = new DepartmentCache();
+        private DataItemCache dataItemCache = new DataItemCache();
         private EmergencyReportsBLL emergencyreportsbll = new EmergencyReportsBLL();
 
         #region 视图功能
@@ -51,6 +54,12 @@ namespace LeaRun.EmergencyDuty.Controllers
         {
             var watch = CommonHelper.TimerStart();
             var data = emergencyreportsbll.GetPageList(pagination, queryJson);
+
+            foreach (var item in data)
+            {
+
+            }
+
             var jsonData = new
             {
                 rows = data,
