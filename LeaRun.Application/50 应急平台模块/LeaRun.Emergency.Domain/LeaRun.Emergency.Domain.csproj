@@ -72,6 +72,7 @@
     <Compile Include="EmergencyDuty\Mapping\EmergencyReportsMap.cs" />
     <Compile Include="EmergencyDuty\Model\DutyDetailsViewModel.cs" />
     <Compile Include="EmergencyDuty\Model\DutiesViewModel.cs" />
+    <Compile Include="EmergencyDuty\PartialEntity\EmergencyReportsViewModel.cs" />
     <Compile Include="GIS\Entity\MapBoundaryEntity.cs" />
     <Compile Include="GIS\IService\IMapBoundaryService.cs" />
     <Compile Include="GIS\IService\IResourceMapService.cs" />

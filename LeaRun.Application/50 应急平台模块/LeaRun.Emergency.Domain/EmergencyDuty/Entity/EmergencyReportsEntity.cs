@@ -53,11 +53,11 @@ namespace LeaRun.EmergencyDuty.Entity
         /// <summary>
         ///事件大类别
         /// </summary>
-        public int? EvtClass { get; set; }
+        public string EvtClass { get; set; }
         /// <summary>
         ///事件小类别
         /// </summary>
-        public int? EvtSubClass { get; set; }
+        public string EvtSubClass { get; set; }
         /// <summary>
         ///基本过程
         /// </summary>

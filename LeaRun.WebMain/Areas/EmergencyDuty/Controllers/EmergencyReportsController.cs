@@ -5,6 +5,11 @@ using LeaRun.Util.Web;
 using LeaRun.WebBase;
 using System.Web.Mvc;
 using LeaRun.UserManage.Cache;
+using LeaRun.EmergencyDuty.Model;
+using System.Collections.Generic;
+using LeaRun.Util.Extension;
+using LeaRun.Definitions.Enums;
+using LeaRun.Definitions;
 
 namespace LeaRun.EmergencyDuty.Controllers
 {
@@ -54,10 +59,12 @@ namespace LeaRun.EmergencyDuty.Controllers
         {
             var watch = CommonHelper.TimerStart();
             var data = emergencyreportsbll.GetPageList(pagination, queryJson);
-
-            foreach (var item in data)
+            foreach (var vm in data)
             {
-
+                vm.EvtClassDesc = vm.EvtClass.ToEnum<EventClassEnum>().ToDescription();
+                vm.EvtSubClassDesc = dataItemCache.ToItemName("EventClass", vm.EvtSubClass);
+                vm.EvtAreaName = dataItemCache.ToItemName("EventArea", vm.EvtArea);
+                vm.SendDeptName = departmentCache.ToDeptName(vm.SendDept);
             }
 
             var jsonData = new

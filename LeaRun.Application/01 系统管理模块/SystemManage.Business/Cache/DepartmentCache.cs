@@ -70,5 +70,17 @@ namespace LeaRun.UserManage.Cache
             }
             return new DepartmentEntity();
         }
+
+        /// <summary>
+        /// 部门名称
+        /// </summary>
+        /// <param name="departmentId">部门ID</param>
+        /// <returns></returns>
+        public string ToDeptName(string departmentId)
+        {
+            var data = this.GetEntity(departmentId);
+
+            return data?.FullName;
+        }
     }
 }

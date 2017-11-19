@@ -30,10 +30,15 @@
             colModel: [
                 { label: 'ID', name: 'Id', index: 'Id', hidden: true  },
                 { label: '事件标题', name: 'Title', index: 'Title', width: 400, align: 'left',sortable: true  },
-                { label: '报送单位', name: 'SendDept', index: 'SendDept', width: 100, align: 'left',sortable: true  },
-                { label: '事件类别', name: 'EvtClass', index: 'EvtClass', width: 100, align: 'left',sortable: true  },
+                { label: '报送单位', name: 'SendDeptName', index: 'SendDeptName', width: 100, align: 'left',sortable: true  },
+                {
+                    label: '事件类别', name: 'EvtClassName', index: 'EvtClassName', width: 150, align: 'left', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        return rowObject.EvtClassDesc + "-" + rowObject.EvtSubClassDesc;
+                    }
+                },
                 { label: '死亡人数', name: 'DeathNum', index: 'DeathNum', width: 100, align: 'right',sortable: true  },
-                { label: '事发区域', name: 'EvtArea', index: 'EvtArea', width: 300, align: 'left',sortable: true  },
+                { label: '事发区域', name: 'EvtAreaName', index: 'EvtAreaName', width: 300, align: 'left',sortable: true  },
                 { label: '事件程度', name: 'EvtDegree', index: 'EvtDegree', width: 100, align: 'center',sortable: true  },
                 { label: '事发时间', name: 'EvtDate', index: 'EvtDate', width: 150, align: 'center',sortable: true  },
                 { label: '报送人员', name: 'SendMan', index: 'SendMan', width: 100, align: 'left',sortable: true  },

@@ -68,7 +68,7 @@ namespace LeaRun.UserManage.Cache
         public string ToItemName(string EnCode, string ItemValue)
         {
             var data = this.GetDataItemList().Where(t => t.EnCode == EnCode);
-            return data.First(t => t.ItemValue == ItemValue).ItemName;
+            return data.FirstOrDefault(t => t.ItemValue == ItemValue)?.ItemName;
         }
     }
 }
