@@ -37,6 +37,17 @@ namespace LeaRun.ResourceManage.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 仪表盘
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Dashboard()
+        {
+            var data = schoolbll.GetDashboardList();
+            return View(data);
+        }
         #endregion
 
         #region 获取数据

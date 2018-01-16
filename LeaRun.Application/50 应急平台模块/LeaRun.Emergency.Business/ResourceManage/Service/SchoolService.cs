@@ -85,6 +85,11 @@ namespace LeaRun.ResourceManage.Service
         {
             return base.FindEntity(keyValue);
         }
+
+        public IEnumerable<SchoolEntity> GetDashboardList()
+        {
+            return base.FindList("select * from RC_School");
+        }
         #endregion
 
         #region 提交数据

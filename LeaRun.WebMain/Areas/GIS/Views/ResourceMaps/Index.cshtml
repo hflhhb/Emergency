@@ -61,98 +61,102 @@
             .plate-overlay.zufang.visited {
                 background: rgba(133, 174, 235, 0.9);
             }
+        .legend-container{
+            position:fixed;
+            bottom:50px;
+            zoom:9999;
+
+        }
+        .legend-items {
+            border:1px solid red;
+            width:500px;
+        }
     </style>
 }
 
-<div class="ui-layout" id="layout" style="height: 100%; width: 100%;">
-    <div class="ui-layout-west">
-        <div class="west-Panel">
-            <div class="profile-nav">
-                <div class="card-box" data-key="gasStation">
-                    <div class="card-box-img">
-                        <img class="gis-rc-img" src="~/Content/images/gis/a1.gif" />
-                    </div>
-                    <div class="card-box-content"><p class="card-box-title">加油站</p></div>
+<div>
+    <div class="legend-container">
+        @*<div class="card-box" data-key="gasStation">
+            <div class="card-box-img">
+                <img class="gis-rc-img" src="~/Content/images/gis/a1.gif" />
+            </div>
+            <div class="card-box-content"><p class="card-box-title">加油站</p></div>
+        </div>
+        <div class="card-box" data-key="school">
+            <div class="card-box-img">
+                <img class="gis-rc-img" src="~/Content/images/gis/a2.gif" />
+            </div>
+            <div class="card-box-content">
+                <p class="card-box-title">学校</p>
+            </div>
+        </div>
+        <div class="card-box" data-key="camera">
+            <div class="card-box-img">
+                <img class="gis-rc-img" src="~/Content/images/gis/a8.gif" />
+            </div>
+            <div class="card-box-content"><p class="card-box-title">摄像头</p></div>
+        </div>
+        <div class="card-box" data-key="hospital">
+            <div class="card-box-img">
+                <img class="gis-rc-img" src="~/Content/images/gis/a5.gif" />
+            </div>
+            <div class="card-box-content"><p class="card-box-title">医院</p></div>
+        </div>*@
+        <ul style="padding-top: 20px;" class="legend-items">
+                <li class="active" data-value="1">加油站</li>
+                <li data-value="2">学校</li>
+                <li data-value="3">摄像头</li>
+                <li class="divide"></li>
+                <li data-value="4">医院</li>
+            </ul>
+    </div>
+    <div class="center-Panel">
+        <div class="titlePanel">
+            <div class="title-search">
+                <table>
+                    <tr>
+                        <td style="padding-left: 2px;">
+                            <i class="fa fa-map-marker" style="font-size:28px; vertical-align:middle; color:#1d9d74; margin-right:5px;"></i>
+                            <input id="txtSuggest" type="text" class="form-control" placeholder="请输入要查询关键字" style="width: 400px; display:inline-block;" />
+                        </td>
+                        <td style="padding-left: 5px;">
+                            <a id="btn_Search" class="btn btn-primary"><i class="fa fa-search"></i>&nbsp;查询</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="toolbar">
+                <div class="btn-group">
+                    <a id="lr-replace" class="btn btn-default" onclick="reload();"><i class="fa fa-refresh"></i>&nbsp;刷新</a>
                 </div>
-                <div class="card-box" data-key="school">
-                    <div class="card-box-img">
-                        <img class="gis-rc-img" src="~/Content/images/gis/a2.gif" />
-                    </div>
-                    <div class="card-box-content">
-                        <p class="card-box-title">学校</p>
-                    </div>
-                </div>
-                <div class="card-box" data-key="camera">
-                    <div class="card-box-img">
-                        <img class="gis-rc-img" src="~/Content/images/gis/a8.gif" />
-                    </div>
-                    <div class="card-box-content"><p class="card-box-title">摄像头</p></div>
-                </div>
-                <div class="card-box" data-key="hospital">
-                    <div class="card-box-img">
-                        <img class="gis-rc-img" src="~/Content/images/gis/a5.gif" />
-                    </div>
-                    <div class="card-box-content"><p class="card-box-title">医院</p></div>
-                </div>
-                @*<ul style="padding-top: 20px;">
-                    <li class="active" data-value="1">加油站</li>
-                    <li data-value="2">学校</li>
-                    <li data-value="3">摄像头</li>
-                    <li class="divide"></li>
-                    <li data-value="4">医院</li>
-                </ul>*@
             </div>
         </div>
     </div>
-    <div class="ui-layout-center">
-        <div class="center-Panel">
-            <div class="titlePanel">
-                <div class="title-search">
-                    <table>
-                        <tr>
-                            <td style="padding-left: 2px;">
-                                <i class="fa fa-map-marker" style="font-size:28px; vertical-align:middle; color:#1d9d74; margin-right:5px;"></i>
-                                <input id="txtSuggest" type="text" class="form-control" placeholder="请输入要查询关键字" style="width: 400px; display:inline-block;" />
-                            </td>
-                            <td style="padding-left: 5px;">
-                                <a id="btn_Search" class="btn btn-primary"><i class="fa fa-search"></i>&nbsp;查询</a>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="toolbar">
-                    <div class="btn-group">
-                        <a id="lr-replace" class="btn btn-default" onclick="reload();"><i class="fa fa-refresh"></i>&nbsp;刷新</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="map-content">
-            <div id="allmap"></div>
-        </div>
+    <div class="map-content">
+        <div id="allmap"></div>
     </div>
 </div>
 <script type="text/javascript">
     //初始化页面
     function InitialPage() {
         //layout布局
-        $('#layout').layout({
-            applyDefaultStyles: true,
-            west__size: 225,
-            onresize: function () {
-                $(window).resize()
-            }
-        });
-        $('.profile-nav').height($(window).height() - 20);
+        //$('#layout').layout({
+        //    applyDefaultStyles: true,
+        //    west__size: 225,
+        //    onresize: function () {
+        //        $(window).resize()
+        //    }
+        //});
+        //$('.profile-nav').height($(window).height() - 20);
         $('.map-content').height($(window).height() - 80);
         //resize重设(表格、树形)宽高
-        $(window).resize(function (e) {
-            window.setTimeout(function () {
-                $('.profile-nav').height($(window).height() - 20);
-                $('.map-content').height($(window).height() - 80);
-            }, 200);
-            e.stopPropagation();
-        });
+        //$(window).resize(function (e) {
+        //    window.setTimeout(function () {
+        //        $('.profile-nav').height($(window).height() - 20);
+        //        $('.map-content').height($(window).height() - 80);
+        //    }, 200);
+        //    e.stopPropagation();
+        //});
     }
     InitialPage();
     //

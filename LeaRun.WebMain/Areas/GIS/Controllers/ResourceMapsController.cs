@@ -18,6 +18,10 @@ namespace LeaRun.GIS.Controllers
             return View();
         }
 
+        public ActionResult Map()
+        {
+            return View();
+        }
 
         [AjaxOnly]
         public ActionResult GetResources(string queryJson) 

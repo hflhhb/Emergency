@@ -1379,6 +1379,7 @@
     <Content Include="Content\scripts\utils\learun-ui.js" />
     <Content Include="Content\scripts\utils\learun-webApp.js" />
     <Content Include="Content\scripts\utils\learun-webAppData.js" />
+    <Content Include="Content\Site.css" />
     <Content Include="Content\styles\font-awesome.min.css" />
     <Content Include="Content\styles\learun-applayout.css" />
     <Content Include="Content\styles\emergeny-duty.css" />
@@ -1491,6 +1492,10 @@
     <Content Include="Areas\EmergencyDuty\Views\DeptDuties\Index.cshtml" />
     <Content Include="Areas\EmergencyDuty\Views\DeptDuties\Detail.cshtml" />
     <Content Include="Areas\EmergencyDuty\Views\DeptDuties\_Detail.cshtml" />
+    <Content Include="Areas\ResourceManage\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\ResourceManage\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\ResourceManage\Views\Schools\Dashboard.cshtml" />
+    <Content Include="Areas\GIS\Views\ResourceMaps\Map.cshtml" />
     <None Include="Configs\Data\Database.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -1595,6 +1600,7 @@
     <Content Include="Theme\plugins\dropzone\css\stylus\basic.styl" />
     <Content Include="Theme\plugins\dropzone\css\stylus\dropzone.styl" />
     <Content Include="Theme\plugins\dropzone\upload.php" />
+    <Content Include="Theme\plugins\echart\echarts.min.js" />
     <Content Include="Theme\plugins\fancybox\CHANGELOG.md" />
     <Content Include="Theme\plugins\fancybox\README.md" />
     <Content Include="Theme\plugins\Flexigrid\css\flexigrid.less" />
@@ -1897,7 +1903,6 @@
     <Folder Include="Areas\PortalManage\Models\" />
     <Folder Include="Areas\PortalManage\Views\Shared\" />
     <Folder Include="Areas\ResourceManage\Models\" />
-    <Folder Include="Areas\ResourceManage\Views\Shared\" />
     <Folder Include="Areas\SecurityCheck\Controllers\" />
     <Folder Include="Areas\SecurityCheck\Models\" />
     <Folder Include="Areas\SecurityCheck\Views\Shared\" />

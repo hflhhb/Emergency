@@ -60,6 +60,16 @@ namespace LeaRun.ResourceManage.Business
         {
             return service.GetEntity(keyValue);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="keyValue">主键值</param>
+        /// <returns></returns>
+        public IEnumerable<SchoolEntity> GetDashboardList()
+        {
+            return service.GetDashboardList();
+        }
         #endregion
 
         #region 提交数据

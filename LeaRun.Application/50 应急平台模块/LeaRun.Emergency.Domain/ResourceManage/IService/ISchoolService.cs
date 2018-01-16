@@ -40,6 +40,8 @@ namespace LeaRun.ResourceManage.IService
         /// <param name="keyValue">主键值</param>
         /// <returns></returns>
         SchoolEntity GetEntity(string keyValue);
+
+        IEnumerable<SchoolEntity> GetDashboardList();
         #endregion
 
         #region 提交数据

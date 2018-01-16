@@ -1,0 +1,144 @@
+﻿@using LeaRun.ResourceManage.Entity
+@{;
+    ViewBag.Title = "dashboard";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+
+@model IEnumerable<SchoolEntity>
+
+@section Scripts{
+    @*<script type="text/javascript" src="~/Content/scripts/plugins/echarts/echarts.min.js"></script>*@
+    <script type="text/javascript" src="~/Theme/plugins/echart/echarts.min.js"></script>
+}
+
+<div>测试数据：</div>
+
+<div class="row">
+    <div class="col-md-5">
+        <div id="staticChart" style="height:600px;"></div>
+    </div>
+    <div class="col-md-7">
+        <div id="dynamicChart" style="height:600px;"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var staticChart = echarts.init(document.getElementById('staticChart'));
+    var dynamicChart = echarts.init(document.getElementById('dynamicChart'));
+    // 指定图表的配置项和数据
+    var staticOption = {
+
+        title: {
+            text: '应急资源统计-静态例子'
+        },
+        tooltip: {},
+        legend: {
+            data: ['数量']
+        },
+        xAxis: {
+            data: ["[31A00]党政军机关", "[31B00]学校", "[31C00]公众聚集场所", "[31H00]重要场所", "[31M00] 在建工程施工场所"]
+        },
+        yAxis: {},
+        series: [{
+            name: '数量',
+            type: 'bar',
+            data: [12, 30, 10, 2, 15]
+        }]
+    };
+
+    var dynamicOption = {
+        color: ['#3398DB'],
+        title: {
+            text: '应急资源统计',
+            subtext: '应急办',
+            left: 'center'
+        },
+        tooltip: {
+            show: true,
+            feature: {
+                dataView: { show: true, readOnly: false },
+                magicType: { show: true, type: ['pie', 'line', 'bar'] },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        },
+        //grid: {
+        //    left: '3%',
+        //    right: '4%',
+        //    bottom: '3%',
+        //    containLabel: true
+        //},
+        legend: {
+            x: "left",
+            data: ['资源数量']
+        },
+        xAxis: [
+            {
+                type: 'category',
+                //data: ["党政军机关", "学校", "公众聚集场所", "重要场所", "在建工程施工场所"]
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value'
+            }
+        ],
+        series: [
+            {
+                name: "资源数量",
+                type: "bar",
+                barWidth: '50%',
+                //data: [12, 30, 10, 2, 15]
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    staticChart.setOption(staticOption);
+    dynamicChart.setOption(dynamicOption);
+
+    function updateDynamicChart(rtnData) {
+        if (!rtnData) return;
+        rtnData = rtnData || [];
+        var aryCount = [];
+        var aryCate = [];
+        rtnData.forEach(function (o, i) {
+            var name = o["Name"];
+            var countVal = o["Value"];
+            aryCate.push(name);
+            aryCount.push({ name: name, value: countVal });
+        });
+        ////
+
+        dynamicChart.setOption({
+            //legend: { data: aryCate },
+            xAxis: {
+                data: aryCate
+            },
+            series: [
+                {
+                    name: '资源数量',
+                    data: aryCount,
+                }
+            ]
+        });
+    }
+    $(function () {
+        //动态数据 的方式
+        var dataFromServer = [
+            { Name: "党政军机关", Value: 12 },
+            { Name: "学校", Value: 30 },
+            { Name: "公众聚集场所", Value: 10 },
+            { Name: "重要场所", Value: 2 },
+            { Name: "在建工程施工场所", Value: 15 },
+        ];
+        //去服务器取得数据
+        //$.get("/xxx", { _: new Date().valueOf() })
+        //    .done(function (rtnData) {
+        //        if (!rtnData) return;
+        //        updateDynamicChart(rtnData);
+        //    });
+        updateDynamicChart(dataFromServer);
+    });
+</script>

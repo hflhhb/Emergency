@@ -1,0 +1,502 @@
+﻿@{
+    ViewBag.Title = "应急地图展示";
+    Layout = "~/Views/Shared/_MapIndex.cshtml";
+}
+@section Scripts{
+<script type="text/javascript" src="http://api.map.baidu.com/library/CityList/1.4/src/CityList_min.js"></script>
+<!--加载鼠标绘制工具-->
+<link rel="stylesheet" href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" />
+<script type="text/javascript" src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>
+}
+
+@section Styles{
+    <style type="text/css">
+        body, html, #allmap {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+
+        .map-content {
+            padding-right: 10px;
+        }
+        .gis-rc-img{
+            width:30px;
+            height:50px;
+        }
+        .card-box-title{
+            padding:12px;
+            font-size:16px;
+        }
+        .plate-overlay {
+            box-sizing: border-box;
+            width: 86px;
+            height: 86px;
+            line-height: 160%;
+            padding-top: 16px;
+            border-radius: 50%;
+            background: rgba(46, 171, 98, 0.8);
+            text-align: center;
+            font-size: 12px;
+            font-weight: inherit;
+            color: #fff;
+            box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.24);
+        }
+
+            .plate-overlay:hover {
+                background: rgba(221, 36, 36, 0.8) !important;
+            }
+
+            .plate-overlay.zufang {
+                background: rgba(74, 137, 238, 0.9);
+                padding-top: 24px;
+            }
+
+            .plate-overlay.visited {
+                background: rgba(102, 205, 160, 0.9);
+            }
+
+            .plate-overlay.zufang.visited {
+                background: rgba(133, 174, 235, 0.9);
+            }
+    </style>
+}
+
+<div class="ui-layout" id="layout" style="height: 100%; width: 100%;">
+    <div class="ui-layout-west">
+        <div class="west-Panel">
+            <div class="profile-nav">
+                <div class="card-box" data-key="gasStation">
+                    <div class="card-box-img">
+                        <img class="gis-rc-img" src="~/Content/images/gis/a1.gif" />
+                    </div>
+                    <div class="card-box-content"><p class="card-box-title">加油站</p></div>
+                </div>
+                <div class="card-box" data-key="school">
+                    <div class="card-box-img">
+                        <img class="gis-rc-img" src="~/Content/images/gis/a2.gif" />
+                    </div>
+                    <div class="card-box-content">
+                        <p class="card-box-title">学校</p>
+                    </div>
+                </div>
+                <div class="card-box" data-key="camera">
+                    <div class="card-box-img">
+                        <img class="gis-rc-img" src="~/Content/images/gis/a8.gif" />
+                    </div>
+                    <div class="card-box-content"><p class="card-box-title">摄像头</p></div>
+                </div>
+                <div class="card-box" data-key="hospital">
+                    <div class="card-box-img">
+                        <img class="gis-rc-img" src="~/Content/images/gis/a5.gif" />
+                    </div>
+                    <div class="card-box-content"><p class="card-box-title">医院</p></div>
+                </div>
+                @*<ul style="padding-top: 20px;">
+                    <li class="active" data-value="1">加油站</li>
+                    <li data-value="2">学校</li>
+                    <li data-value="3">摄像头</li>
+                    <li class="divide"></li>
+                    <li data-value="4">医院</li>
+                </ul>*@
+            </div>
+        </div>
+    </div>
+    <div class="ui-layout-center">
+        <div class="center-Panel">
+            <div class="titlePanel">
+                <div class="title-search">
+                    <table>
+                        <tr>
+                            <td style="padding-left: 2px;">
+                                <i class="fa fa-map-marker" style="font-size:28px; vertical-align:middle; color:#1d9d74; margin-right:5px;"></i>
+                                <input id="txtSuggest" type="text" class="form-control" placeholder="请输入要查询关键字" style="width: 400px; display:inline-block;" />
+                            </td>
+                            <td style="padding-left: 5px;">
+                                <a id="btn_Search" class="btn btn-primary"><i class="fa fa-search"></i>&nbsp;查询</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="toolbar">
+                    <div class="btn-group">
+                        <a id="lr-replace" class="btn btn-default" onclick="reload();"><i class="fa fa-refresh"></i>&nbsp;刷新</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="map-content">
+            <div id="allmap"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    //初始化页面
+    function InitialPage() {
+        //layout布局
+        $('#layout').layout({
+            applyDefaultStyles: true,
+            west__size: 225,
+            onresize: function () {
+                $(window).resize()
+            }
+        });
+        $('.profile-nav').height($(window).height() - 20);
+        $('.map-content').height($(window).height() - 80);
+        //resize重设(表格、树形)宽高
+        $(window).resize(function (e) {
+            window.setTimeout(function () {
+                $('.profile-nav').height($(window).height() - 20);
+                $('.map-content').height($(window).height() - 80);
+            }, 200);
+            e.stopPropagation();
+        });
+    }
+    InitialPage();
+    //
+    $(".card-box").click(function () {
+        if (!$(this).hasClass("active")) {
+            $(this).addClass("active")
+        } else {
+            $(this).removeClass("active")
+        }
+        //
+        map.setZoom(CLUSTER_ZOOM);
+        toggleResource();
+    });
+
+</script>
+<script type="text/javascript">
+    var kouMap = new Kou.Map();
+    var map = kouMap.map;
+    //
+    kouMap.iniAutoComplete("txtSuggest");
+
+    //
+    //查询事件
+    $("#btn_Search").click(function () {
+        kouMap.searchAndSetPlace($("#txtSuggest").val());
+    });
+    //查询回车
+    $('#txtSuggest').on('keydown', function (event) {
+        if (event.keyCode == "13") {
+            $('#btn_Search').trigger("click");
+        }
+    });
+
+    //确定
+    function AcceptClick(onAccept) {
+        var postData = {
+            address: $("#txtSuggest").val(),
+            lng: $("#lng").val(),
+            lat: $("#lat").val()
+        };
+        //
+        onAccept(postData);
+        dialogClose();
+    }
+
+    var CLUSTER_ZOOM = 15;
+    var _boundaryLabels = [];
+    var _ptCollections = {};
+    var _styleOptions = getManuallyStyleOpts(); 
+
+    $(function () {
+        //getBoundary();
+        loadBoundary();
+        //lazyLoadResource();
+    });
+
+    function getMapBounds() {
+        var bounds = map.getBounds();
+        var postBounds = {
+            lngsw: bounds.Le,
+            latsw: bounds.Ke,
+            lngne: bounds.Ge,
+            latne: bounds.Fe
+        };
+
+        return postBounds;
+    }
+    function loadBoundary() {
+        var postBounds = getMapBounds();
+        $.ajax({
+            url: "/GIS/MapBoundaries/GetListJson",
+            data: { queryJson: JSON.stringify(postBounds) },
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                paintBoundary(data);
+            },
+        });
+        
+    }
+
+    function paintBoundary(data) {
+        var pointArray = [];
+        _.each(data, function (b) {
+            var boundarypts = b.Boundary;
+
+            var ply = new BMap.Polygon(boundarypts, {
+                //strokeWeight: 2, strokeColor: "#ff0000"
+                strokeColor: "#0955CF",
+                strokeWeight: 1,
+                strokeOpacity: 0.7,
+                strokeStyle: "dashed",
+                filled: true,
+                fillColor: "#84A8E2",
+                fillOpacity: 0.3,
+                //autoClose: true,
+                //infowin: false
+            }); //建立多边形覆盖物
+            map.addOverlay(ply);  //添加覆盖物
+
+            var position = new BMap.Point(b.Longitude, b.Latitude);
+            //创建label
+            var label = new BMap.Label({ position: position });
+            label.setStyle({
+                //height: '25px',
+                //color: "#fff",
+                backgroundColor:'transparent',
+                border: 'none',
+                //borderRadius: "25px",
+                //fontWeight: 'bold',
+            });
+            //var content = '<span style="color:red"><i class="fa fa-map-marker"></i></span>' + '<p style="padding:0px 13px;text-align:center;margin-top:5px;">这是一个点</p>';
+            //var content = '<div data-id="chuansha" class="plate-overlay visited">川沙<br>4.3万<br>1086套</div>';
+            //var content = '<div data-id="chuansha" class="plate-overlay visited">' + '川沙<br>4.3万<br>1086套' + '</div>';
+            var content = '<div data-id="chuansha" class="plate-overlay visited">' + decodeURIComponent(b.Content || "") + '</div>';
+            label.setContent(content);
+            label.setPosition(position);
+            label.setOffset(new BMap.Size(-43, -43));
+            _boundaryLabels.push(label);
+            map.addOverlay(label);
+
+            pointArray = pointArray.concat(ply.getPath());
+        });
+
+        map.setViewport(pointArray);    //调整视野
+        
+    }
+    //
+    //var cityList = new BMapLib.CityList();
+
+    //cityList.getBusiness('航头', function (json) {
+    //    console.log('商圈');
+    //    console.log(json);
+    //    var boundarypts = json[0].coordinate;
+    //    var ply = new BMap.Polygon(boundarypts, {
+    //        strokeWeight: 2, strokeColor: "#ff0000",
+    //        //strokeColor: "#0955CF",
+    //        //strokeWeight: 2,
+    //        //strokeOpacity: 0.7,
+    //        dashStyle: "Solid",
+    //        //filled: true,
+    //        //fillColor: "#84A8E2",
+    //        //fillOpacity: 0.3,
+    //        //autoClose: true,
+    //        //infowin: false
+    //    }); //建立多边形覆盖物
+    //    map.addOverlay(ply);  //添加覆盖物
+    //    //pointArray = pointArray.concat(ply.getPath());
+    //});
+
+    //cityList.getSubAreaList(289, function (json) {
+    //    console.log('城市列表');
+    //    console.log(json);
+    //});
+
+
+    //区域
+    function getBoundary() {
+        var bdary = new BMap.Boundary();
+        bdary.get("上海市浦东新区", function (rs) {       //获取行政区域
+            map.clearOverlays();        //清除地图覆盖物
+            var count = rs.boundaries.length; //行政区域的点有多少个
+            if (count === 0) {
+                dialogTop("未能获取当前输入行政区域", 'error');
+                return;
+            }
+            var pointArray = [];
+            for (var i = 0; i < count; i++) {
+                var ply = new BMap.Polygon(rs.boundaries[i], {
+                    //strokeWeight: 2, strokeColor: "#ff0000"
+                    strokeColor: "#0955CF",
+                    strokeWeight: 2,
+                    strokeOpacity: 0.7,
+                    dashStyle: "Solid",
+                    filled: true,
+                    fillColor: "#84A8E2",
+                    fillOpacity: 0.3,
+                    autoClose: true,
+                    infowin: false
+                }); //建立多边形覆盖物
+                map.addOverlay(ply);  //添加覆盖物
+                pointArray = pointArray.concat(ply.getPath());
+            }
+            map.setViewport(pointArray);    //调整视野
+        });
+    }
+    //
+    var lazyLoadResource = _.debounce(loadResources, 800);
+
+    function toggleResource() {
+        var curZoom = map.getZoom();
+        if (curZoom < CLUSTER_ZOOM) {
+            _.each(_boundaryLabels, function (lb) {
+                lb.show();
+            });
+            clearPointCllections();
+            return;
+        }
+        if (getSelectedKinds().length <= 0) return;
+        _.each(_boundaryLabels, function (lb) {
+            lb.hide();
+        });
+        loadResources();
+    }
+
+    map.addEventListener("tilesloaded", function (e) {
+        //lazyLoadResource();
+    });
+
+    map.addEventListener("zoomend", function (e) {
+        toggleResource();
+    });
+    //
+
+    function getSelectedKinds() {
+        var resKinds = [];
+        $(".card-box.active").each(function () {
+            resKinds.push($(this).data("key"));
+        });
+
+        return resKinds;
+    }
+    function loadResources() {
+        var postBounds = getMapBounds();
+        var resKinds = getSelectedKinds();
+        var postData = {
+            //bounds: postBounds,
+            boudns: {},
+            kinds : resKinds
+        };
+        $.ajax({
+            url: "/GIS/ResourceMaps/GetResources",
+            data: { queryJson: JSON.stringify(postData) },
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                locateResource(data);
+            },
+        });
+    }
+
+    var resPaintConfig = {
+        Cameras: {
+            size: BMAP_POINT_SIZE_SMALL,
+            shape: BMAP_POINT_SHAPE_WATERDROP,
+            color: '#d340c3'
+        },
+        Hospitals: {
+            size: BMAP_POINT_SIZE_BIG,
+            shape: BMAP_POINT_SHAPE_RHOMBUS,
+            color: '#4c58a4'
+        },
+        GasStations: {
+            size: BMAP_POINT_SIZE_SMALL,
+            shape: BMAP_POINT_SHAPE_STAR,
+            color: '#d3ed27'
+        },
+        Schools: {
+            size: BMAP_POINT_SIZE_SMALL,
+            shape: BMAP_POINT_SHAPE_CIRCLE,
+            color: '#16e1cc'
+        }
+    };
+    
+    //
+    function clearPointCllections() {
+        _.forEach(_ptCollections, function (val, key) {
+            map.removeOverlay(val);
+            val = null;
+        });
+        _ptCollections = {};
+    } 
+
+    function locateResource(data) {
+        //
+        clearPointCllections();
+        //
+        _.forEach(data, function (val, key) {
+            if (val != null && _.any(val)) {
+                _ptCollections[key] = addPointCollection(val, resPaintConfig[key]);
+            }
+        });
+
+    }
+
+    function addPointCollection(aryRes, opt) {
+        // map.clearOverlays();
+        var points = [];  // 添加海量点数据
+        for (var i = 0; i < aryRes.length; i++) {
+            var res = aryRes[i];
+            points.push(new BMap.Point(res.Longitude, res.Latitude));
+        }
+        //var options = {
+        //    size: BMAP_POINT_SIZE_SMALL,
+        //    shape: BMAP_POINT_SHAPE_WATERDROP,
+        //    color: '#d340c3'
+        //}
+        var pointCollection = new BMap.PointCollection(points, opt);  // 初始化PointCollection
+        pointCollection.addEventListener('click', function (e) {
+            alert('单击点的坐标为：' + e.point.lng + ',' + e.point.lat);  // 监听点击事件
+        });
+
+        map.addOverlay(pointCollection);  // 添加Overlay
+        return pointCollection;
+    }
+
+    //
+    var _manuallyOverlays = [];
+    function getManuallyStyleOpts() {
+        var styleOptions = {
+            strokeColor: "red",    //边线颜色。
+            fillColor: "#fff",      //填充颜色。当参数为空时，圆形将没有填充效果。
+            strokeWeight: 3,       //边线的宽度，以像素为单位。
+            strokeOpacity: 0.8,   //边线透明度，取值范围0 - 1。
+            fillOpacity: 0.6,      //填充的透明度，取值范围0 - 1。
+            strokeStyle: 'solid' //边线的样式，solid或dashed。
+        };
+        return styleOptions;
+    }
+    //
+    
+    //实例化鼠标绘制工具
+    var drawingManager = new BMapLib.DrawingManager(map, {
+        isOpen: false, //是否开启绘制模式
+        enableDrawingTool: true, //是否显示工具栏
+        enableCalculate:true,
+        drawingToolOptions: {
+            anchor: BMAP_ANCHOR_TOP_LEFT, //位置
+            offset: new BMap.Size(65, 15), //偏离值
+            drawingModes: [
+                BMAP_DRAWING_CIRCLE,
+            ],
+        },
+        circleOptions: _styleOptions, //圆的样式
+        //polylineOptions: _styleOptions, //线的样式
+        //polygonOptions: _styleOptions, //多边形的样式
+        //rectangleOptions: _styleOptions //矩形的样式
+    });
+    //添加鼠标绘制工具监听事件，用于获取绘制结果
+    drawingManager.addEventListener('overlaycomplete', function (e) {
+        //
+        _manuallyOverlays.push(e.overlay);
+        //dialogAlert("overlaycomplete", 1);
+        dialogMsg("overlaycomplete", 1);
+    });
+
+</script>
