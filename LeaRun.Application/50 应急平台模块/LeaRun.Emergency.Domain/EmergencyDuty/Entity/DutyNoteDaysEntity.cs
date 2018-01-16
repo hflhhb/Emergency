@@ -4,52 +4,48 @@ using System;
 
 namespace LeaRun.EmergencyDuty.Entity
 {
-    public partial class DutyUsersEntity : BaseEntity
+    public partial class DutyNoteDaysEntity : BaseEntity
     {
         /// <summary>
         ///ID
         /// </summary>
         public string Id { get; set; }
         /// <summary>
-        ///值班人员名称
+        ///日志名称
         /// </summary>
-        public string UserName { get; set; }
+        public string LogName { get; set; }
         /// <summary>
-        ///所在部门
+        ///当前主值班人
         /// </summary>
-        public string DeptId { get; set; }
+        public string ChiefUser { get; set; }
         /// <summary>
-        ///部门名称
+        ///当前副值班人
         /// </summary>
-        public string DeptName { get; set; }
+        public string ViceUser { get; set; }
         /// <summary>
-        ///值班属性
+        ///值班班次
         /// </summary>
-        public string DutyProp { get; set; }
+        public string DutyType { get; set; }
         /// <summary>
-        ///职务名称
+        ///热线办值班人
         /// </summary>
-        public string DutyName { get; set; }
+        public string HotlineUser { get; set; }
         /// <summary>
-        ///职责名称
+        ///接班主值班人
         /// </summary>
-        public string JobName { get; set; }
+        public string NextChiefUser { get; set; }
         /// <summary>
-        ///电话
+        ///状态
         /// </summary>
-        public string TelNo { get; set; }
+        public int? Status { get; set; }
         /// <summary>
-        ///手机
+        ///开始时间
         /// </summary>
-        public string Mobile { get; set; }
+        public DateTime? StartedAt { get; set; }
         /// <summary>
-        ///是否领导
+        ///结束时间
         /// </summary>
-        public bool? IsLeader { get; set; }
-        /// <summary>
-        ///排序
-        /// </summary>
-        public int? Sort { get; set; }
+        public DateTime? EndedAt { get; set; }
         /// <summary>
         ///创建人标识
         /// </summary>

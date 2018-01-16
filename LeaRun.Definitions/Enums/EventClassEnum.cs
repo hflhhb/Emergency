@@ -10,7 +10,7 @@ namespace LeaRun.Definitions.Enums
     /// <summary>
     /// 大事件类型
     /// </summary>
-    public enum EventTypeEnum
+    public enum EventClassEnum
     {
         /// <summary>
         /// 自然灾害

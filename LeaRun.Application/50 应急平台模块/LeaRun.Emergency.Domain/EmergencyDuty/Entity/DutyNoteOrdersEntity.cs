@@ -4,52 +4,84 @@ using System;
 
 namespace LeaRun.EmergencyDuty.Entity
 {
-    public partial class DutyUsersEntity : BaseEntity
+    public partial class DutyNoteOrdersEntity : BaseEntity
     {
         /// <summary>
         ///ID
         /// </summary>
         public string Id { get; set; }
         /// <summary>
-        ///值班人员名称
+        ///关联日志ID
         /// </summary>
-        public string UserName { get; set; }
+        public string NoteId { get; set; }
         /// <summary>
-        ///所在部门
+        ///标题
         /// </summary>
-        public string DeptId { get; set; }
+        public string Title { get; set; }
         /// <summary>
-        ///部门名称
+        ///领导
         /// </summary>
-        public string DeptName { get; set; }
+        public string Leaderships { get; set; }
         /// <summary>
-        ///值班属性
+        ///抄送人1
         /// </summary>
-        public string DutyProp { get; set; }
+        public string CarbonCopy1 { get; set; }
         /// <summary>
-        ///职务名称
+        ///抄送人2
         /// </summary>
-        public string DutyName { get; set; }
+        public string CarbonCopy2 { get; set; }
         /// <summary>
-        ///职责名称
+        ///是否短信
         /// </summary>
-        public string JobName { get; set; }
+        public bool? IsSms { get; set; }
         /// <summary>
-        ///电话
+        ///是否贴头报
         /// </summary>
-        public string TelNo { get; set; }
+        public bool? IsHeadline { get; set; }
         /// <summary>
-        ///手机
+        ///是否摘报
         /// </summary>
-        public string Mobile { get; set; }
+        public bool? IsSummary { get; set; }
         /// <summary>
-        ///是否领导
+        ///是否快报
         /// </summary>
-        public bool? IsLeader { get; set; }
+        public bool? IsExpress { get; set; }
         /// <summary>
-        ///排序
+        ///是否专报
         /// </summary>
-        public int? Sort { get; set; }
+        public bool? IsSpecial { get; set; }
+        /// <summary>
+        ///是否存档
+        /// </summary>
+        public bool? IsArchive { get; set; }
+        /// <summary>
+        ///审核意见
+        /// </summary>
+        public string AuditComment { get; set; }
+        /// <summary>
+        ///办理情况
+        /// </summary>
+        public string DealComment { get; set; }
+        /// <summary>
+        ///状态
+        /// </summary>
+        public int? Status { get; set; }
+        /// <summary>
+        ///审核人
+        /// </summary>
+        public string Auditor { get; set; }
+        /// <summary>
+        ///审核时间
+        /// </summary>
+        public DateTime? AuditedAt { get; set; }
+        /// <summary>
+        ///经办人
+        /// </summary>
+        public string Operator { get; set; }
+        /// <summary>
+        ///操作时间
+        /// </summary>
+        public DateTime? OperatedAt { get; set; }
         /// <summary>
         ///创建人标识
         /// </summary>
