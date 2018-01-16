@@ -1507,6 +1507,8 @@
     <Content Include="Areas\EmergencyDuty\Views\EmergencyReports\Index.cshtml" />
     <Content Include="Areas\ResourceManage\Views\Schools\Dashboard.cshtml" />
     <Content Include="Areas\GIS\Views\ResourceMaps\Map.cshtml" />
+    <Content Include="Areas\EmergencyDuty\Views\EmergencyReports\Report.cshtml" />
+    <Content Include="Areas\ResourceManage\Views\GasStations\FormMap.cshtml" />
     <None Include="Configs\Data\Database.xsd">
       <SubType>Designer</SubType>
     </None>

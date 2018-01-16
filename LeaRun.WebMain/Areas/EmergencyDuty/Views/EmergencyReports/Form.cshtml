@@ -9,6 +9,59 @@
     });
     //初始化控件
     function initControl() {
+        //
+        $("#SendDept").ComboBoxTree({
+            url: "../../UserManage/Department/GetOrganizeTreeJson",
+            description: "==请选择==",
+            height: "250px",
+            click: function (item) {
+                if (item.Sort == 'Organize') {
+                    organizeId = item.id;
+                    parentId = 0;
+                } else {
+                    parentId = item.id;
+                }
+            }
+        });
+        //事件类别
+        var $evtClass = $("#EvtClass")
+        $evtClass.ComboBox({
+            url: "../../SystemManage/DataItemDetail/GetDataItemListJson",
+            param: { EnCode: "EventClass" },
+            id: "ItemValue",
+            text: "ItemName",
+            height: "200px",
+            description: "==请选择=="
+        });
+        $evtClass.bind("change", function () {
+            var value = $(this).attr('data-value');
+            $("#EvtSubClass").ComboBox({
+                url: "../../SystemManage/DataItemDetail/GetSubDataItemListJson",
+                param: { EnCode: "EventClass", ItemValue: value },
+                id: "ItemValue",
+                text: "ItemName",
+                height: "200px",
+                description: "==请选择=="
+            });
+        });
+        //库版本
+        $("#EvtSubClass").ComboBox({
+            description: "==请选择=="
+        });
+        $("#EvtDegree").ComboBox({
+            description: "==请选择=="
+        });
+
+        $("#EvtArea").ComboBox({
+            url: "../../SystemManage/DataItemDetail/GetDataItemListJson",
+            param: { EnCode: "EventArea" },
+            id: "ItemValue",
+            text: "ItemName",
+            height: "200px",
+            description: "==请选择=="
+        });
+
+
         //获取表单
         if (!!keyValue) {
             $.SetForm({
@@ -36,84 +89,112 @@
         })
     }
 </script>
-<div style="margin-top: 20px; margin-right: 30px;">
-    <table class="form">
+<div style="margin-top: 20px; margin-right: 30px;" class="form">
+    <table >
+        <colgroup>
+            <col width="80" />
+            <col width="530" />
+            <col width="80" />
+            <col width="220" />
+        </colgroup>
         <tr>
-            <td class="formTitle">事件标题</td>
+            <td class="formTitle">报送单位 <font face="宋体">*</font></td>
             <td class="formValue">
-                <input id="Title" type="text" class="form-control"  />
+                <div id="SendDept" type="select" class="ui-select" style="float: left; width:100%; margin-right: 0px;" isvalid="yes" checkexpession="NotNull">
+                </div>
+            </td>
+            <td class="formTitle">签发人员 <font face="宋体">*</font></td>
+            <td class="formValue">
+                <input id="Signer" type="text" class="form-control" />
             </td>
         </tr>
         <tr>
-            <td class="formTitle">报送单位</td>
-            <td class="formValue">
-                <input id="SendDept" type="text" class="form-control"  />
-            </td>
-        </tr>
-        <tr>
-            <td class="formTitle">报送人员</td>
+            <td class="formTitle">报送人员 <font face="宋体">*</font></td>
             <td class="formValue">
                 <input id="SendMan" type="text" class="form-control"  />
             </td>
-        </tr>
-        <tr>
-            <td class="formTitle">签发人员</td>
-            <td class="formValue">
-                <input id="Signer" type="text" class="form-control"  />
-            </td>
-        </tr>
-        <tr>
-            <td class="formTitle">联系电话</td>
+
+            <td class="formTitle">联系电话 <font face="宋体">*</font></td>
             <td class="formValue">
                 <input id="ContactTelNo" type="text" class="form-control"  />
             </td>
         </tr>
+    </table>
+
+    <table style="table-layout:fixed; border-collapse:collapse;">
+        <colgroup>
+            <col width="80" />
+            <col width="250" />
+            <col width="80" />
+            <col width="280" />
+            <col width="80" />
+            <col width="220" />
+        </colgroup>
         <tr>
-            <td class="formTitle">事发时间</td>
-            <td class="formValue">
-                <input id="EvtDate" type="text" class="form-control"  />
+            <td class="formTitle">事件标题 <font face="宋体">*</font></td>
+            <td class="formValue" colspan="3">
+                <input id="Title" type="text" class="form-control" />
+            </td>
+
+            <td class="formTitle">事件程度 <font face="宋体">*</font></td>
+            <td class="formValue" >
+                <div id="EvtDegree" type="select" class="ui-select" style="float: left;  width:100%;  margin-right: 0px;" isvalid="yes" checkexpession="NotNull">
+                    <ul>
+                        <li data-value="">==请选择==</li>
+                        <li data-value="1">特别重大</li>
+                        <li data-value="2">重大</li>
+                        <li data-value="3">较大</li>
+                        <li data-value="4">一般</li>
+                    </ul>
+                </div>
             </td>
         </tr>
         <tr>
-            <td class="formTitle">事件程度</td>
-            <td class="formValue">
-                <input id="EvtDegree" type="text" class="form-control"  />
-            </td>
-        </tr>
-        <tr>
+
             <td class="formTitle">事发区域</td>
             <td class="formValue">
-                <input id="EvtArea" type="text" class="form-control"  />
+                <div id="EvtArea" type="select" class="ui-select" style="float: left; width:100%; margin-right: 0px;" isvalid="yes" checkexpession="NotNull">
+                </div>
+            </td>
+            <td class="formTitle">事件类别</td>
+            <td class="formValue">
+                <div id="EvtClass" type="select" class="ui-select" style="float: left; width: 100px; margin-right: 0px;" isvalid="yes" checkexpession="NotNull">
+                </div>
+                <div id="EvtSubClass" type="select" class="ui-select" style="float: left; width: 100px; margin-right: 0px;" isvalid="yes" checkexpession="NotNull">
+                </div>
+            </td>
+            <td class="formTitle">事发时间 <font face="宋体">*</font></td>
+            <td class="formValue">
+                <input id="EvtDate" type="text" class="form-control input-wdatepicker" onclick="WdatePicker()"/>
             </td>
         </tr>
         <tr>
             <td class="formTitle">具体地址</td>
-            <td class="formValue">
+            <td class="formValue" colspan="3">
                 <input id="EvtAddress" type="text" class="form-control"  />
+            </td>
+
+            <td class="formTitle" rowspan="10" valign="top">影响范围</td>
+            <td class="formValue" >
+                <label>人数</label>
+                <input id="AffectUserNum" style="display:inline-block; width:40px;" type="text" class="form-control" />
             </td>
         </tr>
         <tr>
             <td class="formTitle">事件起因</td>
-            <td class="formValue">
-                <input id="EvtReason" type="text" class="form-control"  />
+            <td class="formValue" colspan="3">
+                <textarea id="EvtReason" type="text" class="form-control"></textarea>
             </td>
-        </tr>
-        <tr>
-            <td class="formTitle">事件大类别</td>
-            <td class="formValue">
-                <input id="EvtClass" type="text" class="form-control"  />
-            </td>
-        </tr>
-        <tr>
-            <td class="formTitle">事件小类别</td>
-            <td class="formValue">
-                <input id="EvtSubClass" type="text" class="form-control"  />
+
+            <td class="formValue" rowspan="10" valign="top">
+                <label>范围</label>
+                <input id="AffectAreas" type="text" class="form-control" />
             </td>
         </tr>
         <tr>
             <td class="formTitle">基本过程</td>
-            <td class="formValue">
-                <input id="BaseInfo" type="text" class="form-control"  />
+            <td class="formValue" colspan="3">
+                <textarea id="BaseInfo" type="text" class="form-control"></textarea>
             </td>
         </tr>
         <tr>
@@ -121,59 +202,42 @@
             <td class="formValue">
                 <input id="DeathNum" type="text" class="form-control"  />
             </td>
-        </tr>
-        <tr>
-            <td class="formTitle">重伤人数</td>
+            <td class="formTitle">受伤人数</td>
             <td class="formValue">
-                <input id="SeriousHurtNum" type="text" class="form-control"  />
-            </td>
-        </tr>
-        <tr>
-            <td class="formTitle">轻伤人数</td>
-            <td class="formValue">
-                <input id="MinorHurtNum" type="text" class="form-control"  />
+                <label>重伤:</label>
+                <input id="SeriousHurtNum" style="width:40px; display:inline-block;" type="text" class="form-control"  />
+                <label>轻伤:</label>
+                <input id="MinorHurtNum" type="text" style="width:40px; display:inline-block;" class="form-control" />
             </td>
         </tr>
         <tr>
             <td class="formTitle">财产损失</td>
-            <td class="formValue">
-                <input id="LoseInfo" type="text" class="form-control"  />
-            </td>
-        </tr>
-        <tr>
-            <td class="formTitle">影响区域</td>
-            <td class="formValue">
-                <input id="AffectAreas" type="text" class="form-control"  />
-            </td>
-        </tr>
-        <tr>
-            <td class="formTitle">影响人数</td>
-            <td class="formValue">
-                <input id="AffectUserNum" type="text" class="form-control"  />
+            <td class="formValue" colspan="3">
+                <textarea id="LoseInfo" type="text" class="form-control"></textarea>
             </td>
         </tr>
         <tr>
             <td class="formTitle">发展趋势</td>
-            <td class="formValue">
-                <input id="DriftInfo" type="text" class="form-control"  />
+            <td class="formValue" colspan="3">
+                <textarea id="DriftInfo" type="text" class="form-control"></textarea>
             </td>
         </tr>
         <tr>
             <td class="formTitle">处置情况</td>
-            <td class="formValue">
-                <input id="DealInfo" type="text" class="form-control"  />
+            <td class="formValue" colspan="3">
+                <textarea id="DealInfo" type="text" class="form-control" ></textarea>
             </td>
         </tr>
         <tr>
             <td class="formTitle">拟采取措施</td>
-            <td class="formValue">
-                <input id="PlanInfo" type="text" class="form-control"  />
+            <td class="formValue" colspan="3">
+                <textarea id="PlanInfo" type="text" class="form-control" ></textarea>
             </td>
         </tr>
         <tr>
             <td class="formTitle">其他情况说明</td>
-            <td class="formValue">
-                <input id="Remarks" type="text" class="form-control"  />
+            <td class="formValue" colspan="3">
+                <textarea id="Remarks" type="text" class="form-control"></textarea>
             </td>
         </tr>
        

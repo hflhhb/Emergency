@@ -1,0 +1,181 @@
+﻿@{;
+    ViewBag.Title = "表单页面";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<script>
+    var keyValue = request('keyValue');
+    $(function () {
+        initControl();
+    });
+    //初始化控件
+    function initControl() {
+        //获取表单
+        if (!!keyValue) {
+            $.SetForm({
+                url: "../../EmergencyDuty/EmergencyReports/GetFormJson",
+                param: { keyValue: keyValue },
+                success: function (data) {
+                    $("#form1").SetWebControls(data);
+                }
+            })
+        }
+    }
+    //保存表单;
+    function AcceptClick() {
+        if (!$('#form1').Validform()) {
+            return false;
+        }
+        var postData = $("#form1").GetWebControls(keyValue);
+        $.SaveForm({
+            url: "../../EmergencyDuty/EmergencyReports/SaveForm?keyValue=" + keyValue,
+            param: postData,
+            loading: "正在保存数据...",
+            success: function () {
+                $.currentIframe().$("#gridTable").trigger("reloadGrid");
+            }
+        })
+    }
+</script>
+<div style="margin-top: 20px; margin-right: 30px;">
+    <table class="form">
+        <tr>
+            <td class="formTitle">事件标题</td>
+            <td class="formValue">
+                <input id="Title" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">报送单位</td>
+            <td class="formValue">
+                <input id="SendDept" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">报送人员</td>
+            <td class="formValue">
+                <input id="SendMan" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">签发人员</td>
+            <td class="formValue">
+                <input id="Signer" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">联系电话</td>
+            <td class="formValue">
+                <input id="ContactTelNo" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">事发时间</td>
+            <td class="formValue">
+                <input id="EvtDate" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">事件程度</td>
+            <td class="formValue">
+                <input id="EvtDegree" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">事发区域</td>
+            <td class="formValue">
+                <input id="EvtArea" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">具体地址</td>
+            <td class="formValue">
+                <input id="EvtAddress" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">事件起因</td>
+            <td class="formValue">
+                <input id="EvtReason" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">事件大类别</td>
+            <td class="formValue">
+                <input id="EvtClass" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">事件小类别</td>
+            <td class="formValue">
+                <input id="EvtSubClass" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">基本过程</td>
+            <td class="formValue">
+                <input id="BaseInfo" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">死亡人数</td>
+            <td class="formValue">
+                <input id="DeathNum" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">重伤人数</td>
+            <td class="formValue">
+                <input id="SeriousHurtNum" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">轻伤人数</td>
+            <td class="formValue">
+                <input id="MinorHurtNum" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">财产损失</td>
+            <td class="formValue">
+                <input id="LoseInfo" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">影响区域</td>
+            <td class="formValue">
+                <input id="AffectAreas" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">影响人数</td>
+            <td class="formValue">
+                <input id="AffectUserNum" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">发展趋势</td>
+            <td class="formValue">
+                <input id="DriftInfo" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">处置情况</td>
+            <td class="formValue">
+                <input id="DealInfo" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">拟采取措施</td>
+            <td class="formValue">
+                <input id="PlanInfo" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">其他情况说明</td>
+            <td class="formValue">
+                <input id="Remarks" type="text" class="form-control"  />
+            </td>
+        </tr>
+       
+    </table>
+</div>
