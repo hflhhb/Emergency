@@ -330,6 +330,7 @@
     <Content Include="Content\images\video\5103.wav" />
     <Content Include="Content\images\view_grid.png" />
     <Content Include="Content\scripts\app\map.base.js" />
+    <Content Include="Content\scripts\app\map.locate.js" />
     <Content Include="Content\scripts\bootstrap\bootstrap.extension.css" />
     <Content Include="Content\scripts\bootstrap\bootstrap.min.css" />
     <Content Include="Content\scripts\bootstrap\bootstrap.min.js" />
@@ -1888,6 +1889,7 @@
     <Content Include="Content\scripts\jquery\jquery_chained\test\vendor\jasmine-1.3.1\MIT.LICENSE" />
     <Content Include="Web.config" />
     <Content Include="Views\Shared\_MapIndex.cshtml" />
+    <Content Include="Views\Shared\_MapForm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

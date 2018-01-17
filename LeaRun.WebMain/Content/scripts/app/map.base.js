@@ -5,7 +5,9 @@ Kou.Map = function (container, options) {
     var defaults = {
         center: new BMap.Point(121.487864, 31.249223),
         currentCity: "上海",
-        enableScrollWheelZoom: true
+        enableScrollWheelZoom: true,
+        enableNavCtrl: true,
+        onMapClick: function (e) { }
     };
     this.container = container || "allmap";
     //
@@ -17,6 +19,7 @@ Kou.Map = function (container, options) {
 Kou.Map.prototype = {
     //
     initial: function () {
+        var me = this;
         // 百度地图API功能
         var map = new BMap.Map(this.container);    // 创建Map实例
         this.map = map;
@@ -28,19 +31,23 @@ Kou.Map.prototype = {
         //单击获取点击的经纬度
         map.addEventListener("click", function (e) {
             console.info(e.point.lng + "," + e.point.lat);
+            !!me.options.onMapClick && me.options.onMapClick.call(me, e);
         });
+
 
         //
         // 添加带有定位的导航控件
-        var navigationControl = new BMap.NavigationControl({
-            // 靠左上角位置
-            anchor: BMAP_ANCHOR_TOP_LEFT,
-            // LARGE类型
-            type: BMAP_NAVIGATION_CONTROL_LARGE,
-            // 启用显示定位
-            enableGeolocation: true
-        });
-        map.addControl(navigationControl);
+        if (this.options.enableNavCtrl) {
+            var navigationControl = new BMap.NavigationControl({
+                // 靠左上角位置
+                anchor: BMAP_ANCHOR_TOP_LEFT,
+                // LARGE类型
+                type: BMAP_NAVIGATION_CONTROL_LARGE,
+                // 启用显示定位
+                enableGeolocation: true
+            });
+            map.addControl(navigationControl);
+        }
         // 添加定位控件
         var geolocationControl = new BMap.GeolocationControl();
         geolocationControl.addEventListener("locationSuccess", function (e) {
@@ -67,6 +74,7 @@ Kou.Map.prototype = {
 
     iniAutoComplete: function (input, onSearchComplete) {
         var map = this.map;
+        var me = this;
         var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
             {
                 input: input,
@@ -75,7 +83,7 @@ Kou.Map.prototype = {
         ac.addEventListener("onconfirm", function (e) {    //鼠标点击下拉列表后的事件
             var _value = e.item.value;
             var tmpPlace = _value.province + _value.city + _value.district + _value.street + _value.business;
-            searchAndSetPlace(tmpPlace, onSearchComplete);
+            me.searchAndSetPlace(tmpPlace, onSearchComplete);
         });
 
         this.autoComplete = ac;
@@ -94,7 +102,7 @@ Kou.Map.prototype = {
                 if (!pp) return;
                 map.centerAndZoom(pp, 18);
                 map.addOverlay(new BMap.Marker(pp));    //添加标注
-                !!onSearchComplete && onSearchComplete(searchResults);
+                !!onSearchComplete && onSearchComplete(searchResults, pp);
             }
         });
         local.search(txtPlace);

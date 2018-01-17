@@ -1,11 +1,14 @@
 ﻿@{
     ViewBag.Title = "地图位置查找";
-    Layout = "~/Views/Shared/_MapIndex.cshtml";
+    //Layout = "~/Views/Shared/_MapIndex.cshtml";
+    Layout = "~/Views/Shared/_MapForm.cshtml";
 }
 @section Scripts{
+
 }
 
 @section Styles{
+    <link href="~/Content/styles/learun-applayout.css" rel="stylesheet" />
     <style type="text/css">
         body, html, #allmap {
             width: 100%;
@@ -14,25 +17,29 @@
             margin: 0;
             font-family: "微软雅黑";
         }
-        .map-content{
 
+        .map-content {
         }
-        .row{
-            margin:5px;
+
+        .row {
+            margin: 5px;
         }
+
         .h-col {
-            padding:0px;
-            margin:0px;
+            padding: 0px;
+            margin: 0px;
         }
+
         .h-col-6 {
             width: 60%;
         }
+
         .h-col-4 {
             width: 40%;
         }
 
-        .formTitle{
-            width:60px;
+        .formTitle {
+            width: 60px;
         }
 
         label {
@@ -42,10 +49,55 @@
             font-weight: 700;
         }
 
+        .app_preview .item_field_value {
+            width: 514px;
+        }
+
+        .app_preview .item_row {
+            background-color: #fff;
+        }
+
+        .app_layout .item_field_label {
+            background-color: #fff;
+        }
+
+        .form-panel {
+            width: 650px;
+            float: left;
+            overflow-y: auto;
+        }
+
+        .map-content {
+            float: right;
+            width: 350px;
+            /*height: 659px;*/
+            z-index: 1000;
+            background: rgba(0,0,0,0.01);
+            padding: 0px;
+            border-left: 1px solid #ccc;
+        }
+
+        .form .formTitle {
+            text-align: left;
+            padding-left: 5px;
+        }
+
+        form .formTitle font {
+            right: auto !important;
+            margin-left: 5px;
+        }
+
+        .formValue input, .formValue textarea {
+            border-radius: 5px;
+        }
+
+        input, textarea {
+            background: #fff !important;
+        }
     </style>
 }
 
-<div class="titlePanel">
+<div class="titlePanel" style="border-bottom:1px solid #ccc;">
     <div class="title-search">
         <table>
             <tr>
@@ -69,50 +121,131 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-8 col-xs-8 h-col">
-        <div class="map-content h-col" style="width:100%; height:100%;">
-            <div id="allmap"></div>
+
+<div class="h-col form-panel form">
+    <div class="tab-pane app_layout app_preview active">
+        <div class="item_row">
+            <div class="item_field_label"><span>名称</span></div>
+            <div class="item_field_value" style="">
+                <input id="Name" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+            </div>
         </div>
-    </div>
-    <div class="col-md-4 col-xs-4 h-col">
-        <div style="margin:5px; border-left:0px solid #ccc;">
-            <form>
-                <div class="form-group">
-                    <label for="Name">名称</label>
-                    <input id="Name" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
-                </div>
-                <div class="form-group">
-                    <label for="LinkPerson">联系人</label>
-                    <input id="LinkPerson" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
-                </div>
-                <div class="form-group">
-                    <label for="LinkPhone">联系电话</label>
-                    <input id="LinkPhone" type="text" class="form-control" isvalid="yes" checkexpession="MobileOrPhone" />
-                </div>
-                <div class="form-group">
-                    <label for="LegalPerson">法人</label>
-                    <input id="LegalPerson" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
-                </div>
-                <div class="form-group">
-                    <label for="StartTime">开始时间</label>
-                    <input id="StartTime" type="text" class="form-control input-wdatepicker" onclick="WdatePicker()" isvalid="yes" checkexpession="NotNull" />
-                </div>
-                <div class="form-group">
-                    <label for="Remark">备注</label>
-                    <textarea id="Remark" class="form-control" style="height:60px;"></textarea>
-                </div>
-            </form>
-            
+        <div class="item_row">
+            <div class="item_field_label"><span>联系人</span></div>
+            <div class="item_field_value" style="">
+                <input id="LinkPerson" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+            </div>
+        </div>
+        <div class="item_row">
+            <div class="item_field_label"><span>联系电话</span></div>
+            <div class="item_field_value" style="">
+                <input id="LinkPhone" type="text" class="form-control" isvalid="yes" checkexpession="MobileOrPhone" />
+            </div>
+        </div>
+        <div class="item_row">
+            <div class="item_field_label"><span>法人</span></div>
+            <div class="item_field_value" style="">
+                <input id="LegalPerson" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+            </div>
+        </div>
+        <div class="item_row">
+            <div class="item_field_label"><span>开始时间</span></div>
+            <div class="item_field_value" style="">
+                <input id="StartTime" type="text" class="form-control input-wdatepicker" onclick="WdatePicker()" isvalid="yes" checkexpession="NotNull" />
+            </div>
+        </div>
+        <div class="item_row">
+            <div class="item_field_label"><span>备注</span></div>
+            <div class="item_field_value" style="">
+                <textarea id="Remark" class="form-control" style="height:200px;"></textarea>
+            </div>
         </div>
     </div>
 </div>
 
+<div class="map-content h-col">
+    <div id="allmap"></div>
+</div>
 
+@*<div class="row">
+        <div class="col-md-8 col-xs-8 h-col">
+            <div style="margin:5px; border-left:0px solid #ccc;">
+                <form>
+                    <div class="form-group">
+                        <label for="Name">名称</label>
+                        <input id="Name" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+                    </div>
+                    <div class="form-group">
+                        <label for="LinkPerson">联系人</label>
+                        <input id="LinkPerson" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+                    </div>
+                    <div class="form-group">
+                        <label for="LinkPhone">联系电话</label>
+                        <input id="LinkPhone" type="text" class="form-control" isvalid="yes" checkexpession="MobileOrPhone" />
+                    </div>
+                    <div class="form-group">
+                        <label for="LegalPerson">法人</label>
+                        <input id="LegalPerson" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+                    </div>
+                    <div class="form-group">
+                        <label for="StartTime">开始时间</label>
+                        <input id="StartTime" type="text" class="form-control input-wdatepicker" onclick="WdatePicker()" isvalid="yes" checkexpession="NotNull" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Remark">备注</label>
+                        <textarea id="Remark" class="form-control" style="height:60px;"></textarea>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-4 h-col">
+
+            <div class="map-content h-col" style="width:100%; height:100%;">
+                <div id="allmap"></div>
+            </div>
+        </div>
+    </div>*@
+
+<script type="text/javascript" src="~/Content/scripts/app/map.locate.js"></script>
 <script type="text/javascript">
-    var reqAddress = request('address');
-    var reqLng = request('lng');
-    var reqLat = request('lat');
+
+    var keyValue = request('keyValue');
+    $(function () {
+        initControl();
+    });
+    //初始化控件
+    function initControl() {
+        //获取表单
+        if (!!keyValue) {
+            $.SetForm({
+                url: "../../ResourceManage/GasStations/GetFormJson",
+                param: { keyValue: keyValue },
+                success: function (data) {
+                    $("#form1").SetWebControls(data);
+                    $("#StartTime").val(formatDate(data.StartTime, "yyyy-MM-dd"));
+                    focusRequestLocation(data);
+                }
+            })
+        }
+    }
+    //保存表单;
+    function AcceptClick() {
+        if (!$('#form1').Validform()) {
+            return false;
+        }
+        //
+        var postData = mergeLoaction($("#form1").GetWebControls(keyValue));
+
+        $.SaveForm({
+            url: "../../ResourceManage/GasStations/SaveForm?keyValue=" + keyValue,
+            param: postData,
+            loading: "正在保存数据...",
+            success: function () {
+                $.currentIframe().$("#gridTable").trigger("reloadGrid");
+            }
+        });
+    }
 
     $('.map-content').height($(window).height() - 60);
     //resize重设(表格、树形)宽高
@@ -123,113 +256,4 @@
         e.stopPropagation();
     });
 </script>
-<script type="text/javascript">
-    var kouMap = new Kou.Map();
-    var map = kouMap.map;
-    //
-    kouMap.iniAutoComplete("txtSuggest");
 
-    //
-    var geoc = new BMap.Geocoder();
-
-    //单击获取点击的经纬度
-    map.addEventListener("click", function (e) {
-        var point = e.point;
-        console.info(e);
-        map.clearOverlays();    //清除地图上所有覆盖物
-        var marker = new BMap.Marker(point);// 创建标注
-        map.addOverlay(marker);// 将标注添加到地图中
-        marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
-
-        $("#lng").val(point.lng);
-        $("#lat").val(point.lat);
-        //
-        geoc.getLocation(point, function (rs) {
-            $("#txtSuggest").val(rs.address);
-        });
-    });
-
-    //
-    var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
-        {
-            input: "txtSuggest",
-            location: "上海市"
-        });
-    //$("#txtSuggest").val(reqAddress);
-    //ac.addEventListener("onhighlight", function (e) {  //鼠标放在下拉列表上的事件
-
-    //});
-
-
-    ac.addEventListener("onconfirm", function (e) {    //鼠标点击下拉列表后的事件
-        var _value = e.item.value;
-        var tmpPlace = _value.province + _value.city + _value.district + _value.street + _value.business;
-        searchAndSetPlace(tmpPlace);
-    });
-
-    function searchAndSetPlace(txtPlace) {
-        map.clearOverlays();    //清除地图上所有覆盖物
-        var local = new BMap.LocalSearch(map, { //智能搜索
-            onSearchComplete: function () {
-                var searchResults = local.getResults();
-                if (!searchResults) return;
-                var firstPoi = searchResults.getPoi(0);
-                if (!firstPoi) return;
-                var pp = firstPoi.point;    //获取第一个智能搜索的结果
-                if (!pp) return;
-                map.centerAndZoom(pp, 18);
-                map.addOverlay(new BMap.Marker(pp));    //添加标注
-            }
-        });
-        //在当前城市检索
-        local.search(txtPlace, { forceLocal: true });
-    }
-
-    //
-    //查询事件
-    $("#btn_Search").click(function () {
-        searchAndSetPlace($("#txtSuggest").val());
-    });
-    //查询回车
-    $('#txtSuggest').on('keydown', function (event) {
-        if (event.keyCode == "13") {
-            $('#btn_Search').trigger("click");
-        }
-    });
-
-    //确定
-    function AcceptClick(onAccept) {
-        var postData = {
-            address: $("#txtSuggest").val(),
-            lng: $("#lng").val(),
-            lat: $("#lat").val()
-        };
-        //
-        onAccept(postData);
-        dialogClose();
-    }
-
-    function focusRequestLocation() {
-        $("#txtSuggest").val(reqAddress);
-        $("#lng").val(reqLng);
-        $("#lat").val(reqLat);
-        if (reqLng > 0 && reqLat > 0) {
-            map.clearOverlays();
-            var reqPt = new BMap.Point(reqLng, reqLat);
-            var reqMarker = new BMap.Marker(reqPt);// 创建标注
-            map.addOverlay(reqMarker);// 将标注添加到地图中
-            map.panTo(reqPt);
-            reqMarker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
-        } else {
-            reqAddress && searchAndSetPlace(reqAddress);
-        }
-    }
-
-    setTimeout(function () {
-        focusRequestLocation();
-    }, 200);
-    //
-    //map.addEventListener("tilesloaded", function (e) {
-
-    //});
-</script>
