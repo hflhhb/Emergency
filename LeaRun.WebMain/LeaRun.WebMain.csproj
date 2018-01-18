@@ -266,6 +266,17 @@
     <Content Include="Content\images\gis\a4.gif" />
     <Content Include="Content\images\gis\a5.gif" />
     <Content Include="Content\images\gis\a8.gif" />
+    <Content Include="Content\images\gis\alarm.png" />
+    <Content Include="Content\images\gis\desktop.png" />
+    <Content Include="Content\images\gis\earth-globe.png" />
+    <Content Include="Content\images\gis\hospital.png" />
+    <Content Include="Content\images\gis\icon-1.png" />
+    <Content Include="Content\images\gis\plumbering.png" />
+    <Content Include="Content\images\gis\refund.png" />
+    <Content Include="Content\images\gis\reunion.png" />
+    <Content Include="Content\images\gis\shelter.png" />
+    <Content Include="Content\images\gis\shield.png" />
+    <Content Include="Content\images\gis\travel.png" />
     <Content Include="Content\images\head\avatar.png" />
     <Content Include="Content\images\head\avatar04.png" />
     <Content Include="Content\images\head\avatar2.png" />

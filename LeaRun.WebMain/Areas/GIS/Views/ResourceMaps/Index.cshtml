@@ -62,20 +62,111 @@
                 background: rgba(133, 174, 235, 0.9);
             }
         .legend-container{
-            position:fixed;
+            /*position:fixed;
             bottom:50px;
-            zoom:9999;
-
+            zoom:9999;*/
         }
         .legend-items {
             border:1px solid red;
             width:500px;
         }
+        .plugIn {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            margin-left: -400px;
+            height: 65px;
+            z-index:10000;
+        }
+
+            .plugIn:after {
+                content: '';
+                display: table;
+                clear: both;
+            }
+
+            .plugIn .plugIn-list {
+                height: 100%;
+                border-radius: 60px;
+                background-color: rgba(234, 234, 234, 0.74);
+                box-shadow: 1px 2px 5px 1px #9c9c9c, inset 0 -5px 10px 1px #cacaca;
+                padding: 0 40px;
+            }
+
+                .plugIn .plugIn-list > li {
+                    float: left;
+                    width: 80px;
+                    text-align: center;
+                    font-size: 13px;
+                    height: 100%;
+                    padding-top: 42px;
+                    position: relative;
+                }
+
+                    .plugIn .plugIn-list > li:before {
+                        content: '';
+                        display: block;
+                        width: 55px;
+                        height: 55px;
+                        border: 5px solid #2767a7;
+                        background-color: #fff;
+                        border-radius: 50%;
+                        position: absolute;
+                        top: -28px;
+                        left: 50%;
+                        margin-left: -28px;
+                        background-image: url(/Content/images/gis/icon-1.png);
+                        background-repeat: no-repeat;
+                        -webkit-background-size: 100%;
+                        background-size: 100%;
+                        box-shadow: 1px 1px 10px 1px #2767a7;
+                        cursor: pointer;
+                    }
+
+            .plugIn .plugIn-box {
+                position: absolute;
+                bottom: 108px;
+                min-width: 100%;
+                background-color: rgba(255, 255, 255, 0.74);
+                box-shadow: 1px 2px 5px 1px #9c9c9c, inset 0 -5px 10px 1px #cacaca;
+                border-radius: 3px;
+                padding: 5px 10px;
+                display: none;
+            }
+
+                .plugIn .plugIn-box > li {
+                    line-height: 1.7;
+                    border-radius: 2px;
+                    font-size: 12px;
+                    margin-bottom: 5px;
+                    cursor: pointer;
+                    white-space: nowrap;
+                    text-align: left;
+                    padding: 0 5px;
+                }
+
+                    .plugIn .plugIn-box > li:hover,
+                    .plugIn .plugIn-box > li.active {
+                        background-color: #2b67ad;
+                        color: #fff;
+                    }
+
+                .plugIn .plugIn-box:after {
+                    content: '';
+                    width: 0;
+                    height: 0;
+                    border-style: solid;
+                    border-width: 8px 7px 0 7px;
+                    border-color: #b9b9b9 transparent transparent transparent;
+                    position: absolute;
+                    bottom: -8px;
+                    margin-left: -7px;
+                }
     </style>
 }
 
-<div>
-    <div class="legend-container">
+<div class="map-container">
+    <div class="legend-container plugIn">
         @*<div class="card-box" data-key="gasStation">
             <div class="card-box-img">
                 <img class="gis-rc-img" src="~/Content/images/gis/a1.gif" />
@@ -102,13 +193,90 @@
             </div>
             <div class="card-box-content"><p class="card-box-title">医院</p></div>
         </div>*@
-        <ul style="padding-top: 20px;" class="legend-items">
-                <li class="active" data-value="1">加油站</li>
-                <li data-value="2">学校</li>
-                <li data-value="3">摄像头</li>
-                <li class="divide"></li>
-                <li data-value="4">医院</li>
-            </ul>
+
+        <ul class="plugIn-list">
+            <li data-v="shield">防护目标</li>
+            <li data-v="alarm">
+                <ul class="plugIn-box">
+                    <li>党政军机关</li>
+                    <li data-key="school">学校</li>
+                    <li>公众聚集场所</li>
+                    <li>重要场所</li>
+                    <li>在建工程施工场所</li>
+                    <li>公路基础设施</li>
+                    <li>水运基础交通设施</li>
+                    <li>水利设施</li>
+                    <li>电力基础设施</li>
+                    <li data-key="gasStation">石油天然气设施</li>
+                    <li>领导机构</li>
+                    <li>办事机构</li>
+                    <li>指挥和综合协调机构</li>
+                </ul>
+                <span>应急机构</span>
+            </li>
+            <li data-v="reunion">
+                <ul class="plugIn-box">
+                    <li>专家</li>
+                    <li>军队</li>
+                    <li>武警</li>
+                    <li>公安警察</li>
+                    <li>专业救援队伍</li>
+                </ul>
+                <span>人力资源</span>
+            </li>
+            <li data-v="plumbering">
+                <ul class="plugIn-box">
+                    <li>战略性储备物资</li>
+                    <li>专用应急物资及储备</li>
+                    <li>基本生活保障物资</li>
+                    <li>应急装备</li>
+                </ul>
+                <span>物资储备</span>
+            </li>
+            <li data-v="earth-globe">
+                <ul class="plugIn-box">
+                    <li>通信网</li>
+                    <li>通信保障机构</li>
+                    <li>通信设备</li>
+                </ul>
+                <span>通信资源</span>
+            </li>
+            <li data-v="travel">
+                <ul class="plugIn-box">
+                    <li>运输站场</li>
+                    <li>运输设备</li>
+                    <li>运输保障机构</li>
+                </ul>
+                <span>运输物流</span>
+            </li>
+            <li data-v="hospital">
+                <ul class="plugIn-box">
+                    <li data-key="hospital">医疗机构</li>
+                    <li>疾病预防控制中心</li>
+                    <li>卫生监督所</li>
+                    <li>医学科学研究机构</li>
+                    <li>医疗设备和药品</li>
+                    <li>其他医疗卫生资源</li>
+                </ul>
+                <span>医疗卫生</span>
+            </li>
+            <li data-v="shelter">
+                <ul class="plugIn-box">
+                    <li>避难场所</li>
+                    <li>人防工程</li>
+                </ul>
+                <span>避难场所</span>
+            </li>
+            <li data-v="refund">
+                <ul class="plugIn-box">
+                    <li>专项应急资金</li>
+                    <li>募捐资金</li>
+                    <li>应急保障</li>
+                </ul>
+                <span>财力保障</span>
+            </li>
+            <li data-v="desktop" data-key="camera" >视频监控</li>
+        </ul>
     </div>
     <div class="center-Panel">
         <div class="titlePanel">
@@ -148,15 +316,15 @@
         //    }
         //});
         //$('.profile-nav').height($(window).height() - 20);
-        $('.map-content').height($(window).height() - 80);
+        $('.map-content').height($(window).height() - 60);
         //resize重设(表格、树形)宽高
-        //$(window).resize(function (e) {
-        //    window.setTimeout(function () {
-        //        $('.profile-nav').height($(window).height() - 20);
-        //        $('.map-content').height($(window).height() - 80);
-        //    }, 200);
-        //    e.stopPropagation();
-        //});
+        $(window).resize(function (e) {
+            window.setTimeout(function () {
+                //$('.profile-nav').height($(window).height() - 20);
+                $('.map-content').height($(window).height() - 60);
+            }, 200);
+            e.stopPropagation();
+        });
     }
     InitialPage();
     //
@@ -171,6 +339,92 @@
         toggleResource();
     });
 
+    function LegendBox(config) {
+        var defaults = {
+            onSelect: function (keys) { }
+        };
+
+        this.options = $.extend({}, defaults, config);
+
+        this.active = '';
+        this.key = [];
+        this.keys = {};
+        this.ids = {};
+        this.init();
+    }
+    LegendBox.prototype = {
+        init : function () {
+            var self = this;
+            $('.plugIn-box').each(function () {
+                var w = ($(this).outerWidth() - $(this).closest('li').outerWidth()) / 2;
+                $(this).offset({ left: -w })
+            });
+            $('.map-container').click(this.hide);
+            $('.plugIn-list > li').click(function (e) {
+                e.stopPropagation();
+                self.hide();
+                self.active = $(this).data('v');
+                var resKind = $(this).data("key");
+                var box = $(this).find('.plugIn-box');
+                if (box.length <= 0) {
+                    if ($.inArray(resKind, self.key) < 0) {
+                        self.saveKey(resKind);
+                    } else {
+                        self.removeKey(resKind);
+                    }
+                    self.select();
+                } else {
+                    self.show(box)
+                }
+            });
+            $('.plugIn-box > li').click(function (e) {
+                e.stopPropagation();
+                if (self.key.length >= 10 && !$(this).hasClass('active')) {
+                    alert('最多同时支持搜索10个选项!')
+                } else {
+                    var resKind = $(this).data("key");
+                    if ($(this).hasClass('active')) {
+                        self.removeKey(resKind);
+                        $(this).removeClass('active');
+                    } else {
+                        $(this).addClass('active');
+                        self.saveKey(resKind);
+                    }
+                    self.select();
+                }
+            });
+        },
+
+        saveKey: function (value) {
+            value = $.trim(value);
+            if (!value) return;
+            this.keys[value] = this.active;
+            this.key.push(value);
+        },
+        removeKey: function (value) {
+            value = $.trim(value);
+            if (!value) return;
+            var index = $.inArray(value, this.key);
+            this.key.splice(index, 1);
+        },
+        show: function (box) {
+            $(box).show();
+        },
+        hide: function () {
+            $('.plugIn-box').hide();
+        },
+        select: function () {
+            if (!!this.options.onSelect) {
+                this.options.onSelect.call(this, this.key);
+            }
+        }
+    }
+    var legendbox = new LegendBox({
+        onSelect: function () {
+            map.setZoom(CLUSTER_ZOOM);
+            toggleResource();
+        }
+    });
 </script>
 <script type="text/javascript">
     var kouMap = new Kou.Map();
@@ -355,7 +609,10 @@
             clearPointCllections();
             return;
         }
-        if (getSelectedKinds().length <= 0) return;
+        if (getSelectedKinds().length <= 0) {
+            clearPointCllections();
+            return;
+        }
         _.each(_boundaryLabels, function (lb) {
             lb.hide();
         });
@@ -372,12 +629,16 @@
     //
 
     function getSelectedKinds() {
-        var resKinds = [];
-        $(".card-box.active").each(function () {
-            resKinds.push($(this).data("key"));
-        });
+        if ($(".card-box").length > 0) {
+            var resKinds = [];
+            $(".card-box.active").each(function () {
+                resKinds.push($(this).data("key"));
+            });
 
-        return resKinds;
+            return resKinds;
+        }
+        
+        return legendbox.key;
     }
     function loadResources() {
         var postBounds = getMapBounds();
@@ -400,7 +661,8 @@
 
     var resPaintConfig = {
         Cameras: {
-            size: BMAP_POINT_SIZE_SMALL,
+            icon: new BMap.Icon("Content/images/gis/alarm.png", new BMap.Size(24, 24)),
+            size: BMAP_POINT_SIZE_HUGE,
             shape: BMAP_POINT_SHAPE_WATERDROP,
             color: '#d340c3'
         },
@@ -410,12 +672,12 @@
             color: '#4c58a4'
         },
         GasStations: {
-            size: BMAP_POINT_SIZE_SMALL,
+            size: BMAP_POINT_SIZE_BIG,
             shape: BMAP_POINT_SHAPE_STAR,
             color: '#d3ed27'
         },
         Schools: {
-            size: BMAP_POINT_SIZE_SMALL,
+            size: BMAP_POINT_SIZE_BIG,
             shape: BMAP_POINT_SHAPE_CIRCLE,
             color: '#16e1cc'
         }
@@ -425,7 +687,12 @@
     function clearPointCllections() {
         _.forEach(_ptCollections, function (val, key) {
             map.removeOverlay(val);
+            //_.forEach(val, function (ov) {
+            //    map.removeOverlay(ov);
+            //    ov = null;
+            //});
             val = null;
+            delete _ptCollections[key];
         });
         _ptCollections = {};
     } 
@@ -445,18 +712,41 @@
     function addPointCollection(aryRes, opt) {
         // map.clearOverlays();
         var points = [];  // 添加海量点数据
+        var overlays = [];
+        var icn = new BMap.Icon("/Content/images/gis/alarm.png", new BMap.Size(24, 24));
         for (var i = 0; i < aryRes.length; i++) {
             var res = aryRes[i];
-            points.push(new BMap.Point(res.Longitude, res.Latitude));
+            var pt = new BMap.Point(res.Longitude, res.Latitude); 
+            points.push(pt);
+            //var marker = new BMap.Marker(pt, { icon: icn});
+            //map.addOverlay(marker);
+
+            //marker.addEventListener('click', function (e) {
+            //    //alert('单击点的坐标为：' + e.point.lng + ',' + e.point.lat);  // 监听点击事件
+            //    var sContent =
+            //        "<h4 style='margin:0 0 5px 0;padding:0.2em 0'>单击点的坐标为</h4>" +
+            //        //"<img style='float:right;margin:4px' id='imgDemo' src='../img/tianAnMen.jpg' width='139' height='104' title='天安门'/>" +
+            //        "<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'> " + e.point.lng + ',' + e.point.lat + "</p>" +
+            //        "</div>";
+            //    var infoWindow = new BMap.InfoWindow(sContent);
+            //    map.openInfoWindow(infoWindow, e.point);
+            //});
+
+            //overlays.push(marker);
         }
-        //var options = {
-        //    size: BMAP_POINT_SIZE_SMALL,
-        //    shape: BMAP_POINT_SHAPE_WATERDROP,
-        //    color: '#d340c3'
-        //}
+
+        //return overlays;
+
         var pointCollection = new BMap.PointCollection(points, opt);  // 初始化PointCollection
         pointCollection.addEventListener('click', function (e) {
-            alert('单击点的坐标为：' + e.point.lng + ',' + e.point.lat);  // 监听点击事件
+            //alert('单击点的坐标为：' + e.point.lng + ',' + e.point.lat);  // 监听点击事件
+            var sContent =
+                "<h4 style='margin:0 0 5px 0;padding:0.2em 0'>单击点的坐标为</h4>" +
+                //"<img style='float:right;margin:4px' id='imgDemo' src='../img/tianAnMen.jpg' width='139' height='104' title='天安门'/>" +
+                "<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'> " + e.point.lng + ',' + e.point.lat + "</p>" +
+                "</div>";
+            var infoWindow = new BMap.InfoWindow(sContent);
+            map.openInfoWindow(infoWindow, e.point);
         });
 
         map.addOverlay(pointCollection);  // 添加Overlay
