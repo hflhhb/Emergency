@@ -65,6 +65,7 @@
             /*position:fixed;
             bottom:50px;
             zoom:9999;*/
+            z-index:9999;
         }
         .legend-items {
             border:1px solid red;
@@ -76,7 +77,6 @@
             left: 50%;
             margin-left: -400px;
             height: 65px;
-            z-index:10000;
         }
 
             .plugIn:after {
@@ -103,24 +103,28 @@
                     position: relative;
                 }
 
-                    .plugIn .plugIn-list > li:before {
-                        content: '';
-                        display: block;
+                    .plugIn .plugIn-list > li.active > i {
+                        color: #fff;
+                        background: linear-gradient(#2f83d8, #053769);
+                        line-height: 55px;
+                        border: 0;
+                    }
+
+                    .plugIn .plugIn-list > li > i {
+                        box-shadow: 1px 1px 20px 1px #0a4b8c;
                         width: 55px;
                         height: 55px;
-                        border: 5px solid #2767a7;
+                        border-radius: 30px;
                         background-color: #fff;
-                        border-radius: 50%;
                         position: absolute;
                         top: -28px;
                         left: 50%;
                         margin-left: -28px;
-                        background-image: url(/Content/images/gis/icon-1.png);
-                        background-repeat: no-repeat;
-                        -webkit-background-size: 100%;
-                        background-size: 100%;
-                        box-shadow: 1px 1px 10px 1px #2767a7;
                         cursor: pointer;
+                        font-size: 34px;
+                        color: #0f4479;
+                        border: 5px solid #14599e;
+                        line-height: 46px;
                     }
 
             .plugIn .plugIn-box {
@@ -161,7 +165,7 @@
                     position: absolute;
                     bottom: -8px;
                     margin-left: -7px;
-                }
+                }
     </style>
 }
 
@@ -193,8 +197,105 @@
             </div>
             <div class="card-box-content"><p class="card-box-title">医院</p></div>
         </div>*@
-
         <ul class="plugIn-list">
+            <li data-v="shield" class="noList">
+                <i class="fa fa-bolt"></i>
+                <span>防护目标</span>
+            </li>
+            <li data-v="alarm">
+                <ul class="plugIn-box">
+                    <li>党政军机关</li>
+                    <li data-key="school">学校</li>
+                    <li>公众聚集场所</li>
+                    <li>重要场所</li>
+                    <li>在建工程施工场所</li>
+                    <li>公路基础设施</li>
+                    <li>水运基础交通设施</li>
+                    <li>水利设施</li>
+                    <li>电力基础设施</li>
+                    <li data-key="gasStation">石油天然气设施</li>
+                    <li>领导机构</li>
+                    <li>办事机构</li>
+                    <li>指挥和综合协调机构</li>
+                </ul>
+                <i class="fa fa-university" style="font-size: 25px;"></i>
+                <span>应急机构</span>
+            </li>
+            <li data-v="reunion">
+                <ul class="plugIn-box">
+                    <li>专家</li>
+                    <li>军队</li>
+                    <li>武警</li>
+                    <li>公安警察</li>
+                    <li>专业救援队伍</li>
+                </ul>
+                <i class="fa fa-users" style="font-size: 25px;"></i>
+                <span>人力资源</span>
+            </li>
+            <li data-v="plumbering">
+                <ul class="plugIn-box">
+                    <li>战略性储备物资</li>
+                    <li>专用应急物资及储备</li>
+                    <li>基本生活保障物资</li>
+                    <li>应急装备</li>
+                </ul>
+                <i style="font-size: 30px;" class="fa fa-truck"></i>
+                <span>物资储备</span>
+            </li>
+            <li data-v="earth-globe">
+                <ul class="plugIn-box">
+                    <li>通信网</li>
+                    <li>通信保障机构</li>
+                    <li>通信设备</li>
+                </ul>
+                <i class="fa fa-globe"></i>
+                <span>通信资源</span>
+            </li>
+            <li data-v="travel">
+                <ul class="plugIn-box">
+                    <li>运输站场</li>
+                    <li>运输设备</li>
+                    <li>运输保障机构</li>
+                </ul>
+                <i class="fa fa-plane"></i>
+                <span>运输物流</span>
+            </li>
+            <li data-v="hospital">
+                <ul class="plugIn-box">
+                    <li data-key="hospital">医疗机构</li>
+                    <li>疾病预防控制中心</li>
+                    <li>卫生监督所</li>
+                    <li>医学科学研究机构</li>
+                    <li>医疗设备和药品</li>
+                    <li>其他医疗卫生资源</li>
+                </ul>
+                <i class="fa fa-heartbeat" style="font-size: 30px;"></i>
+                <span>医疗卫生</span>
+            </li>
+            <li data-v="shelter">
+                <ul class="plugIn-box">
+                    <li>避难场所</li>
+                    <li>人防工程</li>
+                </ul>
+                <i class="fa fa-home"></i>
+                <span>避难场所</span>
+            </li>
+            <li data-v="refund">
+                <ul class="plugIn-box">
+                    <li>专项应急资金</li>
+                    <li>募捐资金</li>
+                    <li>应急保障</li>
+                </ul>
+                <i class="fa fa-bar-chart" style="font-size: 27px;"></i>
+                <span>财力保障</span>
+            </li>
+            <li data-v="desktop" data-key="camera" class="noList">
+                <i style="font-size: 25px;" class="fa fa-desktop"></i>
+                <span >视频监控</span>
+            </li>
+        </ul>
+
+        @*<ul class="plugIn-list">
             <li data-v="shield">防护目标</li>
             <li data-v="alarm">
                 <ul class="plugIn-box">
@@ -276,7 +377,7 @@
                 <span>财力保障</span>
             </li>
             <li data-v="desktop" data-key="camera" >视频监控</li>
-        </ul>
+        </ul>*@
     </div>
     <div class="center-Panel">
         <div class="titlePanel">
@@ -362,20 +463,47 @@
             $('.map-container').click(this.hide);
             $('.plugIn-list > li').click(function (e) {
                 e.stopPropagation();
-                self.hide();
+                //self.hide();
                 self.active = $(this).data('v');
                 var resKind = $(this).data("key");
                 var box = $(this).find('.plugIn-box');
-                if (box.length <= 0) {
-                    if ($.inArray(resKind, self.key) < 0) {
-                        self.saveKey(resKind);
+
+                if ($(this).hasClass('active')) {
+                    $(this).removeClass('active');
+                    if (box.length <= 0) {
+                        if ($.inArray(resKind, self.key) >= 0) {
+                            self.removeKey(resKind);
+                            self.select();
+                        }
                     } else {
-                        self.removeKey(resKind);
+                        self.hide()
                     }
-                    self.select();
                 } else {
-                    self.show(box)
+                    self.hide();
+                    $(this).addClass('active');
+                    if (box.length <= 0) {
+                        if ($.inArray(resKind, self.key) < 0) {
+                            self.saveKey(resKind);
+                            self.select();
+                        }
+                    } else {
+                        self.show(box)
+                    }
                 }
+
+                console.log(self.key);
+
+
+                //if (box.length <= 0) {
+                //    if ($.inArray(resKind, self.key) < 0) {
+                //        self.saveKey(resKind);
+                //    } else {
+                //        self.removeKey(resKind);
+                //    }
+                //    self.select();
+                //} else {
+                //    self.show(box)
+                //}
             });
             $('.plugIn-box > li').click(function (e) {
                 e.stopPropagation();
@@ -392,6 +520,8 @@
                     }
                     self.select();
                 }
+
+                console.log(self.key);
             });
         },
 
@@ -412,6 +542,7 @@
         },
         hide: function () {
             $('.plugIn-box').hide();
+            $('.plugIn-list > li:not(.noList)').removeClass('active');
         },
         select: function () {
             if (!!this.options.onSelect) {
@@ -421,7 +552,7 @@
     }
     var legendbox = new LegendBox({
         onSelect: function () {
-            map.setZoom(CLUSTER_ZOOM);
+            //map.setZoom(CLUSTER_ZOOM);
             toggleResource();
         }
     });
@@ -607,7 +738,7 @@
                 lb.show();
             });
             clearPointCllections();
-            return;
+            //return;
         }
         if (getSelectedKinds().length <= 0) {
             clearPointCllections();
@@ -661,41 +792,54 @@
 
     var resPaintConfig = {
         Cameras: {
-            icon: new BMap.Icon("Content/images/gis/alarm.png", new BMap.Size(24, 24)),
+            //icon: new BMap.Icon("/Content/images/gis/alarm.png", new BMap.Size(24, 24)),
+            iconkey:"alarm",
             size: BMAP_POINT_SIZE_HUGE,
             shape: BMAP_POINT_SHAPE_WATERDROP,
             color: '#d340c3'
         },
         Hospitals: {
+            iconkey: "hospital",
             size: BMAP_POINT_SIZE_BIG,
             shape: BMAP_POINT_SHAPE_RHOMBUS,
             color: '#4c58a4'
         },
         GasStations: {
+            iconkey: "reunion",
             size: BMAP_POINT_SIZE_BIG,
             shape: BMAP_POINT_SHAPE_STAR,
             color: '#d3ed27'
         },
         Schools: {
+            iconkey: "shelter",
             size: BMAP_POINT_SIZE_BIG,
             shape: BMAP_POINT_SHAPE_CIRCLE,
             color: '#16e1cc'
         }
     };
+
+    //_.forEach(resPaintConfig, function (opt, idx) {
+        
+
+    //});
     
     //
     function clearPointCllections() {
         _.forEach(_ptCollections, function (val, key) {
-            map.removeOverlay(val);
-            //_.forEach(val, function (ov) {
-            //    map.removeOverlay(ov);
-            //    ov = null;
-            //});
-            val = null;
+            if (_.isArray(val)) {
+                _.forEach(val, function (ov) {
+                    map.removeOverlay(ov);
+                    ov = null;
+                });
+            } else {
+                map.removeOverlay(val);
+                val = null;
+            }
+
             delete _ptCollections[key];
         });
         _ptCollections = {};
-    } 
+    }
 
     function locateResource(data) {
         //
@@ -703,7 +847,12 @@
         //
         _.forEach(data, function (val, key) {
             if (val != null && _.any(val)) {
-                _ptCollections[key] = addPointCollection(val, resPaintConfig[key]);
+                console.log(key, resPaintConfig[key]);
+                if (val.length > 100) {
+                    _ptCollections[key] = addPointCollection(val, resPaintConfig[key]);
+                } else {
+                    _ptCollections[key] = addPointMarkers(val, resPaintConfig[key]);
+                }
             }
         });
 
@@ -713,44 +862,50 @@
         // map.clearOverlays();
         var points = [];  // 添加海量点数据
         var overlays = [];
-        var icn = new BMap.Icon("/Content/images/gis/alarm.png", new BMap.Size(24, 24));
+       
         for (var i = 0; i < aryRes.length; i++) {
             var res = aryRes[i];
             var pt = new BMap.Point(res.Longitude, res.Latitude); 
             points.push(pt);
-            //var marker = new BMap.Marker(pt, { icon: icn});
-            //map.addOverlay(marker);
-
-            //marker.addEventListener('click', function (e) {
-            //    //alert('单击点的坐标为：' + e.point.lng + ',' + e.point.lat);  // 监听点击事件
-            //    var sContent =
-            //        "<h4 style='margin:0 0 5px 0;padding:0.2em 0'>单击点的坐标为</h4>" +
-            //        //"<img style='float:right;margin:4px' id='imgDemo' src='../img/tianAnMen.jpg' width='139' height='104' title='天安门'/>" +
-            //        "<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'> " + e.point.lng + ',' + e.point.lat + "</p>" +
-            //        "</div>";
-            //    var infoWindow = new BMap.InfoWindow(sContent);
-            //    map.openInfoWindow(infoWindow, e.point);
-            //});
-
-            //overlays.push(marker);
         }
 
-        //return overlays;
-
         var pointCollection = new BMap.PointCollection(points, opt);  // 初始化PointCollection
-        pointCollection.addEventListener('click', function (e) {
-            //alert('单击点的坐标为：' + e.point.lng + ',' + e.point.lat);  // 监听点击事件
-            var sContent =
-                "<h4 style='margin:0 0 5px 0;padding:0.2em 0'>单击点的坐标为</h4>" +
-                //"<img style='float:right;margin:4px' id='imgDemo' src='../img/tianAnMen.jpg' width='139' height='104' title='天安门'/>" +
-                "<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'> " + e.point.lng + ',' + e.point.lat + "</p>" +
-                "</div>";
-            var infoWindow = new BMap.InfoWindow(sContent);
-            map.openInfoWindow(infoWindow, e.point);
-        });
+        pointCollection.addEventListener('click', onResourceClick);
 
         map.addOverlay(pointCollection);  // 添加Overlay
+       // map.setViewport(points);
         return pointCollection;
+    }
+
+    function addPointMarkers(aryRes, opt) {
+        // map.clearOverlays();
+        var points = [];
+        var overlays = [];
+        var icn = new BMap.Icon("/Content/images/gis/" + (opt.iconkey || "alarm") + ".png", new BMap.Size(24, 24));
+        for (var i = 0; i < aryRes.length; i++) {
+            var res = aryRes[i];
+            var pt = new BMap.Point(res.Longitude, res.Latitude);
+            points.push(pt);
+            var marker = new BMap.Marker(pt, { icon: icn});
+            map.addOverlay(marker);
+
+            marker.addEventListener('click', onResourceClick);
+
+            overlays.push(marker);
+        }
+        //map.setViewport(points);
+        return overlays;
+    }
+
+    function onResourceClick(e) {
+        //alert('单击点的坐标为：' + e.point.lng + ',' + e.point.lat);  // 监听点击事件
+        var sContent =
+            "<h4 style='margin:0 0 5px 0;padding:0.2em 0'>单击点的坐标为</h4>" +
+            //"<img style='float:right;margin:4px' id='imgDemo' src='../img/tianAnMen.jpg' width='139' height='104' title='天安门'/>" +
+            "<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'> " + e.point.lng + ',' + e.point.lat + "</p>" +
+            "</div>";
+        var infoWindow = new BMap.InfoWindow(sContent);
+        map.openInfoWindow(infoWindow, e.point);
     }
 
     //
