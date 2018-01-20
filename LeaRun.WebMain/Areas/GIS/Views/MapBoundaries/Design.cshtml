@@ -172,7 +172,7 @@
     }
 
     //
-    var lazyLoadDbBoundary = _.debounce(loadDbBoundary, 0);
+    var lazyLoadDbBoundary = _.debounce(loadBoundary, 0);
     $(function () {
         lazyLoadDbBoundary();
     });
@@ -180,19 +180,104 @@
         //lazyLoadDbBoundary();
     });
     //
-    function loadDbBoundary() {
-        if (!checkKeyvalue()) return;
+    function getMapBounds() {
+        var bounds = map.getBounds();
+        var postBounds = {
+            lngsw: bounds.Le,
+            latsw: bounds.Ke,
+            lngne: bounds.Ge,
+            latne: bounds.Fe
+        };
+
+        return postBounds;
+    }
+    function loadBoundary() {
+        var postBounds = getMapBounds();
         $.ajax({
-            url: "/GIS/MapBoundaries/GetFormJson?keyvalue="+keyValue,
-            data: {  },
+            url: "/GIS/MapBoundaries/GetListJson",
+            data: { queryJson: JSON.stringify(postBounds) },
             type: "get",
             dataType: "json",
             success: function (data) {
-                paintDbBoundary(data);
+                paintAllBoundary(data);
             },
         });
+
     }
 
+    function paintAllBoundary(data) {
+        var pointArray = [];
+        _.each(data, function (b) {
+            if (b.Id == keyValue) {
+                paintDbBoundary(b);
+            } else {
+                paintBrotherBoundary(b);
+            }
+        });
+
+        //map.setViewport(pointArray);    //调整视野
+
+    }
+    //
+    //function loadDbBoundary() {
+    //    if (!checkKeyvalue()) return;
+    //    $.ajax({
+    //        url: "/GIS/MapBoundaries/GetFormJson?keyvalue="+keyValue,
+    //        data: {  },
+    //        type: "get",
+    //        dataType: "json",
+    //        success: function (data) {
+    //            paintDbBoundary(data);
+    //        },
+    //    });
+    //}
+
+    //
+
+    function paintBrotherBoundary(b) {
+        var pointArray = [];
+        var boundarypts = b.Boundary;
+
+        var ply = new BMap.Polygon(boundarypts, {
+            //strokeWeight: 2, strokeColor: "#ff0000"
+            strokeColor: "#0955CF",
+            strokeWeight: 1,
+            strokeOpacity: 0.7,
+            strokeStyle: "dashed",
+            filled: true,
+            fillColor: "#84A8E2",
+            fillOpacity: 0.3,
+            //autoClose: true,
+            //infowin: false
+        }); //建立多边形覆盖物
+        map.addOverlay(ply);  //添加覆盖物
+
+        var position = new BMap.Point(b.Longitude, b.Latitude);
+        //创建label
+        var label = new BMap.Label({ position: position });
+        label.setStyle({
+            //height: '25px',
+            //color: "#fff",
+            backgroundColor: 'transparent',
+            border: 'none',
+            //borderRadius: "25px",
+            //fontWeight: 'bold',
+        });
+        //var content = '<span style="color:red"><i class="fa fa-map-marker"></i></span>' + '<p style="padding:0px 13px;text-align:center;margin-top:5px;">这是一个点</p>';
+        //var content = '<div data-id="chuansha" class="plate-overlay visited">川沙<br>4.3万<br>1086套</div>';
+        //var content = '<div data-id="chuansha" class="plate-overlay visited">' + '川沙<br>4.3万<br>1086套' + '</div>';
+        var content = '<div data-id="chuansha" class="plate-overlay visited">' + decodeURIComponent(b.Content || "") + '</div>';
+        label.setContent(content);
+        label.setPosition(position);
+        label.setOffset(new BMap.Size(-43, -43));
+        //_boundaryLabels.push(label);
+        map.addOverlay(label);
+
+        pointArray = pointArray.concat(ply.getPath());
+
+        //map.setViewport(pointArray);    //调整视野
+
+    }
     //
     function paintDbBoundary(data) {
         var dbBoundary = data.Boundary;

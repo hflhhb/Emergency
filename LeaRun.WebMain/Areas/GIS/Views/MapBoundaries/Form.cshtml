@@ -17,6 +17,7 @@
                 success: function (data) {
                     if (!!data.Content) {
                         data.Content = decodeURIComponent(data.Content);
+                        data.Properties = decodeURIComponent(data.Properties);
                     }
                     $("#form1").SetWebControls(data);
                 }
@@ -30,6 +31,7 @@
         }
         var postData = $("#form1").GetWebControls(keyValue);
         postData.Content = encodeURIComponent(postData.Content);
+        postData.Properties = encodeURIComponent(postData.Properties);
         if (!keyValue) { //新建时
             postData.Latitude = 0;
             postData.Longitude = 0;
@@ -97,11 +99,18 @@
             </td>
         </tr>
         <tr>
+            <td class="formTitle">属性</td>
+            <td class="formValue" colspan='3'>
+                <textarea id="Properties" class="form-control" style="height:80px;"></textarea>
+            </td>
+        </tr>
+        <tr>
             <td class="formTitle">备注</td>
             <td class="formValue" colspan='3'>
                 <textarea id="Remark" class="form-control" style="height:60px;"></textarea>
             </td>
         </tr>
+
 
     </table>
 </div>

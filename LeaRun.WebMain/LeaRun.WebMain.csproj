@@ -267,6 +267,7 @@
     <Content Include="Content\images\gis\a5.gif" />
     <Content Include="Content\images\gis\a8.gif" />
     <Content Include="Content\images\gis\alarm.png" />
+    <Content Include="Content\images\gis\bar.png" />
     <Content Include="Content\images\gis\desktop.png" />
     <Content Include="Content\images\gis\earth-globe.png" />
     <Content Include="Content\images\gis\hospital.png" />

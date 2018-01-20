@@ -79,6 +79,11 @@ namespace LeaRun.GIS.Entity
         /// </summary>
         /// <returns></returns>
         public string Remark { get; set; }
+        /// <summary>
+        /// Properties
+        /// </summary>
+        /// <returns></returns>
+        public string Properties { get; set; }
         #endregion
 
         #region 扩展操作

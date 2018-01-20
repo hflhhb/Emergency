@@ -61,11 +61,22 @@
             .plate-overlay.zufang.visited {
                 background: rgba(133, 174, 235, 0.9);
             }
-        .legend-container{
+        .area-title {
+            font-weight:bold;
+            font-size:14px;
+            color:orangered;
+            vertical-align:bottom;
+        }
+        .area-bar{
+            /*width:24px;*/
+            height:34px;
+            padding-right:5px;
+        } 
+        .legend-container {
             /*position:fixed;
             bottom:50px;
             zoom:9999;*/
-            z-index:9999;
+            z-index: 9999;
         }
         .legend-items {
             border:1px solid red;
@@ -627,8 +638,11 @@
         var pointArray = [];
         _.each(data, function (b) {
             var boundarypts = b.Boundary;
-
-            var ply = new BMap.Polygon(boundarypts, {
+            console.log(b.Properties);
+            var objProp = eval("(" + decodeURIComponent(b.Properties || "{}") + ")");
+            var cusStyle = objProp.style;
+            console.log(objProp);
+            var style = _.extend({}, {
                 //strokeWeight: 2, strokeColor: "#ff0000"
                 strokeColor: "#0955CF",
                 strokeWeight: 1,
@@ -639,7 +653,9 @@
                 fillOpacity: 0.3,
                 //autoClose: true,
                 //infowin: false
-            }); //建立多边形覆盖物
+            }, cusStyle);
+
+            var ply = new BMap.Polygon(boundarypts, style); //建立多边形覆盖物
             map.addOverlay(ply);  //添加覆盖物
 
             var position = new BMap.Point(b.Longitude, b.Latitude);
@@ -656,7 +672,8 @@
             //var content = '<span style="color:red"><i class="fa fa-map-marker"></i></span>' + '<p style="padding:0px 13px;text-align:center;margin-top:5px;">这是一个点</p>';
             //var content = '<div data-id="chuansha" class="plate-overlay visited">川沙<br>4.3万<br>1086套</div>';
             //var content = '<div data-id="chuansha" class="plate-overlay visited">' + '川沙<br>4.3万<br>1086套' + '</div>';
-            var content = '<div data-id="chuansha" class="plate-overlay visited">' + decodeURIComponent(b.Content || "") + '</div>';
+            //var content = '<div data-id="chuansha" class="plate-overlay visited">' + decodeURIComponent(b.Content || "") + '</div>';
+            var content = '<div data-id="' + b.Id + '" class=""><img class="area-bar" src="/Content/images/gis/bar.png"><span class="area-title">' + b.Name + ':100人</span></div>';
             label.setContent(content);
             label.setPosition(position);
             label.setOffset(new BMap.Size(-43, -43));

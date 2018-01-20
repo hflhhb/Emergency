@@ -44,6 +44,13 @@
                         return _.escape(decodeURIComponent(cellvalue));
                     }
                 },
+                {
+                    label: '属性', name: 'Properties', index: 'Properties', width: 200, align: 'left', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (!cellvalue) return "";
+                        return _.escape(decodeURIComponent(cellvalue));
+                    }
+                },
                 { label: '备注', name: 'Remark', index: 'Remark', width: 100, align: 'left',sortable: true  },
                 { label: '创建时间', name: 'CreateTime', index: 'CreateTime', width: 100, align: 'left',sortable: true  },
                 { label: '创建用户', name: 'CreateUser', index: 'CreateUser', width: 100, align: 'left',sortable: true  },
@@ -71,8 +78,8 @@
             id: 'Form',
             title: '添加地图区域',
             url: '/GIS/MapBoundaries/Form',
-            width: '500px',
-            height: '450px',
+            width: '600px',
+            height: '550px',
             callBack: function (iframeId) {
                 top.frames[iframeId].AcceptClick();
             }
@@ -86,8 +93,8 @@
                 id: 'Form',
                 title: '编辑地图区域',
                 url: '/GIS/MapBoundaries/Form?keyValue=' + keyValue,
-                width: '500px',
-                height: '450px',
+                width: '600px',
+                height: '550px',
                 callBack: function (iframeId) {
                     top.frames[iframeId].AcceptClick();
                 }
