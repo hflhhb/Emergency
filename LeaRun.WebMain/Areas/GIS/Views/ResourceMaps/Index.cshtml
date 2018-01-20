@@ -82,6 +82,7 @@
             border:1px solid red;
             width:500px;
         }
+
         .plugIn {
             position: absolute;
             bottom: 30px;
@@ -119,6 +120,7 @@
                         background: linear-gradient(#2f83d8, #053769);
                         line-height: 55px;
                         border: 0;
+                        box-shadow: 0px 0px 12px 5px #00dcff;
                     }
 
                     .plugIn .plugIn-list > li > i {
@@ -159,6 +161,24 @@
                     text-align: left;
                     padding: 0 5px;
                 }
+
+                    .plugIn .plugIn-box > li:nth-child(1):before {
+                        content: '';
+                        display: inline-block;
+                        background-image: url(/Content/images/gis/alarm.png);
+                        background-repeat: no-repeat;
+                        width: 17px;
+                        height: 17px;
+                        -webkit-background-size: contain;
+                        background-size: contain;
+                        vertical-align: middle;
+                        margin-right: 3px;
+                    }
+
+                    .plugIn .plugIn-box > li.spliter {
+                        border: 1px solid #797979;
+                        margin: 0 5px 5px 5px;
+                    }
 
                     .plugIn .plugIn-box > li:hover,
                     .plugIn .plugIn-box > li.active {
@@ -219,12 +239,13 @@
                     <li data-key="school">学校</li>
                     <li>公众聚集场所</li>
                     <li>重要场所</li>
+                    <li class="spliter"></li>
                     <li>在建工程施工场所</li>
                     <li>公路基础设施</li>
                     <li>水运基础交通设施</li>
                     <li>水利设施</li>
                     <li>电力基础设施</li>
-                    <li data-key="gasStation">石油天然气设施</li>
+                    <li>石油天然气设施</li>
                     <li>领导机构</li>
                     <li>办事机构</li>
                     <li>指挥和综合协调机构</li>
@@ -273,7 +294,7 @@
             </li>
             <li data-v="hospital">
                 <ul class="plugIn-box">
-                    <li data-key="hospital">医疗机构</li>
+                    <li>医疗机构</li>
                     <li>疾病预防控制中心</li>
                     <li>卫生监督所</li>
                     <li>医学科学研究机构</li>
@@ -300,9 +321,9 @@
                 <i class="fa fa-bar-chart" style="font-size: 27px;"></i>
                 <span>财力保障</span>
             </li>
-            <li data-v="desktop" data-key="camera" class="noList">
+            <li data-v="desktop" data-key="camera"  class="noList">
                 <i style="font-size: 25px;" class="fa fa-desktop"></i>
-                <span >视频监控</span>
+                <span>视频监控</span>
             </li>
         </ul>
 
@@ -479,28 +500,50 @@
                 var resKind = $(this).data("key");
                 var box = $(this).find('.plugIn-box');
 
-                if ($(this).hasClass('active')) {
-                    $(this).removeClass('active');
-                    if (box.length <= 0) {
-                        if ($.inArray(resKind, self.key) >= 0) {
-                            self.removeKey(resKind);
-                            self.select();
-                        }
+                self.hide();
+                if (box.length <= 0) {
+                    if (!$(this).hasClass("active")) {
+                        $(this).addClass("active");
+                        self.saveKey(resKind);
                     } else {
-                        self.hide()
+                        $(this).removeClass("active");
+                        self.removeKey(resKind);
                     }
+                    //if ($.inArray(resKind, self.key) >= 0) {
+                    //    self.removeKey(resKind);
+                    //} else {
+                    //    self.saveKey(resKind);
+                    //}
+                    self.select();
                 } else {
-                    self.hide();
-                    $(this).addClass('active');
-                    if (box.length <= 0) {
-                        if ($.inArray(resKind, self.key) < 0) {
-                            self.saveKey(resKind);
-                            self.select();
-                        }
-                    } else {
-                        self.show(box)
+                    if (!$(this).hasClass('active')) {
+                        $(this).addClass('active');
                     }
                 }
+                self.show(box);
+
+                //if ($(this).hasClass('active')) {
+                //    $(this).removeClass('active');
+                //    if (box.length <= 0) {
+                //        if ($.inArray(resKind, self.key) >= 0) {
+                //            self.removeKey(resKind);
+                //            self.select();
+                //        }
+                //    } else {
+                //        self.hide()
+                //    }
+                //} else {
+                //    self.hide();
+                //    $(this).addClass('active');
+                //    if (box.length <= 0) {
+                //        if ($.inArray(resKind, self.key) < 0) {
+                //            self.saveKey(resKind);
+                //            self.select();
+                //        }
+                //    } else {
+                //        self.show(box)
+                //    }
+                //}
 
                 console.log(self.key);
 
@@ -516,11 +559,11 @@
                 //    self.show(box)
                 //}
             });
-            $('.plugIn-box > li').click(function (e) {
+            $('.plugIn-box > li:not(.spliter)').click(function (e) {
                 e.stopPropagation();
-                if (self.key.length >= 10 && !$(this).hasClass('active')) {
+                if (self.key.length === 10 && !$(this).hasClass('active')) {
                     alert('最多同时支持搜索10个选项!')
-                } else {
+                }  else {
                     var resKind = $(this).data("key");
                     if ($(this).hasClass('active')) {
                         self.removeKey(resKind);
@@ -553,7 +596,18 @@
         },
         hide: function () {
             $('.plugIn-box').hide();
-            $('.plugIn-list > li:not(.noList)').removeClass('active');
+            var box = $('.plugIn-list');
+            var la = box.find('>li.active');
+            la.each(function () {
+                if ($(this).find('.plugIn-box').length > 0) {
+                    if ($(this).find('li.active').length <= 0) {
+                        $(this).removeClass('active');
+                    }
+                }
+            });
+
+            //$('.plugIn-box').hide();
+            //$('.plugIn-list > li:not(.noList)').removeClass('active');
         },
         select: function () {
             if (!!this.options.onSelect) {
