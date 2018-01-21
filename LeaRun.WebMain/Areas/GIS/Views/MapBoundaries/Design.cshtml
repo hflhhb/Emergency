@@ -83,6 +83,7 @@
                     <div class="pull-left">
                         <button class="btn btn-info" id="btnJoinPoint">区域连接</button>
                         <button class="btn btn-danger" id="btnClearPoint">清空</button>
+                        <span class="text-info" id="currentPoint"></span>
                     </div>
                     <div class="pull-right">
                         <button class="btn btn-primary lr-push-right" id="btnSave">保存</button>
@@ -122,7 +123,7 @@
         //layout布局
         $('#layout').layout({
             applyDefaultStyles: true,
-            east__size: 300,
+            east__size: 320,
             onresize: function () {
                 $(window).resize()
             }
@@ -307,6 +308,7 @@
         points: [],
         markers: [],
         ply: null,
+        ptelem:null,
     };
     function clearBoundary() {
         //
@@ -327,17 +329,40 @@
     function getPointKey(point) {
         return point.lng + "," + point.lat;
     }
+
+    function findPointPos(key) {
+        return _.findIndex(boundary.points, function (p, i) {
+            return getPointKey(p) == key;
+        });
+    }
+
+    function getMarker(key) {
+        var findedIdx = findPointPos(key);
+        
+        if (findedIdx >= 0) {
+            return boundary.markers[findedIdx];
+        }
+
+        return null;
+    }
+
+    function setCurrentPoint(elem) {
+        if (elem == null || elem.length == 0) {
+            boundary.ptelem = null;
+            $("#currentPoint").html("");
+        } else {
+            boundary.ptelem = elem;
+            $("#currentPoint").html(elem.find(".boundary-pt-title").text());
+        }
+    }
+
     $(".boundary-pts").on("click", ".btn-pt-del", function () {
         var key = $(this).data("key");
         $(this).parent().remove();
-        var findedIdx = -1;
-        _.remove(boundary.points, function (p, i) {
-            if (getPointKey(p) == key) {
-                findedIdx = i;
-                return true;
-            }
-        });
+        var findedIdx = findPointPos(key);
+        
         if (findedIdx >= 0) {
+            var delingPts = _.pullAt(boundary.points, findedIdx);
             var delingMarks = _.pullAt(boundary.markers, findedIdx);
             _.each(delingMarks, function (m) {
                 map.removeOverlay(m);
@@ -350,11 +375,50 @@
     map.addEventListener("click", function (e) {
         pIndex++;
         var curPt = new BMap.Point(e.point.lng, e.point.lat);
-        boundary.points.push(curPt);
-        addMarker(curPt, pIndex);
-        $(".boundary-pts ul").append(createPointHtml(curPt));
+        var marker = null;
+        if (boundary.ptelem == null) {
+            boundary.points.push(curPt);
+            marker = addMarker(curPt, pIndex);
+            $(".boundary-pts ul").append(createPointHtml(curPt));
+        } else {
+            var key = boundary.ptelem.data("key");
+            var findedIdx = findPointPos(key);
+            if (findedIdx >= 0) {
+                var pos = findedIdx + 1;
+                boundary.points.splice(pos, 0, curPt);
+                marker = addMarker(curPt, pIndex, pos);
+
+                //$(createPointHtml(curPt)).insertBefore(boundary.ptelem);
+                boundary.ptelem.after(createPointHtml(curPt));
+            }
+            
+        }
+        if (marker != null) {
+            var key = getPointKey(marker.getPosition());
+            var curliPt = $(".boundary-pt-li[data-key='" + key + "']");
+            if (curliPt.length > 0) {
+                setCurrentPoint(curliPt);
+            }
+        }
         paintBoundaryLine();
     });
+
+    $(".boundary-pts").on({
+        "focus": function () {
+            var liPt = $(this).closest(".boundary-pt-li");
+            var key = liPt.data("key");
+            var marker = getMarker(key);
+            marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+            setCurrentPoint(liPt);
+        },
+        "blur": function () {
+            var liPt = $(this).closest(".boundary-pt-li");
+            var key = liPt.data("key");
+            var marker = getMarker(key);
+            marker.setAnimation(null); //清除动画
+            setCurrentPoint(null);
+        }
+    }, "input.boundary-pt");
 
     function createPointHtml(point) {
         var key = getPointKey(point);
@@ -367,12 +431,27 @@
 
         return html;
     }
-    function addMarker(point, index) {
+    function addMarker(point, index, position) {
         var marker = new BMap.Marker(point);
         map.addOverlay(marker);
         var label = new BMap.Label("边界点" + index, { offset: new BMap.Size(20, -10) });
         marker.setLabel(label);
-        boundary.markers.push(marker);
+        if (position >= 0) {
+            boundary.markers.splice(position, 0, marker);
+        } else {
+            boundary.markers.push(marker);
+        }
+
+        marker.addEventListener("click", function (e) {
+            //console.log(e);
+            //e.domEvent.cancelBubble = true;
+            ////e.stopPropagation();
+            //if (e.target) {
+            //    e.target.setAnimation(BMAP_ANIMATION_BOUNCE);
+            //}
+        });
+
+        return marker;
     }
 
     function paintBoundary() {
