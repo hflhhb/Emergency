@@ -14,10 +14,10 @@
 <div>测试数据：</div>
 
 <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-7">
         <div id="staticChart" style="height:600px;"></div>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-5">
         <div id="dynamicChart" style="height:600px;"></div>
     </div>
 </div>
@@ -37,7 +37,7 @@
             data: ['数量']
         },
         xAxis: {
-            axisLabel: { rotate: 45 },
+            axisLabel: { rotate: 45, fontSize: 8 },
             data: ["[31A00]党政军机关", "[31B00]学校", "[31C00]公众聚集场所", "[31H00]重要场所", "[31M00] 在建工程施工场所"]
         },
         yAxis: {},
@@ -55,21 +55,22 @@
             subtext: '应急办',
             left: 'center'
         },
-        tooltip: {
-            show: true,
-            feature: {
-                dataView: { show: true, readOnly: false },
-                magicType: { show: true, type: ['pie', 'line', 'bar'] },
-                restore: { show: true },
-                saveAsImage: { show: true }
-            }
+
+        grid: {
+            tooltip: {
+                show: true,
+                feature: {
+                    dataView: { show: true, readOnly: false },
+                    magicType: { show: true, type: ['pie', 'line', 'bar'] },
+                    restore: { show: true },
+                    saveAsImage: { show: true }
+                }
+            },
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
         },
-        //grid: {
-        //    left: '3%',
-        //    right: '4%',
-        //    bottom: '3%',
-        //    containLabel: true
-        //},
         legend: {
             x: "left",
             data: ['资源数量']
@@ -77,6 +78,7 @@
         xAxis: [
             {
                 type: 'category',
+                data: ["[31A00]党政军机关", "[31B00]学校", "[31C00]公众聚集场所", "[31H00]重要场所", "[31M00] 在建工程施工场所"]
                 //data: ["党政军机关", "学校", "公众聚集场所", "重要场所", "在建工程施工场所"]
             }
         ],
@@ -128,11 +130,11 @@
     $(function () {
         //动态数据 的方式
         var dataFromServer = [
-            { Name: "党政军机关", Value: 12 },
-            { Name: "学校", Value: 30 },
-            { Name: "公众聚集场所", Value: 10 },
-            { Name: "重要场所", Value: 2 },
-            { Name: "在建工程施工场所", Value: 15 },
+            { Name: "[31A00]党政军机关", Value: 12 },
+            { Name: "[31B00]学校", Value: 30 },
+            { Name: "[31C00]公众聚集场所", Value: 10 },
+            { Name: "[31H00]重要场所", Value: 2 },
+            { Name: "[31M00]在建工程施工场所", Value: 15 },
         ];
         //去服务器取得数据
         //$.get("/xxx", { _: new Date().valueOf() })

@@ -316,12 +316,13 @@
         boundary.points = [];
         //
         _.each(boundary.markers, function (m) {
-            map.removeOverlay(m);
+            removeMarker(m);
         });
         boundary.markers = [];
         //
         map.removeOverlay(boundary.ply);
         boundary.ply = null;
+        boundary.ptelem = null;
         //
         pIndex = 0;
     }
@@ -357,7 +358,7 @@
     }
 
     $(".boundary-pts").on("click", ".btn-pt-del", function () {
-        var key = $(this).data("key");
+        var key = $(this).closest(".boundary-pt-li").data("key");
         $(this).parent().remove();
         var findedIdx = findPointPos(key);
         
@@ -365,7 +366,7 @@
             var delingPts = _.pullAt(boundary.points, findedIdx);
             var delingMarks = _.pullAt(boundary.markers, findedIdx);
             _.each(delingMarks, function (m) {
-                map.removeOverlay(m);
+                removeMarker(m);
             });
         }
 
@@ -424,9 +425,9 @@
         var key = getPointKey(point);
         var html = '<li class="boundary-pt-li" data-key="' + key + '">';
         html += '<span class="boundary-pt-title"><i class="fa fa-map-signs"></i> ' + (pIndex) + '</span>';
-        html += '<span><input type="text" class="form-control boundary-pt" value="' + point.lng +'"/></span> ';
-        html += '<span><input type="text" class="form-control boundary-pt" value="' + point.lat + '" /></span> ';
-        html += '<button class="btn btn-xs btn-danger btn-pt-del" data-key="' + key + '"><i class="fa fa-trash-o"></i> 删除</button>';
+        html += '<span><input type="text" class="form-control boundary-pt pt-lng" value="' + point.lng +'"/></span> ';
+        html += '<span><input type="text" class="form-control boundary-pt pt-lat" value="' + point.lat + '" /></span> ';
+        html += '<button class="btn btn-xs btn-danger btn-pt-del"><i class="fa fa-trash-o"></i> 删除</button>';
         html += "</li>";
 
         return html;
@@ -434,24 +435,55 @@
     function addMarker(point, index, position) {
         var marker = new BMap.Marker(point);
         map.addOverlay(marker);
-        var label = new BMap.Label("边界点" + index, { offset: new BMap.Size(20, -10) });
+        //var title = _.pad(index, 4, " ");
+        var title = "" + index;
+        var left = 1;
+        if (title.length == 1) {
+            left = 5;
+        }
+        //console.log(title);
+        var label = new BMap.Label(title, { offset: new BMap.Size(left, 3) });
+        label.setStyle({ color: "#fff", fontSize: "6px", border: "0", backgroundColor:"transparent" });
         marker.setLabel(label);
         if (position >= 0) {
             boundary.markers.splice(position, 0, marker);
         } else {
             boundary.markers.push(marker);
         }
-
-        marker.addEventListener("click", function (e) {
-            //console.log(e);
-            //e.domEvent.cancelBubble = true;
-            ////e.stopPropagation();
-            //if (e.target) {
-            //    e.target.setAnimation(BMAP_ANIMATION_BOUNCE);
-            //}
-        });
+        marker.enableDragging();
+        marker.addEventListener("dragging", moveBoundaryPoint);
+        //marker.addEventListener("click", function (e) {
+        //    //console.log(e);
+        //    //e.domEvent.cancelBubble = true;
+        //    ////e.stopPropagation();
+        //    //if (e.target) {
+        //    //    e.target.setAnimation(BMAP_ANIMATION_BOUNCE);
+        //    //}
+        //});
 
         return marker;
+    }
+
+    function removeMarker(marker) {
+        if (!marker) return;
+        marker.removeEventListener("dragging", moveBoundaryPoint);
+        map.removeOverlay(marker);
+    }
+
+    function moveBoundaryPoint(e) {
+        //console.log(e);
+        var pt = e.point;
+        var idx = boundary.markers.indexOf(e.target);
+        boundary.points[idx] = pt;
+        //console.log(idx);
+        paintBoundaryLine();
+        var lipt = $(".boundary-pt-li").eq(idx);
+        if (!!lipt && lipt.length > 0) {
+            var key = getPointKey(pt)
+            lipt.data("key", key);
+            lipt.find(".pt-lng").val(pt.lng);
+            lipt.find(".pt-lat").val(pt.lat);
+        }
     }
 
     function paintBoundary() {

@@ -68,7 +68,7 @@
             vertical-align:bottom;
         }
         .area-bar{
-            /*width:24px;*/
+            width:24px;
             height:34px;
             padding-right:5px;
         } 
@@ -624,8 +624,9 @@
     });
 </script>
 <script type="text/javascript">
-    var kouMap = new Kou.Map();
+    var kouMap = new Kou.Map("allmap", { center: new BMap.Point(121.690935, 31.120784) });
     var map = kouMap.map;
+    map.setZoom(12);
     //
     kouMap.iniAutoComplete("txtSuggest");
 
@@ -696,6 +697,7 @@
             console.log(b.Properties);
             var objProp = eval("(" + decodeURIComponent(b.Properties || "{}") + ")");
             var cusStyle = objProp.style;
+            var ht = objProp.statics; 
             console.log(objProp);
             var style = _.extend({}, {
                 //strokeWeight: 2, strokeColor: "#ff0000"
@@ -728,7 +730,7 @@
             //var content = '<div data-id="chuansha" class="plate-overlay visited">川沙<br>4.3万<br>1086套</div>';
             //var content = '<div data-id="chuansha" class="plate-overlay visited">' + '川沙<br>4.3万<br>1086套' + '</div>';
             //var content = '<div data-id="chuansha" class="plate-overlay visited">' + decodeURIComponent(b.Content || "") + '</div>';
-            var content = '<div data-id="' + b.Id + '" class=""><img class="area-bar" src="/Content/images/gis/bar.png"><span class="area-title">' + b.Name + ':100人</span></div>';
+            var content = '<div data-id="' + b.Id + '" class=""><img class="area-bar" style="height:' + ht+'" src="/Content/images/gis/bar.png"><span class="area-title">' + b.Name + ':100人</span></div>';
             label.setContent(content);
             label.setPosition(position);
             label.setOffset(new BMap.Size(-43, -43));
@@ -738,7 +740,7 @@
             pointArray = pointArray.concat(ply.getPath());
         });
 
-        map.setViewport(pointArray);    //调整视野
+        //map.setViewport(pointArray);    //调整视野
         
     }
     //
